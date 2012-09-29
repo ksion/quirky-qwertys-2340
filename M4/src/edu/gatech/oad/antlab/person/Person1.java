@@ -31,7 +31,13 @@ public class Person1 {
 	 */
 	private String calc(String input) {
 	  //Person 1 put your implementation here
-	  return null;
+	  if (input.length()>3){
+	  	String firstPos = input.substring(0,2);
+	  	String newStart = input.substring(2);
+	  	String retString = newStart.concat(firstPos);
+	  	return retString;
+	  }
+	  else return input;
 	}
 	
 	/**
@@ -45,5 +51,6 @@ public class Person1 {
 	public String toString(String input) {
 	  return name + calc(input);
 	}
+	
 
 }
