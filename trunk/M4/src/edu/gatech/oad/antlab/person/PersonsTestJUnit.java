@@ -23,7 +23,12 @@ public class PersonsTestJUnit {
 	
 	@Test
 	public void person2Test() {
-		fail("Not yet implemented");
+		Person2 name = new Person2("Annette");
+		String text = name.toString("gtg123b");
+		assertFalse("Person2 fails to randomize ",
+				text.equals("Annettegtg123b"));
+		assertTrue("Length of input changes " ,
+				text.length() == 14);
 	}
 	
 	@Test
