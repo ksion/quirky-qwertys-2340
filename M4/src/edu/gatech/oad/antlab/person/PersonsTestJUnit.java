@@ -27,8 +27,8 @@ public class PersonsTestJUnit {
 		String text = name.toString("gtg123b");
 		assertFalse("Person2 fails to randomize ",
 				text.equals("Annettegtg123b"));
-		assertTrue("Length of input changes " ,
-				text.length() == 14);
+		assertEquals("Length of input changes " , 
+				14, text.length());
 	}
 	
 	@Test
