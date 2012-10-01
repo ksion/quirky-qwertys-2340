@@ -4,6 +4,7 @@
 		simple build file for M4
 	</description>
     
+	<!-- Setup the properties -->
     <target name = "init">
 		<property name="src.dir" 		value="src" />
 		<property name="build.dir" 		value="build" />
@@ -15,6 +16,7 @@
 		<property name="main-class" 	value="edu.gatech.oad.antlab.pkg1.AntLabMain" />
     </target>
 	
+	<!-- Make the directories -->
 	<target name = "prepare" depends = "init">
 		<mkdir dir = "${src.dir}" />
 		<mkdir dir = "${build.dir}" />
@@ -24,9 +26,10 @@
 		<mkdir dir = "${jar.dir}" />	
 	</target>
 	
-	
+	<!-- Compile java classes in src.dir to build.dir -->
 	<target name = "compile" depends = "prepare">
-		<javac srcdir = "${src.dir}" destdir = "${classes.dir}">
+		<javac srcdir = "${src.dir}" destdir = "${classes.dir}" 
+			includeAntRuntime="false">
 			<classpath>
       			<fileset dir="${library.dir}">
         			<include name="**/*.jar"/>
@@ -35,7 +38,7 @@
     	</javac>
 	</target>
 	
-	
+	<!-- Generate javadocs of src.dir to apidoc.dir -->
 	<target name = "javadoc" depends = "compile">
 		<javadoc packagenames = "src" sourcepath = "${src.dir}" destdir= "${apidoc.dir}">
 			<fileset dir = "${src.dir}">
@@ -49,7 +52,7 @@
 		</javadoc>
 	</target>
 	
-
+	<!-- Package the compiled classes to AntLabRun.jar -->
 	<target name = "jar" depends = "compile">
 		<jar destfile="${jar.dir}/${jar.file}.jar" basedir="${classes.dir}">
 		<manifest>
@@ -59,14 +62,16 @@
 		</jar>
 	</target>
 	
-	
+	<!-- Runs the AntLabRun.jar file -->
 	<target name="run" depends = "jar">
 		<java jar = "${jar.dir}/${jar.file}.jar" fork="true" />		
 	</target>
 	
+	<!-- Performs all tasks but clear -->
 	<target name="all" depends ="init, prepare, compile, javadoc, jar, run">
 	</target>
 	
+	<!-- Removes any compiled classes, .jars, and javadocs -->
 	<target name="clean">
 		<delete dir ="${build.dir}" />
 		<delete dir = "${apidoc.dir}" />
