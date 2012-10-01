@@ -23,7 +23,7 @@
 
 	<!-- Compiles all java classes in the src.dir to build.dir -->    
     <target name="compile" depends="prepare">
-        <javac srcdir="${src.dir}" destdir="${classes.dir}" >
+        <javac srcdir="${src.dir}" destdir="${build.dir}" >
         	<classpath>
         		<fileset dir="${lib.dir}" >
         			<include name="**/*.jar"/>
