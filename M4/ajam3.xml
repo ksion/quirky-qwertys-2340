@@ -5,16 +5,16 @@
     	<property name="src.dir" value="src"/>
     	<property name="build.dir" value="build"/>
     	<property name="classes.dir" value="${build.dir}/classes"/>
-    	<property name="lib.dir" value="lib" />
+    	<property name="lib.dir" value="${basedir}/lib"/>
     	<property name="jar.dir" value="${build.dir}/jar"/>
-    	<property name="apidoc.dir" value=apidoc"/>
+    	<property name="apidoc.dir" value="apidoc"/>
     	<property name="main-class"  value="edu.gatech.oad.antlab.pkg1.AntLabMain"/>
     </target>
 
 
 	<!-- Make all of the required directories -->
     <target name="prepare" depends="init">
-		<mkdir dir="${build.dir}" />
+    	<mkdir dir="${build.dir}" />
 		<mkdir dir="${classes.dir}" />
 		<mkdir dir="${jar.dir}" />
 		<mkdir dir="${apidoc.dir}" />
@@ -23,26 +23,38 @@
 
 	<!-- Compiles all java classes in the src.dir to build.dir -->    
     <target name="compile" depends="prepare">
-        <javac srcdir="${src.dir} destdir="${build.dir}" />
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" >
+        	<classpath>
+        		<fileset dir="${lib.dir}" >
+        			<include name="**/*.jar"/>
+        		</fileset>
+        	</classpath>
+        </javac>	
     </target>    
     
     
     <!-- Generates the javadoc documentation for all java classes in src.dir and stores it in apidoc.dir-->
-    <target name=javadoc depends="compile">
+    <target name="javadoc" depends="compile">
    	    <javadoc sourcepath="${src.dir}" access="public" destdir="${apidoc.dir}/javadoc"
 		    packagenames="edu.gatech.oad.antlab.*">
 		    <fileset dir="${src.dir}">
-		        <include name="**/*.java">
+		        <include name="**/*.java" />
 		    </fileset>
+		    <classpath>
+		    	<fileset dir="${lib.dir}">
+		    		<include name="**/*.jar" />
+		    	</fileset>
+		    </classpath>
 		</javadoc>
 	</target>
     
     
-    <!-- Packages all of the compiled classes, excluding resources.jar, to AntLabRun.jar -->
+    <!-- Packages all of the compiled classes to AntLabRun.jar -->
     <target name="jar" depends="compile">
-            <jar destfile="${jar.dir}/AntLabRun.jar" basedir="${classes.dir}" excludes=${lib.dir}/resources.jar">
+            <jar destfile="${jar.dir}/AntLabRun.jar" basedir="${classes.dir}">
             <manifest>
-                <attribute name="Main-Class" value="${main-class}"/>
+                <attribute name="Main-Class" value="${main-class}" />
+                <attribute name="Class-Path" value="${lib.dir}/resources.jar" />
             </manifest>
         </jar>
     </target>
@@ -52,13 +64,15 @@
     <target name="run" depends="jar">
         <java jar="${jar.dir}/AntLabRun.jar" fork="true"/>
     </target>
- 
+    
    
     <!-- Performs all of the tasks except for clean -->
-    <target name="all" depends="run" excludes="clean"/>
-
+    <target name="all" depends="init, prepare, compile, javadoc, jar, run" />
+    
+    
     <!-- Removes any compiled classes, JARS, and javadocs --> 
 	<target name="clean">
         <delete dir="${build.dir}"/>
-	</target>
+	</target> 
+
 </project>
