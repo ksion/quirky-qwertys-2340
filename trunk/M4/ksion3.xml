@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="M4 - KeannaXML" basedir="." default="all">
+	<description>
+		simple build file for M4
+	</description>
+    
+    <target name = "init">
+		<property name="src.dir" 		value="src" />
+		<property name="build.dir" 		value="build" />
+		<property name="classes.dir" 	value="${build.dir}/classes" />
+		<property name="library.dir" 	value="${basedir}/lib" />
+		<property name="apidoc.dir" 	value="apidocs" />
+		<property name="jar.dir"   	 	value="${build.dir}/jar"/>
+		<property name="jar.file" 		value="AntLabRun" />
+		<property name="main-class" 	value="edu.gatech.oad.antlab.pkg1.AntLabMain" />
+    </target>
+	
+	<target name = "prepare" depends = "init">
+		<mkdir dir = "${src.dir}" />
+		<mkdir dir = "${build.dir}" />
+		<mkdir dir = "${classes.dir}" />
+		<mkdir dir = "${library.dir}" />
+		<mkdir dir = "${apidoc.dir}" />
+		<mkdir dir = "${jar.dir}" />	
+	</target>
+	
+	
+	<target name = "compile" depends = "prepare">
+		<javac srcdir = "${src.dir}" destdir = "${classes.dir}">
+			<classpath>
+      			<fileset dir="${library.dir}">
+        			<include name="**/*.jar"/>
+      			</fileset>
+    		</classpath>
+    	</javac>
+	</target>
+	
+	
+	<target name = "javadoc" depends = "compile">
+		<javadoc packagenames = "src" sourcepath = "${src.dir}" destdir= "${apidoc.dir}">
+			<fileset dir = "${src.dir}">
+				<include name= "**"/>
+			</fileset>
+			<classpath>
+      			<fileset dir="${library.dir}">
+        			<include name="**/*.jar"/>
+      			</fileset>
+    		</classpath>
+		</javadoc>
+	</target>
+	
+
+	<target name = "jar" depends = "compile">
+		<jar destfile="${jar.dir}/${jar.file}.jar" basedir="${classes.dir}">
+		<manifest>
+			<attribute name = "Main-Class" value = "${main-class}" />
+			<attribute name = "Class-Path" value = "../../lib/resources.jar" />
+		</manifest>
+		</jar>
+	</target>
+	
+	
+	<target name="run" depends = "jar">
+		<java jar = "${jar.dir}/${jar.file}.jar" fork="true" />		
+	</target>
+	
+	<target name="all" depends ="init, prepare, compile, javadoc, jar, run">
+	</target>
+	
+	<target name="clean">
+		<delete dir ="${build.dir}" />
+		<delete dir = "${apidoc.dir}" />
+	</target>
+
+</project>
