@@ -4,7 +4,7 @@
  * The Player can travel to other planets and trade, sell,
  * or buy goods with other non-playable character traders.  
  * 
- * @author Qwirky Qwerties
+ * @author Qwirky Qwertys
  * @version 1.0 10.07.12
  *
  */
@@ -50,6 +50,13 @@ public class Player {
 		fighterSkill = skills[1];
 		traderSkill = skills[2];
 		engineerSkill = skills[3];
+		System.out.println("You've created a player named " + name + ".");
+		System.out.println("Pilot skill points: " + pilotSkill);
+		System.out.println("Fighter skill points: " + fighterSkill);
+		System.out.println("Trader skill points: " + traderSkill);
+		System.out.println("Engineer skill points: " + engineerSkill);
+		System.out.println("Your current ship is a " + myShip.getName());
+		System.out.println("You have " + money + "credits available.");
 	}
 	
 	/**

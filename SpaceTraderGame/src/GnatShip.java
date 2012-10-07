@@ -1,7 +1,7 @@
 /**
  * Represents the default Ship a Traveler starts off with.
  * 
- * @author Qwirky Qwerties
+ * @author Qwirky Qwertys
  * @version 1.0 10.07.12
  */
 public class GnatShip extends Ship {
@@ -11,6 +11,7 @@ public class GnatShip extends Ship {
 	
 	public GnatShip(int hullStrength){
 		super(hullStrength);
+		name = "Gnat Ship";
 	}
 	/* 
 	 * Methods that will be added to code later:
