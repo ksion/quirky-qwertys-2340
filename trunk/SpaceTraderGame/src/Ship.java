@@ -5,7 +5,7 @@
  * serves as storage for all of the Player's Equipment 
  * and TradeGoods.
  * 
- * @author Qwirky Qwerties
+ * @author Qwirky Qwertys
  * @version 1.0 10.07.12
  */
 public class Ship {
@@ -16,52 +16,55 @@ public class Ship {
 	// Equipment[] myEquipment = new Equipment[10];
 	
 	/** Amount of damage Ship has sustained. */
-	private int damageSustained = 0;
+	protected int damageSustained = 0;
 	
 	/** Distance Ship has traveled. */
-	private int distanceTraveled = 0;
+	protected int distanceTraveled = 0;
 	
 	/** Rate at which Ship uses up fuel as it travels. For every
 	    four parsecs the Ship travels, the Ship's fuel amount 
 	    goes down by one ton of fuel. */
-	private int fuelEconomy = 4;
+	protected int fuelEconomy = 4;
 	
 	/** Amount of fuel Ship currently has. */
-	private int fuelAmount = 16;
+	protected int fuelAmount = 16;
 	
 	/** Marker used to keep track of whether or not Ship has an 
 	    escape pod. */
-	private boolean escapePod = false;
+	protected boolean escapePod = false;
 	
 	/** Marker used to keep track of whether or not Ship is insured. */
-	private boolean insurance = false;
+	protected boolean insurance = false;
 	
 	/** Number of cargo holds available for the equipment. */
-	private static final int CARGOBAY = 15;
+	protected static final int CARGOBAY = 15;
 	
 	/** Number of slots available to store weapons. */
-	private static final int WEAPONSLOTS = 1;
+	protected static final int WEAPONSLOTS = 1;
 	
 	/** Number of slots available to store gadgets. */
-	private static final int GADGETSLOTS = 1;
+	protected static final int GADGETSLOTS = 1;
 	
 	/** Number of slots available to store gadgets. */
-	private static final int SHIELDSLOTS = 0;
+	protected static final int SHIELDSLOTS = 0;
 	
 	/** Range of parsecs Ship can travel before it runs out of fuel. */
-	private static final int TRAVELRANGE = 14;
+	protected static final int TRAVELRANGE = 14;
 	
 	/** Number of rooms available for crew. */
-	private static final int CREWQUARTERS = 0;	
+	protected static final int CREWQUARTERS = 0;	
 	
 	/** Strength of the Ship's hull. */
-	private int hullStrength;
+	protected int hullStrength;
 	
 	/** Current x-coordinate of the Ship. */
-	private int currentX = 0;
+	protected int currentX = 0;
 	
 	/** Current y-coordinate of the Ship. */
-	private int currentY = 0;
+	protected int currentY = 0;
+	
+	/** Represents the name of the Ship. */
+	protected static String name = "Ship";
 
 	/**
 	 * Instantiates a Ship with specified hull strength.
@@ -71,5 +74,15 @@ public class Ship {
 		this.hullStrength = hullStrength;
 	}
 	
-	
+	/**
+	 * Gets the name of the Ship. 
+	 * This class may be deleted later--it's purpose is
+	 * to make sure that Player instantiates the Ship
+	 * correctly.
+	 * 
+	 * @return the name/type of the Ship
+	 */
+	public String getName(){
+		return name;
+	}
 }
