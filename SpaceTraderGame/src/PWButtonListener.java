@@ -29,8 +29,9 @@ public class PWButtonListener implements ActionListener {
 			sum += skills[i];
 		if (sum > 15)
 			bigPicture.setSkillFieldZero();
-		else {
-			//create new player
+		else if (sum == 15) {
+			Player newPlayer = new Player(PlayerWindow.getTextFieldName(), skills);
+			System.out.println(newPlayer.toString());
 		}
 			
 	}
