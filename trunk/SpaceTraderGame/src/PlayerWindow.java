@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -12,7 +11,6 @@ import javax.swing.border.EmptyBorder;
 
 
 import net.miginfocom.swing.MigLayout;
-import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 
@@ -24,8 +22,7 @@ public class PlayerWindow extends JPanel {
 	private static Color c = new Color(0, 255, 0);
 	private static Font f = new Font("Space Age", 1, 12);
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JTextField textName;
+	private static JTextField textName;
 	private static JTextField textFieldPilot;
 	private static JTextField textField_Fighter;
 	private static JTextField textField_Engineer;
@@ -163,6 +160,10 @@ public class PlayerWindow extends JPanel {
 
 	public static String getTextFieldTrader() {
 		return textField_Trader.getText();
+	}
+	
+	public static String getTextFieldName(){
+		return textName.getText();
 	}
 
 	public void setSkillFieldZero() {
