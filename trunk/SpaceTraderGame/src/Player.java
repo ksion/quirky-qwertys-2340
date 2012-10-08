@@ -50,13 +50,7 @@ public class Player {
 		fighterSkill = skills[1];
 		traderSkill = skills[2];
 		engineerSkill = skills[3];
-		System.out.println("You've created a player named " + name + ".");
-		System.out.println("Pilot skill points: " + pilotSkill);
-		System.out.println("Fighter skill points: " + fighterSkill);
-		System.out.println("Trader skill points: " + traderSkill);
-		System.out.println("Engineer skill points: " + engineerSkill);
-		System.out.println("Your current ship is a " + myShip.getName());
-		System.out.println("You have " + money + "credits available.");
+		
 	}
 	
 	/**
@@ -106,6 +100,18 @@ public class Player {
 	 */
 	public int getMoney(){
 		return money;
+	}
+	
+	public String toString(){
+		String playerString = "";
+		playerString += "You've created a player named " + name + ".\n";
+		playerString += "Pilot skill points: " + pilotSkill + "\n";
+		playerString += "Fighter skill points: " + fighterSkill + "\n";
+		playerString += "Trader skill points: " + traderSkill + "\n";
+		playerString += "Engineer skill points: " + engineerSkill + "\n";
+		playerString += "Your current ship is a " + myShip.getName() + "\n";
+		playerString += "You have " + money + " credits available. \n";
+		return playerString;
 	}
 	/* 
 	 * Methods that will be added to code later:
