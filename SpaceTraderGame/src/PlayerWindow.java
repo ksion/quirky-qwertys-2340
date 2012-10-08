@@ -4,16 +4,17 @@ import java.awt.EventQueue;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
+import java.awt.event.*;
 
 
 public class PlayerWindow extends JPanel {
 
 	private JPanel contentPane;
 	private JTextField textName;
-	private JTextField textFieldPilot;
-	private JTextField textField_Fighter;
-	private JTextField textField_Engineer;
-	private JTextField textField_Trader;
+	private static JTextField textFieldPilot;
+	private static JTextField textField_Fighter;
+	private static JTextField textField_Engineer;
+	private static JTextField textField_Trader;
 
 	/**
 	 * Launch the application.
@@ -99,7 +100,30 @@ public class PlayerWindow extends JPanel {
 		add(comboBoxDifficulty, "cell 6 5 4 1,growx");
 		
 		JButton btnCreatePlayer = new JButton("Create");
+		btnCreatePlayer.addActionListener(new PWButtonListener(textName.getText(), this));
 		add(btnCreatePlayer, "cell 9 7 2 1,alignx right");		
 	}
 
+	public static String getTextFieldPilot() {
+		return textFieldPilot.getText();
+	}
+
+	public static String getTextFieldFighter() {
+		return textField_Fighter.getText();
+	}
+
+	public static String getTextFieldEngineer() {
+		return textField_Engineer.getText();
+	}
+
+	public static String getTextFieldTrader() {
+		return textField_Trader.getText();
+	}
+
+	public void setSkillFieldZero() {
+		textFieldPilot.setText("0");
+		textField_Fighter.setText("0");
+		textField_Engineer.setText("0");
+		textField_Trader.setText("0");
+	}
 }
