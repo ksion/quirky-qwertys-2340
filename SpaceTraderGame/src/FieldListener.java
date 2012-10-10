@@ -19,12 +19,10 @@ public class FieldListener implements DocumentListener {
 	@Override
 	public void insertUpdate(DocumentEvent arg0) {
 		sum += (new Integer(text.getText())).intValue();
-		if (sum > 9)
-			sum = sum - 1;
-		if (sum > 16)
-			sum = 0;
-		System.out.println(sum);/*
-		pass(arg0, arg0.getLength());*/
+		//The sum variable is incrementing on the old
+		//sum, so like if i put 10, then back space to 
+		//replace 0 with a five, sum is equal to 25.
+		System.out.println(sum);
 	}
 	
 
