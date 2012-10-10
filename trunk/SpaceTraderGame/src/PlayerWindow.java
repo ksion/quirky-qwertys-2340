@@ -27,6 +27,7 @@ public class PlayerWindow extends JPanel {
 	private static JTextField textField_Fighter;
 	private static JTextField textField_Engineer;
 	private static JTextField textField_Trader;
+	private static JButton createButton;
 
 	/**
 	 * Launch the application.
@@ -76,6 +77,9 @@ public class PlayerWindow extends JPanel {
 		add(textName, "cell 2 1 4 1,growx");
 		textName.setColumns(10);
 		
+		createButton = new JButton("Create");
+		add(createButton, "cell 9 7 2 1,alignx right");	
+		
 		JLabel lblSkillPointsDesc1 = new JLabel("Start the game with 15 skill points. Allocate those points");
 		add(lblSkillPointsDesc1, "cell 1 2 12 1");
 		lblSkillPointsDesc1.setForeground(c);
@@ -92,9 +96,11 @@ public class PlayerWindow extends JPanel {
 		lblPilot.setFont(f);
 		
 		textFieldPilot = new JTextField();
-		textFieldPilot.setText("0");
+		//textFieldPilot.setText("0");
 		add(textFieldPilot, "cell 2 4,growx");
 		textFieldPilot.setColumns(10);
+		textFieldPilot.getDocument().addDocumentListener(new 
+				FieldListener(textFieldPilot, this));
 		
 		JLabel lblFighter = new JLabel("Fighter");
 		add(lblFighter, "cell 3 4");
@@ -102,7 +108,7 @@ public class PlayerWindow extends JPanel {
 		lblFighter.setFont(f);
 		
 		textField_Fighter = new JTextField();
-		textField_Fighter.setText("0");
+		//textField_Fighter.setText("0");
 		add(textField_Fighter, "cell 5 4,growx");
 		textField_Fighter.setColumns(10);
 		
@@ -112,7 +118,7 @@ public class PlayerWindow extends JPanel {
 		lblEngineer.setFont(f);
 		
 		textField_Engineer = new JTextField();
-		textField_Engineer.setText("0");
+		//textField_Engineer.setText("0");
 		add(textField_Engineer, "cell 7 4,growx");
 		textField_Engineer.setColumns(10);
 		
@@ -122,7 +128,7 @@ public class PlayerWindow extends JPanel {
 		lblTrader.setFont(f);
 		
 		textField_Trader = new JTextField();
-		textField_Trader.setText("0");
+		//textField_Trader.setText("0");
 		add(textField_Trader, "cell 10 4,growx");
 		textField_Trader.setColumns(10);
 		
@@ -135,10 +141,7 @@ public class PlayerWindow extends JPanel {
 		JComboBox comboBoxDifficulty = new JComboBox(comboBoxDefaults);
 		add(comboBoxDifficulty, "cell 6 5 4 1,growx");
 		
-		JButton btnCreatePlayer = new JButton("Create");
-		btnCreatePlayer.addActionListener(new PWButtonListener(textName.getText(), this));
-		// btnCreatePlayer.setEnabled(false);
-		add(btnCreatePlayer, "cell 9 7 2 1,alignx right");		
+			
 	}
 	
 	public void paintComponent(Graphics g){
@@ -171,5 +174,9 @@ public class PlayerWindow extends JPanel {
 		textField_Fighter.setText("0");
 		textField_Engineer.setText("0");
 		textField_Trader.setText("0");
+	}
+
+	public JButton getCreateButton() {
+		return createButton;
 	}
 }
