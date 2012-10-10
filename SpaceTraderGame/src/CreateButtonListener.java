@@ -1,21 +1,19 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-
 /**
  * ButtonListener that connects with PlayerWindow button "Create"
  * @author Keanna //not finished
  */
-public class PWButtonListener implements ActionListener {
+public class CreateButtonListener implements ActionListener {
 	
-	static String playerName = null;
-	static int[] skills = new int[4];
-	PlayerWindow bigPicture;
+	String playerName = null;
+	int[] skills = new int[4];
+	PlayerWindow bigPicture = null;
 	
-	public PWButtonListener(String name, PlayerWindow object) {
+	public CreateButtonListener(String name, PlayerWindow obj) {
 		playerName = name;
-		bigPicture = object;
+		bigPicture = obj;
 	}
 	
 	@Override
@@ -27,13 +25,12 @@ public class PWButtonListener implements ActionListener {
 		int sum = 0;
 		for (int i = 0; i < 4; i++)
 			sum += skills[i];
-		if (sum > 15)
+		if (sum > 15 || sum < 15) {
 			bigPicture.setSkillFieldZero();
-		else if (sum == 15) {
-			Player newPlayer = new Player(PlayerWindow.getTextFieldName(), skills);
+			bigPicture.getCreateButton().setEnabled(FieldListener.setEnable);
+		} else {
+			Player newPlayer = new Player(playerName, skills);
 			System.out.println(newPlayer.toString());
 		}
-			
 	}
-
 }
