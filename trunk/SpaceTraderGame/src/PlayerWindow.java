@@ -162,7 +162,7 @@ public class PlayerWindow extends JPanel {
 	}
 	/**
 	 * draws the background image on the GUI
-	 * @param  the graphics object
+	 * @param g - the graphics object
 	 */
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
