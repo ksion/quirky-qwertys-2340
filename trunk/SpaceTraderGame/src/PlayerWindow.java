@@ -4,10 +4,13 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 
 import net.miginfocom.swing.MigLayout;
@@ -15,19 +18,23 @@ import java.io.File;
 import java.io.IOException;
 
 
-
+/**
+ * creates the initial player creation GUI
+ * @author Qwirky Qwertys
+ * @version 1.0
+ */
 public class PlayerWindow extends JPanel {
 
-	private static Image img, spaceIcon;
-	private static Color c = new Color(0, 255, 0);
-	private static Font f = new Font("Space Age", 1, 12);
-	private static final long serialVersionUID = 1L;
-	private static JTextField textName;
-	private static JTextField textFieldPilot;
-	private static JTextField textField_Fighter;
-	private static JTextField textField_Engineer;
-	private static JTextField textField_Trader;
-	private static JButton createButton;
+	private Image img, spaceIcon;
+	private Color c = new Color(0, 255, 0);
+	private Font f = new Font("Space Age", 1, 12);
+	private final long serialVersionUID = 1L;
+	private JTextField textName;
+	private JTextField textFieldPilot;
+	private JTextField textField_Fighter;
+	private JTextField textField_Engineer;
+	private JTextField textField_Trader;
+	private JButton createButton;
 
 	/**
 	 * Launch the application.
@@ -36,9 +43,11 @@ public class PlayerWindow extends JPanel {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					spaceIcon = ImageIO.read(new File("src\\shipIcon.png"));
+					
+					Image spaceIcon = ImageIO.read(new File("src/shipIcon.png"));//needed for MACs and Windows
 					PlayerWindow player = new PlayerWindow();
 					JFrame frame = new JFrame();
+					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					frame.setContentPane( player );
 					frame.setBounds(100, 100, 450, 300);
 					frame.setPreferredSize(new Dimension(650, 250));
@@ -58,7 +67,10 @@ public class PlayerWindow extends JPanel {
 	 */
 	public PlayerWindow() throws IOException {
 //		setTitle("Player Creation");
-//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		NewPlayerListener playerListener = new NewPlayerListener();
+		
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new MigLayout("", "[][][grow][][][grow][grow][grow][][][grow][][][][]", "[][shrink 50][][][][][][grow,bottom]"));		
 		JLabel lblHeader = new JLabel("Pick your options below to start a new game.");
@@ -66,7 +78,7 @@ public class PlayerWindow extends JPanel {
 		lblHeader.setFont(f);
 		add(lblHeader, "cell 1 0 14 1");
 		
-		img = ImageIO.read(new File("src\\Space.jpg"));
+		img = ImageIO.read(new File("src/Space.jpg"));//needed for MACs and Windows
 		
 		JLabel lblNameLabel = new JLabel("Name");
 		add(lblNameLabel, "cell 1 1,alignx trailing");
@@ -76,8 +88,11 @@ public class PlayerWindow extends JPanel {
 		textName = new JTextField();
 		add(textName, "cell 2 1 4 1,growx");
 		textName.setColumns(10);
+		textName.getDocument().addDocumentListener( playerListener );
 		
 		createButton = new JButton("Create");
+		createButton.setEnabled(false);
+		createButton.addActionListener( new CreateListener() );
 		add(createButton, "cell 9 7 2 1,alignx right");	
 		
 		JLabel lblSkillPointsDesc1 = new JLabel("Start the game with 15 skill points. Allocate those points");
@@ -99,8 +114,7 @@ public class PlayerWindow extends JPanel {
 		//textFieldPilot.setText("0");
 		add(textFieldPilot, "cell 2 4,growx");
 		textFieldPilot.setColumns(10);
-		textFieldPilot.getDocument().addDocumentListener(new 
-				FieldListener(textFieldPilot, this));
+		textFieldPilot.getDocument().addDocumentListener( playerListener ); 
 		
 		JLabel lblFighter = new JLabel("Fighter");
 		add(lblFighter, "cell 3 4");
@@ -111,6 +125,7 @@ public class PlayerWindow extends JPanel {
 		//textField_Fighter.setText("0");
 		add(textField_Fighter, "cell 5 4,growx");
 		textField_Fighter.setColumns(10);
+		textField_Fighter.getDocument().addDocumentListener( playerListener ); 
 		
 		JLabel lblEngineer = new JLabel("Engineer");
 		add(lblEngineer, "cell 6 4,alignx trailing");
@@ -121,6 +136,7 @@ public class PlayerWindow extends JPanel {
 		//textField_Engineer.setText("0");
 		add(textField_Engineer, "cell 7 4,growx");
 		textField_Engineer.setColumns(10);
+		textField_Engineer.getDocument().addDocumentListener( playerListener );
 		
 		JLabel lblTrader = new JLabel("Trader");
 		add(lblTrader, "cell 9 4,alignx trailing");
@@ -131,6 +147,7 @@ public class PlayerWindow extends JPanel {
 		//textField_Trader.setText("0");
 		add(textField_Trader, "cell 10 4,growx");
 		textField_Trader.setColumns(10);
+		textField_Trader.getDocument().addDocumentListener( playerListener ); 
 		
 		JLabel lblDifficultyLevel = new JLabel("Select your difficulty level:");
 		add(lblDifficultyLevel, "cell 1 5 5 1");
@@ -143,40 +160,138 @@ public class PlayerWindow extends JPanel {
 		
 			
 	}
-	
+	/**
+	 * draws the background image on the GUI
+	 * @param  the graphics object
+	 */
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		g.drawImage(img, 0, 0, null);
 	}
 
-	public static String getTextFieldPilot() {
+	/**
+	 * gets the Pilot skill points
+	 * @return skill points
+	 */
+	public String getTextFieldPilot() {
 		return textFieldPilot.getText();
 	}
 
-	public static String getTextFieldFighter() {
+	/**
+	 * gets the fighter skill points
+	 * @return sill points
+	 */
+	public String getTextFieldFighter() {
 		return textField_Fighter.getText();
 	}
-
-	public static String getTextFieldEngineer() {
+/**
+ * gets the engineer skill points
+ * @return skill points
+ */
+	public String getTextFieldEngineer() {
 		return textField_Engineer.getText();
 	}
-
-	public static String getTextFieldTrader() {
+/**
+ * gets the trader skill points
+ * @return skill points
+ */
+	public String getTextFieldTrader() {
 		return textField_Trader.getText();
 	}
-	
-	public static String getTextFieldName(){
+	/**
+	 * gets the player's name
+	 * @return player's name
+	 */
+	public String getTextFieldName(){
 		return textName.getText();
 	}
-
+/**
+ * zeros out the skills fields
+ */
 	public void setSkillFieldZero() {
 		textFieldPilot.setText("0");
 		textField_Fighter.setText("0");
 		textField_Engineer.setText("0");
 		textField_Trader.setText("0");
 	}
-
+/**
+ * gets the create button
+ * @return the create button
+ */
 	public JButton getCreateButton() {
 		return createButton;
+	}
+	
+	
+	private class NewPlayerListener implements DocumentListener {
+
+		@Override
+		public void changedUpdate(DocumentEvent arg0) {
+			createButton.setEnabled(areAllSkillPointsUsed()&&isNameSet());
+			
+		}
+
+		@Override
+		public void insertUpdate(DocumentEvent arg0) {
+			createButton.setEnabled(areAllSkillPointsUsed()&&isNameSet());
+			
+			
+		}
+
+		@Override
+		public void removeUpdate(DocumentEvent arg0) {
+			createButton.setEnabled(areAllSkillPointsUsed()&&isNameSet());
+			
+			
+		}
+		
+		public boolean areAllSkillPointsUsed() {
+			try {
+				int skillPointsUsed = getValue(textFieldPilot) 
+						+ getValue(textField_Fighter)
+						+ getValue(textField_Engineer)
+						+ getValue(textField_Trader);
+				return skillPointsUsed == 15;
+			} catch( NumberFormatException ex ) {
+				return false;				
+			}
+		}
+		public boolean isNameSet(){
+			if (textName.getText().equals("")){
+				return false;
+			}
+			else return true;
+		}
+		
+		public int getValue( JTextField field ) {
+			if (field.getText().equals("")){
+				return 0;
+			}
+			else return (Integer.parseInt(field.getText()) );
+			
+		}
+		
+	}
+	private class CreateListener implements ActionListener{
+		
+		public int getValue( JTextField field ) {
+			if (field.getText().equals("")){
+				return 0;
+			}
+			else return (Integer.parseInt(field.getText()) );
+			
+		}
+		
+		public void actionPerformed(ActionEvent e){
+			int[] skills = new int[4];
+			skills[0] = getValue(textFieldPilot);
+			skills[1] = getValue(textField_Fighter);
+			skills[2] = getValue(textField_Engineer);
+			skills[3] = getValue(textField_Trader);
+			String playerName = textName.getText();
+			
+			Player newPlayer = new Player(playerName, skills);
+			System.out.println(newPlayer.toString());
+		}
 	}
 }
