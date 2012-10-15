@@ -20,9 +20,7 @@ public class GameController {
 		} catch (IOException e) {
 
 			e.printStackTrace();
-		}
-		
-		
+		}		
 	}
 	
 
