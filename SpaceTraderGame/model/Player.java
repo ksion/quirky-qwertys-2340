@@ -1,3 +1,4 @@
+package model;
 /**
  * Represents the playable space trader character.
  * It is through Player that the user can play this game.

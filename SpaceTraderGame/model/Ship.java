@@ -1,3 +1,4 @@
+package model;
 /**
  * Represents the vehicle used by the Player to travel
  * from one planet to another. The Ship may be used to
