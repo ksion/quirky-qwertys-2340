@@ -1,3 +1,4 @@
+package model;
 /**
  * Represents the default Ship a Traveler starts off with.
  * 
