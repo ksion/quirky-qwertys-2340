@@ -3,7 +3,25 @@ import java.util.List;
 
 
 public interface SolarSystem {
-
+	
+	/**
+	 * Adds a Planet to the Solar System's underlying
+	 * List collection. Returns a boolean: true if add
+	 * was successful, false if otherwise.
+	 * @param Planet object
+	 * @return boolean
+	 */
+	public boolean add(Planet object);
+	
+	/**
+	 * Removes a Planet from the underlying List collection.
+	 * Returns a boolean: true if add was successful, false
+	 * if otherwise.
+	 * @param Planet object
+	 * @return boolean
+	 */
+	public boolean remove(Planet object);
+	
 	/**
 	 * Returns the planets within the Solar System
 	 * as an ordered collection. 
@@ -29,6 +47,14 @@ public interface SolarSystem {
 	public int getTechLevel();
 	
 	/**
+	 * Returns an int that represents the resource 
+	 * the Solar System has in abundance. This value 
+	 * influences the price and quality of trade goods.
+	 * @return int
+	 */
+	public int getResources();
+	
+	/**
 	 * Returns an int that represents the type of 
 	 * government that holds within the S.System. This
 	 * value influences the number of police, pirates,
@@ -36,7 +62,7 @@ public interface SolarSystem {
 	 * traveling.
 	 * @return int 
 	 */
-	public int getPoliSystem();
+	 public int getPoliSystem();
 	
 	/**
 	 * Returns a double that must be accounted for in all
@@ -44,7 +70,13 @@ public interface SolarSystem {
 	 * price.
 	 * @return double
 	 */
-	public double genTaxRate();
+	public double getTaxRate();
+	
+	/**
+	 * Sets the tax rate of the Solar System.
+	 * @param double new tax rate
+	 */
+	public void setTaxRate(double taxRate);
 	
 	/**
 	 * Returns an int that represents the type of encounter
@@ -57,5 +89,4 @@ public interface SolarSystem {
 	 * @return int
 	 */
 	public int genEncounter();
-	
 }
