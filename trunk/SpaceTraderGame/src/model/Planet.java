@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 
 public class Planet {
 	Random rand = new Random();
-	private String name;
+	private String name, picName;
 	private final int HEIGHT = 451, WIDTH = 801, SIZE = 30;
 	private int currentCondition, techLevel; 
 	private Point position; 
@@ -24,12 +24,14 @@ public class Planet {
 		this.name = n;
 		this.techLevel = tL; 
 		this.currentCondition = cc;
+		picName = planetPics[rand.nextInt(5)];
 	}
 	public Planet(Point p){
 		this.position = p;
 		makeName();
 		this.techLevel = rand.nextInt(8);
 		this.currentCondition = rand.nextInt(13);
+		picName = planetPics[rand.nextInt(5)];
 	}
 	
 	public Planet(){
@@ -37,6 +39,7 @@ public class Planet {
 		makeName();
 		this.techLevel = rand.nextInt(8);
 		this.currentCondition = rand.nextInt(13);
+		picName = planetPics[rand.nextInt(5)];
 	}
 
 	public void makeName(){
@@ -81,10 +84,9 @@ public class Planet {
 	}
 	
 	public void draw(Graphics g){
-		String planetName = planetPics[rand.nextInt(5)];
 		Image img = null;
 		try {
-			img = ImageIO.read(new File(planetName));
+			img = ImageIO.read(new File(picName));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
