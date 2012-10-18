@@ -7,24 +7,27 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 import model.Planet;
+import model.SolarSystem;
 
 public class MapWindow extends JPanel {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private Planet[] planets = new Planet[5];
+	
 	/**
 	 * Create the panel.
 	 */
 	public MapWindow() {
+		SolarSystem s1 = new SolarSystem();
 		for(int i = 0; i < 5; i++){
-			planets[i] = new Planet();
+			s1.add(new Planet());
 		}
 	}
+	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		Image background = null;
