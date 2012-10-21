@@ -7,6 +7,12 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
+/**
+ * Represents a planet in the Space Trader game.
+ * 
+ * @author Quirky Qwertys
+ * @version 1.0 10.22.12
+ */
 public class Planet {
 	Random rand = new Random();
 	private String name, picName;
@@ -14,31 +20,38 @@ public class Planet {
 	private int currentCondition, techLevel; 
 	private Point position; 
 	private TradeGood[] goods; 
+	private static SolarSystem system;
+	private static double tax;
 	private String[] planetPics = {"src/view/blueGasPlanet.png","src/view/desertPlanet.png","src/view/desolatePlanet.png","src/view/jupiterPlanet.png", "src/view/redMineralPlanet.png"};
 	// private Vendor[] availVend;
 	private String[] vowels = {"a","e","i","o","u","y"}, consonants = {"b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","z"};
 	
 	
-	public Planet(Point p, String n, int tL, int cc){
-		this.position = p;
-		this.name = n;
-		this.techLevel = tL; 
-		this.currentCondition = cc;
+	public Planet(Point p, SolarSystem s, String n, int tL, int cc){
+		position = p;
+		system = s;
+		name = n;
+		techLevel = tL; 
+		currentCondition = cc;
 		picName = planetPics[rand.nextInt(5)];
+		
+		tax = s.getTaxRate();
 	}
-	public Planet(Point p){
-		this.position = p;
+	
+	public Planet(Point p, SolarSystem s){
+		position = p;
+		system = s;
 		makeName();
-		this.techLevel = rand.nextInt(8);
-		this.currentCondition = rand.nextInt(13);
+		techLevel = rand.nextInt(8);
+		currentCondition = rand.nextInt(13);
 		picName = planetPics[rand.nextInt(5)];
 	}
 	
 	public Planet(){
-		this.position = new Point(rand.nextInt(WIDTH), rand.nextInt(HEIGHT));
+		position = new Point(rand.nextInt(WIDTH), rand.nextInt(HEIGHT));
 		makeName();
-		this.techLevel = rand.nextInt(8);
-		this.currentCondition = rand.nextInt(13);
+		techLevel = rand.nextInt(8);
+		currentCondition = rand.nextInt(13);
 		picName = planetPics[rand.nextInt(5)];
 	}
 
@@ -108,5 +121,4 @@ public class Planet {
 		
 		g.drawImage(img, x, y, SIZE, SIZE, null);
 	}
-
 }

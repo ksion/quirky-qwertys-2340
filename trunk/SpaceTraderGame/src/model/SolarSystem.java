@@ -1,43 +1,61 @@
 package model;
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.List;
 
-
+/**
+ * Represents a solar system in the Space Trader game. The solar 
+ * system consists of a group of planets and has a particular 
+ * tech level, specific resources, and a tax rate which applies 
+ * to all of the planets that are within the system.
+ * 
+ * @author Quirky Qwertys
+ * @version 1.0 10.22.12
+ *
+ */
 public class SolarSystem {
 	private Point location;
 	private String name;
 	private ArrayList<Planet> planets;
-	private int count = 0;
 	private int techLevel;
 	private int resources;
-	private double taxRate;
+	private static double taxRate;
+	private static int count = 0;
 	
-	public SolarSystem(String n, Point p, ArrayList<Planet> pnts, int tL, double tR, int rS ) {
-		this.name = n;
-		this.planets = pnts;
-		this.location = p;
-		this.techLevel = tL;
-		this.taxRate = tR;
-		this.resources = rS;
+	/**
+	 * Instantiates a SolarSystem with a specific name, position,
+	 * tech level, tax rate and resources.
+	 *  
+	 * @param n the name of the SolarSystem
+	 * @param p the (x, y) coordinate of the SolarSystem (in the Universe)
+	 * @param tL the tech level of the SolarSystem
+	 * @param tR the tax rate used in the SolarSystem
+	 * @param rS the resources available in the SolarSystem
+	 */
+	public SolarSystem(String n, Point p, int tL, double tR, int rS ) {
+		name = n;
+		location = p;
+		techLevel = tL;
+		taxRate = tR;
+		resources = rS;
 		count = planets.size();
 	}
 	
-	public SolarSystem(String n, ArrayList<Planet> pnts) {
-		this(n, new Point(0, 0), pnts, 5, 0.07, 7);
-	}
-	
-	public SolarSystem() {
-		name = "Random System";
-		planets = new ArrayList<Planet>(3);
+	/**
+	 * Instantiates a SolarSystem with a default name, coordinates, tax 
+	 * rate, and number of planets.
+	 * 
+	 * @param planets the group of Planets in the SolarSystem 
+	 */
+	public SolarSystem(ArrayList<Planet> planets) {
+		this("Baton Rouge", new Point(0, 0), 5, 0.07, 7);
 	}
 	
 	/**
-	 * Adds a Planet to the Solar System's underlying
-	 * array. Returns a boolean: true if add
-	 * was successful, false if otherwise.
+	 * Adds a Planet to the Solar System. 
+	 * 
 	 * @param Planet object
-	 * @return boolean
+	 * @return true Planet isn't a copy or repeat of another Planet, 
+	 * false otherwise
 	 */
 	public boolean add(Planet object) {
 		boolean ace = false;
@@ -50,56 +68,66 @@ public class SolarSystem {
 	}
 	
 	/**
-	 * Removes a Planet from the underlying List collection.
-	 * Returns a boolean: true if add was successful, false
-	 * if otherwise.
-	 * @param Planet object
-	 * @return boolean
+	 * Removes a Planet from the SolarSystem.
+     *
+	 * @param planet the Planet that will be removed from
+	 * the SolarSystem
+	 * @return true if the Planet exists and can be removed, false
+	 * otherwise
 	 */
-	public boolean remove(Planet object) {
+	public boolean remove(Planet planet) {
 		boolean ace = false;
-		int idx = planets.indexOf(object);
-		if (idx >= 0){
+		int idx = planets.indexOf(planet);
+		if (idx >= 0 && planets.contains(planet)){
 			planets.remove(idx);
+			ace = true;
 		}
 		return ace;
 	}
 	
 	/**
-	 * Returns the planets within the Solar System
-	 * as an ArrayList
-	 * @return ArrayList<Planet> - of type Planet
+	 * Gets the all of the Planets within the SolarSystem.
+	 * 
+	 * @return the list with all of the Planets in the SolarSystem
 	 */
 	public ArrayList<Planet> getSolarSystem() {
 		return planets;
 	}
 	
 	/**
-	 * Returns the location of the Solar System 
-	 * relative to the universe, determined at
-	 * creation.
-	 * @return Point
+	 * Sets the SolarSystem to have a specified group of 
+	 * Planets.
+	 */
+	public void setSolarSystem(ArrayList<Planet> newPlanets) {
+		planets = newPlanets;
+	}
+	
+	/**
+	 * Returns the location of the SolarSystem relative to  
+	 * the Universe.
+	 * @return the location (or (x, y) coordinate) of the SolarSystem
 	 */
 	public Point getLocation() {
 		return location;
 	}
 	
 	/**
-	 * Returns an int that represents the 
-	 * level of technological development of the
-	 * Solar System. This value influences production
-	 * and price of goods sold within the S.System.
-	 * @return int
+	 * Gets the technological development level of the
+	 * SolarSystem. This value influences production
+	 * and price of goods sold within the SolarSystem.
+	 * 
+	 * @return the tech level of the SolarSystem
 	 */
 	public int getTechLevel() {
 		return techLevel;
 	}
 	
 	/**
-	 * Returns an int that represents the resource 
-	 * the Solar System has in abundance. This value 
-	 * influences the price and quality of trade goods.
-	 * @return int
+	 * Gets an int that represents the resource the 
+	 * SolarSystem has in abundance. This value influences
+	 * the price and quality of trade goods.
+	 * 
+	 * @return the abundant resource in the SolarSystem 
 	 */
 	public int getResources() {
 		return resources;
@@ -118,20 +146,23 @@ public class SolarSystem {
 	}
 	
 	/**
-	 * Returns a double that must be accounted for in all
+	 * Retrieves the tax rate that must be accounted for in all
 	 * trade affairs. The number must be added to the base
 	 * price.
-	 * @return double
+	 * 
+	 * @return the current tax rate in the SolarSystem
 	 */
 	public double getTaxRate() {
 		return taxRate;
 	}
 	
 	/**
-	 * Sets the tax rate of the Solar System.
-	 * @param double new tax rate
+	 * Sets the tax rate of the SolarSystem.
+	 * 
+	 * @param taxRate the new tax rate of the SolarSystem
 	 */
-	public void setTaxRate(double taxRate) {
+	public void setTaxRate(double newTaxRate) {
+	    taxRate = newTaxRate;
 	}
 	
 	/**
