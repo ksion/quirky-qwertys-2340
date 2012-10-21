@@ -13,12 +13,26 @@ import java.util.ArrayList;
  *
  */
 public class SolarSystem {
+	
+	/** Location of a SolarSystem in the Universe. */
 	private Point location;
+	
+	/** Name of the SolarSystem. */
 	private String name;
+	
+	/** Planets in the SolarSystem. */
 	private ArrayList<Planet> planets;
+	
+	/** The tech level of a SolarSystem can be from 0-7. */
 	private int techLevel;
+	
+	/** The resource type of a SolarSystem can range from levels 0-13. */
 	private int resources;
+	
+	/** Tax rate that applies to any transaction. */
 	private static double taxRate;
+	
+	/** Number of Planets in a SolarSystem. */
 	private static int count = 0;
 	
 	/**
@@ -27,7 +41,7 @@ public class SolarSystem {
 	 *  
 	 * @param n the name of the SolarSystem
 	 * @param p the (x, y) coordinate of the SolarSystem (in the Universe)
-	 * @param tL the tech level of the SolarSystem
+	 * @param tL the tech level of the SolarSystem which can be from 0-7
 	 * @param tR the tax rate used in the SolarSystem
 	 * @param rS the resources available in the SolarSystem
 	 */
@@ -37,7 +51,7 @@ public class SolarSystem {
 		techLevel = tL;
 		taxRate = tR;
 		resources = rS;
-		count = planets.size();
+		planets = new ArrayList<Planet>();
 	}
 	
 	/**
@@ -46,32 +60,30 @@ public class SolarSystem {
 	 * 
 	 * @param planets the group of Planets in the SolarSystem 
 	 */
-	public SolarSystem(ArrayList<Planet> planets) {
+	public SolarSystem() {
 		this("Baton Rouge", new Point(0, 0), 5, 0.07, 7);
 	}
 	
 	/**
 	 * Adds a Planet to the Solar System. 
 	 * 
-	 * @param Planet object
-	 * @return true Planet isn't a copy or repeat of another Planet, 
-	 * false otherwise
+	 * @param planet the Planet that will be added to the SolarSystem
+	 * @return true if the Planet isn't a copy or repeat of another 
+	 * Planet, false otherwise
 	 */
-	public boolean add(Planet object) {
-		boolean ace = false;
-		if (!planets.contains(object)) {
-			planets.add(object);
-			ace = true;
+	public boolean add(Planet planet) {
+		if (!planets.contains(planet)) {
+			planets.add(planet);
 			count++;
+			return true;
 		}
-		return ace;
+		return false;
 	}
 	
 	/**
 	 * Removes a Planet from the SolarSystem.
      *
-	 * @param planet the Planet that will be removed from
-	 * the SolarSystem
+	 * @param planet the Planet that will be removed from the SolarSystem
 	 * @return true if the Planet exists and can be removed, false
 	 * otherwise
 	 */
@@ -90,7 +102,7 @@ public class SolarSystem {
 	 * 
 	 * @return the list with all of the Planets in the SolarSystem
 	 */
-	public ArrayList<Planet> getSolarSystem() {
+	public ArrayList<Planet> getPlanets() {
 		return planets;
 	}
 	
@@ -98,13 +110,14 @@ public class SolarSystem {
 	 * Sets the SolarSystem to have a specified group of 
 	 * Planets.
 	 */
-	public void setSolarSystem(ArrayList<Planet> newPlanets) {
+	public void setPlanets(ArrayList<Planet> newPlanets) {
 		planets = newPlanets;
 	}
 	
 	/**
 	 * Returns the location of the SolarSystem relative to  
 	 * the Universe.
+	 * 
 	 * @return the location (or (x, y) coordinate) of the SolarSystem
 	 */
 	public Point getLocation() {
@@ -134,18 +147,6 @@ public class SolarSystem {
 	}
 	
 	/**
-	 * Returns an int that represents the type of 
-	 * government that holds within the S.System. This
-	 * value influences the number of police, pirates,
-	 * and traders there could possibly be afloat when
-	 * traveling.
-	 * @return int 
-	 */
-	 public int getPoliSystem() {
-		return 0;
-	}
-	
-	/**
 	 * Retrieves the tax rate that must be accounted for in all
 	 * trade affairs. The number must be added to the base
 	 * price.
@@ -163,19 +164,5 @@ public class SolarSystem {
 	 */
 	public void setTaxRate(double newTaxRate) {
 	    taxRate = newTaxRate;
-	}
-	
-	/**
-	 * Returns an int that represents the type of encounter
-	 * that occurs when the player is traveling. Encounters
-	 * are not strictly subject to police, pirate, and trader
-	 * encounters. Encounters may also be good luck or bad
-	 * luck occasions, such as finding trade goods floating 
-	 * around or hitting a meteor which causes damage to the
-	 * ship.
-	 * @return int
-	 */
-	public int genEncounter() {
-		return 0;
 	}
 }
