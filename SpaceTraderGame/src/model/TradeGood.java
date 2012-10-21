@@ -1,5 +1,4 @@
 package model;
-public interface TradeGood {
-	private int cost;
-	
+public class TradeGood {
+	private static int cost;
 }

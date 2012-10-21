@@ -33,7 +33,8 @@ public class MapWindow extends JPanel {
 		Image background = null;
 		try {
 			background = ImageIO.read(new File("src/view/starsBackground.jpeg"));
-		} catch (IOException e) {
+		} 
+		catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
