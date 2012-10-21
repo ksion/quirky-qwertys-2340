@@ -12,37 +12,52 @@ import java.util.ArrayList;
 
 import model.Planet;
 import model.SolarSystem;
+import model.Universe;
 
+/**
+ * Represents the navigation window for the Space Trader game.
+ * 
+ * @author Quirky Qwertys
+ * @version 1.0 10.22.12
+ */
 public class MapWindow extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
-	private Planet[] planets = new Planet[5];
+	
+	/** Represents the universe in Space Trader game. */
+	private Universe universe;
 	
 	/**
-	 * Create the panel.
+	 * Creates the panel.
 	 */
-	public MapWindow() {
-		SolarSystem s1 = new SolarSystem();
-		for(int i = 0; i < 5; i++){
-			s1.add(new Planet());
-		}
+	public MapWindow(){
+		universe = new Universe();
 	}
 	
+	/**
+	 * Paints all of the SolarSystems and planets.
+	 */
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		Image background = null;
 		try {
 			background = ImageIO.read(new File("src/view/starsBackground.jpeg"));
 		} 
-		catch (IOException e) {
+		catch (IOException e){
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		g.drawImage(background, 0, 0, null);
-		for(Planet p: planets){
+		ArrayList<SolarSystem> systems = universe.getSystems();
+		SolarSystem solarSystem = systems.get(0);
+		for(Planet p : solarSystem.getPlanets()){
 			p.draw(g);
 		}
 	}
+	
+	/**
+	 * Main method creates the navigation window.
+	 */
 	public static void main(String[] args){
 		JFrame frame = new JFrame();
 		frame.setPreferredSize(new Dimension(800, 450));
