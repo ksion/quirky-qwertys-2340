@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.EventQueue;
 import java.awt.Graphics;
 
 import javax.imageio.ImageIO;
@@ -44,7 +45,6 @@ public class MapWindow extends JPanel {
 			background = ImageIO.read(new File("src/view/starsBackground.jpeg"));
 		} 
 		catch (IOException e){
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		g.drawImage(background, 0, 0, null);
@@ -57,13 +57,35 @@ public class MapWindow extends JPanel {
 	
 	/**
 	 * Main method creates the navigation window.
-	 */
+	 
 	public static void main(String[] args){
 		JFrame frame = new JFrame();
 		frame.setPreferredSize(new Dimension(800, 450));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
+		
 		frame.add(new MapWindow());
 		frame.pack();
+		frame.setVisible(true);
+	}
+	*/
+	
+	public void launch(){
+		EventQueue.invokeLater(new Runnable() {
+			public void run(){
+			
+				try{
+					JFrame frame = new JFrame();
+					frame.setPreferredSize(new Dimension(800, 450));
+					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			
+					frame.add(new MapWindow());
+					frame.pack();
+					frame.setVisible(true);
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+			
 	}
 }

@@ -52,10 +52,10 @@ public class PlayerWindow extends JPanel {
 				try {
 					
 					Image spaceIcon = ImageIO.read(new File("src/view/shipIcon.png"));//needed for MACs and Windows
-					PlayerWindow player = new PlayerWindow();
+					//PlayerWindow player = new PlayerWindow();
 					JFrame frame = new JFrame();
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					frame.setContentPane( player );
+					frame.setContentPane(PlayerWindow.this);
 					frame.setBounds(100, 100, 450, 300);
 					frame.setPreferredSize(new Dimension(650, 250));
 					frame.setIconImage(spaceIcon);
@@ -100,7 +100,6 @@ public class PlayerWindow extends JPanel {
 		
 		createButton = new JButton("Create");
 		createButton.setEnabled(false);
-		createButton.addActionListener( new CreateListener() );
 		add(createButton, "cell 9 7 2 1,alignx right");	
 		
 		JLabel lblSkillPointsDesc1 = new JLabel("Start the game with 15 skill points. Allocate those points");
@@ -223,14 +222,46 @@ public class PlayerWindow extends JPanel {
 		textField_Trader.setText("0");
 	}
 /**
- * gets the create button
- * @return the create button
+ * gets the values out of the fields to create the player
+ * @return player created
  */
-	public JButton getCreateButton() {
-		return createButton;
+	public Player getNewPlayer(){
+		int[] skills = new int[4];
+		skills[0] = getValue(textFieldPilot);
+		skills[1] = getValue(textField_Fighter);
+		skills[2] = getValue(textField_Engineer);
+		skills[3] = getValue(textField_Trader);
+		String playerName = textName.getText();
+		
+		Player newPlayer = new Player(playerName, skills);
+		System.out.println(newPlayer.toString());
+		return newPlayer;
+	}
+	/**
+	 * set the action listener on the create button
+	 * @param listener - the action listener
+	 */
+	public void setCreateListener(ActionListener listener){
+		createButton.addActionListener(listener);
+	}
+	/**
+	 * gets the value of the name field
+	 * @param field the text field
+	 * @return >1 if the player name is populated
+	 */
+	public int getValue( JTextField field ) {
+		if (field.getText().equals("")){
+			return 0;
+		}
+		else return (Integer.parseInt(field.getText()) );
+		
 	}
 	
-	
+	/**
+	 * inner class to make sure all the fields are populated correctly on new player creation
+	 * @author Quirky Qwertys
+	 *
+	 */
 	private class NewPlayerListener implements DocumentListener {
 
 		@Override
@@ -253,6 +284,10 @@ public class PlayerWindow extends JPanel {
 			
 		}
 		
+		/**
+		 * method to make sure all the skill points are populated and add up to 15
+		 * @return true if the points add up to 15; false otherwise
+		 */
 		public boolean areAllSkillPointsUsed() {
 			try {
 				int skillPointsUsed = getValue(textFieldPilot) 
@@ -264,6 +299,10 @@ public class PlayerWindow extends JPanel {
 				return false;				
 			}
 		}
+		/**
+		 * checks to see if the name is populated
+		 * @return true if name is populated
+		 */
 		public boolean isNameSet(){
 			if (textName.getText().equals("")){
 				return false;
@@ -271,35 +310,10 @@ public class PlayerWindow extends JPanel {
 			else return true;
 		}
 		
-		public int getValue( JTextField field ) {
-			if (field.getText().equals("")){
-				return 0;
-			}
-			else return (Integer.parseInt(field.getText()) );
-			
-		}
+		
+		
+		
 		
 	}
-	private class CreateListener implements ActionListener{
-		
-		public int getValue( JTextField field ) {
-			if (field.getText().equals("")){
-				return 0;
-			}
-			else return (Integer.parseInt(field.getText()) );
-			
-		}
-		
-		public void actionPerformed(ActionEvent e){
-			int[] skills = new int[4];
-			skills[0] = getValue(textFieldPilot);
-			skills[1] = getValue(textField_Fighter);
-			skills[2] = getValue(textField_Engineer);
-			skills[3] = getValue(textField_Trader);
-			String playerName = textName.getText();
-			
-			Player newPlayer = new Player(playerName, skills);
-			System.out.println(newPlayer.toString());
-		}
-	}
+	
 }

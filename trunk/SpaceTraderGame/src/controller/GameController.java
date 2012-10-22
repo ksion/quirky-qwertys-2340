@@ -1,6 +1,13 @@
 package controller;
 
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
+
+import model.Player;
+
+import view.MapWindow;
 import view.PlayerWindow;
 
 /**
@@ -16,16 +23,60 @@ public class GameController {
 	 */
 	public static void main(String[] args){
 		//launch the player creation window;
-		PlayerWindow playerWin;
+				
+		GameController gc = new GameController();
+		gc.start();
+		
+		
+		
+		
+	}
+	/**
+	 * starts a new Space Traders game
+	 */
+	public void start(){
+		newGame();
+		
+		
+	}
+	/**
+	 * creates the player window and the map window
+	 */
+	public void newGame(){
+		final PlayerWindow playerWin;
+		
+		
 		try {
 			playerWin = new PlayerWindow();
+			playerWin.setCreateListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					System.out.println("Create Player");
+					playerWin.setVisible(false);
+					Player newPlayer = playerWin.getNewPlayer();
+					showMap();
+					
+				}
+				
+			});
 			playerWin.launch();
 		} catch (IOException e) {
 
 			e.printStackTrace();
-		}		
+		}
+
 	}
 	
+	/**
+	 * shows the map window
+	 */
+	public void showMap(){
+		MapWindow mapWin = new MapWindow();
+		mapWin.launch();
+		
+		
+	}
 
 		
 		
