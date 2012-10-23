@@ -42,11 +42,14 @@ public class Planet {
 	private static double tax;
 	
 	/** List of images used to represent a Planet in the GUI. */
-	private String[] planetPics = {"src/view/blueGasPlanet.png","src/view/desertPlanet.png","src/view/desolatePlanet.png","src/view/jupiterPlanet.png", "src/view/redMineralPlanet.png"};
+	private String[] planetPics = {"src/view/blueGasPlanet.png","src/view/desertPlanet.png",
+			"src/view/desolatePlanet.png","src/view/jupiterPlanet.png", 
+			"src/view/redMineralPlanet.png"};
 	// private Vendor[] availVend;
 	
 	/** List of letters that can be used to randomly generate a planet name. */
-	private String[] vowels = {"a","e","i","o","u","y"}, consonants = {"b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","z"};
+	private String[] vowels = {"a","e","i","o","u","y"}, consonants = 
+		{"b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","z"};
 	
 	
 	/** 
@@ -141,6 +144,14 @@ public class Planet {
 	}
 	
 	/**
+	 * Retrieves the tax rate of the given planet.
+	 * @return tax
+	 */
+	public static double getTaxRate() {
+		return tax;
+	}
+	
+	/**
 	 * Creates a String with information about the Planet's name,
 	 * position, and tech level.
 	 * 
@@ -183,4 +194,6 @@ public class Planet {
 		
 		g.drawImage(img, x, y, SIZE, SIZE, null);
 	}
+
+	
 }
