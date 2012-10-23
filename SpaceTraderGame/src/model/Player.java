@@ -33,8 +33,8 @@ public class Player {
 	/** Current Ship the player owns. */ 
 	Ship myShip = new GnatShip(24);
 	
-	// /** Player's inventory of TradeGoods. */
-	// TradeGood[] inventory = new TradeGood[20];
+	/** Player's inventory of TradeGoods. */
+	TradeGood[] inventory = new TradeGood[myShip.hullStrength];
 	
 	/** 
 	 * Instantiates a Player with a given name and skill
@@ -51,7 +51,6 @@ public class Player {
 		fighterSkill = skills[1];
 		traderSkill = skills[2];
 		engineerSkill = skills[3];
-		
 	}
 	
 	/**
