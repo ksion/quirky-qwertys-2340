@@ -1,4 +1,8 @@
 package model;
+
+import java.awt.Point;
+import java.awt.geom.Point2D;
+
 /**
  * Represents the vehicle used by the Player to travel
  * from one planet to another. The Ship may be used to
@@ -67,6 +71,9 @@ public class Ship {
 	/** Represents the name of the Ship. */
 	protected static String name = "Ship";
 
+	/** Represents whether the ship is in space or a planet */
+	protected static boolean flight = false;
+	
 	/**
 	 * Instantiates a Ship with specified hull strength.
 	 */
@@ -74,6 +81,24 @@ public class Ship {
 	public Ship(int hullStrength){
 		this.hullStrength = hullStrength;
 	}
+	
+		/*I think the ship should contain the travel(Planet p) method
+		public Point travel(Planet p) {
+			flight = true;
+			Point2D current = new Point(currentX, currentY);
+			int dist = (int) Math.sqrt((p.getPosition().distance(current)));
+			if (dist < fuelAmount*fuelEconomy) {
+				currentX = p.getPosition().x;
+				currentY = p.getPosition().y;
+				fuelAmount -= (dist / fuelEconomy);
+			}
+			return new Point(currentX, currentY);
+			//-------------
+			 - during this time where flight is true, an encounter
+			 - needs to be generated...
+			 - somewhere flight has to be turned back to false
+			//-------------
+		}*/
 	
 	/**
 	 * Gets the name of the Ship. 
