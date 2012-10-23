@@ -4,6 +4,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
+import java.util.Math;
 
 import javax.imageio.ImageIO;
 
@@ -193,6 +194,18 @@ public class Planet {
 		}
 		
 		g.drawImage(img, x, y, SIZE, SIZE, null);
+	}
+	
+	public boolean inRange(Point p){
+		boolean inRange = false;
+		
+		int distance = (int) (Math.pow(Math.pow((position.getX() - p.getX()), 2) + 
+				Math.pow(position.getY() - p.getY(), 2), .5));
+		
+		if (distance < 16){
+			inRange = true; 
+		}
+		return inRange;
 	}
 
 	
