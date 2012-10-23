@@ -26,13 +26,15 @@ public class MapWindow extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	/** Represents the universe in Space Trader game. */
-	private Universe universe;
+	private Universe universe = new Universe();;
+	ArrayList<SolarSystem> systems = universe.getSystems();
+	SolarSystem solarSystem = systems.get(0);
 	
 	/**
 	 * Creates the panel.
 	 */
 	public MapWindow(){
-		universe = new Universe();
+		
 	}
 	
 	/**
@@ -48,8 +50,7 @@ public class MapWindow extends JPanel {
 			e.printStackTrace();
 		}
 		g.drawImage(background, 0, 0, null);
-		ArrayList<SolarSystem> systems = universe.getSystems();
-		SolarSystem solarSystem = systems.get(0);
+		
 		for(Planet p : solarSystem.getPlanets()){
 			p.draw(g);
 		}
@@ -87,5 +88,17 @@ public class MapWindow extends JPanel {
 			}
 		});
 			
+	}
+	private class MouseOver extends MouseAdapter{
+		public void mousePressed(MouseEvent m){
+			Point point = m.getPoint();
+			for(Planet planet: solarSystem.getPlanets()){
+				if(planet.inRange(point)){
+					/**
+					 * Annette you will put the link to open your window here. 
+					 */
+				}
+			}
+		}
 	}
 }
