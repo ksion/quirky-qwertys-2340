@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class MapWindow extends JPanel {
 	}
 	
 	/**
-	 * Paints all of the SolarSystems and planets.
+	 * Paints all of the SolarSystems and Planets.
 	 */
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);

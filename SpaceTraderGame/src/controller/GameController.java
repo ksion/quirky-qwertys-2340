@@ -1,6 +1,5 @@
 package controller;
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -25,27 +24,24 @@ public class GameController {
 		//launch the player creation window;
 				
 		GameController gc = new GameController();
-		gc.start();
-		
-		
-		
-		
+		gc.start();		
 	}
+	
+	
 	/**
-	 * starts a new Space Traders game
+	 * Starts a new Space Traders game.
 	 */
 	public void start(){
-		newGame();
-		
-		
+		newGame();	
 	}
+	
+	
 	/**
-	 * creates the player window and the map window
+	 * creates the player window and the map window.
 	 */
 	public void newGame(){
 		final PlayerWindow playerWin;
-		
-		
+			
 		try {
 			playerWin = new PlayerWindow();
 			playerWin.setCreateListener(new ActionListener() {
@@ -68,8 +64,9 @@ public class GameController {
 
 	}
 	
+	
 	/**
-	 * shows the map window
+	 * Shows the map window.
 	 */
 	public void showMap(){
 		MapWindow mapWin = new MapWindow();
@@ -77,10 +74,4 @@ public class GameController {
 		
 		
 	}
-
-		
-		
-		
-	
-
 }
