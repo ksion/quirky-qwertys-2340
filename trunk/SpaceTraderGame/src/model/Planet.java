@@ -4,7 +4,6 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
-import java.util.Math;
 
 import javax.imageio.ImageIO;
 
@@ -196,6 +195,12 @@ public class Planet {
 		g.drawImage(img, x, y, SIZE, SIZE, null);
 	}
 	
+	/**
+	 * Checks to see whether the mouse is over a Planet in the MapWindow.
+	 * 
+	 * @param p the current x- and y-coordinates of the mouse
+	 * @return true if the mouse is over a Planet, false otherwise
+	 */
 	public boolean inRange(Point p){
 		boolean inRange = false;
 		
@@ -207,6 +212,4 @@ public class Planet {
 		}
 		return inRange;
 	}
-
-	
 }
