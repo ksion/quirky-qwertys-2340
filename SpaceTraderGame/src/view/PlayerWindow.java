@@ -22,15 +22,11 @@ import java.io.IOException;
 
 
 /**
- * creates the initial player creation GUI
- * @author Qwirky Qwertys
+ * Creates the initial player creation GUI 
+ * @author Quirky Qwertys
  * @version 1.0
  */
 public class PlayerWindow extends JPanel {
-
-	/**
-	 * 
-	 */
 
 	private Image img;
 	private Color c = new Color(0, 255, 0);

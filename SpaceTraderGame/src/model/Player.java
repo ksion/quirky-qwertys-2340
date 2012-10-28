@@ -1,4 +1,7 @@
 package model;
+
+import java.awt.Point;
+
 /**
  * Represents the playable space trader character.
  * It is through Player that the user can play this game.
@@ -31,7 +34,7 @@ public class Player {
 	private static int money = 1000;
 	
 	/** Current Ship the player owns. */ 
-	Ship myShip = new GnatShip(24);
+	Ship myShip = new GnatShip(24, new Point(100,100));
 	
 	/** Player's inventory of TradeGoods. */
 	TradeGood[] inventory = new TradeGood[myShip.hullStrength];
