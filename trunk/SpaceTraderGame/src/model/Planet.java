@@ -33,7 +33,7 @@ public class Planet {
 	private int techLevel;
 	
 	/** Trade goods available on the Planet. */
-	private TradeGood[] goods; 
+	private Inventory tradableInventory;
 	
 	/** The SolarSystem the Planet belongs to. */
 	private static SolarSystem system; 
@@ -105,6 +105,14 @@ public class Planet {
 		}
 		name = n;
 	}
+	/**
+	 * generates the subset of planet inventory based on all allowable inventory
+	 */
+	public void createInventory(){
+		tradableInventory = new Inventory();
+		//TODO: in another method, figure out the allowable trade goods to pass in instead of TradeGood.values()
+		tradableInventory.generate(this.getTechLevel(), TradeGood.values(), 10, false);
+	}
 	
 	/**
 	 * Gets the name of the Planet.
@@ -146,10 +154,10 @@ public class Planet {
 	 * Retrieves a list of all of the TradeGoods available 
 	 * in the Planet.
 	 * 
-	 * @return the list of TradeGoods
+	 * @return the list of Inventory
 	 */
-	public TradeGood[] getTradeGoods(){
-		return goods;
+	public Inventory getInventory(){
+		return tradableInventory;
 	}
 	
 	/**

@@ -3,15 +3,15 @@ package model;
 import java.util.Random;
 
 public enum TradeGood {
-	WATER(0, 0, 1, 45, 5, 5, 50),
-	FURS(0, 0, 0, 250, 10, 20, 300),
-	FOOD(1, 0, 1, 100, 3, 5, 120),
-	ORE(2, 2, 3, 350, 20, 15, 350),
-	GAMES(3, 1, 6, 250, -10, 10, 200),
-	FIREARMS(3, 1, 5, 1255, 35, 10, 1400),
-	MEDICINE(4, 1, 6, 550, -25, 5, 600),
-	NARCHOTICS(5, 0, 5, 3500, -125, 150, 2000),
-	ROBOTS(6, 4, 7, 5000, -150, 100, 3500);
+	WATER(0, 0, 1, 45, 5, 5, 50, "Water"),
+	FURS(0, 0, 0, 250, 10, 20, 300, "Furs"),
+	FOOD(1, 0, 1, 100, 3, 5, 120, "Food"),
+	ORE(2, 2, 3, 350, 20, 15, 350, "Ore"),
+	GAMES(3, 1, 6, 250, -10, 10, 200, "Games"),
+	FIREARMS(3, 1, 5, 1255, 35, 10, 1400, "Firearms"),
+	MEDICINE(4, 1, 6, 550, -25, 5, 600,"Medicine"),
+	NARCOTICS(5, 0, 5, 3500, -125, 150, 2000, "Narcotics"),
+	ROBOTS(6, 4, 7, 5000, -150, 100, 3500, "Robots");
 	
 	private int mtlp;
 	private int mtlu;
@@ -20,10 +20,11 @@ public enum TradeGood {
 	private int var;
 	private int ipl;
 	private int minSpace;
+	private String name;
 	
 	TradeGood(int minTechLPro, int minTechLUse, int techLProd,
 			int basePrice, int incrPLevel, int vari, 
-			int minPriceSpace) {
+			int minPriceSpace, String name) {
 		mtlp = minTechLPro;
 		mtlu = minTechLUse;
 		ttp = techLProd;
@@ -31,9 +32,10 @@ public enum TradeGood {
 		var = vari;
 		ipl = incrPLevel;
 		minSpace = minPriceSpace;
+		this.name = name;
 	}
 	
-	int cost(int currentTechLevel, boolean inSpace) {
+	public int cost(int currentTechLevel, boolean inSpace) {
 		int ace = -1;
 		Random gen = new Random(); 
 		int headTail = gen.nextInt(2);
@@ -50,6 +52,13 @@ public enum TradeGood {
 				ace = (int) (bP + ipl * (ttp - mtlp) - (bP * variance));
 		}
 		return ace;
+	}
+	/**
+	 * gets the name of the tradegood
+	 * @return name of trade good
+	 */
+	public String getName (){
+		return name;
 	}
 }
 
