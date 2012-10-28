@@ -11,15 +11,6 @@ import java.awt.Point;
 
 public class GnatShip extends Ship {
 	
-	/** Strength of the Ship's hull. */
-	private static int hullStrength; 
-	
-	/** Current x-coordinate of the Ship. */
-	private double currentX = 0;
-	
-	/** Current y-coordinate of the Ship. */
-	private double currentY = 0;
-	
 	/**
 	 * Instantiates a Gnat Ship.
 	 * 
@@ -30,6 +21,7 @@ public class GnatShip extends Ship {
 		super(hullStrength, point);
 		name = "Gnat Ship";
 	}
+	
 	
 	/* 
 	 * Methods that will be added to code later:
