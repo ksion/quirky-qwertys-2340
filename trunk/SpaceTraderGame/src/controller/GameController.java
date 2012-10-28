@@ -66,12 +66,10 @@ public class GameController {
 	
 	
 	/**
-	 * Shows the map window.
+	 * Shows a map of the Planets/SolarSystems in the Universe.
 	 */
 	public void showMap(){
 		MapWindow mapWin = new MapWindow();
-		mapWin.launch();
-		
-		
+		mapWin.launch();	
 	}
 }

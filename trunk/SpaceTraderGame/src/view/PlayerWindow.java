@@ -309,11 +309,5 @@ public class PlayerWindow extends JPanel {
 			}
 			else return true;
 		}
-		
-		
-		
-		
-		
 	}
-	
 }

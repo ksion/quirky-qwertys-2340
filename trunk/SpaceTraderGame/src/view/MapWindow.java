@@ -27,7 +27,7 @@ public class MapWindow extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	/** Represents the universe in Space Trader game. */
-	private Universe universe = new Universe();;
+	private Universe universe = new Universe();
 	ArrayList<SolarSystem> systems = universe.getSystems();
 	SolarSystem solarSystem = systems.get(0);
 	
