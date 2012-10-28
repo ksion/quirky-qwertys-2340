@@ -20,7 +20,6 @@ public enum TradeGood {
 	private int var;
 	private int ipl;
 	private int minSpace;
-	private Random gen = new Random();
 	
 	TradeGood(int minTechLPro, int minTechLUse, int techLProd,
 			int basePrice, int incrPLevel, int vari, 
@@ -36,11 +35,19 @@ public enum TradeGood {
 	
 	int cost(int currentTechLevel, boolean inSpace) {
 		int ace = -1;
-		int variance = gen.nextInt(var);
-		if (inSpace && this.mtlu < currentTechLevel) {			
-			ace = minSpace + ipl * (ttp - mtlp) + variance;
+		Random gen = new Random(); 
+		int headTail = gen.nextInt(2);
+		double variance = var / 100;
+		if (inSpace && this.mtlu < currentTechLevel) {
+			if (headTail < 1)
+				ace = (int) (minSpace + ipl * (ttp - mtlp) + (bP * variance));
+			else
+				ace = (int) (minSpace + ipl * (ttp - mtlp) - (bP * variance));
 		} else if (!inSpace && this.mtlu < currentTechLevel) {
-			ace = bP + ipl * (ttp - mtlp) + variance;
+			if (headTail < 1)
+				ace = (int) (bP + ipl * (ttp - mtlp) + (bP * variance));
+			else
+				ace = (int) (bP + ipl * (ttp - mtlp) - (bP * variance));
 		}
 		return ace;
 	}
