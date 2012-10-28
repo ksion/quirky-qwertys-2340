@@ -1,57 +1,46 @@
 package view;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.BorderLayout;
-import javax.swing.SwingConstants;
-import javax.swing.JPanel;
-import java.awt.GridLayout;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 import model.Planet;
 
 /**
  * Represents the window that shows up when the player is visiting a
  * Planet. Through this window, the player is given the options to 
- * trade, sell, or buy TradeGoods or Equipment; travel to another 
+ * trade, sell, or buy TradeGoods or the Ship; travel to another 
  * Planet; or view the current inventory and statistics.
  *  
  * @author Quirky Qwertys
  * @version 1.0 10.29.12
  */
 public class PlanetWindow {
-
+	private static Planet planet;
 	private JFrame frame;
 
 	/**
-	 * Launches the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PlanetWindow window = new PlanetWindow();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the application.
+	 * 
+	 * @param planet the current Planet in which the Ship is located  
 	 */
-	public PlanetWindow() {
+	public PlanetWindow(Planet planet) {
+		this.planet = planet;
 		initialize();
+		try{
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			frame.pack();
+			frame.setVisible(true);
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * 
+	 * @param p the current Planet in which the Ship is located  
 	 */
 	private void initialize() {
 		frame = new JFrame();
@@ -67,6 +56,7 @@ public class PlanetWindow {
 		
 		JButton btnNewButton1 = new JButton("Go to the Marketplace");
 		centerPanel.add(btnNewButton1);
+		btnNewButton1.addActionListener(new MarketPlaceListener());
 		
 		JButton btnNewButton2 = new JButton("Go to the Shipyard");
 		centerPanel.add(btnNewButton2);
@@ -87,7 +77,7 @@ public class PlanetWindow {
 		JLabel lblNewLabel = new JLabel("");
 		northPanel.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Welcome to planet [name]! What would you like to do?");
+		JLabel lblNewLabel_1 = new JLabel("Welcome to planet " + planet.getName() + "! What would you like to do?");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		northPanel.add(lblNewLabel_1);
 		
@@ -105,5 +95,27 @@ public class PlanetWindow {
 		JLabel lblNewLabel_3 = new JLabel("                          ");
 		westPanel.add(lblNewLabel_3);
 		eastPanel.setLayout(new GridLayout(1, 7, 0, 0));
+	}
+	
+	/**
+	 * Opens the marketplace window, so that the user may trade, buy,
+	 * or sell TradeGoods.
+	 */
+	private class MarketPlaceListener implements ActionListener{
+		/**
+		 * When the "Go to the Marketplace" button is clicked, the 
+		 * marketplace window pops up.
+		 * 
+		 * @param ae the event that corresponds to when the button is clicked
+		 */
+		public void actionPerformed(ActionEvent ae){
+			JFrame frame = new JFrame();
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			frame.setContentPane(new TradeWindow());
+			frame.setBounds(100, 100, 450, 300);
+			frame.setPreferredSize(new Dimension(650, 250));
+			frame.setVisible(true);
+			frame.pack();
+		}
 	}
 }

@@ -1,7 +1,6 @@
 package model;
 
 import java.awt.Point;
-import java.awt.geom.Point2D;
 
 /**
  * Represents the vehicle used by the Player to travel
@@ -63,10 +62,10 @@ public class Ship {
 	protected int hullStrength;
 	
 	/** Current x-coordinate of the Ship. */
-	protected int currentX = 0;
+	protected double currentX = 0;
 	
 	/** Current y-coordinate of the Ship. */
-	protected int currentY = 0;
+	protected double currentY = 0;
 	
 	/** Represents the name of the Ship. */
 	protected static String name = "Ship";
@@ -77,9 +76,10 @@ public class Ship {
 	/**
 	 * Instantiates a Ship with specified hull strength.
 	 */
-	// Later: include Point or X and Y coordinates in constructor
-	public Ship(int hullStrength){
+	public Ship(int hullStrength, Point p){
 		this.hullStrength = hullStrength;
+		this.currentX = p.getX();
+		this.currentY = p.getY();
 	}
 	
 		/*I think the ship should contain the travel(Planet p) method

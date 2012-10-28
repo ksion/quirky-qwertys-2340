@@ -107,6 +107,15 @@ public class Planet {
 	}
 	
 	/**
+	 * Gets the name of the Planet.
+	 * 
+	 * @param n the new name of the Planet
+	 */
+	public String getName(){
+		return name;
+	}
+	
+	/**
 	 * Sets the name of the Planet to the specified input.
 	 * 
 	 * @param n the new name of the Planet

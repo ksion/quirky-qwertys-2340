@@ -75,7 +75,6 @@ public class TradeWindow extends JPanel {
 		JButton btnNext = new JButton("Next");
 		btnNext.setToolTipText("Done Trading");
 		buttonPanel.add(btnNext);
-
 	}
 	
 	private class ArrowListener implements ActionListener{
@@ -84,7 +83,7 @@ public class TradeWindow extends JPanel {
 		public ArrowListener(int direction){
 			this.direction = direction;
 		
-	}
+	    }
 		public void actionPerformed(ActionEvent e){
 			if (direction == LEFT){
 				//TODO: get right table selection; check that funds are available; move it to left table; decrement funds
@@ -95,11 +94,9 @@ public class TradeWindow extends JPanel {
 				//TODO: get left table selection; move it to right table; increment funds
 			}
 		}
-		
-			
-		}
+    }
 
-	public static void main(String[] args){
+	/*public static void main(String[] args){
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setContentPane(new TradeWindow());
@@ -109,5 +106,5 @@ public class TradeWindow extends JPanel {
 		frame.setVisible(true);
 		frame.pack();
 		
-	}
+	}*/
 }

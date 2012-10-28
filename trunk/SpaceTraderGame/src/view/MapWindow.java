@@ -35,7 +35,7 @@ public class MapWindow extends JPanel {
 	 * Creates the panel.
 	 */
 	public MapWindow(){
-		
+		addMouseListener(new MouseOver());
 	}
 	
 	/**
@@ -79,6 +79,8 @@ public class MapWindow extends JPanel {
 					JFrame frame = new JFrame();
 					frame.setPreferredSize(new Dimension(800, 450));
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					frame.setFocusableWindowState(true);
+					frame.setLocationByPlatform(true);
 			
 					frame.add(new MapWindow());
 					frame.pack();
@@ -90,14 +92,22 @@ public class MapWindow extends JPanel {
 		});
 			
 	}
+	
+	/**
+	 * Creates an Adapter to catch where the mouse is pressed on
+	 * the map.
+	 */
 	private class MouseOver extends MouseAdapter{
+		/**
+		 * Detects when a Planet has been clicked.
+		 * 
+		 * @param m the event corresponding to when the mouse is pressed
+		 */
 		public void mousePressed(MouseEvent m){
 			Point point = m.getPoint();
 			for(Planet planet: solarSystem.getPlanets()){
 				if(planet.inRange(point)){
-					/**
-					 * Annette you will put the link to open your window here. 
-					 */
+					new PlanetWindow(planet);		
 				}
 			}
 		}
