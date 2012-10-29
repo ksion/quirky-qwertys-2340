@@ -21,7 +21,7 @@ public enum TradeGood {
 	private int ipl;
 	private int minSpace;
 	private String name;
-	private int cost;
+	private int cost;//we don't need this
 	
 	TradeGood(int minTechLPro, int minTechLUse, int techLProd,
 			int basePrice, int incrPLevel, int vari, 
@@ -68,7 +68,7 @@ public enum TradeGood {
 	 * @return int cost
 	 */
 	public int getCost() {
-		// TODO Auto-generated method stub
+		// TODO we don't need this here because the cost is stored in the inventory and varies by planet
 		return cost;
 	}
 
