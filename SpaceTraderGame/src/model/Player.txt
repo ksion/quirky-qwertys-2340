@@ -1,0 +1,12 @@
+Name: hayden
+Credits: 1000
+
+Stats: Pilot = 5 Figher = 5 Trader = 3 Engineer = 2Ship: Gnat Ship: 
+Damage Sustained: 0
+Distance Traveled: 0
+Fuel economy: 4
+Fuel amount: 16
+Escape Pod: false
+Insurance: false
+Hull Strength: 24
+Cargo Hold: 

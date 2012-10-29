@@ -5,6 +5,11 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 import model.Inventory;
 import model.Player;
@@ -60,10 +65,10 @@ public class TradeWindow extends JPanel {
 		lblOtherInventory.setHorizontalAlignment(SwingConstants.CENTER);
 		tablePanel.add(lblOtherInventory, "cell 2 1");
 		
-		JButton btnTradeBuy = new JButton("<--");
+		JButton btnTradeBuy = new JButton("<==");
 		btnTradeBuy.setEnabled(false);
 		
-		JButton btnTradeSell = new JButton("-->");
+		JButton btnTradeSell = new JButton("==>");
 		btnTradeSell.setEnabled(false);
 		
 		tableLeft = new JTable();
@@ -96,8 +101,11 @@ public class TradeWindow extends JPanel {
 		buttonPanel.add(Box.createHorizontalGlue());
 	
 		
-		JButton btnSaveAndQuit = new JButton("Save and Quit");
+		JButton btnSaveAndQuit = new JButton("Save and Exit");
+		btnSaveAndQuit.addActionListener(new SaveListener());
 		buttonPanel.add(btnSaveAndQuit);
+		
+		
 		
 		JButton btnNext = new JButton("Next");
 		btnNext.setToolTipText("Done Trading");
@@ -271,6 +279,25 @@ public class TradeWindow extends JPanel {
 			}
 		}
     }
+	
+	private class SaveListener implements ActionListener{
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			PrintWriter output = null;
+			try{
+				output = new PrintWriter(new FileWriter("src//model//Player.txt"));
+				output.write(player.toString());
+				output.write(player.getShip().toString());
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			finally{
+				output.close();
+			}
+		}
+	}
 	
 	
 	/*public static void main(String[] args){
