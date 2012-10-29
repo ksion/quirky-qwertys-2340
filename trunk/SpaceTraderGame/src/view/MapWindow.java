@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 
@@ -29,6 +30,7 @@ public class MapWindow extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private GameController gc;
+	protected JLabel planetName;
 	
 	/** Represents the universe in Space Trader game. */
 	private Universe universe = new Universe();
@@ -40,6 +42,10 @@ public class MapWindow extends JPanel {
 	 */
 	public MapWindow(){
 		addMouseListener(new MouseOver());
+		addMouseMotionListener(new MouseMove());
+		planetName = new JLabel();
+		planetName.setForeground(Color.white);
+		add(planetName);
 	}
 	
 	/**
@@ -114,6 +120,33 @@ public class MapWindow extends JPanel {
 				if(planet.inRange(point)){
 					planet.createInventory();
 					new PlanetWindow(planet,gc);		
+				}
+			}
+		}
+	}
+	
+	private class MouseMove implements MouseMotionListener{
+
+		@Override
+		public void mouseDragged(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseMoved(MouseEvent m) {
+			Point mPoint = m.getPoint();
+			for (Planet planet: solarSystem.getPlanets()){
+				if(planet.inRange(mPoint)){
+					int size = planet.getSize();
+					planetName.setBounds(
+							m.getX() - size,
+							m.getY() - size,
+							100, 
+							15
+							);
+					planetName.setText(planet.getName());
+					
 				}
 			}
 		}
