@@ -22,16 +22,15 @@ public class Inventory {
 		this(Integer.MAX_VALUE);
 	}
 	
-	public void generate(int techLevel, TradeGood[] allowableTradeGoods, int maxQty, boolean inSpace ){
+	public void generate(int techLevel, List<TradeGood> allowableTradeGoods, int maxQty, boolean inSpace){
 		Random rand = new Random();
 		goods = new ArrayList<TradableItem>();
 		for (TradeGood good: allowableTradeGoods){
 			int qty = rand.nextInt(maxQty);
-			if (qty>0){
-				goods.add(new TradableItem(good, rand.nextInt(maxQty),good.cost(techLevel,inSpace )) );
+			if (qty > 0){
+				goods.add(new TradableItem(good, rand.nextInt(maxQty),good.cost(techLevel, inSpace)));
 			}
-			 
-		}	
+		} 
 		
 	}
 	
