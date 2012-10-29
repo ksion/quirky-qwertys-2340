@@ -119,6 +119,7 @@ public class Ship {
 			// TODO Auto-generated method stub
 			// This one is yours Annette :)
 			// make sure you take into account the ships fuel
+			// I added the separate distance method so you can use it to check if the planet is close enough.
 			return true;
 		}
 
