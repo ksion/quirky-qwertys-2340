@@ -67,9 +67,6 @@ public class PlanetWindow {
 		JButton btnNewButton2 = new JButton("Go to the Shipyard");
 		centerPanel.add(btnNewButton2);
 		
-		JButton btnNewButton3 = new JButton("Travel ");
-		centerPanel.add(btnNewButton3);
-		
 		JButton btnNewButton4 = new JButton("Check Status");
 		centerPanel.add(btnNewButton4);
 		

@@ -77,28 +77,35 @@ public class Ship {
 		 * @param p the planet to travel to.
 		 */
 	
-		public void travel(Planet p) {
-			
+		public boolean travel(Planet p) {
+			boolean canTravel = false;
 			if(inRange(p)){
+				canTravel = true;
 				flight = true;
-				Point planetPos = p.getPosition();
-				double 	planetX = planetPos.getX(), 
-						planetY = planetPos.getY();
-				double pixelDistance = 
-						Math.pow(
-							Math.pow(currentX - planetX, 2) + 
-							Math.pow(currentY - planetY, 2)
-							,.5);
-				double gameDistance = pixelDistance/20;
+				double gameDistance = findDistance(p);
 				fuelAmount -= gameDistance/fuelEconomy;
 				
-				currentX = planetX;
-				currentY = planetY;
+				currentX = p.getPosition().getX();
+				currentY = p.getPosition().getY();
 				
 			}
 			else{
 				JOptionPane.showMessageDialog(null, "This planet is too far away to travel to.", "Woops!", JOptionPane.ERROR_MESSAGE);
 			}
+			return canTravel;
+		}
+		
+		public double findDistance(Planet p){
+			Point planetPos = p.getPosition();
+			double 	planetX = planetPos.getX(), 
+					planetY = planetPos.getY();
+			double pixelDistance = 
+					Math.pow(
+						Math.pow(currentX - planetX, 2) + 
+						Math.pow(currentY - planetY, 2)
+						,.5);
+			double gameDistance = pixelDistance/20;
+			return gameDistance;
 		}
 			
 			
@@ -111,7 +118,8 @@ public class Ship {
 	private boolean inRange(Planet p) {
 			// TODO Auto-generated method stub
 			// This one is yours Annette :)
-			return false;
+			// make sure you take into account the ships fuel
+			return true;
 		}
 
 

@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 
 import model.Planet;
+import model.Player;
 import model.SolarSystem;
 import model.Universe;
 
@@ -31,6 +32,7 @@ public class MapWindow extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private GameController gc;
 	protected JLabel planetName;
+	protected Player player;
 	
 	/** Represents the universe in Space Trader game. */
 	private Universe universe = new Universe();
@@ -38,14 +40,17 @@ public class MapWindow extends JPanel {
 	SolarSystem solarSystem = systems.get(0);
 	
 	/**
+	 * I also added a player parameter to the constructor so that the travel method for the ship from the game controller can be called.
 	 * Creates the panel.
+	 * @param p the player from the game controller
 	 */
-	public MapWindow(){
+	public MapWindow(Player p){
 		addMouseListener(new MouseOver());
 		addMouseMotionListener(new MouseMove());
 		planetName = new JLabel();
 		planetName.setForeground(Color.white);
 		add(planetName);
+		player = p;
 	}
 	
 	/**
@@ -111,16 +116,23 @@ public class MapWindow extends JPanel {
 	private class MouseOver extends MouseAdapter{
 		/**
 		 * Detects when a Planet has been clicked.
-		 * 
+		 * if the planet clicked is in the range of the ship, it will travel there and open the trade window. 
+		 * If not it will tell the user that the planet is not in range.
 		 * @param m the event corresponding to when the mouse is pressed
 		 */
 		public void mousePressed(MouseEvent m){
 			Point point = m.getPoint();
 			for(Planet planet: solarSystem.getPlanets()){
 				if(planet.inRange(point)){
-					JOptionPane.showMessageDialog(null, "Would you like to travel to this planet?", "Travel", JOptionPane.YES_NO_OPTION);
-					planet.createInventory();
-					new PlanetWindow(planet,gc);		
+					int choice = JOptionPane.showConfirmDialog(null, "Would you like to travel to this planet?", "Travel", JOptionPane.YES_NO_OPTION);
+					if(choice == JOptionPane.YES_OPTION){
+						boolean b = player.getShip().travel(planet);
+						if (b){
+							planet.createInventory();
+							new PlanetWindow(planet,gc);	
+						}
+					}
+						
 				}
 			}
 		}
