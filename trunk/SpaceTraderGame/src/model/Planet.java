@@ -3,6 +3,7 @@ package model;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -110,8 +111,16 @@ public class Planet {
 	 */
 	public void createInventory(){
 		tradableInventory = new Inventory();
-		//TODO: in another method, figure out the allowable trade goods to pass in instead of TradeGood.values()
-		tradableInventory.generate(this.getTechLevel(), TradeGood.values(), 10, false);
+		//Keanna revised stuff here...!
+		TradeGood[] possiItems = TradeGood.values();
+		ArrayList<TradeGood> passedItems = new ArrayList<TradeGood>();
+		for (int i = 0; i < possiItems.length; i++) {
+			if (possiItems[i].getMinTechLevelUse() <= this.getTechLevel()) {
+				passedItems.add(possiItems[i]);
+			}
+		}
+		passedItems.trimToSize();
+		tradableInventory.generate(this.getTechLevel(), passedItems, 10, false);
 	}
 	
 	/**
