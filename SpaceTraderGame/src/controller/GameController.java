@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import model.Inventory;
 import model.Player;
 
 import view.MapWindow;
@@ -16,10 +17,12 @@ import view.PlayerWindow;
  */
 public class GameController {
 	
+	private Player newPlayer;
 	/**
 	 * Main method to start the game
 	 * @param args
 	 */
+	
 	public static void main(String[] args){
 		//launch the player creation window;
 				
@@ -50,7 +53,7 @@ public class GameController {
 				public void actionPerformed(ActionEvent arg0) {
 					System.out.println("Create Player");
 					playerWin.setVisible(false);
-					Player newPlayer = playerWin.getNewPlayer();
+					newPlayer = playerWin.getNewPlayer();
 					showMap();
 					
 				}
@@ -70,6 +73,19 @@ public class GameController {
 	 */
 	public void showMap(){
 		MapWindow mapWin = new MapWindow();
-		mapWin.launch();	
+		mapWin.launch(this);	
+	}
+	
+	/**
+	 * gets the player instance
+	 * @return player
+	 */
+	public Player getPlayer(){
+		return newPlayer;
+	}
+
+
+	public Inventory getCargo() {
+		return newPlayer.getCargo();
 	}
 }

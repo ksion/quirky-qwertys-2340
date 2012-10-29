@@ -11,14 +11,38 @@ import java.awt.Point;
 
 public class GnatShip extends Ship {
 	
+	/** Number of cargo holds available for the GnatShip. */
+	protected static final int CARGOBAY = 15;
+	
+	/** Hull strength of a GnatShip */
+	protected static final int HULL_STRENGTH = 24;
+	
+	/** Number of slots available to store weapons for a GnatShip. */
+	protected static final int WEAPONSLOTS = 1;
+	
+	/** Number of slots available to store gadgets for a GnatShip. */
+	protected static final int GADGETSLOTS = 1;
+	
+	/** Number of slots available to store gadgets for a GnatShip. */
+	protected static final int SHIELDSLOTS = 0;
+	
+	/** Range of parsecs Ship can travel before it runs out of fuel for a GnatShip. */
+	protected static final int TRAVELRANGE = 14;
+	
+	/** Number of rooms available for crew for a GnatShip. */
+	protected static final int CREWQUARTERS = 0;	
+	
+	
+	
+	
 	/**
 	 * Instantiates a Gnat Ship.
 	 * 
 	 * @param hullStrength the strenght of the Ship's hull
 	 * @param point the location of the Ship
 	 */
-	public GnatShip(int hullStrength, Point point){
-		super(hullStrength, point);
+	public GnatShip(Point point){
+		super(HULL_STRENGTH, CARGOBAY, point);
 		name = "Gnat Ship";
 	}
 	
