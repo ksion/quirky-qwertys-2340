@@ -115,7 +115,7 @@ public class PlanetWindow {
 		public void actionPerformed(ActionEvent ae){
 			JFrame frame = new JFrame();
 			TradeWindow tradeWindow = new TradeWindow();
-			tradeWindow.setPlayerInventory(controller.getCargo());
+			tradeWindow.setPlayer(controller.getPlayer());
 			tradeWindow.setOtherInventory(planet.getInventory());
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			frame.setContentPane(tradeWindow);

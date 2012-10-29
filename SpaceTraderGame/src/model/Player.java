@@ -31,7 +31,7 @@ public class Player {
 	private static int engineerSkill = 0;
 	
 	/** Initial amount of money Player has. */
-	private static int money = 1000;
+	private int money = 1000;
 	
 	/** Current Ship the player owns. */ 
 	Ship myShip = new GnatShip(new Point(100,100));
@@ -111,6 +111,10 @@ public class Player {
 	
 	public Inventory getCargo() {
 		return myShip.getCargo();
+	}
+	
+	public void setMoney(int update){
+		money = money + update;
 	}
 	
 	public String toString(){

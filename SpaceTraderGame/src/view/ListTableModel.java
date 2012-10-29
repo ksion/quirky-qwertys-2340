@@ -9,12 +9,22 @@ import java.util.ListIterator;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
-
+/**
+ * model that the table can use
+ * @author Quirky Qwertys
+ *
+ * @param <T> generic type
+ */
 public abstract class ListTableModel<T> implements TableModel,List<T> {
 	private List<T> tableList;
 	private String[] columnNames;
 	private List<TableModelListener> listeners;
 	
+	/**
+	 * constructor to set up the column names and provide the list
+	 * @param columnNames
+	 * @param source
+	 */
 	public ListTableModel(String[] columnNames, List<T> source){
 		tableList = source;
 		this.columnNames = columnNames;
@@ -178,11 +188,21 @@ public abstract class ListTableModel<T> implements TableModel,List<T> {
 		
 	}
 	
+	/**
+	 * notify change if the table changes
+	 * @param firstRow
+	 * @param lastRow
+	 * @param op
+	 */
 	protected void notifyChange(int firstRow, int lastRow, int op){
 		TableModelEvent event = new TableModelEvent(this, firstRow, lastRow, TableModelEvent.ALL_COLUMNS, op);
 		notifyChange(event);
 	}
 	
+	/**
+	 * notify if the table changes
+	 * @param event
+	 */
 	protected void notifyChange(TableModelEvent event){
 		
 		for (TableModelListener listener: listeners){
@@ -190,7 +210,9 @@ public abstract class ListTableModel<T> implements TableModel,List<T> {
 		}
 		
 	}
-	
+	/**
+	 * notify listeners of table changes
+	 */
 	protected void notifyChange(){
 		
 		notifyChange(new TableModelEvent(this));

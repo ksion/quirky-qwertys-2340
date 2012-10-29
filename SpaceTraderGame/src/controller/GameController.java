@@ -85,6 +85,10 @@ public class GameController {
 	}
 
 
+	/**
+	 * gets the ship's cargo
+	 * @return ship's inventory
+	 */
 	public Inventory getCargo() {
 		return newPlayer.getCargo();
 	}
