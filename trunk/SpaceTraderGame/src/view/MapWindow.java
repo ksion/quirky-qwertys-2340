@@ -118,6 +118,7 @@ public class MapWindow extends JPanel {
 			Point point = m.getPoint();
 			for(Planet planet: solarSystem.getPlanets()){
 				if(planet.inRange(point)){
+					JOptionPane.showMessageDialog(null, "Would you like to travel to this planet?", "Travel", JOptionPane.YES_NO_OPTION);
 					planet.createInventory();
 					new PlanetWindow(planet,gc);		
 				}

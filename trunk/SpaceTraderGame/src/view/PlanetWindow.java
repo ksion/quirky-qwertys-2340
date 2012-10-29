@@ -2,11 +2,13 @@ package view;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 
 import controller.GameController;
 
 import model.Planet;
+import model.Ship;
 
 /**
  * Represents the window that shows up when the player is visiting a
@@ -125,4 +127,5 @@ public class PlanetWindow {
 			frame.pack();
 		}
 	}
+	
 }
