@@ -28,6 +28,7 @@ import java.io.IOException;
  */
 public class PlayerWindow extends JPanel {
 
+
 	private Image img;
 	private Color c = new Color(0, 255, 0);
 	private Font f = new Font("Space Age", 1, 12);
@@ -230,7 +231,6 @@ public class PlayerWindow extends JPanel {
 		String playerName = textName.getText();
 		
 		Player newPlayer = new Player(playerName, skills);
-		System.out.println(newPlayer.toString());
 		return newPlayer;
 	}
 	/**

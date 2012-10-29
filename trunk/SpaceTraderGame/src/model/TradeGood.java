@@ -80,5 +80,11 @@ public enum TradeGood {
 		// TODO Auto-generated method stub
 		return mtlu;
 	}
+	
+	public String toString(){
+		String goodStr = "Trade Good: ";
+		goodStr += name + ": " + cost + " Mtlu: " + mtlu;
+		return goodStr;
+	}
 }
 

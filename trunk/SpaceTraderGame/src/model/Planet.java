@@ -88,6 +88,7 @@ public class Planet {
 		picName = planetPics[rand.nextInt(5)];
 	}
 	
+	
     /**
      * Generates a random name for the Planet.
      */
@@ -141,6 +142,7 @@ public class Planet {
 		name = n;
 	}
 	
+	
 	/**
 	 * Retrieves the position of a Planet.
 	 * 
@@ -177,6 +179,10 @@ public class Planet {
 		return tax;
 	}
 	
+	public int getSize(){
+		return SIZE;
+	}
+	
 	/**
 	 * Creates a String with information about the Planet's name,
 	 * position, and tech level.
@@ -203,8 +209,8 @@ public class Planet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		int x = (int)position.getX() - 15;
-		int y = (int)position.getY() - 15;
+		int x = (int)(position.getX() - SIZE/2);
+		int y = (int)(position.getY() - SIZE/2);
 		if(x - 10 <= 0){
 			x = 0;
 		}

@@ -14,7 +14,7 @@ import java.awt.Point;
  */
 public class Ship {
     // /** Array used to store all of the Player's TradeGoods.*/
-    // TradeGood[] cargoHold = new TradeGood[20]
+    protected TradeGood[] cargoHold = new TradeGood[20];
 	Inventory cargo;
 	
 	// /** Array used to store all of the Ship's Equipment. */
@@ -101,5 +101,24 @@ public class Ship {
 	
 	public Inventory getCargo() {
 		return cargo;
+	}
+	
+	public String toString(){
+		String shipStr = "Ship: ";
+		shipStr += name + ": \n" + 
+		"Damage Sustained: " + damageSustained + "\n" + 
+		"Distance Traveled: " + distanceTraveled + "\n" + 
+		"Fuel economy: " + fuelEconomy + "\n"+ 
+		"Fuel amount: " + fuelAmount + "\n" +
+		"Escape Pod: " + escapePod + "\n" +
+		"Insurance: " + insurance + "\n" +
+		"Hull Strength: " + hullStrength + "\n" +
+		"Cargo Hold: ";
+		
+		//for (TradeGood good: cargoHold){
+		//	shipStr += good.toString() + "\n"; 
+		//}
+		
+		return shipStr;
 	}
 }
