@@ -7,11 +7,11 @@ public enum TradeGood {
 	FURS(0, 0, 0, 250, 10, 20, 300, "Furs"),
 	FOOD(1, 0, 1, 100, 3, 5, 120, "Food"),
 	ORE(2, 2, 3, 350, 20, 15, 350, "Ore"),
-	GAMES(3, 1, 6, 250, -10, 10, 200, "Games"),
+	GAMES(3, 1, 6, 250, 10, 10, 200, "Games"),
 	FIREARMS(3, 1, 5, 1255, 35, 10, 1400, "Firearms"),
-	MEDICINE(4, 1, 6, 550, -25, 5, 600,"Medicine"),
-	NARCOTICS(5, 0, 5, 3500, -125, 150, 2000, "Narcotics"),
-	ROBOTS(6, 4, 7, 5000, -150, 100, 3500, "Robots");
+	MEDICINE(4, 1, 6, 550, 25, 5, 600,"Medicine"),
+	NARCOTICS(5, 0, 5, 3500, 125, 150, 2000, "Narcotics"),
+	ROBOTS(6, 4, 7, 5000, 150, 100, 3500, "Robots");
 	
 	private int mtlp;
 	private int mtlu;
@@ -21,6 +21,7 @@ public enum TradeGood {
 	private int ipl;
 	private int minSpace;
 	private String name;
+	private int cost;
 	
 	TradeGood(int minTechLPro, int minTechLUse, int techLProd,
 			int basePrice, int incrPLevel, int vari, 
@@ -39,18 +40,19 @@ public enum TradeGood {
 		int ace = -1;
 		Random gen = new Random(); 
 		int headTail = gen.nextInt(2);
-		double variance = var / 100;
-		if (inSpace && this.mtlu < currentTechLevel) {
+		double variance = (double) var / 100;
+		if (inSpace && this.mtlu <= currentTechLevel) {
 			if (headTail < 1)
 				ace = (int) (minSpace + ipl * (ttp - mtlp) + (bP * variance));
 			else
 				ace = (int) (minSpace + ipl * (ttp - mtlp) - (bP * variance));
-		} else if (!inSpace && this.mtlu < currentTechLevel) {
+		} else if (!inSpace && this.mtlu <= currentTechLevel) {
 			if (headTail < 1)
 				ace = (int) (bP + ipl * (ttp - mtlp) + (bP * variance));
 			else
 				ace = (int) (bP + ipl * (ttp - mtlp) - (bP * variance));
 		}
+		cost = ace;
 		return ace;
 	}
 	/**
@@ -59,6 +61,24 @@ public enum TradeGood {
 	 */
 	public String getName (){
 		return name;
+	}
+
+	/**
+	 * gets the cost of the tradegood
+	 * @return int cost
+	 */
+	public int getCost() {
+		// TODO Auto-generated method stub
+		return cost;
+	}
+
+	/**
+	 * gets the min place sold
+	 * @return int minTechLevelUsed
+	 */
+	public int getMinTechLevelUse() {
+		// TODO Auto-generated method stub
+		return mtlu;
 	}
 }
 
