@@ -2,6 +2,8 @@ package model;
 
 import java.awt.Point;
 
+import javax.swing.JOptionPane;
+
 /**
  * Represents the vehicle used by the Player to travel
  * from one planet to another. The Ship may be used to
@@ -69,24 +71,50 @@ public class Ship {
 	}
 	
 	
-		/*I think the ship should contain the travel(Planet p) method
-		public Point travel(Planet p) {
-			flight = true;
-			Point2D current = new Point(currentX, currentY);
-			int dist = (int) Math.sqrt((p.getPosition().distance(current)));
-			if (dist < fuelAmount*fuelEconomy) {
-				currentX = p.getPosition().x;
-				currentY = p.getPosition().y;
-				fuelAmount -= (dist / fuelEconomy);
+		/**
+		 * this method will change the position of the ship to the be at the planet
+		 * passed in if it is within range of the ship.
+		 * @param p the planet to travel to.
+		 */
+	
+		public void travel(Planet p) {
+			
+			if(inRange(p)){
+				flight = true;
+				Point planetPos = p.getPosition();
+				double 	planetX = planetPos.getX(), 
+						planetY = planetPos.getY();
+				double pixelDistance = 
+						Math.pow(
+							Math.pow(currentX - planetX, 2) + 
+							Math.pow(currentY - planetY, 2)
+							,.5);
+				double gameDistance = pixelDistance/20;
+				fuelAmount -= gameDistance/fuelEconomy;
+				
+				currentX = planetX;
+				currentY = planetY;
+				
 			}
-			return new Point(currentX, currentY);
-			//-------------
+			else{
+				JOptionPane.showMessageDialog(null, "This planet is too far away to travel to.", "Woops!", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+			
+			
+			/*
 			 - during this time where flight is true, an encounter
 			 - needs to be generated...
 			 - somewhere flight has to be turned back to false
-			//-------------
-		}*/
+			*/
 	
+	private boolean inRange(Planet p) {
+			// TODO Auto-generated method stub
+			// This one is yours Annette :)
+			return false;
+		}
+
+
 	/**
 	 * Gets the name of the Ship. 
 	 * This class may be deleted later--it's purpose is
