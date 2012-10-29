@@ -125,6 +125,12 @@ public class MapWindow extends JPanel {
 		}
 	}
 	
+	/**
+	 * this class listens for mouse movements. As of now all it does is display the name 
+	 * of the planet when the mouse is over it
+	 * @author Hayden
+	 *
+	 */
 	private class MouseMove implements MouseMotionListener{
 
 		@Override
@@ -139,9 +145,10 @@ public class MapWindow extends JPanel {
 			for (Planet planet: solarSystem.getPlanets()){
 				if(planet.inRange(mPoint)){
 					int size = planet.getSize();
+					Point pPos = planet.getPosition();
 					planetName.setBounds(
-							m.getX() - size,
-							m.getY() - size,
+							(int)pPos.getX() - size,
+							(int)pPos.getY() - size,
 							100, 
 							15
 							);
