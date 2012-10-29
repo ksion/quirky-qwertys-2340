@@ -1,7 +1,6 @@
 package model;
 
 import java.awt.Point;
-import java.util.HashMap;
 
 /**
  * Represents the vehicle used by the Player to travel
@@ -16,6 +15,7 @@ import java.util.HashMap;
 public class Ship {
     // /** Array used to store all of the Player's TradeGoods.*/
     // TradeGood[] cargoHold = new TradeGood[20]
+	Inventory cargo;
 	
 	// /** Array used to store all of the Ship's Equipment. */
 	// Equipment[] myEquipment = new Equipment[10];
@@ -40,28 +40,8 @@ public class Ship {
 	
 	/** Marker used to keep track of whether or not Ship is insured. */
 	protected boolean insurance = false;
-	
-	/** Number of cargo holds available for the TradeGoods. */
-	protected static final int CARGOHOLDS = 15;
-	
-	/** Number of slots available to store weapons. */
-	protected static final int WEAPONSLOTS = 1;
-	
-	/** Number of slots available to store gadgets. */
-	protected static final int GADGETSLOTS = 1;
-	
-	/** Number of slots available to store gadgets. */
-	protected static final int SHIELDSLOTS = 0;
-	
-	/** Range of parsecs Ship can travel before it runs out of fuel. */
-	protected static final int TRAVELRANGE = 14;
-	
-	/** Number of rooms available for crew. */
-	protected static final int CREWQUARTERS = 0;
-	
-	/** Map used to store the TradeGoods in the Ship. */
-	protected static final HashMap<TradeGood, Integer> goodsInventory = new HashMap<TradeGood, Integer>();
-	
+
+		
 	/** Strength of the Ship's hull. */
 	protected int hullStrength;
 	
@@ -75,72 +55,20 @@ public class Ship {
 	protected static String name = "Ship";
 
 	/** Represents whether the ship is in space or a planet */
-	protected static boolean flight = false;
-	
-	/** Represents the number of TradeGoods in the Ship. */
-	protected static int tradeGoodCounter;
+	protected  boolean flight = false;
 	
 	/**
 	 * Instantiates a Ship with specified hull strength.
 	 */
-	public Ship(int hullStrength, Point p){
+	public Ship(int hullStrength, int inventorySlots, Point p){
 		this.hullStrength = hullStrength;
 		this.currentX = p.getX();
 		this.currentY = p.getY();
-		tradeGoodCounter = 0;
+		cargo = new Inventory(inventorySlots);
+
 	}
 	
-	/**
-	 * Stores a TradeGood in the Ship, if there is space
-	 * available.
-	 * 
-	 * @param good the TradeGood that will be stored
-	 * @return true if the good was stored, false otherwise
-	 */
-	public boolean addTradeGood(TradeGood good){
-		if (tradeGoodCounter < CARGOHOLDS){
-			if (goodsInventory.containsKey(good)){
-				Integer newValue = goodsInventory.get(good);
-				goodsInventory.put(good, ++newValue);
-			}
-			else
-				goodsInventory.put(good, 1);
-			tradeGoodCounter++;
-			return true;
-		}
-		return false;
-	}
 	
-	/**
-	 * Removes a TradeGood from the Ship.
-	 * 
-	 * @param good the TradeGood that will be removed
-	 * @return true if the TradeGood was removed, otherwise return false
-	 */
-	public boolean removeTradeGood(TradeGood good){
-		if (tradeGoodCounter == 0)
-			return false;
-		else if (goodsInventory.containsKey(good)){
-				Integer quantity = goodsInventory.get(good);
-				if (quantity == 1)
-					goodsInventory.remove(good);
-				else
-					goodsInventory.put(good, --quantity);
-				tradeGoodCounter--;
-				return true;
-		}
-		return false;
-	}
-	
-	/**
-	 * Checks the number of cargo holds available to store 
-	 * TradeGoods.
-	 * 
-	 * @return the number of cargo holds available
-	 */
-	public int holdsAvailable(){
-		return CARGOHOLDS - tradeGoodCounter;
-	}
 		/*I think the ship should contain the travel(Planet p) method
 		public Point travel(Planet p) {
 			flight = true;
@@ -169,5 +97,9 @@ public class Ship {
 	 */
 	public String getName(){
 		return name;
+	}
+	
+	public Inventory getCargo() {
+		return cargo;
 	}
 }

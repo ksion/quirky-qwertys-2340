@@ -36,10 +36,10 @@ public class Planet {
 	private Inventory tradableInventory;
 	
 	/** The SolarSystem the Planet belongs to. */
-	private static SolarSystem system; 
+	private SolarSystem system; 
 	
 	/** Tax that applies to all trade transactions in the Planet. */
-	private static double tax;
+	private double tax;
 	
 	/** List of images used to represent a Planet in the GUI. */
 	private String[] planetPics = {"src/view/blueGasPlanet.png","src/view/desertPlanet.png",
@@ -164,7 +164,7 @@ public class Planet {
 	 * Retrieves the tax rate of the given planet.
 	 * @return tax
 	 */
-	public static double getTaxRate() {
+	public double getTaxRate() {
 		return tax;
 	}
 	

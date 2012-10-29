@@ -5,6 +5,9 @@ import java.awt.Graphics;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import controller.GameController;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -25,6 +28,7 @@ import model.Universe;
 public class MapWindow extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
+	private GameController gc;
 	
 	/** Represents the universe in Space Trader game. */
 	private Universe universe = new Universe();
@@ -71,18 +75,19 @@ public class MapWindow extends JPanel {
 	}
 	*/
 	
-	public void launch(){
+	public void launch(final GameController gc){
 		EventQueue.invokeLater(new Runnable() {
 			public void run(){
 			
 				try{
+					MapWindow.this.gc = gc;
 					JFrame frame = new JFrame();
 					frame.setPreferredSize(new Dimension(800, 450));
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					frame.setFocusableWindowState(true);
 					frame.setLocationByPlatform(true);
 			
-					frame.add(new MapWindow());
+					frame.add(MapWindow.this);
 					frame.pack();
 					frame.setVisible(true);
 				}catch (Exception e) {
@@ -107,7 +112,8 @@ public class MapWindow extends JPanel {
 			Point point = m.getPoint();
 			for(Planet planet: solarSystem.getPlanets()){
 				if(planet.inRange(point)){
-					new PlanetWindow(planet);		
+					planet.createInventory();
+					new PlanetWindow(planet,gc);		
 				}
 			}
 		}

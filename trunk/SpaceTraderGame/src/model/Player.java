@@ -34,7 +34,7 @@ public class Player {
 	private static int money = 1000;
 	
 	/** Current Ship the player owns. */ 
-	Ship myShip = new GnatShip(24, new Point(100,100));
+	Ship myShip = new GnatShip(new Point(100,100));
 	
 	/** Player's inventory of TradeGoods. */
 	TradeGood[] inventory = new TradeGood[myShip.hullStrength];
@@ -103,6 +103,14 @@ public class Player {
 	 */
 	public int getMoney(){
 		return money;
+	}
+	
+	public Ship getShip() {
+		return myShip;
+	}
+	
+	public Inventory getCargo() {
+		return myShip.getCargo();
 	}
 	
 	public String toString(){

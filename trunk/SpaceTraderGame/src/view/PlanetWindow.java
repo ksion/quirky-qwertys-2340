@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import controller.GameController;
+
 import model.Planet;
 
 /**
@@ -16,16 +18,18 @@ import model.Planet;
  * @version 1.0 10.29.12
  */
 public class PlanetWindow {
-	private static Planet planet;
+	private Planet planet;
 	private JFrame frame;
+	private GameController controller;
 
 	/**
 	 * Create the application.
 	 * 
 	 * @param planet the current Planet in which the Ship is located  
 	 */
-	public PlanetWindow(Planet planet) {
+	public PlanetWindow(Planet planet, GameController gc) {
 		this.planet = planet;
+		controller = gc;
 		initialize();
 		try{
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -110,8 +114,11 @@ public class PlanetWindow {
 		 */
 		public void actionPerformed(ActionEvent ae){
 			JFrame frame = new JFrame();
+			TradeWindow tradeWindow = new TradeWindow();
+			tradeWindow.setPlayerInventory(controller.getCargo());
+			tradeWindow.setOtherInventory(planet.getInventory());
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			frame.setContentPane(new TradeWindow());
+			frame.setContentPane(tradeWindow);
 			frame.setBounds(100, 100, 450, 300);
 			frame.setPreferredSize(new Dimension(650, 250));
 			frame.setVisible(true);

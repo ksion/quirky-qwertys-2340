@@ -15,8 +15,8 @@ public abstract class ListTableModel<T> implements TableModel,List<T> {
 	private String[] columnNames;
 	private List<TableModelListener> listeners;
 	
-	public ListTableModel(String[] columnNames){
-		tableList = new ArrayList<T>();
+	public ListTableModel(String[] columnNames, List<T> source){
+		tableList = source;
 		this.columnNames = columnNames;
 		listeners = new ArrayList<TableModelListener>();
 		

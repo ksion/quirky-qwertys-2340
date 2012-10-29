@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import model.Inventory;
+import model.TradableItem;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.JFrame;
@@ -23,6 +25,10 @@ public class TradeWindow extends JPanel {
 	private JTextField textField;
 	private final int LEFT = 0;
 	private final int RIGHT = 1;
+	private Inventory playerInventory;
+	
+
+	private Inventory otherInventory;
 
 	/**
 	 * Create the panel.
@@ -49,6 +55,7 @@ public class TradeWindow extends JPanel {
 		tablePanel.add(new JScrollPane(tableLeft), "cell 0 2 1 4,grow");
 		
 		tableRight = new JTable();
+		
 		tablePanel.add(new JScrollPane(tableRight), "cell 2 2 1 4,grow");
 		
 		
@@ -77,6 +84,47 @@ public class TradeWindow extends JPanel {
 		buttonPanel.add(btnNext);
 	}
 	
+	public Inventory getPlayerInventory() {
+		return playerInventory;
+	}
+
+	public void setPlayerInventory(Inventory playerInventory) {
+		this.playerInventory = playerInventory;
+		tableLeft.setModel(new InventoryTableModel(playerInventory));
+	}
+
+	public Inventory getOtherInventory() {
+		return otherInventory;
+	}
+
+	public void setOtherInventory(Inventory otherInventory) {
+		this.otherInventory = otherInventory;
+		tableRight.setModel(new InventoryTableModel(otherInventory));
+	}
+	
+	
+	private class InventoryTableModel extends ListTableModel<TradableItem>{
+		private Inventory inventory;
+		
+		public InventoryTableModel(Inventory inventory){
+			super(new String[] {"Name","Quantity", "Cost"},inventory.getGoods());
+			this.inventory = inventory;
+		}
+
+		@Override
+		public Object getValueAt(int row, int col) {
+			TradableItem item = get(row);
+			switch(col){
+				case 0:return item.getName();
+				case 1: return item.getQty();
+				case 2: return item.getPrice();
+				default: return null;
+			}
+		
+		}
+	}
+	
+	
 	private class ArrowListener implements ActionListener{
 		private int direction;
 		
@@ -95,7 +143,8 @@ public class TradeWindow extends JPanel {
 			}
 		}
     }
-
+	
+	
 	/*public static void main(String[] args){
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
