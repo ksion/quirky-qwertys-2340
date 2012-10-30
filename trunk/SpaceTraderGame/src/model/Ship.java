@@ -43,7 +43,6 @@ public class Ship {
 	/** Marker used to keep track of whether or not Ship is insured. */
 	protected boolean insurance = false;
 
-		
 	/** Strength of the Ship's hull. */
 	protected int hullStrength;
 	
@@ -56,8 +55,11 @@ public class Ship {
 	/** Represents the name of the Ship. */
 	protected static String name = "Ship";
 
-	/** Represents whether the ship is in space or a planet */
-	protected  boolean flight = false;
+	/** Represents whether the ship is in space or a planet. */
+	protected boolean flight = false;
+	
+	/** Represents the maximum distance the Ship can travel in one trip. */
+	protected final double MAX_DISTANCE = 300; 
 	
 	/**
 	 * Instantiates a Ship with specified hull strength.
@@ -71,58 +73,68 @@ public class Ship {
 	}
 	
 	
-		/**
-		 * this method will change the position of the ship to the be at the planet
-		 * passed in if it is within range of the ship.
-		 * @param p the planet to travel to.
-		 */
+	/**
+	 * this method will change the position of the ship to the be at the planet
+	 * passed in if it is within range of the ship.
+	 * 
+	 * @param p the planet to travel to.
+	 */
+	public boolean travel(Planet p) {
+		boolean canTravel = false;
+		if(inRange(p)){
+			canTravel = true;
+			flight = true;
+			double gameDistance = findDistance(p);
+			fuelAmount -= gameDistance/fuelEconomy;
+			
+			currentX = p.getPosition().getX();
+			currentY = p.getPosition().getY();		
+		}
+		else{
+			JOptionPane.showMessageDialog(null, "This planet is too far away to travel to.", "Woops!", JOptionPane.ERROR_MESSAGE);
+		}
+		return canTravel;
+	}
 	
-		public boolean travel(Planet p) {
-			boolean canTravel = false;
-			if(inRange(p)){
-				canTravel = true;
-				flight = true;
-				double gameDistance = findDistance(p);
-				fuelAmount -= gameDistance/fuelEconomy;
-				
-				currentX = p.getPosition().getX();
-				currentY = p.getPosition().getY();
-				
-			}
-			else{
-				JOptionPane.showMessageDialog(null, "This planet is too far away to travel to.", "Woops!", JOptionPane.ERROR_MESSAGE);
-			}
-			return canTravel;
-		}
-		
-		public double findDistance(Planet p){
-			Point planetPos = p.getPosition();
-			double 	planetX = planetPos.getX(), 
-					planetY = planetPos.getY();
-			double pixelDistance = 
-					Math.pow(
-						Math.pow(currentX - planetX, 2) + 
-						Math.pow(currentY - planetY, 2)
-						,.5);
-			double gameDistance = pixelDistance/20;
-			return gameDistance;
-		}
-			
-			
+	/**
+	 * Finds the distance between the Ship and a given 
+	 * Planet.
+	 * 	
+	 * @param p the Planet the Ship may be traveling to
+	 * @return the distance between the Ship and the Planet
+	 */
+	public double findDistance(Planet p){
+		Point planetPos = p.getPosition();
+		double 	planetX = planetPos.getX(), 
+		    	planetY = planetPos.getY();
+		double pixelDistance = 
+				Math.pow(Math.pow(currentX - planetX, 2) + 	Math.pow(currentY - planetY, 2),.5);
+		double gameDistance = pixelDistance/20;
+	return gameDistance;
+	}
 			/*
 			 - during this time where flight is true, an encounter
 			 - needs to be generated...
 			 - somewhere flight has to be turned back to false
 			*/
-	
+   /**
+	* Checks whether a Planet is within the Ship's range to
+	* travel to it.
+    * 
+    * @param p the Planet to which the Ship may travel
+    * @return true if the Planet that has been clicked on is 
+    * within the Ship's range, otherwise false
+	*/	
 	private boolean inRange(Planet p) {
-			// TODO Auto-generated method stub
-			// This one is yours Annette :)
-			// make sure you take into account the ships fuel
-			// I added the separate distance method so you can use it to check if the planet is close enough.
+		double distance = findDistance(p);
+		double fuelNeeded = Math.ceil(distance / fuelEconomy);
+		
+		if (distance <= MAX_DISTANCE && fuelAmount >= fuelNeeded){
+			fuelAmount -= fuelNeeded;
 			return true;
 		}
-
+		return false;
+	}
 
 	/**
 	 * Gets the name of the Ship. 
@@ -136,10 +148,20 @@ public class Ship {
 		return name;
 	}
 	
+	/**
+	 * Retrieves the current cargo in the Ship.
+	 * 
+	 * @return the Ship's inventory
+	 */
 	public Inventory getCargo() {
 		return cargo;
 	}
 	
+	/**
+	 * Has information about the Ship's main characteristics.
+	 * 
+	 * @return a String containing the Ship's current state
+	 */
 	public String toString(){
 		String shipStr = "Ship: ";
 		shipStr += name + ": \n" + 
