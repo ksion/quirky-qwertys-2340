@@ -59,7 +59,7 @@ public class Ship {
 	protected boolean flight = false;
 	
 	/** Represents the maximum distance the Ship can travel in one trip. */
-	protected final double MAX_DISTANCE = 300; 
+	protected final double MAX_DISTANCE = 15; 
 	
 	/**
 	 * Instantiates a Ship with specified hull strength.
