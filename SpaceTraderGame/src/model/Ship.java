@@ -122,8 +122,8 @@ public class Ship {
 	* travel to it.
     * 
     * @param p the Planet to which the Ship may travel
-    * @return true if the Planet that has been clicked on is 
-    * within the Ship's range, otherwise false
+    * @return true if the Planet is within the Ship's range, 
+    * otherwise false
 	*/	
 	private boolean inRange(Planet p) {
 		double distance = findDistance(p);
