@@ -32,6 +32,7 @@ public class MapWindow extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private GameController gc;
 	protected JLabel planetName;
+	protected JLabel fuelLevel, skillPilot, skillTrader, skillEngineer, skillFighter;
 	protected Player player;
 	
 	/** Represents the universe in Space Trader game. */
@@ -44,13 +45,33 @@ public class MapWindow extends JPanel {
 	 * Creates the panel.
 	 * @param p the player from the game controller
 	 */
-	public MapWindow(Player p){
+	public MapWindow(){
+		setLayout(new BorderLayout());
 		addMouseListener(new MouseOver());
 		addMouseMotionListener(new MouseMove());
 		planetName = new JLabel();
 		planetName.setForeground(Color.white);
 		add(planetName);
-		player = p;
+		JPanel labelPanel = new JPanel();
+		labelPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
+		labelPanel.setOpaque(false);
+		labelPanel.setBackground(null);
+
+		fuelLevel = Style.createNormalLabel();
+		skillPilot = Style.createNormalLabel();
+		skillTrader = Style.createNormalLabel();
+		skillEngineer = Style.createNormalLabel();
+		skillFighter = Style.createNormalLabel();
+
+		labelPanel.add(fuelLevel);
+		labelPanel.add(skillPilot);
+		labelPanel.add(skillTrader);
+		labelPanel.add(skillEngineer);
+		labelPanel.add(skillFighter);
+
+		add(labelPanel, BorderLayout.SOUTH);
+		
+	
 	}
 	
 	/**
@@ -109,6 +130,22 @@ public class MapWindow extends JPanel {
 			
 	}
 	
+	
+	/**
+	 * sets the player
+	 * @param player
+	 */
+	public void setPlayer(Player player) {
+		this.player = player;
+		fuelLevel.setText("Fuel level: " + player.getShip().getFuelAmount());
+		skillPilot.setText("Pilot Skill: "+ player.getPilotSkill());
+		skillTrader.setText("Trader Skill: "+ player.getTraderSkill());
+		skillEngineer.setText("Engineer Skill: " + player.getEngineerSkill());
+		skillFighter.setText("Fighter Skill: " + player.getFighterSkill());
+	}
+
+
+
 	/**
 	 * Creates an Adapter to catch where the mouse is pressed on
 	 * the map.
