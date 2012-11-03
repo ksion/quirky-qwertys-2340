@@ -3,13 +3,16 @@ package model;
 import java.awt.Point;
 
 /**
- * Represents the default Ship a Traveler starts off with.
+ * This is the best ship type option for those who wish to become
+ * pirates. It can travel up to 13 parsecs on a tank and has
+ * a good hull strength. The user can carry the most amount of
+ * weapons with this ship.
  * 
  * @author Qwirky Qwertys
- * @version 1.0 10.07.12
+ * @version 1.0 11.05.12
  */
-public class GnatShip extends Ship {
-	
+public class MosquitoShip extends Ship{
+    
 	/** Number of cargo holds available in the Ship. */
 	private static final int CARGOBAY = 15;
 	
@@ -17,37 +20,28 @@ public class GnatShip extends Ship {
 	private static final int HULL_STRENGTH = 100;
 	
 	/** Number of slots available to store weapons in the Ship. */
-	private static final int WEAPONSLOTS = 1;
+	private static final int WEAPONSLOTS = 2;
 	
 	/** Number of slots available to store gadgets in the Ship. */
 	private static final int GADGETSLOTS = 1;
 	
-	/** Number of slots available to store gadgets for a Ship. */
-	private static final int SHIELDSLOTS = 0;
+	/** Number of slots available to store gadgets in the Ship. */
+	private static final int SHIELDSLOTS = 1;
 	
 	/** Range of parsecs Ship can travel before it runs out of fuel. */
-	private static final int TRAVELRANGE = 14;
+	private static final int TRAVELRANGE = 13;
 	
 	/** Cost of the Ship. */
-	private static final int COST = 10000;
+	private static final int COST = 30000;
 
-	
 	/**
-	 * Instantiates a Gnat ship.
+	 * Instantiates a Mosquito ship.
 	 * 
 	 * @param hullStrength the strength of the Ship's hull
 	 * @param point the location of the Ship
 	 */
-	public GnatShip(Point point){
+	public MosquitoShip(Point point){
 		super(HULL_STRENGTH, CARGOBAY, point);
-		name = "Gnat Ship";
+		name = "Mosquito";
 	}
-	
-	
-	/* 
-	 * Methods that will be added to code later:
-	 * public Point travel(Planet p){return null;}
-	 * public int battle(Traveler player, Equipment[x] e){return null;}
-	 * public void selfDestruct(){}
-     */
 }

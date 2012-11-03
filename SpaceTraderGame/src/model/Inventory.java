@@ -99,14 +99,11 @@ public class Inventory {
 	 * @return current item if found; null otherwise
 	 */
 	public TradableItem findItem(TradableItem good){
-		
 		for (TradableItem current: goods){
 			if (current.getType().equals(good.getType())){
 				return current;
-			}
-			
+			}	
 		}
-		
 		return null;
 	}
 	

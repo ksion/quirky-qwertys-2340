@@ -1,8 +1,10 @@
 package model;
 /**
- * represents the items ready for trade
- * @author QuirkyQwertys
- *
+ * Represents the items (TradeGoods) that can be traded,
+ * bought or sold.
+ * 
+ * @author Quirky Qwertys
+ * @version 1.0 10.27.12
  */
 
 public class TradableItem {
@@ -12,10 +14,11 @@ public class TradableItem {
 	
 	
 	/**
-	 * constructor for tradable items that will go into inventory;
-	 * @param type trade good
-	 * @param qty qty in inventory
-	 * @param price trade good price
+	 * Instantiates a tradeable item that will go into 
+	 * the inventory.
+	 * @param type the trade good 
+	 * @param qty the quantity in inventory
+	 * @param price the price of the trade good 
 	 */
 	public TradableItem(TradeGood type, int qty, int price){
 		this.type = type;
@@ -23,44 +26,41 @@ public class TradableItem {
 		this.price = price;
 	}
 /**
- * gets the qty of the trade good
- * @return qty
+ * Gets the quantity of the trade good
+ * @return the quantity
  */
 	public int getQty() {
 		return qty;
 	}
 /**
- * sets the qty of the trade good
- * @param qty
+ * Sets the quantity of the trade good
+ * @param qty the new quantity of the trade good
  */
 	public void setQty(int qty) {
 		this.qty = qty;
 	}
 
 	/**
-	 * returns the type of trade good
-	 * @return
+	 * Retrieves the type of trade good
+	 * @return the trade good
 	 */
 	public TradeGood getType() {
 		return type;
 	}
 
 	/**
-	 * gets the price of the trade good
-	 * @return price
+	 * Gets the price of the trade good
+	 * @return the price of the good
 	 */
 	public int getPrice() {
 		return price;
 	}
 	
 	/**
-	 * gets the name of the trade good
-	 * @return name
+	 * Gets the name of the trade good
+	 * @return the name of the good
 	 */
 	public String getName(){
 		return type.getName();
 	}
-	
-	
-
 }
