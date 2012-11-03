@@ -18,17 +18,17 @@ public class Player {
 	private String name;
 	
 	/** Skill determines how well Player pilots the Ship. */
-	private static int pilotSkill = 0;
+	private int pilotSkill = 0;
 	
 	/** Skill determines how well Player handle Weapons. */
-	private static int fighterSkill = 0;
+	private  int fighterSkill = 0;
 	
 	/** Skill determines prices Player must pay for TradeGoods, 
 	    Ships, and Equipment. */
-	private static int traderSkill = 0;
+	private int traderSkill = 0;
 	
 	/** Skill determines how well Player can maintain Ship. */
-	private static int engineerSkill = 0;
+	private  int engineerSkill = 0;
 	
 	/** Initial amount of money Player has. */
 	private int money = 1000;
@@ -117,6 +117,39 @@ public class Player {
 		money = money + update;
 	}
 	
+	
+	/**
+	 * gets the pilotskill level
+	 * @return pilotSkill level
+	 */
+	public int getPilotSkill() {
+		return pilotSkill;
+	}
+
+	/**
+	 * gets the Fighter skill level
+	 * @return fighterSkill
+	 */
+	public int getFighterSkill() {
+		return fighterSkill;
+	}
+
+	/**
+	 * gets the trader skill level
+	 * @return traderSkill
+	 */
+	public int getTraderSkill() {
+		return traderSkill;
+	}
+
+	/**
+	 * gets the engineer skill level
+	 * @return int engineerskill
+	 */
+	public int getEngineerSkill() {
+		return engineerSkill;
+	}
+
 	public String toString(){
 		String playerString = "";
 		playerString += "You've created a player named " + name + ".\n";

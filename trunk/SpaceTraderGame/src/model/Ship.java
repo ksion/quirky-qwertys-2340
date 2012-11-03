@@ -157,6 +157,24 @@ public class Ship {
 		return cargo;
 	}
 	
+	
+	/**
+	 * gets the fuel level remaining
+	 * @return the int representing the fuel level
+	 */
+	public int getFuelAmount() {
+		return fuelAmount;
+	}
+
+	/**
+	 * sets the fuel level
+	 * @param fuelAmount 
+	 */
+	public void setFuelAmount(int fuelAmount) {
+		this.fuelAmount = fuelAmount;
+	}
+
+
 	/**
 	 * Has information about the Ship's main characteristics.
 	 * 

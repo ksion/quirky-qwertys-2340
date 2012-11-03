@@ -2,6 +2,10 @@ package view;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import javax.swing.*;
 
@@ -23,6 +27,9 @@ public class PlanetWindow {
 	private Planet planet;
 	private JFrame frame;
 	private GameController controller;
+	private Image img;
+	private Color c = new Color(0, 255, 0);
+	private Font f = new Font("Space Age", 1, 12);
 
 	/**
 	 * Create the application.
@@ -35,6 +42,8 @@ public class PlanetWindow {
 		initialize();
 		try{
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			Image spaceIcon = ImageIO.read(new File("src/view/shipIcon.png"));
+			frame.setIconImage(spaceIcon);
 			frame.pack();
 			frame.setVisible(true);
 		}
@@ -113,15 +122,22 @@ public class PlanetWindow {
 		 */
 		public void actionPerformed(ActionEvent ae){
 			JFrame frame = new JFrame();
-			TradeWindow tradeWindow = new TradeWindow();
-			tradeWindow.setPlayer(controller.getPlayer());
-			tradeWindow.setOtherInventory(planet.getInventory());
-			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			frame.setContentPane(tradeWindow);
-			frame.setBounds(100, 100, 450, 300);
-			frame.setPreferredSize(new Dimension(650, 250));
-			frame.setVisible(true);
-			frame.pack();
+			TradeWindow tradeWindow;
+			try {
+				tradeWindow = new TradeWindow();
+				tradeWindow.setPlayer(controller.getPlayer());
+				tradeWindow.setOtherInventory(planet.getInventory());
+				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				frame.setContentPane(tradeWindow);
+				frame.setBounds(100, 100, 450, 300);
+				frame.setPreferredSize(new Dimension(650, 250));
+				frame.setVisible(true);
+				frame.pack();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 	}
 	

@@ -1,11 +1,15 @@
-Name: hayden
-Credits: 1000
-
-Stats: Pilot = 5 Figher = 5 Trader = 3 Engineer = 2Ship: Gnat Ship: 
+You've created a player named Test.
+Pilot skill points: 5
+Fighter skill points: 5
+Trader skill points: 5
+Engineer skill points: 0
+Your current ship is a Gnat Ship
+You have 1000 credits available. 
+Ship: Gnat Ship: 
 Damage Sustained: 0
 Distance Traveled: 0
 Fuel economy: 4
-Fuel amount: 16
+Fuel amount: 12
 Escape Pod: false
 Insurance: false
 Hull Strength: 24

@@ -48,9 +48,9 @@ public enum TradeGood {
 				ace = (int) (minSpace + ipl * (ttp - mtlp) - (bP * variance));
 		} else if (!inSpace && this.mtlu <= currentTechLevel) {
 			if (headTail < 1)
-				ace = (int) (bP + ipl * (ttp - mtlp) + (bP * variance));
+				ace = (int) (bP + ipl * Math.abs((ttp - mtlp)) + (bP * variance));
 			else
-				ace = (int) (bP + ipl * (ttp - mtlp) - (bP * variance));
+				ace = (int) ((bP + ipl * Math.abs((ttp - mtlp))) - (bP * variance));
 		}
 		cost = ace;
 		return ace;

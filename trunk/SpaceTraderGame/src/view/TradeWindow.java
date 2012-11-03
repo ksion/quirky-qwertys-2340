@@ -1,15 +1,25 @@
 package view;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import java.io.File;
+
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 
 import model.Inventory;
 import model.Player;
@@ -39,6 +49,11 @@ public class TradeWindow extends JPanel {
 	private JLabel lblCredits;
 	private static final int BUY = 0;
 	private static final int SELL = 1;
+	private Image img;
+	private Color c = new Color(0, 255, 0);
+	private Font f = new Font("Space Age", 1, 12);
+	
+	
 	
 	private Player player;
 	private Inventory otherInventory;
@@ -46,9 +61,11 @@ public class TradeWindow extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public TradeWindow() {
+	public TradeWindow() throws IOException {
 		
 		setLayout(new BorderLayout(0, 0));
+		//img = ImageIO.read(new File("src/view/Space.jpg"));
+		img = ImageIO.read(getClass().getResource("Space.jpg"));
 		
 		JPanel tablePanel = new JPanel();
 		add(tablePanel, BorderLayout.CENTER);
@@ -110,6 +127,17 @@ public class TradeWindow extends JPanel {
 		JButton btnNext = new JButton("Next");
 		btnNext.setToolTipText("Done Trading");
 		buttonPanel.add(btnNext);
+	}
+	
+	/**
+	 * draws the background image on the GUI
+	 * @param g - the graphics object
+	 */
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);
+		//System.out.println("Called here");
+		boolean ret = g.drawImage(img, 0, 0, null);
+		System.out.println(ret);
 	}
 	
 /**
@@ -279,6 +307,7 @@ public class TradeWindow extends JPanel {
 			}
 		}
     }
+	
 	
 	private class SaveListener implements ActionListener{
 		
