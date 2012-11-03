@@ -3,15 +3,17 @@ package model;
 import java.awt.Point;
 
 /**
- * Represents the default Ship a Traveler starts off with.
+ * Represents a fairly efficient ship. It's not too expensive,
+ * has plenty of cargo bays and can travel up to 17 parsecs on
+ * a tank.
  * 
  * @author Qwirky Qwertys
- * @version 1.0 10.07.12
+ * @version 1.0 11.05.12
  */
-public class GnatShip extends Ship {
+public class FireflyShip extends Ship{
 	
 	/** Number of cargo holds available in the Ship. */
-	private static final int CARGOBAY = 15;
+	private static final int CARGOBAY = 20;
 	
 	/** Hull strength of the Ship. */
 	private static final int HULL_STRENGTH = 100;
@@ -22,32 +24,23 @@ public class GnatShip extends Ship {
 	/** Number of slots available to store gadgets in the Ship. */
 	private static final int GADGETSLOTS = 1;
 	
-	/** Number of slots available to store gadgets for a Ship. */
-	private static final int SHIELDSLOTS = 0;
+	/** Number of slots available to store gadgets in the Ship. */
+	private static final int SHIELDSLOTS = 1;
 	
 	/** Range of parsecs Ship can travel before it runs out of fuel. */
-	private static final int TRAVELRANGE = 14;
+	private static final int TRAVELRANGE = 17;
 	
 	/** Cost of the Ship. */
-	private static final int COST = 10000;
+	private static final int COST = 25000;
 
-	
 	/**
-	 * Instantiates a Gnat ship.
+	 * Instantiates a Firefly ship.
 	 * 
 	 * @param hullStrength the strength of the Ship's hull
 	 * @param point the location of the Ship
 	 */
-	public GnatShip(Point point){
+	public FireflyShip(Point point){
 		super(HULL_STRENGTH, CARGOBAY, point);
-		name = "Gnat Ship";
+		name = "Firefly";
 	}
-	
-	
-	/* 
-	 * Methods that will be added to code later:
-	 * public Point travel(Planet p){return null;}
-	 * public int battle(Traveler player, Equipment[x] e){return null;}
-	 * public void selfDestruct(){}
-     */
 }

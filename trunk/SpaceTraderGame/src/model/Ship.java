@@ -69,7 +69,6 @@ public class Ship {
 		this.currentX = p.getX();
 		this.currentY = p.getY();
 		cargo = new Inventory(inventorySlots);
-
 	}
 	
 	
@@ -159,7 +158,7 @@ public class Ship {
 	
 	
 	/**
-	 * gets the fuel level remaining
+	 * Gets the remaining fuel level. 
 	 * @return the int representing the fuel level
 	 */
 	public int getFuelAmount() {

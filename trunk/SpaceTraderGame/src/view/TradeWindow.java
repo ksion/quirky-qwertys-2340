@@ -276,8 +276,8 @@ public class TradeWindow extends JPanel {
 		 * action performed based on buy/sell; reloads the table when items move out
 		 */
 		public void actionPerformed(ActionEvent e){
-			if (transaction == BUY){//buying an item
-				
+			if (transaction == BUY){
+				//buying an item
 				
 				TradableItem toBuy = getOtherInventory().getGoods().get(tableRight.getSelectedRow());
 				int cost = toBuy.getPrice();
@@ -292,7 +292,8 @@ public class TradeWindow extends JPanel {
 					soldModel.sold( toBuy );
 				}
 			}
-			else{//player selling an item
+			else{
+				//player selling an item
 				
 				TradableItem toSell = player.getCargo().getGoods().get(tableLeft.getSelectedRow());
 				int cost = toSell.getPrice();
@@ -303,7 +304,7 @@ public class TradeWindow extends JPanel {
 					lblCredits.setText(Integer.toString(getCredits()));
 					InventoryTableModel buyModel = (InventoryTableModel)tableRight.getModel();
 					buyModel.purchase( toSell );
-			}
+				}
 			}
 		}
     }
