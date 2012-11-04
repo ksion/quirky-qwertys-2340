@@ -30,9 +30,6 @@ public class BumblebeeShip extends Ship{
 	
 	/** Range of parsecs Ship can travel before it runs out of fuel. */
 	private static final int TRAVELRANGE = 15;
-	
-	/** Cost of the Ship. */
-	private static final int COST = 60000;
 
 	/**
 	 * Instantiates a Firefly ship.
@@ -45,5 +42,6 @@ public class BumblebeeShip extends Ship{
 		name = "Firefly";
 		fuelCapacity = TRAVELRANGE * fuelEconomy;
 		fuelAmount = fuelCapacity;
+		cost = 60000;
 	}
 }

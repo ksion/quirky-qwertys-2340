@@ -64,6 +64,9 @@ public class Ship {
 	/** Maximum amount of fuel or fuel capacity a Ship can have. */	
 	protected int fuelCapacity = 64;
 	
+	/** Cost of the Ship. */
+	protected static Integer cost = 10000;
+	
 	/**
 	 * Instantiates a Ship with specified hull strength.
 	 */
@@ -176,6 +179,23 @@ public class Ship {
 		this.fuelAmount = fuelAmount;
 	}
 
+	/**
+	 * Gets the fuel capacity.
+	 * 
+	 * @return the ship's fuel capacity
+	 */
+	public int getFuelCapacity(){
+		return fuelCapacity;
+	}
+	
+	/**
+	 * Retrieves the ship's original cost.
+	 * 
+	 * @return the ship's cost
+	 */
+	public int getCost(){
+		return cost;
+	}
 
 	/**
 	 * Has information about the Ship's main characteristics.
