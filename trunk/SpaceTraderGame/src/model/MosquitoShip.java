@@ -43,5 +43,7 @@ public class MosquitoShip extends Ship{
 	public MosquitoShip(Point point){
 		super(HULL_STRENGTH, CARGOBAY, point);
 		name = "Mosquito";
+		fuelCapacity = TRAVELRANGE * fuelEconomy;
+		fuelAmount = fuelCapacity;
 	}
 }

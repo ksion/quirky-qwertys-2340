@@ -42,5 +42,7 @@ public class FireflyShip extends Ship{
 	public FireflyShip(Point point){
 		super(HULL_STRENGTH, CARGOBAY, point);
 		name = "Firefly";
+		fuelCapacity = TRAVELRANGE * fuelEconomy;
+		fuelAmount = fuelCapacity;
 	}
 }

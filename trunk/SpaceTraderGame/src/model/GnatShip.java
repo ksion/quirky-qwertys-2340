@@ -41,6 +41,8 @@ public class GnatShip extends Ship {
 	public GnatShip(Point point){
 		super(HULL_STRENGTH, CARGOBAY, point);
 		name = "Gnat Ship";
+		fuelCapacity = TRAVELRANGE * fuelEconomy;
+		fuelAmount = fuelCapacity;
 	}
 	
 	
