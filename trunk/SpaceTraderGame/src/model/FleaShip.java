@@ -32,10 +32,6 @@ public class FleaShip extends Ship{
 	/** Range of parsecs Ship can travel before it runs out of fuel for a FleaShip. */
 	private static final int TRAVELRANGE = 20;
 	
-	/** Cost of the Gnat ship. */
-	private static final int COST = 2000;
-
-	
 	/**
 	 * Instantiates a Flea ship.
 	 * 
@@ -47,5 +43,6 @@ public class FleaShip extends Ship{
 		name = "Flea Ship";
 		fuelCapacity = TRAVELRANGE * fuelEconomy;
 		fuelAmount = fuelCapacity;
+		cost = 2000;
 	}
 }

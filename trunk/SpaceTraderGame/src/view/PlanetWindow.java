@@ -76,6 +76,7 @@ public class PlanetWindow {
 		
 		JButton btnNewButton2 = new JButton("Go to the Shipyard");
 		centerPanel.add(btnNewButton2);
+		btnNewButton2.addActionListener(new ShipyardListener());
 		
 		JButton btnNewButton4 = new JButton("Check Status");
 		centerPanel.add(btnNewButton4);
@@ -135,12 +136,38 @@ public class PlanetWindow {
 				frame.setPreferredSize(new Dimension(650, 250));
 				frame.setVisible(true);
 				frame.pack();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} 
+			catch (IOException e) {
+			    // TODO Auto-generated catch block
+			    e.printStackTrace();
 			}
-			
 		}
 	}
-	
+	/**
+	 * Opens the shipyard window, so that the user may trade 
+	 * his/her ship.
+	 * @param event the event that corresponds to when the
+	 * "Go to the Ship Yard" button is clicked
+	 *
+	 */
+	private class ShipyardListener implements ActionListener{
+		
+		public void actionPerformed(ActionEvent event){
+			JFrame frame = new JFrame();
+			ShipyardWindow shipyardWindow;
+			try{
+			    shipyardWindow = new ShipyardWindow(controller.getPlayer());
+			    frame.setTitle("Shipyard");
+			    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				frame.setContentPane(shipyardWindow);
+				frame.setBounds(100, 100, 450, 300);
+				frame.setPreferredSize(new Dimension(650, 250));
+				frame.setVisible(true);
+				frame.pack();			    
+			}
+			catch (Exception e){
+			    e.printStackTrace();
+			}
+		}
+	}
 }
