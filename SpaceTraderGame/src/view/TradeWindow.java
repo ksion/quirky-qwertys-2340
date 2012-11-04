@@ -29,6 +29,7 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
@@ -52,7 +53,7 @@ public class TradeWindow extends JPanel {
 	private Image img;
 	private Color c = new Color(0, 255, 0);
 	private Font f = new Font("Space Age", 1, 12);
-	
+	private TradeWindow t = this;
 	
 	
 	private Player player;
@@ -118,7 +119,7 @@ public class TradeWindow extends JPanel {
 		buttonPanel.add(Box.createHorizontalGlue());
 	
 		
-		JButton btnSaveAndQuit = new JButton("Save and Exit");
+		JButton btnSaveAndQuit = new JButton("Save"); //changed to just save
 		btnSaveAndQuit.addActionListener(new SaveListener());
 		buttonPanel.add(btnSaveAndQuit);
 		
@@ -211,22 +212,26 @@ public class TradeWindow extends JPanel {
 		 * @param buy a tradable item
 		 * @return true if successful
 		 */
-		public boolean purchase( TradableItem buy ) {
-			boolean added = inventory.addTradeGood(buy);
-			if( added ) {
-				notifyChange();
+		public boolean purchase( TradableItem buy, int qty ) {
+			boolean added = false;
+			for (int i = 0; i < qty; i++) {
+				added = inventory.addTradeGood(buy);
+				if( added ) {
+					notifyChange();
+				}
 			}
 			return added;
 		}
+		
 		/**
 		 * sell action 
 		 * @param item a tradeable item
 		 * @return true if successful
 		 */
-		public boolean sold( TradableItem item ) {
+		public boolean sold(TradableItem item, int qty) {
 			TradableItem modelItem = inventory.findItem(item);
-			if (modelItem.getQty()>0){
-				modelItem.setQty(modelItem.getQty() - 1);
+			if (modelItem.getQty() > 0){
+				modelItem.setQty(modelItem.getQty() - qty);
 				// todo should use a more precise method to update the table so we don't loose the selection 
 				notifyChange();
 				return true;
@@ -276,34 +281,53 @@ public class TradeWindow extends JPanel {
 		 * action performed based on buy/sell; reloads the table when items move out
 		 */
 		public void actionPerformed(ActionEvent e){
-			if (transaction == BUY){
+			if (transaction == BUY) {
 				//buying an item
-				
 				TradableItem toBuy = getOtherInventory().getGoods().get(tableRight.getSelectedRow());
 				int cost = toBuy.getPrice();
 				int qty = toBuy.getQty();
+				/**
+				 * added dialogue box ! - Keanna
+				 */
+				Object[] nums = new Object[qty + 1];
+				for (int i = 0; i < qty + 1; i++) {
+					nums[i] = new Integer(i);
+				}
+				
+				int qtyWant = (Integer) JOptionPane.showInputDialog(t, "How many to buy ?", 
+						"Quantity Buy", JOptionPane.PLAIN_MESSAGE, null, nums, new Integer(0));
 				
 				InventoryTableModel model = (InventoryTableModel)tableLeft.getModel();
-				if (qty>0 && cost < getCredits() && model.purchase(toBuy)) {
-					player.setMoney(-cost);
+				if (qty > 0 && cost < getCredits() && model.purchase(toBuy, qtyWant)) {
+					player.setMoney(-cost * qtyWant);
 					lblCredits.setText(Integer.toString(getCredits()));
 					
 					InventoryTableModel soldModel = (InventoryTableModel)tableRight.getModel();
-					soldModel.sold( toBuy );
+					soldModel.sold(toBuy, qtyWant);
 				}
-			}
-			else{
+			} else {
 				//player selling an item
-				
 				TradableItem toSell = player.getCargo().getGoods().get(tableLeft.getSelectedRow());
 				int cost = toSell.getPrice();
+				int qty = toSell.getQty();
+				
+				/**
+				 * added dialogue box ! - Keanna
+				 */
+				Object[] nums = new Object[qty + 1];
+				for (int i = 0; i < qty + 1; i++) {
+					nums[i] = new Integer(i);
+				}
+				
+				int qtyWant = (Integer) JOptionPane.showInputDialog(t, "How many to sell ?", 
+						"Quantity Sell", JOptionPane.PLAIN_MESSAGE, null, nums, new Integer(0));
 				
 				InventoryTableModel model = (InventoryTableModel)tableLeft.getModel();
-				if ( model.sold(toSell) == true){
-					player.setMoney(cost);
-					lblCredits.setText(Integer.toString(getCredits()));
+				if (model.sold(toSell, qtyWant) == true){
+					player.setMoney(cost * qtyWant);
+					lblCredits.setText(Integer.toString(getCredits()));				
 					InventoryTableModel buyModel = (InventoryTableModel)tableRight.getModel();
-					buyModel.purchase( toSell );
+					buyModel.purchase(toSell, qtyWant);
 				}
 			}
 		}
@@ -315,7 +339,7 @@ public class TradeWindow extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			PrintWriter output = null;
-			try{
+			try {
 				output = new PrintWriter(new FileWriter("src//model//Player.txt"));
 				output.write(player.toString());
 				output.write(player.getShip().toString());
@@ -323,7 +347,7 @@ public class TradeWindow extends JPanel {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			finally{
+			finally {
 				output.close();
 			}
 		}
