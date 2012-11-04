@@ -21,7 +21,6 @@ public enum TradeGood {
 	private int ipl;
 	private int minSpace;
 	private String name;
-	private int cost;//we don't need this
 	
 	TradeGood(int minTechLPro, int minTechLUse, int techLProd,
 			int basePrice, int incrPLevel, int vari, 
@@ -39,20 +38,20 @@ public enum TradeGood {
 	public int cost(int currentTechLevel, boolean inSpace) {
 		int ace = -1;
 		Random gen = new Random(); 
-		int headTail = gen.nextInt(2);
-		double variance = (double) var / 100;
+		int headTail = gen.nextInt(3);
+		int varia = gen.nextInt(var);
+		double variance = (double) varia / 100;
 		if (inSpace && this.mtlu <= currentTechLevel) {
 			if (headTail < 1)
 				ace = (int) (minSpace + ipl * (ttp - mtlp) + (bP * variance));
 			else
 				ace = (int) (minSpace + ipl * (ttp - mtlp) - (bP * variance));
 		} else if (!inSpace && this.mtlu <= currentTechLevel) {
-			if (headTail < 1)
-				ace = (int) (bP + ipl * Math.abs((ttp - mtlp)) + (bP * variance));
+			if (headTail < 2)
+				ace = (int) ((bP + ipl * Math.abs((ttp - mtlp))) + (bP * variance));
 			else
 				ace = (int) ((bP + ipl * Math.abs((ttp - mtlp))) - (bP * variance));
 		}
-		cost = ace;
 		return ace;
 	}
 	/**
@@ -64,15 +63,6 @@ public enum TradeGood {
 	}
 
 	/**
-	 * gets the cost of the tradegood
-	 * @return int cost
-	 */
-	public int getCost() {
-		// TODO we don't need this here because the cost is stored in the inventory and varies by planet
-		return cost;
-	}
-
-	/**
 	 * gets the min place sold
 	 * @return int minTechLevelUsed
 	 */
@@ -81,10 +71,10 @@ public enum TradeGood {
 		return mtlu;
 	}
 	
-	public String toString(){
+	/*public String toString(){
 		String goodStr = "Trade Good: ";
 		goodStr += name + ": " + cost + " Mtlu: " + mtlu;
 		return goodStr;
-	}
+	}*/
 }
 
