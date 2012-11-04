@@ -61,6 +61,9 @@ public class Ship {
 	/** Represents the maximum distance the Ship can travel in one trip. */
 	protected final double MAX_DISTANCE = 15; 
 	
+	/** Maximum amount of fuel or fuel capacity a Ship can have. */	
+	protected int fuelCapacity = 64;
+	
 	/**
 	 * Instantiates a Ship with specified hull strength.
 	 */
