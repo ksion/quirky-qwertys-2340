@@ -21,6 +21,7 @@ public enum TradeGood {
 	private int ipl;
 	private int minSpace;
 	private String name;
+	private int cost;
 	
 	TradeGood(int minTechLPro, int minTechLUse, int techLProd,
 			int basePrice, int incrPLevel, int vari, 
@@ -52,6 +53,7 @@ public enum TradeGood {
 			else
 				ace = (int) ((bP + ipl * Math.abs((ttp - mtlp))) - (bP * variance));
 		}
+		cost = ace;
 		return ace;
 	}
 	/**
@@ -71,10 +73,10 @@ public enum TradeGood {
 		return mtlu;
 	}
 	
-	/*public String toString(){
+	public String toString(){
 		String goodStr = "Trade Good: ";
 		goodStr += name + ": " + cost + " Mtlu: " + mtlu;
 		return goodStr;
-	}*/
+	}
 }
 
