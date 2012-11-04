@@ -41,6 +41,7 @@ public class PlanetWindow {
 		controller = gc;
 		initialize();
 		try{
+			frame.setTitle("Planet " + planet.getName());
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			Image spaceIcon = ImageIO.read(new File("src/view/shipIcon.png"));
 			frame.setIconImage(spaceIcon);
@@ -89,7 +90,7 @@ public class PlanetWindow {
 		JLabel lblNewLabel = new JLabel("");
 		northPanel.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Welcome to planet " + planet.getName() + "! What would you like to do?");
+		JLabel lblNewLabel_1 = new JLabel("Welcome to " + planet.getName() + "! What would you like to do?");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		northPanel.add(lblNewLabel_1);
 		
@@ -127,6 +128,7 @@ public class PlanetWindow {
 				tradeWindow = new TradeWindow();
 				tradeWindow.setPlayer(controller.getPlayer());
 				tradeWindow.setOtherInventory(planet.getInventory());
+				frame.setTitle("Marketplace");
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.setContentPane(tradeWindow);
 				frame.setBounds(100, 100, 450, 300);
