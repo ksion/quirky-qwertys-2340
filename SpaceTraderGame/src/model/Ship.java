@@ -189,6 +189,16 @@ public class Ship {
 	}
 	
 	/**
+	 * Gets the maximum amount of fuel that ship needs
+	 * to have a full tank.
+	 * 
+	 * @return the maximum amount of fuel needed 
+	 */
+	public int getMaxFuel(){
+		return getFuelCapacity() - getFuelAmount();
+	}
+	
+	/**
 	 * Retrieves the ship's original cost.
 	 * 
 	 * @return the ship's cost
