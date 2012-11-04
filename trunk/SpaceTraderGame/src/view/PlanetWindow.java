@@ -61,6 +61,7 @@ public class PlanetWindow {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
+		frame.setPreferredSize(new Dimension(650, 250));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel centerPanel = new JPanel();
@@ -74,12 +75,12 @@ public class PlanetWindow {
 		centerPanel.add(btnNewButton1);
 		btnNewButton1.addActionListener(new MarketPlaceListener());
 		
+		centerPanel.add(new JLabel(""));
+		
 		JButton btnNewButton2 = new JButton("Go to the Shipyard");
 		centerPanel.add(btnNewButton2);
 		btnNewButton2.addActionListener(new ShipyardListener());
 		
-		JButton btnNewButton4 = new JButton("Check Status");
-		centerPanel.add(btnNewButton4);
 		
 		JPanel northPanel = new JPanel();
 		frame.getContentPane().add(northPanel, BorderLayout.NORTH);
@@ -116,6 +117,7 @@ public class PlanetWindow {
 	 * or sell TradeGoods.
 	 */
 	private class MarketPlaceListener implements ActionListener{
+		
 		/**
 		 * When the "Go to the Marketplace" button is clicked, the 
 		 * marketplace window pops up.
@@ -146,12 +148,14 @@ public class PlanetWindow {
 	/**
 	 * Opens the shipyard window, so that the user may trade 
 	 * his/her ship.
-	 * @param event the event that corresponds to when the
-	 * "Go to the Ship Yard" button is clicked
-	 *
+	 * @param event the event that corresponds to when the button is clicked
 	 */
 	private class ShipyardListener implements ActionListener{
 		
+		/**
+		 * When the "Go to the Shipyard" button is clicked the shipyard
+		 * window pops up.
+		 */
 		public void actionPerformed(ActionEvent event){
 			JFrame frame = new JFrame();
 			ShipyardWindow shipyardWindow;
