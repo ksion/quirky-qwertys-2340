@@ -107,6 +107,13 @@ public class SolarSystem {
 	}
 	
 	/**
+	 * Retrieves the name of a SolarSystem.
+	 */
+	public String getName(){
+		return name;
+	}
+	
+	/**
 	 * Sets the SolarSystem to have a specified group of 
 	 * Planets.
 	 */

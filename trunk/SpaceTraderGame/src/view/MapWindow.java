@@ -113,7 +113,7 @@ public class MapWindow extends JPanel {
 			
 				try{
 					MapWindow.this.gc = gc;
-					JFrame frame = new JFrame();
+					JFrame frame = new JFrame(solarSystem.getName() + " System");
 					frame.setPreferredSize(new Dimension(800, 450));
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					frame.setFocusableWindowState(true);

@@ -48,7 +48,7 @@ public class PlayerWindow extends JPanel {
 					
 					Image spaceIcon = ImageIO.read(new File("src/view/shipIcon.png"));//needed for MACs and Windows
 					//PlayerWindow player = new PlayerWindow();
-					JFrame frame = new JFrame();
+					JFrame frame = new JFrame("Create a New Space Trader Character");
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					frame.setContentPane(PlayerWindow.this);
 					frame.setBounds(100, 100, 450, 300);
