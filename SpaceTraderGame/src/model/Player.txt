@@ -1,16 +1,16 @@
-You've created a player named j.
-Pilot skill points: 3
-Fighter skill points: 3
-Trader skill points: 3
-Engineer skill points: 6
+You've created a player named kjs.
+Pilot skill points: 5
+Fighter skill points: 5
+Trader skill points: 5
+Engineer skill points: 0
 Your current ship is a Gnat Ship
-You have 2594 credits available. 
+You have 1000 credits available. 
 Ship: Gnat Ship: 
 Damage Sustained: 0
 Distance Traveled: 0
 Fuel economy: 4
-Fuel amount: 12
+Fuel amount: 0
 Escape Pod: false
 Insurance: false
-Hull Strength: 24
+Hull Strength: 100
 Cargo Hold: 
