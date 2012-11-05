@@ -15,4 +15,9 @@ public class Style {
 		label.setForeground(Style.SPACEAGE_COLOR);
 		return label;
 	}
+	public static JLabel createSkillLabel() {
+		JLabel label = new JLabel();
+		label.setForeground(Style.SPACEAGE_COLOR);
+		return label;
+	}
 }

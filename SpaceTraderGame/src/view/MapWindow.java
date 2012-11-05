@@ -37,7 +37,7 @@ public class MapWindow extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private GameController gc;
 	protected JLabel planetName;
-	protected JLabel fuelLevel, skillPilot, skillTrader, skillEngineer, skillFighter;
+	protected JLabel fuelLevel, skillPilot, skillTrader, skillEngineer, skillFighter, shipLocation;
 	protected Player player;
 	
 	/** Represents the universe in Space Trader game. */
@@ -62,17 +62,19 @@ public class MapWindow extends JPanel {
 		labelPanel.setOpaque(false);
 		labelPanel.setBackground(null);
 
-		fuelLevel = Style.createNormalLabel();
-		skillPilot = Style.createNormalLabel();
-		skillTrader = Style.createNormalLabel();
-		skillEngineer = Style.createNormalLabel();
-		skillFighter = Style.createNormalLabel();
+		fuelLevel = Style.createSkillLabel();
+		skillPilot = Style.createSkillLabel();
+		skillTrader = Style.createSkillLabel();
+		skillEngineer = Style.createSkillLabel();
+		skillFighter = Style.createSkillLabel();
+		shipLocation = Style.createSkillLabel();
 
 		labelPanel.add(fuelLevel);
 		labelPanel.add(skillPilot);
 		labelPanel.add(skillTrader);
 		labelPanel.add(skillEngineer);
 		labelPanel.add(skillFighter);
+		labelPanel.add(shipLocation);
 
 		add(labelPanel, BorderLayout.SOUTH);
 		
@@ -97,7 +99,7 @@ public class MapWindow extends JPanel {
 			p.draw(g);
 		}
 		
-		move(player.getShip().getLocation());
+		player.getShip().drawShip(g);
 	}
 	
 	/**
@@ -149,6 +151,7 @@ public class MapWindow extends JPanel {
 		skillTrader.setText("Trader Skill: "+ player.getTraderSkill());
 		skillEngineer.setText("Engineer Skill: " + player.getEngineerSkill());
 		skillFighter.setText("Fighter Skill: " + player.getFighterSkill());
+		shipLocation.setText("Location: x = " + player.getShip().getLocation().x + " y = " + player.getShip().getLocation().y);
 	}
 
 
@@ -174,6 +177,7 @@ public class MapWindow extends JPanel {
 						if (b){
 							planet.createInventory();
 							new PlanetWindow(planet,gc);	
+							repaint();
 						}
 					}
 						
@@ -239,7 +243,7 @@ public class MapWindow extends JPanel {
 		BufferedImage bShipIcon = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
 		g2d = bShipIcon.createGraphics();
 		g2d.drawImage(shipIcon, at, null);
-		player.getShip().setLocation(p);
+		
 		
 		
 
