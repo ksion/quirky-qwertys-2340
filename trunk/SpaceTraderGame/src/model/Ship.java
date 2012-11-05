@@ -1,11 +1,13 @@
 package model;
 
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Point;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.*;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 
 /**

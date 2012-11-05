@@ -1,6 +1,5 @@
 package model;
 
-import model.Ship;
 import java.awt.Point;
 
 /**

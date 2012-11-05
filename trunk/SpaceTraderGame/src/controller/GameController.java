@@ -6,7 +6,6 @@ import java.io.IOException;
 
 import model.Inventory;
 import model.Player;
-
 import view.MapWindow;
 import view.PlayerWindow;
 

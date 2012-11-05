@@ -1,24 +1,25 @@
 package view;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.*;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-
 import model.Player;
 import net.miginfocom.swing.MigLayout;
-import java.io.File;
-import java.io.IOException;
 
 
 /**
