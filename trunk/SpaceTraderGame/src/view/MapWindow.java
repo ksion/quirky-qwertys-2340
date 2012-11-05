@@ -215,7 +215,7 @@ public class MapWindow extends JPanel {
 							15
 							);
 					planetName.setText(planet.getName());
-					
+					fuelLevel.setText("Fuel level: " + player.getShip().getFuelAmount());
 				}
 			}
 		}
