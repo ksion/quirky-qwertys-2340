@@ -53,7 +53,7 @@ public class Ship {
 	protected double currentY = 0;
 	
 	/** Represents the name of the Ship. */
-	protected static String name = "Ship";
+	protected String name = "Ship";
 
 	/** Represents whether the ship is in space or a planet. */
 	protected boolean flight = false;
@@ -65,7 +65,7 @@ public class Ship {
 	protected int fuelCapacity = 64;
 	
 	/** Cost of the Ship. */
-	protected static Integer cost = 10000;
+	protected Integer cost = 10000;
 	
 	/**
 	 * Instantiates a Ship with specified hull strength.
@@ -205,6 +205,15 @@ public class Ship {
 	 */
 	public int getCost(){
 		return cost;
+	}
+	
+	/**
+	 * Retrieves the ship's location.
+	 * 
+	 * @return the ship's location
+	 */
+	public Point getLocation(){
+		return new Point((int)currentX, (int)currentY);
 	}
 
 	/**

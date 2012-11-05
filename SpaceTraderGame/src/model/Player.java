@@ -149,6 +149,15 @@ public class Player {
 	public int getEngineerSkill() {
 		return engineerSkill;
 	}
+	
+	/**
+	 * Sets the Player's ship to a given type.
+	 * 
+	 * @param s the Ship the player's new ship
+	 */
+	public void setShip(Ship s){
+		myShip = s;
+	}
 
 	public String toString(){
 		String playerString = "";
