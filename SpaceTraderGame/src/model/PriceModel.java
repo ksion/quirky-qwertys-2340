@@ -1,5 +1,4 @@
 package model;
-import model.Planet;
 public class PriceModel {
 	
 	private Planet planet;

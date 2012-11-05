@@ -1,19 +1,23 @@
 package view;
 
-import javax.swing.JPanel;
-import javax.swing.JFormattedTextField;
 import java.awt.BorderLayout;
-import java.util.List;
-
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import net.miginfocom.swing.MigLayout;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.JTable;
+import javax.swing.SpinnerListModel;
+import javax.swing.SwingConstants;
+
 import model.Player;
 import model.Ship;
 import model.Shipyard;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * Represents the shipyard where the user may trade his/her
