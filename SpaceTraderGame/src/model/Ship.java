@@ -1,17 +1,12 @@
 package model;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GraphicsConfiguration;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.*;
 import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
+
 
 /**
  * Represents the vehicle used by the Player to travel
@@ -101,8 +96,7 @@ public class Ship {
 			double gameDistance = findDistance(p);
 			fuelAmount -= gameDistance/fuelEconomy;
 			
-			currentX = p.getPosition().getX();
-			currentY = p.getPosition().getY();		
+			setLocation(p.getPosition());	
 		}
 		else{
 			JOptionPane.showMessageDialog(null, "This planet is too far away to travel to.", "Woops!", JOptionPane.ERROR_MESSAGE);
@@ -252,6 +246,17 @@ public class Ship {
 		//}
 		
 		return shipStr;
+	}
+	
+	public void drawShip(Graphics g){
+		Image shipIcon = null;
+		try {
+			shipIcon = ImageIO.read(new File("src/view/shipIcon.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		g.drawImage(shipIcon, getLocation().x, getLocation().y, 20, 20, null);
 	}
 	
 	
