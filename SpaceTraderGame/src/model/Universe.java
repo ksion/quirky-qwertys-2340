@@ -33,9 +33,9 @@ public class Universe {
 		ArrayList<Planet> planets4 = new ArrayList<Planet>();
 		
 		planets1.add(new Planet(new Point(100, 100), system1, "Hibiscus"));
-		planets1.add(new Planet(new Point(175, 50), system1, "Acacia"));
-		planets1.add(new Planet(new Point(122,205), system1, "Pengua"));
-		planets1.add(new Planet(new Point(298, 102), system1, "Abelia"));
+		planets1.add(new Planet(new Point(175, 225), system1, "Acacia"));
+		planets1.add(new Planet(new Point(650,250), system1, "Pengua"));
+		planets1.add(new Planet(new Point(398, 202), system1, "Abelia"));
 		planets2.add(new Planet(new Point(), system2, "Mustang"));
 		planets3.add(new Planet(new Point(), system3, "Seckel"));
 		planets4.add(new Planet(new Point(), system4, "Toussaint"));

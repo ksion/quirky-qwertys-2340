@@ -79,6 +79,7 @@ public class Ship {
 		this.currentX = p.getX();
 		this.currentY = p.getY();
 		cargo = new Inventory(inventorySlots);
+		System.out.println("You are in planet Hibiscus at " + p);
 	}
 	
 	
@@ -101,6 +102,7 @@ public class Ship {
 		else{
 			JOptionPane.showMessageDialog(null, "This planet is too far away to travel to.", "Woops!", JOptionPane.ERROR_MESSAGE);
 		}
+		System.out.println("You are in planet " + p.getName() + " at " + getLocation());
 		return canTravel;
 	}
 	
