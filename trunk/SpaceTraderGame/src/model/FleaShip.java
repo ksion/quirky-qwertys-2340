@@ -40,7 +40,7 @@ public class FleaShip extends Ship{
 	 */
 	public FleaShip(Point point){
 		super(HULL_STRENGTH, CARGOBAY, point);
-		name = "Flea Ship";
+		name = "Flea";
 		fuelCapacity = TRAVELRANGE * fuelEconomy;
 		fuelAmount = fuelCapacity;
 		cost = 2000;

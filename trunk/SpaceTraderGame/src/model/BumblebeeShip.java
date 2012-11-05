@@ -39,7 +39,7 @@ public class BumblebeeShip extends Ship{
 	 */
 	public BumblebeeShip(Point point){
 		super(HULL_STRENGTH, CARGOBAY, point);
-		name = "Firefly";
+		name = "Bumblebee";
 		fuelCapacity = TRAVELRANGE * fuelEconomy;
 		fuelAmount = fuelCapacity;
 		cost = 60000;
