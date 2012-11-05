@@ -178,6 +178,7 @@ public class MapWindow extends JPanel {
 							planet.createInventory();
 							new PlanetWindow(planet,gc);
 							fuelLevel.setText("Fuel level: " + player.getShip().getFuelAmount());
+							shipLocation.setText("Location: x = " + player.getShip().getLocation().x + " y = " + player.getShip().getLocation().y);
 							repaint();
 						}
 					}
