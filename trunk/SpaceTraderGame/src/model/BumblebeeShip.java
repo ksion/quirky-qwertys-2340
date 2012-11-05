@@ -1,6 +1,14 @@
 package model;
 
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Point;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 /**
  * Represents the most expensive ship in the Space Trader
@@ -31,6 +39,7 @@ public class BumblebeeShip extends Ship{
 	/** Range of parsecs Ship can travel before it runs out of fuel. */
 	private static final int TRAVELRANGE = 15;
 
+
 	/**
 	 * Instantiates a Firefly ship.
 	 * 
@@ -44,4 +53,5 @@ public class BumblebeeShip extends Ship{
 		fuelAmount = fuelCapacity;
 		cost = 60000;
 	}
+	
 }

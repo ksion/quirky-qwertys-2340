@@ -1,3 +1,13 @@
+<<<<<<< .mine
+You've created a player named a.
+Pilot skill points: 15
+Fighter skill points: 0
+Trader skill points: 0
+Engineer skill points: 0
+Your current ship is a Gnat
+You have 1000 credits available. 
+Ship: Gnat: 
+=======
 You've created a player named kjs.
 Pilot skill points: 5
 Fighter skill points: 5
@@ -6,10 +16,15 @@ Engineer skill points: 0
 Your current ship is a Gnat Ship
 You have 1000 credits available. 
 Ship: Gnat Ship: 
+>>>>>>> .r148
 Damage Sustained: 0
 Distance Traveled: 0
 Fuel economy: 4
+<<<<<<< .mine
+Fuel amount: 50
+=======
 Fuel amount: 0
+>>>>>>> .r148
 Escape Pod: false
 Insurance: false
 Hull Strength: 100

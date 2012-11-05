@@ -1,6 +1,14 @@
 package model;
 
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Point;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 /**
  * Represents the default Ship a Traveler starts off with.
@@ -27,6 +35,8 @@ public class GnatShip extends Ship {
 	
 	/** Range of parsecs Ship can travel before it runs out of fuel. */
 	private static final int TRAVELRANGE = 14;
+
+	
 	
 	/**
 	 * Instantiates a Gnat ship.
@@ -41,6 +51,7 @@ public class GnatShip extends Ship {
 		fuelAmount = fuelCapacity;
 		cost = 10000;
 	}
+	
 	
 	
 	/* 
