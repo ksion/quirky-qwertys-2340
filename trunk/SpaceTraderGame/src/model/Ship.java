@@ -79,7 +79,6 @@ public class Ship {
 		this.currentX = p.getX();
 		this.currentY = p.getY();
 		cargo = new Inventory(inventorySlots);
-		System.out.println("You are in planet Hibiscus at " + p);
 	}
 	
 	

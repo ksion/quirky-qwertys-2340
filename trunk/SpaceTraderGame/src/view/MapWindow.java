@@ -176,7 +176,8 @@ public class MapWindow extends JPanel {
 						boolean b = player.getShip().travel(planet);
 						if (b){
 							planet.createInventory();
-							new PlanetWindow(planet,gc);	
+							new PlanetWindow(planet,gc);
+							fuelLevel.setText("Fuel level: " + player.getShip().getFuelAmount());
 							repaint();
 						}
 					}
@@ -215,7 +216,6 @@ public class MapWindow extends JPanel {
 							15
 							);
 					planetName.setText(planet.getName());
-					fuelLevel.setText("Fuel level: " + player.getShip().getFuelAmount());
 				}
 			}
 		}
