@@ -3,6 +3,9 @@ package view;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Point;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -11,6 +14,8 @@ import controller.GameController;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -91,6 +96,8 @@ public class MapWindow extends JPanel {
 		for(Planet p : solarSystem.getPlanets()){
 			p.draw(g);
 		}
+		
+		move(player.getShip().getLocation());
 	}
 	
 	/**
@@ -192,6 +199,7 @@ public class MapWindow extends JPanel {
 		@Override
 		public void mouseMoved(MouseEvent m) {
 			Point mPoint = m.getPoint();
+			move(mPoint);
 			for (Planet planet: solarSystem.getPlanets()){
 				if(planet.inRange(mPoint)){
 					int size = planet.getSize();
@@ -207,5 +215,34 @@ public class MapWindow extends JPanel {
 				}
 			}
 		}
+	}
+	/** draws the ship, rotates it and moves it to the specified point **/
+	public void move(Point p){
+		double x = player.getShip().getLocation().x,
+				y = player.getShip().getLocation().y;
+		
+		Graphics2D g2d;
+		Image shipIcon = null;
+		double 	dx = p.x - x, 
+				dy = p.y - y;
+		double degree = Math.atan(dy/dx);
+		AffineTransform at = new AffineTransform();
+		at.rotate(degree);
+		at.translate(p.x, p.y);
+		
+		try {
+			shipIcon = ImageIO.read(new File("src/view/shipIcon.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		BufferedImage bShipIcon = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+		g2d = bShipIcon.createGraphics();
+		g2d.drawImage(shipIcon, at, null);
+		player.getShip().setLocation(p);
+		
+		
+
+		
 	}
 }
