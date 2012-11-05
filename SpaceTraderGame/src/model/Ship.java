@@ -1,7 +1,16 @@
 package model;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.Image;
 import java.awt.Point;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 /**
@@ -47,7 +56,7 @@ public class Ship {
 	protected int hullStrength;
 	
 	/** Current x-coordinate of the Ship. */
-	protected double currentX = 0;
+	private double currentX = 0;
 	
 	/** Current y-coordinate of the Ship. */
 	protected double currentY = 0;
@@ -215,6 +224,11 @@ public class Ship {
 	public Point getLocation(){
 		return new Point((int)currentX, (int)currentY);
 	}
+	
+	public void setLocation(Point p){
+		currentX = p.x;
+		currentY = p.y;
+	}
 
 	/**
 	 * Has information about the Ship's main characteristics.
@@ -239,4 +253,6 @@ public class Ship {
 		
 		return shipStr;
 	}
+	
+	
 }
