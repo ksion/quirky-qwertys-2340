@@ -66,9 +66,13 @@ public abstract class ListTableModel<T> implements TableModel,List<T> {
 
 	@Override
 	public void clear() {
+		
 		int indexLast = tableList.size()-1;
+		
 		tableList.clear();
-		notifyChange(0,indexLast,TableModelEvent.DELETE);
+		if (indexLast>=0){
+			notifyChange(0,indexLast,TableModelEvent.DELETE);
+		}
 		
 		
 	}

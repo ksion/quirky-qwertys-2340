@@ -24,6 +24,8 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import controller.GameController;
+
 import model.Inventory;
 import model.Player;
 import model.TradableItem;
@@ -45,6 +47,7 @@ public class TradeWindow extends JPanel {
 	private Font f = new Font("Space Age", 1, 12);
 	private TradeWindow t = this;
 	
+	private GameController controller;
 	
 	private Player player;
 	private Inventory otherInventory;
@@ -52,7 +55,8 @@ public class TradeWindow extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public TradeWindow() throws IOException {
+	public TradeWindow(GameController controller) throws IOException {
+		this.controller = controller;
 		
 		setLayout(new BorderLayout(0, 0));
 		//img = ImageIO.read(new File("src/view/Space.jpg"));
@@ -115,9 +119,18 @@ public class TradeWindow extends JPanel {
 		
 		
 		
-		JButton btnNext = new JButton("Next");
-		btnNext.setToolTipText("Done Trading");
-		buttonPanel.add(btnNext);
+		JButton btnDone = new JButton("Done");
+		btnDone.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TradeWindow.this.controller.showPlanet();
+				
+			}
+			
+		});
+		btnDone.setToolTipText("Done Trading");
+		buttonPanel.add(btnDone);
 	}
 	
 	/**
@@ -330,7 +343,7 @@ public class TradeWindow extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			PrintWriter output = null;
 			try {
-				output = new PrintWriter(new FileWriter("src//model//Player.txt"));
+				output = new PrintWriter(new FileWriter("src/model/Player.txt"));
 				output.write(player.toString());
 				output.write(player.getShip().toString());
 			} catch (IOException e1) {

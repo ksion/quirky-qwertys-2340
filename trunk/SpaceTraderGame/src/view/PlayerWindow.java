@@ -3,6 +3,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +19,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import controller.GameController;
+
 import model.Player;
 import net.miginfocom.swing.MigLayout;
 
@@ -28,8 +31,6 @@ import net.miginfocom.swing.MigLayout;
  * @version 1.0
  */
 public class PlayerWindow extends JPanel {
-
-
 	private Image img;
 	private final long serialVersionUID = 1L;
 	private JTextField textName;
@@ -38,6 +39,8 @@ public class PlayerWindow extends JPanel {
 	private JTextField textField_Engineer;
 	private JTextField textField_Trader;
 	private JButton createButton;
+
+	private GameController controller;
 
 	/**
 	 * Launch the application.
@@ -69,9 +72,8 @@ public class PlayerWindow extends JPanel {
 	 * Create the frame.
 	 * @throws IOException 
 	 */
-	public PlayerWindow() throws IOException {
-//		setTitle("Player Creation");
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public PlayerWindow(GameController controller) throws IOException {
+		this.controller = controller;
 		
 		NewPlayerListener playerListener = new NewPlayerListener();
 		
@@ -96,6 +98,15 @@ public class PlayerWindow extends JPanel {
 		
 		createButton = new JButton("Create");
 		createButton.setEnabled(false);
+		createButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				PlayerWindow.this.controller.newGame(getNewPlayer());
+				
+			}
+			
+		});
 		add(createButton, "cell 9 7 2 1,alignx right");	
 		
 		JLabel lblSkillPointsDesc1 = new JLabel("Start the game with 15 skill points. Allocate those points");

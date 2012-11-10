@@ -27,7 +27,6 @@ public class GnatShip extends Ship {
 	
 	/** Range of parsecs Ship can travel before it runs out of fuel. */
 	private static final int TRAVELRANGE = 14;
-
 	
 	
 	/**

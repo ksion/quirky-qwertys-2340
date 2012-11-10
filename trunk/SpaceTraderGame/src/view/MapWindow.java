@@ -37,7 +37,7 @@ import controller.GameController;
  * @version 1.0 10.22.12
  */
 public class MapWindow extends JPanel {
-	
+		
 	private static final long serialVersionUID = 1L;
 	private GameController gc;
 	protected JLabel planetName;
@@ -54,7 +54,8 @@ public class MapWindow extends JPanel {
 	 * Creates the panel.
 	 * @param p the player from the game controller
 	 */
-	public MapWindow(){
+	public MapWindow(GameController gc){
+		this.gc = gc;
 		setLayout(new BorderLayout());
 		addMouseListener(new MouseOver());
 		addMouseMotionListener(new MouseMove());
@@ -119,31 +120,7 @@ public class MapWindow extends JPanel {
 		frame.setVisible(true);
 	}
 	*/
-	
-	public void launch(final GameController gc){
-		EventQueue.invokeLater(new Runnable() {
-			public void run(){
-			
-				try{
-					MapWindow.this.gc = gc;
-					JFrame frame = new JFrame(solarSystem.getName() + " System");
-					frame.setPreferredSize(new Dimension(800, 450));
-					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					frame.setFocusableWindowState(true);
-					frame.setLocationByPlatform(true);
-			
-					frame.add(MapWindow.this);
-					frame.pack();
-					frame.setVisible(true);
-				}catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-			
-	}
-	
-	
+		
 	/**
 	 * sets the player
 	 * @param player
@@ -177,16 +154,12 @@ public class MapWindow extends JPanel {
 				if(planet.inRange(point)){
 					int choice = JOptionPane.showConfirmDialog(null, "Would you like to travel to this planet?", "Travel", JOptionPane.YES_NO_OPTION);
 					if(choice == JOptionPane.YES_OPTION){
-						boolean b = player.getShip().travel(planet);
-						if (b){
-							planet.createInventory();
-							new PlanetWindow(planet,gc);
+						if( gc.travelToPlanet( planet ) ) {
 							fuelLevel.setText("Fuel level: " + player.getShip().getFuelAmount());
 							shipLocation.setText("Location: x = " + player.getShip().getLocation().x + " y = " + player.getShip().getLocation().y);
 							repaint();
 						}
 					}
-						
 				}
 			}
 		}

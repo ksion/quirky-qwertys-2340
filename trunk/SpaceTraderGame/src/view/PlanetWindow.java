@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,25 +31,25 @@ import controller.GameController;
  * @author Quirky Qwertys
  * @version 1.0 10.29.12
  */
-public class PlanetWindow {
-	private Planet planet;
-	private JFrame frame;
+public class PlanetWindow extends JPanel {
 	private GameController controller;
+	private Planet planet;
 	private Image img;
 	private Color c = new Color(0, 255, 0);
 	private Font f = new Font("Space Age", 1, 12);
+	private JLabel planetNameLabel;
 
 	/**
 	 * Create the application.
 	 * 
 	 * @param planet the current Planet in which the Ship is located  
 	 */
-	public PlanetWindow(Planet planet, GameController gc) {
-		this.planet = planet;
-		controller = gc;
+	public PlanetWindow(GameController controller) {
+		this.controller = controller;
 		initialize();
+		/*
 		try{
-			frame.setTitle("Planet " + planet.getName());
+			//frame.setTitle("Planet " + planet.getName());
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			Image spaceIcon = ImageIO.read(new File("src/view/shipIcon.png"));
 			frame.setIconImage(spaceIcon);
@@ -58,6 +59,7 @@ public class PlanetWindow {
 		catch (Exception e){
 			e.printStackTrace();
 		}
+		*/
 	}
 
 	/**
@@ -66,13 +68,9 @@ public class PlanetWindow {
 	 * @param p the current Planet in which the Ship is located  
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setPreferredSize(new Dimension(650, 250));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLayout( new BorderLayout() );
 		
 		JPanel centerPanel = new JPanel();
-		frame.getContentPane().add(centerPanel, BorderLayout.CENTER);
 		centerPanel.setLayout(new GridLayout(7, 3, 0, 0));
 		
 		JLabel lblNewLabel_4 = new JLabel("");
@@ -90,7 +88,6 @@ public class PlanetWindow {
 		
 		
 		JPanel northPanel = new JPanel();
-		frame.getContentPane().add(northPanel, BorderLayout.NORTH);
 		northPanel.setLayout(new GridLayout(4, 1, 0, 0));
 		
 		JLabel label = new JLabel("");
@@ -99,12 +96,11 @@ public class PlanetWindow {
 		JLabel lblNewLabel = new JLabel("");
 		northPanel.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Welcome to " + planet.getName() + "! What would you like to do?");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		northPanel.add(lblNewLabel_1);
+		planetNameLabel = new JLabel("");
+		planetNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		northPanel.add(planetNameLabel);
 		
 		JPanel eastPanel = new JPanel();
-		frame.getContentPane().add(eastPanel, BorderLayout.EAST);
 		eastPanel.setLayout(new GridLayout(1, 2, 0, 0));
 		
 		JLabel lblNewLabel_2 = new JLabel("                          ");
@@ -112,11 +108,16 @@ public class PlanetWindow {
 		eastPanel.setLayout(new GridLayout(1, 7, 0, 0));
 		
 		JPanel westPanel = new JPanel();
-		frame.getContentPane().add(westPanel, BorderLayout.WEST);
 		
 		JLabel lblNewLabel_3 = new JLabel("                          ");
 		westPanel.add(lblNewLabel_3);
 		eastPanel.setLayout(new GridLayout(1, 7, 0, 0));
+		
+		
+		add( northPanel, BorderLayout.NORTH );
+		add( eastPanel, BorderLayout.EAST );
+		add( westPanel, BorderLayout.WEST );
+		add( centerPanel, BorderLayout.CENTER );
 	}
 	
 	/**
@@ -132,28 +133,11 @@ public class PlanetWindow {
 		 * @param ae the event that corresponds to when the button is clicked
 		 */
 		public void actionPerformed(ActionEvent ae){
-			JFrame frame = new JFrame();
-			TradeWindow tradeWindow;
-			try {
-				tradeWindow = new TradeWindow();
-				tradeWindow.setPlayer(controller.getPlayer());
-				tradeWindow.setOtherInventory(planet.getInventory());
-				frame.setTitle("Marketplace");
-				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				frame.setContentPane(tradeWindow);
-				frame.setBounds(100, 100, 450, 300);
-				frame.setPreferredSize(new Dimension(650, 250));
-				frame.setVisible(true);
-				frame.pack();
-			} 
-			catch (IOException e) {
-			    // TODO Auto-generated catch block
-			    e.printStackTrace();
-			}
+			controller.gotoMarketPlace();
 		}
 	}
 	/**
-	 * Opens the shipyard window, so that the user may trade 
+	 * Opens the ship yard window, so that the user may trade 
 	 * his/her ship.
 	 * @param event the event that corresponds to when the button is clicked
 	 */
@@ -164,21 +148,19 @@ public class PlanetWindow {
 		 * window pops up.
 		 */
 		public void actionPerformed(ActionEvent event){
-			JFrame frame = new JFrame();
-			ShipyardWindow shipyardWindow;
-			try{
-			    shipyardWindow = new ShipyardWindow(controller.getPlayer());
-			    frame.setTitle("Shipyard");
-			    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				frame.setContentPane(shipyardWindow);
-				frame.setBounds(100, 100, 450, 300);
-				frame.setPreferredSize(new Dimension(650, 250));
-				frame.setVisible(true);
-				frame.pack();			    
-			}
-			catch (Exception e){
-			    e.printStackTrace();
-			}
+			controller.gotoShipyard();
 		}
 	}
+
+	public Planet getPlanet() {
+		return planet;
+	}
+
+	public void setPlanet(Planet planet) {
+		this.planet = planet;
+		
+		planetNameLabel.setText("Welcome to " + planet.getName() + "! What would you like to do?");		
+	}
+	
+	
 }

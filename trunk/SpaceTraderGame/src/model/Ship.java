@@ -30,6 +30,7 @@ public class Ship {
 	
 	/** Amount of damage Ship has sustained. */
 	protected int damageSustained = 0;
+
 	
 	/** Distance Ship has traveled. */
 	protected int distanceTraveled = 0;
@@ -214,6 +215,14 @@ public class Ship {
 	}
 	
 	/**
+	 * Retrieves the hull strength of the ship
+	 * @return ship's hull strength
+	 */
+	public int getHullStrength(){
+		return hullStrength;
+	}
+	
+	/**
 	 * Retrieves the ship's location.
 	 * 
 	 * @return the ship's location
@@ -226,6 +235,18 @@ public class Ship {
 		currentX = p.x;
 		currentY = p.y;
 	}
+	
+	
+
+	public void setDamageSustained(int damageSustained) {
+		this.damageSustained = damageSustained;
+	}
+	
+	public int getDamageSustained() {
+		return damageSustained;
+	}
+
+
 
 	/**
 	 * Has information about the Ship's main characteristics.
