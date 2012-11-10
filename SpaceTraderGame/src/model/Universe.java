@@ -12,11 +12,8 @@ import java.util.ArrayList;
  */
 public class Universe {
 	
-	/** Represents the number of SolarSystems in the Universe. */
-	private static int solarSystemCounter;
-	
 	/** Represents a list of all of the SolarSystems instantiated in the Universe. */
-	private static ArrayList<SolarSystem> solarSystems = new ArrayList<SolarSystem>();
+	private ArrayList<SolarSystem> solarSystems = new ArrayList<SolarSystem>();
 	 
 	/**
 	 * Instantiates the universe with four default SolarSystems.
@@ -61,7 +58,6 @@ public class Universe {
 	public boolean add(SolarSystem system){
 		if (!solarSystems.contains(system)){
 			solarSystems.add(system);
-			solarSystemCounter++;
 			return true;
 		}
 		return false;
@@ -79,7 +75,6 @@ public class Universe {
 			return false;
 		else if (solarSystems.contains(system)){
 			solarSystems.remove(system);
-			solarSystemCounter--;
 			return true;
 		}
 		return false;

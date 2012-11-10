@@ -3,20 +3,26 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.SpinnerListModel;
 import javax.swing.SwingConstants;
 
+import controller.GameController;
+
 import model.Player;
 import model.Ship;
 import model.Shipyard;
+import model.TradableItem;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -28,6 +34,8 @@ import net.miginfocom.swing.MigLayout;
  * @version 1.0 11.05.12
  */
 public class ShipyardWindow extends JPanel {
+
+	private GameController controller;
 	
 	private Ship ship;
 	private Player player;
@@ -42,6 +50,7 @@ public class ShipyardWindow extends JPanel {
 	private Ship[] ships;
 	private JLabel shipLbl;
 	private JLabel lblYourShip;
+	private ShipTableModel shipTableModel;
 	
 	/** Maximum amount of fuel a player can buy. */
 	private int maxFuel;
@@ -52,9 +61,8 @@ public class ShipyardWindow extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ShipyardWindow(Player p) {
-		player = p;
-		ship = p.getShip();
+	public ShipyardWindow(GameController controller) {
+		this.controller = controller;
 		
 		setLayout(new BorderLayout(0, 0));
 		
@@ -65,44 +73,23 @@ public class ShipyardWindow extends JPanel {
 		JLabel lblWelcomeToThe = new JLabel("You may trade your ship for a new one or buy fuel here.");
 		panel.add(lblWelcomeToThe, "cell 0 0 3 1");
 		
-		lblYourShip = new JLabel("Your Ship: " + ship.getName());
+		lblYourShip = new JLabel();
 		panel.add(lblYourShip, "cell 0 1");
 		
-		JLabel lblOtherShips = new JLabel("Ships for Sell	              Cost");
-		panel.add(lblOtherShips, "cell 2 1");
+		//JLabel lblOtherShips = new JLabel("Ships for Sell	              Cost");
+		//panel.add(lblOtherShips, "cell 2 1");
 		
-		shipLbl = new JLabel("Cost of your ship: " + ship.getCost());
+		shipLbl = new JLabel("");
 		panel.add(shipLbl, "cell 0 2");
 		
 		btnTrade = new JButton("Trade");
 		panel.add(btnTrade, "cell 1 2");
 		btnTrade.addActionListener(new TradeListener());
 		
-		Shipyard yard = new Shipyard(ship);
-		ships = yard.getShips();
 		
-		String[][] tableInfo = new String[5][2];
-		
-		int k = 0; 
-		
-		for (int i = 0; i < tableInfo.length; i++){
-			for(int j = 0; j < tableInfo[i].length; j++){
-				
-				// If looking at the left column insert ship type
-				if (k % 2 == 0)
-					tableInfo[i][j] = ships[i].getName();
-				
-				// If looking at right column insert ship cost
-				else
-					tableInfo[i][j] = Integer.toString(ships[i].getCost());
-				k++;
-			}
-		}
-		
-		String[] columnNames = {"Ship Type", "Cost"};
-		
-		table = new JTable(tableInfo, columnNames);
-		panel.add(table, "cell 2 2,grow");
+		shipTableModel= new ShipTableModel();
+		table = new JTable(shipTableModel);
+		panel.add(new JScrollPane(table), "cell 2 2,grow");
 		
 		JLabel lblCurrentFuelAmount = new JLabel("Current Fuel Amount");
 		panel.add(lblCurrentFuelAmount, "cell 0 4 2 1");
@@ -110,31 +97,12 @@ public class ShipyardWindow extends JPanel {
 		JLabel lblFuelForSell = new JLabel("Qty. Fuel to Buy");
 		panel.add(lblFuelForSell, "cell 2 4");
 		
-		currFuelLbl = new JLabel(Integer.toString(ship.getFuelAmount()) + " tons / " + 
-				                        Integer.toString(ship.getFuelCapacity()) + " tons");
+		currFuelLbl = new JLabel();
 		currFuelLbl.setVerticalAlignment(SwingConstants.TOP);
 		panel.add(currFuelLbl, "cell 0 5");
 		
-		maxFuel = player.getShip().getMaxFuel();
 		
-		// Array of possible tons of fuel that can be bought
-		Integer[] fuelQuantity = new Integer[maxFuel];
-		for (int i = 0; i < maxFuel; i++){
-			fuelQuantity[i] = i + 1;
-		}
-		
-		SpinnerListModel spinnerModel;
-		
-		// In case, player's just bought/traded for a new ship
-		// if window is closed and reopened--that case is handled
-		// here
-		if (maxFuel == 0){
-			spinnerModel = new SpinnerListModel(new Integer[] {0});
-		}
-		
-		else
-			spinnerModel = new SpinnerListModel(fuelQuantity);
-		spinner = new JSpinner(spinnerModel);
+		spinner = new JSpinner();
 		JComponent editor = spinner.getEditor();
 		
 		// Change the size of the spinner's text field 
@@ -147,13 +115,26 @@ public class ShipyardWindow extends JPanel {
 		panel.add(btnBuy, "cell 1 5");
 		btnBuy.addActionListener(new BuyListener());
 		
-		lblCreditsAvailable = new JLabel("Credits Available: " + p.getMoney());
+		lblCreditsAvailable = new JLabel();
 		panel.add(lblCreditsAvailable, "cell 0 6");
 		
 		JLabel lblCostCrton = new JLabel("Fuel Cost: 100 cr./ton of fuel");
 		panel.add(lblCostCrton, "cell 2 6");
 		
-		update();
+		JButton btnDone = new JButton("Done");
+		btnDone.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ShipyardWindow.this.controller.showPlanet();
+				
+			}
+			
+		});
+		add(btnDone, BorderLayout.SOUTH);
+		
+		
+		//update();
 	}
 	
 	/**
@@ -221,7 +202,7 @@ public class ShipyardWindow extends JPanel {
 		 */
 		public void actionPerformed(ActionEvent event){
 			int currShipCost = player.getShip().getCost();
-			Ship selectedShip = ships[table.getSelectedRow()];
+			Ship selectedShip = shipTableModel.get(table.getSelectedRow());
 			
 			if (selectedShip.getCost() <= currShipCost)
 				player.setShip(selectedShip);
@@ -239,4 +220,72 @@ public class ShipyardWindow extends JPanel {
 			update();
 		}
 	}
+	
+	private class ShipTableModel extends ListTableModel<Ship>{
+		
+		public ShipTableModel(){
+			super(new String[]{"Ship Type", "Cost"},new ArrayList<Ship>());
+					
+			
+		}
+
+		@Override
+		public Object getValueAt(int row, int col) {
+			Ship ship = get(row);
+			switch(col){
+				case 0:return ship.getName();
+				case 1: return ship.getCost();
+				default: return null;
+			}
+		}
+		
+	}
+	
+	public void setPlayer( Player p ) {
+		player = p;
+		ship = p.getShip();
+		
+		lblCreditsAvailable.setText("Credits Available: " + p.getMoney());
+		lblYourShip.setText("Your Ship: " + ship.getName());
+		shipLbl.setText("Cost of your ship: " + ship.getCost());
+		currFuelLbl.setText(Integer.toString(ship.getFuelAmount()) + " tons / " + 
+                Integer.toString(ship.getFuelCapacity()) + " tons");
+		
+		
+		maxFuel = player.getShip().getMaxFuel();
+		
+		// Array of possible tons of fuel that can be bought
+		Integer[] fuelQuantity = new Integer[maxFuel];
+		for (int i = 0; i < maxFuel; i++){
+			fuelQuantity[i] = i + 1;
+		}
+		
+		SpinnerListModel spinnerModel;
+		
+		// In case, player's just bought/traded for a new ship
+		// if window is closed and reopened--that case is handled
+		// here
+		if (maxFuel == 0){
+			spinnerModel = new SpinnerListModel(new Integer[] {0});
+		}
+		
+		else
+			spinnerModel = new SpinnerListModel(fuelQuantity);
+		
+		spinner.setModel(spinnerModel);
+		
+		Shipyard yard = new Shipyard(ship);
+		ships = yard.getShips();
+		
+		shipTableModel.clear();
+		shipTableModel.addAll(Arrays.asList(ships));
+		update();
+		
+		
+		
+		
+		
+	}
+	
+		
 }

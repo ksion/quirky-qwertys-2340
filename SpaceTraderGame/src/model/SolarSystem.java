@@ -30,11 +30,8 @@ public class SolarSystem {
 	private int resources;
 	
 	/** Tax rate that applies to any transaction. */
-	private static double taxRate;
-	
-	/** Number of Planets in a SolarSystem. */
-	private static int count = 0;
-	
+	private double taxRate;
+		
 	/**
 	 * Instantiates a SolarSystem with a specific name, position,
 	 * tech level, tax rate and resources.
@@ -74,7 +71,6 @@ public class SolarSystem {
 	public boolean add(Planet planet) {
 		if (!planets.contains(planet)) {
 			planets.add(planet);
-			count++;
 			return true;
 		}
 		return false;
