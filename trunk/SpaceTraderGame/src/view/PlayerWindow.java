@@ -1,4 +1,5 @@
 package view;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
@@ -74,10 +75,10 @@ public class PlayerWindow extends JPanel {
 	 */
 	public PlayerWindow(GameController controller) throws IOException {
 		this.controller = controller;
-		
+		setBackground(Color.black);
 		NewPlayerListener playerListener = new NewPlayerListener();
 		
-		setBorder(new EmptyBorder(5, 5, 5, 5));
+		setBorder(new EmptyBorder(150, 5, 5, 5));
 		setLayout(new MigLayout("", "[][][grow][][][grow][grow][grow][][][grow][][][][]", "[][shrink 50][][][][][][grow,bottom]"));		
 		JLabel lblHeader = new JLabel("Pick your options below to start a new game.");
 		lblHeader.setForeground(Style.SPACEAGE_COLOR);

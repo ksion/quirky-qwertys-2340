@@ -44,10 +44,9 @@ public class MapWindow extends JPanel {
 	protected JLabel fuelLevel, skillPilot, skillTrader, skillEngineer, skillFighter, shipLocation;
 	protected Player player;
 	
-	/** Represents the universe in Space Trader game. */
-	private Universe universe = new Universe();
-	ArrayList<SolarSystem> systems = universe.getSystems();
-	SolarSystem solarSystem = systems.get(0);
+	/** Represents the solar system in Space Trader game. */
+
+	private SolarSystem solarSystem;
 	
 	/**
 	 * I also added a player parameter to the constructor so that the travel method for the ship from the game controller can be called.
@@ -133,6 +132,10 @@ public class MapWindow extends JPanel {
 		skillEngineer.setText("Engineer Skill: " + player.getEngineerSkill());
 		skillFighter.setText("Fighter Skill: " + player.getFighterSkill());
 		shipLocation.setText("Location: x = " + player.getShip().getLocation().x + " y = " + player.getShip().getLocation().y);
+	}
+	
+	public void setSolarSystem(SolarSystem solarSystem){
+		this.solarSystem = solarSystem;
 	}
 
 
