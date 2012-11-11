@@ -35,7 +35,7 @@ public class Shipyard{
 	}
 	
 	/**
-	 * Retrieves a list of all the ships in the shipyard.
+	 * Retrieves a list of all the ships in the Shipyard.
 	 * 
 	 * @return the list of ships
 	 */
