@@ -4,7 +4,7 @@ import java.util.Random;
 
 /**
  * Generates a pirate in the game by creating 
- * a random Ship
+ * a Ship with a random hull strength.
  * 
  * @author Quirky Qwertys
  *
