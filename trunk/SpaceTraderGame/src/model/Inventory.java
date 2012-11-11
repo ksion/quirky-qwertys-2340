@@ -105,38 +105,4 @@ public class Inventory {
 		}
 		return null;
 	}
-	
-	
-	
-	
-	/**
-	 * Removes a TradeGood from the Ship.
-	 * 
-	 * @param good the TradeGood that will be removed
-	 * @return true if the TradeGood was removed, otherwise return false
-	 */
-//	public boolean removeTradeGood(TradeGood good){
-//		if (tradeGoodCounter == 0)
-//			return false;
-//		else if (goodsInventory.containsKey(good)){
-//				Integer quantity = goodsInventory.get(good);
-//				if (quantity == 1)
-//					goodsInventory.remove(good);
-//				else
-//					goodsInventory.put(good, --quantity);
-//				tradeGoodCounter--;
-//				return true;
-//		}
-//		return false;
-//	}
-	
-	/**
-	 * Checks the number of cargo holds available to store 
-	 * TradeGoods.
-	 * 
-	 * @return the number of cargo holds available
-	 */
-//	public int holdsAvailable(){
-//		return CARGOHOLDS - tradeGoodCounter;
-//	}
 }

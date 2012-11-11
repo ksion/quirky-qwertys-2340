@@ -17,17 +17,15 @@ import javax.swing.JOptionPane;
  * serves as storage for all of the Player's Equipment 
  * and TradeGoods.
  * 
- * @author Qwirky Qwertys
+ * @author Quirky Qwertys
  * @version 1.0 10.07.12
  */
 public class Ship {
     // /** Array used to store all of the Player's TradeGoods.*/
     protected TradeGood[] cargoHold = new TradeGood[20];
-	Inventory cargo;
 	
-	// /** Array used to store all of the Ship's Equipment. */
-	// Equipment[] myEquipment = new Equipment[10];
-	
+    protected Inventory cargo;
+
 	/** Amount of damage Ship has sustained. */
 	protected int damageSustained = 0;
 
@@ -75,7 +73,12 @@ public class Ship {
 	protected Integer cost = 10000;
 	
 	/**
-	 * Instantiates a Ship with specified hull strength.
+	 * Instantiates a Ship with specified hull strength, inventory 
+	 * slots and a location.
+	 * 
+	 * @param hullStrength the ship's hull strength
+	 * @param inventorySlots the number of cargo bays
+	 * @param p the ship's location
 	 */
 	public Ship(int hullStrength, int inventorySlots, Point p){
 		this.hullStrength = hullStrength;
@@ -84,10 +87,18 @@ public class Ship {
 		cargo = new Inventory(inventorySlots);
 	}
 	
+	/** 
+	 * Instantiates a Ship with specified hull strength.
+	 * 
+	 * @param hullStrength the ship's hull strength
+	 */
+	public Ship(int hullStrength){
+		this.hullStrength = hullStrength;
+	}
 	
 	/**
-	 * this method will change the position of the ship to the be at the planet
-	 * passed in if it is within range of the ship.
+	 * This method will change the position of the ship to the 
+	 * be at the planet passed in if it is within range of the ship.
 	 * 
 	 * @param p the planet to travel to.
 	 */
@@ -172,6 +183,7 @@ public class Ship {
 	
 	/**
 	 * Gets the remaining fuel level. 
+	 * 
 	 * @return the int representing the fuel level
 	 */
 	public int getFuelAmount() {
@@ -216,10 +228,20 @@ public class Ship {
 	
 	/**
 	 * Retrieves the hull strength of the ship
+	 * 
 	 * @return ship's hull strength
 	 */
 	public int getHullStrength(){
 		return hullStrength;
+	}
+	
+	/**
+	 * Sets the hull strength of the ship
+	 * 
+	 * @param newStrength the hull strength
+	 */
+	public void setHullStrength(int newStrength){
+		hullStrength = newStrength;
 	}
 	
 	/**
@@ -236,12 +258,20 @@ public class Ship {
 		currentY = p.y;
 	}
 	
-	
-
+	/**
+	 * Updates the amount of damage a ship has sustained.
+	 * 
+	 * @param damageSustained the amount of damage
+	 */
 	public void setDamageSustained(int damageSustained) {
 		this.damageSustained = damageSustained;
 	}
 	
+	/**
+	 * Gets the amount of damage sustained.
+	 * 
+	 * @return the damage sustained by the Ship
+	 */
 	public int getDamageSustained() {
 		return damageSustained;
 	}
@@ -264,14 +294,14 @@ public class Ship {
 		"Insurance: " + insurance + "\n" +
 		"Hull Strength: " + hullStrength + "\n" +
 		"Cargo Hold: ";
-		
-		//for (TradeGood good: cargoHold){
-		//	shipStr += good.toString() + "\n"; 
-		//}
-		
 		return shipStr;
 	}
 	
+	/**
+	 * Draws a visual representation of the ship
+	 *  
+	 * @param g the default graphics
+	 */
 	public void drawShip(Graphics g){
 		Image shipIcon = null;
 		try {
@@ -282,6 +312,4 @@ public class Ship {
 		
 		g.drawImage(shipIcon, getLocation().x, getLocation().y, 20, 20, null);
 	}
-	
-	
 }
