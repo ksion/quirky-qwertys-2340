@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
+import java.util.Random;
 
 
 /**
@@ -28,7 +29,6 @@ public class Ship {
 
 	/** Amount of damage Ship has sustained. */
 	protected int damageSustained = 0;
-
 	
 	/** Distance Ship has traveled. */
 	protected int distanceTraveled = 0;
@@ -274,6 +274,18 @@ public class Ship {
 	 */
 	public int getDamageSustained() {
 		return damageSustained;
+	}
+	
+	/**
+	 * Attack a pirate's Ship.
+	 * 
+	 * @param pirateShip the ship that corresponds to a pirate
+	 */
+	public void attack(Ship pirateShip){
+		Random random = new Random();
+		int playerStrength = getHullStrength();
+		int damage = (int) (playerStrength * (random.nextFloat() * 0.41 + 0.10)); 
+		pirateShip.setDamageSustained(pirateShip.getDamageSustained() + damage);
 	}
 
 
