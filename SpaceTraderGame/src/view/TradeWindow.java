@@ -21,8 +21,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import controller.GameController;
 
@@ -46,6 +49,7 @@ public class TradeWindow extends JPanel {
 	private Color c = new Color(0, 255, 0);
 	private Font f = new Font("Space Age", 1, 12);
 	private TradeWindow t = this;
+	private Border tableBorder;
 	
 	private GameController controller;
 	
@@ -58,22 +62,32 @@ public class TradeWindow extends JPanel {
 	public TradeWindow(GameController controller) throws IOException {
 		this.controller = controller;
 		
+		
 		setLayout(new BorderLayout(0, 0));
+		
 		//img = ImageIO.read(new File("src/view/Space.jpg"));
-		img = ImageIO.read(getClass().getResource("Space.jpg"));
+		img = ImageIO.read(getClass().getResource("/view/starsBackground.jpeg"));
+		
 		
 		JPanel tablePanel = new JPanel();
+		tablePanel.setOpaque(false);
 		add(tablePanel, BorderLayout.CENTER);
 		tablePanel.setLayout(new MigLayout("", "[grow][][grow]", "[][][grow][][][grow]"));
 		
 		JLabel lblMessage = new JLabel("Use the arrow buttons to buy/trade items from inventory.");
+		lblMessage.setForeground(Style.SPACEAGE_COLOR);
+		lblMessage.setFont(Style.SPACEAGE_NORMAL);
 		tablePanel.add(lblMessage, "cell 0 0 3 1");
 		
 		JLabel lblTraderInventory = new JLabel("Your Inventory");
+		lblTraderInventory.setForeground(Style.SPACEAGE_COLOR);
+		lblTraderInventory.setFont(Style.SPACEAGE_NORMAL);
 		lblTraderInventory.setHorizontalAlignment(SwingConstants.CENTER);
 		tablePanel.add(lblTraderInventory, "cell 0 1");
 		
 		JLabel lblOtherInventory = new JLabel("Vendor Inventory");
+		lblOtherInventory.setForeground(Style.SPACEAGE_COLOR);
+		lblOtherInventory.setFont(Style.SPACEAGE_NORMAL);
 		lblOtherInventory.setHorizontalAlignment(SwingConstants.CENTER);
 		tablePanel.add(lblOtherInventory, "cell 2 1");
 		
@@ -85,12 +99,28 @@ public class TradeWindow extends JPanel {
 		
 		tableLeft = new JTable();
 		tableLeft.getSelectionModel().addListSelectionListener(new TableListener(tableLeft, btnTradeSell));
-		tablePanel.add(new JScrollPane(tableLeft), "cell 0 2 1 4,grow");
+		JScrollPane scrollPaneLeft = new JScrollPane(tableLeft);
+		scrollPaneLeft.setOpaque(false);
+		scrollPaneLeft.getViewport().setOpaque(false);
+		tablePanel.add(scrollPaneLeft, "cell 0 2 1 4,grow");
 		
 		tableRight = new JTable();
-		tableRight.getSelectionModel().addListSelectionListener(new TableListener(tableRight,btnTradeBuy));
 		
-		tablePanel.add(new JScrollPane(tableRight), "cell 2 2 1 4,grow");
+		tableBorder = new LineBorder(new Color(0,255,0,255),1);
+		/*
+		tableRight.setOpaque(false);
+		((DefaultTableCellRenderer)tableRight.getDefaultRenderer(Object.class)).setForeground(new Color(0,255,0));
+		((DefaultTableCellRenderer)tableRight.getDefaultRenderer(Object.class)).setOpaque(false);
+		tableRight.setShowGrid(false);
+		tableRight.setBorder(tableBorder);
+		*/
+		styleTable(tableRight);
+		styleTable(tableLeft);
+		tableRight.getSelectionModel().addListSelectionListener(new TableListener(tableRight,btnTradeBuy));
+		JScrollPane scrollPane = new JScrollPane(tableRight);
+		scrollPane.getViewport().setOpaque(false);
+		scrollPane.setOpaque(false);
+		tablePanel.add(scrollPane, "cell 2 2 1 4,grow");
 		
 		
 		
@@ -102,13 +132,18 @@ public class TradeWindow extends JPanel {
 		tablePanel.add(btnTradeBuy, "cell 1 4");
 		
 		JPanel buttonPanel = new JPanel();
+		buttonPanel.setOpaque(false);
 		add(buttonPanel, BorderLayout.SOUTH);
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 		
 		JLabel lblCreditsAvailable = new JLabel("Credits Available: ");
+		lblCreditsAvailable.setForeground(Style.SPACEAGE_COLOR);
+		lblCreditsAvailable.setFont(Style.SPACEAGE_NORMAL);
 		buttonPanel.add(lblCreditsAvailable);
 		
 		lblCredits = new JLabel();
+		lblCredits.setForeground(Style.SPACEAGE_COLOR);
+		lblCredits.setFont(Style.SPACEAGE_NORMAL);
 		buttonPanel.add(lblCredits);
 		buttonPanel.add(Box.createHorizontalGlue());
 	
@@ -142,6 +177,19 @@ public class TradeWindow extends JPanel {
 		//System.out.println("Called here");
 		boolean ret = g.drawImage(img, 0, 0, null);
 		System.out.println(ret);
+	}
+	/**
+	 * styles the table to make it transparent
+	 * @param table
+	 */
+	public void styleTable(JTable table){
+		
+		table.setOpaque(false);
+		((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setForeground(new Color(0,255,0));
+		((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setOpaque(false);
+		table.setShowGrid(false);
+		table.setBorder(tableBorder);
+		
 	}
 	
 /**

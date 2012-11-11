@@ -18,6 +18,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -29,13 +30,18 @@ import model.Player;
 
 import controller.GameController;
 
+/**
+ * Class to display various game screens once a new game is created
+ * @author Quirky Qwertys
+ *
+ */
 public class PlanetVisitWindow extends JPanel{
 	
 	private GameController gc;
 	private JPanel menuPanel;
 	private JPanel planetContainerPanel;
 	private BackgroundPanel planetPanel;
-	private JButton btnMap, btnMarket, btnShipyard, btnSaveGame;
+	private JButton btnMap, btnMarket, btnShipyard, btnSaveGame, btnLocalDock;
 	private CardLayout deck;
 	private ShipyardWindow shipyardWin;
 	private TradeWindow tradeWin;
@@ -43,36 +49,52 @@ public class PlanetVisitWindow extends JPanel{
 	private Player player;
 	private Planet planet;
 	private MapWindow mapWin;
+	private JLabel planetStatsName, planetStatsName2, planetStatsTechLevel;
 	
 	public PlanetVisitWindow(GameController gc) throws IOException{
 		this.gc = gc;
 		
-		
+		planetStatsName = new JLabel();
+		planetStatsName.setOpaque(false);
+		planetStatsName2 = new JLabel();
+		planetStatsName2.setOpaque(false);
+		planetStatsTechLevel = new JLabel();
+		planetStatsTechLevel.setOpaque(false);
 		shipyardWin = new ShipyardWindow(gc);
 		tradeWin = new TradeWindow(gc);
 		mapWin = new MapWindow(gc);
 		deck = new CardLayout();
 		setLayout(new BorderLayout());
 		menuPanel = new JPanel();
-		BoxLayout bl = new BoxLayout(menuPanel, BoxLayout.Y_AXIS);
-		menuPanel.setLayout(bl);
-		Color transBlue = new Color(0,0,255,125);
-		menuPanel.setBackground(transBlue);
+		menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.Y_AXIS));
 		
-		//menuPanel.setOpaque(false);
+		//Color transBlue = new Color(0,0,255,125);
+		//Color transBlue = new Color(0x11,0x33,0x3b,200);
+
+		Color transBlue = new Color(0x5d,0xdf,0xfb,175);
+
+		menuPanel.setBackground( new Color( 0x66,0x66,0x66,150 ) );
+		menuPanel.setBorder(BorderFactory.createCompoundBorder(new LineBorder(new Color(0x5d,0xdf,0xfb,255), 2,true), BorderFactory.createEmptyBorder(10,10,10,10)));
+		//menuPanel.setBorder(BorderFactory.createCompoundBorder(new LineBorder(new Color(0,255,0,255), 2,true), BorderFactory.createEmptyBorder(10,10,10,10)));
+		
 		btnMap = new JButton("Map");
-		//btnMap.setForeground(Color.WHITE);
-		//btnMap.setBackground(transBlue);
-		
-		//Border thickBorder = new LineBorder(Color.BLUE, 2);
-		//btnMap.setBorder(thickBorder);
 		btnMap.setOpaque(false);
-		
 		btnMap.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				PlanetVisitWindow.this.gc.showMap();
+				
+			}
+			
+		});
+		
+		btnLocalDock=new JButton("Local Dock");
+		btnLocalDock.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				PlanetVisitWindow.this.gc.showPlanet();
 				
 			}
 			
@@ -114,8 +136,14 @@ public class PlanetVisitWindow extends JPanel{
 		btnSaveGame = new JButton("Save and Exit");
 		btnSaveGame.addActionListener(new SaveListener());
 		
+		
+		
+		menuPanel.add(planetStatsName);
+		menuPanel.add(planetStatsName2);
+		menuPanel.add(planetStatsTechLevel);
 		menuPanel.add(Box.createVerticalGlue());
-		menuPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+		
+		menuPanel.add(btnLocalDock);
 		menuPanel.add(btnMap);
 		menuPanel.add(btnMarket);
 		menuPanel.add(btnShipyard);
@@ -125,26 +153,16 @@ public class PlanetVisitWindow extends JPanel{
 		planetContainerPanel = new JPanel(deck);
 		planetContainerPanel.setOpaque(false);
 		add(planetContainerPanel,BorderLayout.CENTER);
-		try{
-			Image img = ImageIO.read(getClass().getResource("/view/blueGreenPlanet.png"));
-			starsImg = ImageIO.read(getClass().getResource("/view/starsBackground.jpeg"));
-			planetPanel = new BackgroundPanel(img, BackgroundPanel.ACTUAL);
-			planetPanel.setOpaque(false);
-			planetContainerPanel.add(planetPanel, "bluegreen");
-			//deck.show(planetContainerPanel,"bluegreen");
-		}
-		catch(IOException ex){}
+		Image img = ImageIO.read(getClass().getResource("/view/blueGreenPlanet.png"));
+		starsImg = ImageIO.read(getClass().getResource("/view/starsBackground.jpeg"));
+		planetPanel = new BackgroundPanel(img, BackgroundPanel.ACTUAL);
+		planetPanel.setOpaque(false);
+		planetContainerPanel.add(planetPanel, "bluegreen");
+		//deck.show(planetContainerPanel,"bluegreen");
 		
 		planetContainerPanel.add(tradeWin,"trade");
 		planetContainerPanel.add(shipyardWin, "shipyard");
 		planetContainerPanel.add(mapWin, "map");
-		
-		
-		
-		
-		
-		
-		
 	}
 	
 	
@@ -222,6 +240,7 @@ private class SaveListener implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		//TODO: move this to game controller
 		PrintWriter output = null;
 		try {
 			output = new PrintWriter(new FileWriter("src/model/Player.txt"));
@@ -244,6 +263,16 @@ private class SaveListener implements ActionListener{
  */
 public void setPlanet(Planet planet) {
 	this.planet = planet;
+	planetStatsName.setForeground(new Color(0x5d,0xdf,0xfb,255));
+	planetStatsName.setFont(Style.ARIAL_NORMAL);
+	planetStatsName2.setForeground(new Color(0x5d,0xdf,0xfb,255));
+	planetStatsName2.setFont(Style.ARIAL_NORMAL);
+	planetStatsName.setText("Welcome to ");
+	planetStatsName2.setText("Planet "+ planet.getName()+".");
+	planetStatsTechLevel.setFont(Style.ARIAL_NORMAL);
+	planetStatsTechLevel.setForeground(new Color(0x5d,0xdf,0xfb,255));
+	planetStatsTechLevel.setText("Tech Level: "+ planet.getTechLevel());
+	
 	
 }
 
