@@ -11,13 +11,33 @@ import java.util.Random;
  */
 public class Pirate{
 	
-	private Ship ship;
+	private Ship pirateShip;
 	private Random random = new Random();
 	
 	/**
 	 * Instantiates a pirate with a Ship.
 	 */
 	public Pirate(){
-		ship = new Ship(random.nextInt(125) + 25);
+		pirateShip = new Ship(random.nextInt(126) + 25);
+	}
+	
+	/**
+	 * Attack the player's Ship.
+	 * 
+	 * @param playerShip the ship that corresponds to the player
+	 */
+	public void attack(Ship playerShip){
+		int pirateStrength = pirateShip.getHullStrength();
+		int damage = (int) (pirateStrength * (random.nextFloat() * 0.41 + 0.10)); 
+		playerShip.setDamageSustained(playerShip.getDamageSustained() + damage);
+	}
+	
+	/**
+	 * Retrieves a Pirate's Ship.
+	 * 
+	 * @return the pirate's ship
+	 */
+	public Ship getShip(){
+		return pirateShip;
 	}
 }
