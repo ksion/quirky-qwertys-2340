@@ -112,11 +112,11 @@ public class TradeWindow extends JPanel {
 		buttonPanel.add(lblCredits);
 		buttonPanel.add(Box.createHorizontalGlue());
 	
-		
+		/*
 		JButton btnSaveAndQuit = new JButton("Save"); //changed to just save
 		btnSaveAndQuit.addActionListener(new SaveListener());
 		buttonPanel.add(btnSaveAndQuit);
-		
+		*/
 		
 		
 		JButton btnDone = new JButton("Done");
