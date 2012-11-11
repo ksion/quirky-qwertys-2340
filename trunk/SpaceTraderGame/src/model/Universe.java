@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Point;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -17,8 +18,9 @@ public class Universe {
 	 
 	/**
 	 * Instantiates the universe with four default SolarSystems.
+	 * @throws IOException 
 	 */
-	public Universe(){
+	public Universe() throws IOException{
 		SolarSystem system1 = new SolarSystem("Peony", new Point(1, 0), 0, 0.03, 0);
 		SolarSystem system2 = new SolarSystem("Bronco", new Point(2, 0), 3, 0.05, 0);
 		SolarSystem system3 = new SolarSystem("Anjous", new Point(3, 0), 1, 0.05, 3);
@@ -31,7 +33,7 @@ public class Universe {
 		
 		planets1.add(new Planet(new Point(100, 100), system1, "Hibiscus"));
 		planets1.add(new Planet(new Point(175, 225), system1, "Acacia"));
-		planets1.add(new Planet(new Point(650,250), system1, "Pengua"));
+		planets1.add(new Planet(new Point(600,250), system1, "Pengua"));
 		planets1.add(new Planet(new Point(398, 202), system1, "Abelia"));
 		planets2.add(new Planet(new Point(), system2, "Mustang"));
 		planets3.add(new Planet(new Point(), system3, "Seckel"));

@@ -40,6 +40,7 @@ public class MapWindow extends JPanel {
 		
 	private static final long serialVersionUID = 1L;
 	private GameController gc;
+	private Image background;
 	protected JLabel planetName;
 	protected JLabel fuelLevel, skillPilot, skillTrader, skillEngineer, skillFighter, shipLocation;
 	protected Player player;
@@ -52,9 +53,11 @@ public class MapWindow extends JPanel {
 	 * I also added a player parameter to the constructor so that the travel method for the ship from the game controller can be called.
 	 * Creates the panel.
 	 * @param p the player from the game controller
+	 * @throws IOException 
 	 */
-	public MapWindow(GameController gc){
+	public MapWindow(GameController gc) throws IOException{
 		this.gc = gc;
+		background =ImageIO.read(getClass().getResource("/view/starsBackground.jpeg"));
 		setLayout(new BorderLayout());
 		addMouseListener(new MouseOver());
 		addMouseMotionListener(new MouseMove());
@@ -90,20 +93,17 @@ public class MapWindow extends JPanel {
 	 */
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		Image background = null;
-		try {
-			background = ImageIO.read(new File("src/view/starsBackground.jpeg"));
-		} 
-		catch (IOException e){
-			e.printStackTrace();
-		}
+		long start = System.currentTimeMillis();
 		g.drawImage(background, 0, 0, null);
-		
+		long background = System.currentTimeMillis();
 		for(Planet p : solarSystem.getPlanets()){
 			p.draw(g);
 		}
+		long planets = System.currentTimeMillis();
 		
 		player.getShip().drawShip(g);
+		long ship = System.currentTimeMillis();
+		System.out.printf("%,d ms %,d ms %,d ms%n",background-start,planets-background,ship-planets);
 	}
 	
 	/**

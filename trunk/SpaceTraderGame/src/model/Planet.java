@@ -21,7 +21,8 @@ public class Planet {
 	Random rand = new Random();
 	
 	/** Name of the Planet and the name of the corresponding image file. */
-	private String name, picName;
+	private String name;
+	private Image picName;
 	
 	/** Dimensions of the images used to represent Planets. */
 	private final int HEIGHT = 451, WIDTH = 801, SIZE = 30;
@@ -45,9 +46,9 @@ public class Planet {
 	private double tax;
 	
 	/** List of images used to represent a Planet in the GUI. */
-	private String[] planetPics = {"src/view/blueGasPlanet.png","src/view/desertPlanet.png",
-			"src/view/desolatePlanet.png","src/view/jupiterPlanet.png", 
-			"src/view/redMineralPlanet.png"};
+	private String[] planetPics = {"/view/blueGasPlanet.png","/view/desertPlanet.png",
+			"/view/desolatePlanet.png","/view/jupiterPlanet.png", 
+			"/view/redMineralPlanet.png"};
 	// private Vendor[] availVend;
 	
 	/** List of letters that can be used to randomly generate a planet name. */
@@ -62,12 +63,13 @@ public class Planet {
 	 * @param p the (x, y) coordinate of the Planet 
 	 * @param s the SolarSystem the Planet belongs to
 	 * @param n the name of the Planet
+	 * @throws IOException 
 	 */
-	public Planet(Point p, SolarSystem s, String n){
+	public Planet(Point p, SolarSystem s, String n) throws IOException{
 		position = p;
 		system = s;
 		name = n;
-		picName = planetPics[rand.nextInt(5)];
+		picName = ImageIO.read(getClass().getResource(planetPics[rand.nextInt(5)]));
 		
 		techLevel = s.getTechLevel();
 		tax = s.getTaxRate();
@@ -81,13 +83,14 @@ public class Planet {
 	 * @param p the (x, y) coordinate of the Planet 
 	 * @param s the SolarSystem the Planet belongs to
 	 * @param n the name of the Planet
+	 * @throws IOException 
 	 */
-	public Planet(Point p, SolarSystem s){
+	public Planet(Point p, SolarSystem s) throws IOException{
 		position = p;
 		system = s;
 		makeName();
 		techLevel = s.getTechLevel();
-		picName = planetPics[rand.nextInt(5)];
+		picName = ImageIO.read(getClass().getResource(planetPics[rand.nextInt(5)]));
 	}
 	
 	
@@ -204,13 +207,7 @@ public class Planet {
 	 * in MapWindow
 	 */
 	public void draw(Graphics g){
-		Image img = null;
-		try {
-			img = ImageIO.read(new File(picName));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		int x = (int)(position.getX() - SIZE/2);
 		int y = (int)(position.getY() - SIZE/2);
 		if(x - 10 <= 0){
@@ -226,7 +223,7 @@ public class Planet {
 			x = HEIGHT - SIZE;
 		}
 		
-		g.drawImage(img, x, y, SIZE, SIZE, null);
+		g.drawImage(picName, x, y, SIZE, SIZE, null);
 	}
 	
 	/**
