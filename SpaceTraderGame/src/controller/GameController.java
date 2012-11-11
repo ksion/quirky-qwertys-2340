@@ -144,16 +144,23 @@ public class GameController {
 
 
 	public void newGame(Player newPlayer) {
-		this.newPlayer = newPlayer;
-		createUniverse();
-		currentPlanet = solarSystem.getPlanets().get(0);//set the starting planet to the first in the list
-		currentPlanet.createInventory();
-		//showMap();
-		showPlanetVisit();
+		
+		try{
+			this.newPlayer = newPlayer;
+		
+			createUniverse();
+			currentPlanet = solarSystem.getPlanets().get(0);//set the starting planet to the first in the list
+			currentPlanet.createInventory();
+		
+			showPlanetVisit();
+		}
+		catch(IOException e){
+			System.out.println(e);
+		}
 		
 	}
 	
-	public void createUniverse(){
+	public void createUniverse() throws IOException{
 		/** Represents the universe in Space Trader game. */
 		universe = new Universe();
 		systems = universe.getSystems();
