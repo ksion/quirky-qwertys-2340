@@ -25,8 +25,12 @@ import java.awt.event.*;
  * @author Quirky Qwertys
  * @version 1.0 11.11.12
  */
-public class EncounterPanel extends JFrame {
+public class EncounterPanel extends JFrame implements java.io.Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Pirate pirate = new Pirate();
 	private Player player;
 	private JLabel damageInfo;

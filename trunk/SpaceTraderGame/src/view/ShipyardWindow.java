@@ -38,7 +38,12 @@ import net.miginfocom.swing.MigLayout;
  * @author Quirky Qwertys
  * @version 1.0 11.05.12
  */
-public class ShipyardWindow extends JPanel {
+public class ShipyardWindow extends JPanel implements java.io.Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private GameController controller;
 	

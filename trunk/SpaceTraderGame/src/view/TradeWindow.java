@@ -40,7 +40,11 @@ import net.miginfocom.swing.MigLayout;
  * @author QuirkyQwertys
  *
  */
-public class TradeWindow extends JPanel {
+public class TradeWindow extends JPanel implements java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTable tableLeft;
 	private JTable tableRight;
 	private JLabel lblCredits;
