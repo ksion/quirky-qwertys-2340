@@ -1,6 +1,10 @@
 package model;
 public class PriceModel implements java.io.Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Planet planet;
 	
 	public PriceModel(Planet planet) {

@@ -12,6 +12,10 @@ import java.awt.Point;
  */
 public class Shipyard implements java.io.Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** List of all the ships in the Shipyard. */
 	private Ship[] ships = new Ship[5];
 	

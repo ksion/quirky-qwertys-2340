@@ -11,6 +11,10 @@ import java.util.Random;
  */
 public class Pirate implements java.io.Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Ship pirateShip;
 	private Random random = new Random();
 	

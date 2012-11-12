@@ -14,6 +14,11 @@ import java.awt.Point;
 
 public class FleaShip extends Ship implements java.io.Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** Number of cargo holds available for the FleaShip. */
 	private static final int CARGOBAY = 10;
 	

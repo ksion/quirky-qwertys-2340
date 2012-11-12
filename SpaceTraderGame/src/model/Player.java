@@ -14,6 +14,11 @@ import java.awt.Point;
  */
 public class Player implements java.io.Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** Name of the Player. */
 	private String name;
 	
