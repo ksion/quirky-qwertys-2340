@@ -113,7 +113,13 @@ public class Ship {
 			setLocation(p.getPosition());	
 		}
 		else{
-			JOptionPane.showMessageDialog(null, "This planet is too far away to travel to.", "Woops!", JOptionPane.ERROR_MESSAGE);
+			if (!inRange(p) && fuelAmount != 0){
+				JOptionPane.showMessageDialog(null, "This planet is too far away to travel to.", 
+						                      "Woops!", JOptionPane.ERROR_MESSAGE);
+			}
+			else
+				JOptionPane.showMessageDialog(null, "Your ship is out of fuel. You can't travel anywhere.", 
+	                                          "Woops!", JOptionPane.ERROR_MESSAGE);				
 		}
 		System.out.println("You are in planet " + p.getName() + " at " + getLocation());
 		return canTravel;
