@@ -160,27 +160,7 @@ public class TradeWindow extends JPanel {
 		//tablePanel.add(lblCredits, "cell 1 6");
 		buttonPanel.add(Box.createHorizontalGlue());
 	
-		/*
-		JButton btnSaveAndQuit = new JButton("Save"); //changed to just save
-		btnSaveAndQuit.addActionListener(new SaveListener());
-		buttonPanel.add(btnSaveAndQuit);
-		*/
 		
-		/*
-		
-		JButton btnDone = new JButton("Done");
-		btnDone.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				TradeWindow.this.controller.showPlanet();
-				
-			}
-			
-		});
-		btnDone.setToolTipText("Done Trading");
-		buttonPanel.add(btnDone);
-		*/
 	}
 	
 	
@@ -393,24 +373,6 @@ public class TradeWindow extends JPanel {
     }
 	
 	
-	private class SaveListener implements ActionListener{
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			PrintWriter output = null;
-			try {
-				output = new PrintWriter(new FileWriter("src/model/Player.txt"));
-				output.write(player.toString());
-				output.write(player.getShip().toString());
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			finally {
-				output.close();
-			}
-		}
-	}
 	
 	
 	/*public static void main(String[] args){

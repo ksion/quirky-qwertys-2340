@@ -15,7 +15,11 @@ import model.Player;
 import model.SolarSystem;
 
 import controller.GameController;
-
+/**
+ * Parent Container for all the game screens
+ * @author Quirky Qwertys
+ *
+ */
 public class GameWindow extends JPanel {
 	GameController controller;
 	
@@ -48,7 +52,9 @@ public class GameWindow extends JPanel {
 		
 	}
 	
-	
+	/**
+	 * launches the main game window
+	 */
 	public void launch(){
 		EventQueue.invokeLater(new Runnable() {
 			public void run(){
@@ -70,7 +76,11 @@ public class GameWindow extends JPanel {
 			
 	}
 
-
+/**
+ * sets the planet and player
+ * @param planet
+ * @param p
+ */
 	public void showPlanet(Planet planet, Player p) {
 		planetVisitWin.setPlanet(planet);
 		planetVisitWin.setPlayer(p);
@@ -79,7 +89,10 @@ public class GameWindow extends JPanel {
 		deck.show(this, "planetVisit");
 	}
 
-
+/**
+ * shows the shipyard card
+ * @param player
+ */
 	public void showShipyard(Player player) {
 		planetVisitWin.getShipyardWin().setPlayer(player);
 		//deck.show(this, "shipyard");
@@ -87,7 +100,11 @@ public class GameWindow extends JPanel {
 		
 	}
 
-
+/**
+ * shows the marketplace card
+ * @param player
+ * @param inventory
+ */
 	public void showMarketPlace(Player player, Inventory inventory) {
 		planetVisitWin.getTradeWindow().setPlayer(player);
 		planetVisitWin.getTradeWindow().setOtherInventory(inventory);
@@ -96,13 +113,19 @@ public class GameWindow extends JPanel {
 		
 	}
 
-
+/**
+ * shows the player window
+ */
 	public void showNewPlayerWin() {
 		deck.show(this, "player");
 		
 	}
 
-
+/**
+ * shows the map window
+ * @param player
+ * @param solarSystem
+ */
 	public void showMapWin(Player player, SolarSystem solarSystem) {
 		planetVisitWin.getMapWin().setPlayer(player);
 		planetVisitWin.getMapWin().setSolarSystem(solarSystem);
@@ -112,6 +135,11 @@ public class GameWindow extends JPanel {
 		
 	}
 	
+	/**
+	 * shows the planet visit window
+	 * @param p
+	 * @param player
+	 */
 	public void showPlanetVisitWin(Planet p, Player player) {
 		showPlanet(p, player);
 		deck.show(this,"planetVisit");

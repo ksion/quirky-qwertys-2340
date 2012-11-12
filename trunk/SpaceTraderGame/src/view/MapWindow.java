@@ -93,17 +93,17 @@ public class MapWindow extends JPanel {
 	 */
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		long start = System.currentTimeMillis();
+		
 		g.drawImage(background, 0, 0, null);
-		long background = System.currentTimeMillis();
+		
 		for(Planet p : solarSystem.getPlanets()){
 			p.draw(g);
 		}
-		long planets = System.currentTimeMillis();
+		
 		
 		player.getShip().drawShip(g);
-		long ship = System.currentTimeMillis();
-		System.out.printf("%,d ms %,d ms %,d ms%n",background-start,planets-background,ship-planets);
+		
+		
 	}
 	
 	/**
