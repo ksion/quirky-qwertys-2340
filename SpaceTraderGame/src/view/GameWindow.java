@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.io.IOException;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -20,7 +19,9 @@ import controller.GameController;
  * @author Quirky Qwertys
  *
  */
-public class GameWindow extends JPanel {
+public class GameWindow extends JPanel implements java.io.Serializable{
+	private static final long serialVersionUID = 1L;
+
 	GameController controller;
 	
 	MapWindow mapWin;
@@ -29,6 +30,7 @@ public class GameWindow extends JPanel {
 	ShipyardWindow shipyardWin;
 	TradeWindow tradeWin;
 	PlanetVisitWindow planetVisitWin;
+	StartWindow startWin;
 	CardLayout deck;
 	
 	public GameWindow(GameController controller) throws IOException {
@@ -39,6 +41,7 @@ public class GameWindow extends JPanel {
 		mapWin = new MapWindow(controller);
 		planetWin = new PlanetWindow(controller);
 		playerWin = new PlayerWindow(controller);
+		startWin = new StartWindow(controller);
 		//shipyardWin = new ShipyardWindow(controller);
 		//tradeWin = new TradeWindow(controller);
 		deck = new CardLayout();
@@ -46,6 +49,7 @@ public class GameWindow extends JPanel {
 		add(mapWin, "map");
 		add(planetWin, "planet");
 		add(playerWin, "player");
+		add(startWin, "StartWindow");
 		//add(shipyardWin, "shipyard");
 		//add(tradeWin, "trade");
 		add(planetVisitWin, "planetVisit");
@@ -89,6 +93,7 @@ public class GameWindow extends JPanel {
 		deck.show(this, "planetVisit");
 	}
 
+	
 /**
  * shows the shipyard card
  * @param player
@@ -144,5 +149,13 @@ public class GameWindow extends JPanel {
 		showPlanet(p, player);
 		deck.show(this,"planetVisit");
 		
+	}
+	
+	/**
+	 * shows the new game window
+	 */
+	public void showStartWindow(GameController gc) {
+		startWin = new StartWindow(gc);
+		deck.show(this, "StartWindow");
 	}
 }

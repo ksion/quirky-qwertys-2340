@@ -121,7 +121,6 @@ public class EncounterPanel extends JFrame {
 				if (player.getShip().getDamageSustained() >= 100){
 					JOptionPane.showMessageDialog(null, "Your ship has been destroyed and you've lost all items. GAME OVER!");
 					gc = new GameController();
-					gc.start();
 					dispose();
 				}
 				else if (pirate.getShip().getDamageSustained() >= 100){
