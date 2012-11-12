@@ -9,7 +9,7 @@ import java.util.Random;
  * @author Quirky Qwertys
  *
  */
-public class Inventory {
+public class Inventory implements java.io.Serializable{
 	private ArrayList<TradableItem> goods;
 	private int maxItems;
 	

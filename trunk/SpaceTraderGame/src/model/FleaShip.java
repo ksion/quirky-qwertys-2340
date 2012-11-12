@@ -12,7 +12,7 @@ import java.awt.Point;
  * @version 1.0 11.05.12
  */
 
-public class FleaShip extends Ship{
+public class FleaShip extends Ship implements java.io.Serializable{
 	
 	/** Number of cargo holds available for the FleaShip. */
 	private static final int CARGOBAY = 10;

@@ -11,7 +11,7 @@ import java.awt.Point;
  * @author Qwirky Qwertys
  * @version 1.0 11.05.12
  */
-public class BumblebeeShip extends Ship{
+public class BumblebeeShip extends Ship implements java.io.Serializable{
 
 	/** Number of cargo holds available in the Ship. */
 	private static final int CARGOBAY = 25;

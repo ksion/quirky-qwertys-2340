@@ -7,7 +7,7 @@ package model;
  * @version 1.0 10.27.12
  */
 
-public class TradableItem {
+public class TradableItem implements java.io.Serializable{
 	private TradeGood type;
 	private int qty;
 	private int price;

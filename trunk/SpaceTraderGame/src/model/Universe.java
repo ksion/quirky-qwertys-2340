@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author Quirky Qwertys
  * @version 1.0 10.22.12
  */
-public class Universe {
+public class Universe implements java.io.Serializable{
 	
 	/** Represents a list of all of the SolarSystems instantiated in the Universe. */
 	private ArrayList<SolarSystem> solarSystems = new ArrayList<SolarSystem>();

@@ -1,6 +1,6 @@
 package model;
 
-public class Trade {
+public class Trade implements java.io.Serializable{
 
 	/** Represents the current state of transaction **/
 	//view TradeState enum thingy

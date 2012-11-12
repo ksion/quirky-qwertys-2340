@@ -2,7 +2,7 @@ package model;
 
 import java.util.Random;
 
-public enum TradeGood {
+public enum TradeGood implements java.io.Serializable{
 	WATER(0, 0, 1, 45, 5, 5, 50, "Water"),
 	FURS(0, 0, 0, 250, 10, 20, 300, "Furs"),
 	FOOD(1, 0, 1, 100, 3, 5, 120, "Food"),

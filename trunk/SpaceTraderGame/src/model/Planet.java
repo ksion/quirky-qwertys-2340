@@ -16,7 +16,7 @@ import javax.imageio.ImageIO;
  * @author Quirky Qwertys
  * @version 1.0 10.22.12
  */
-public class Planet {
+public class Planet implements java.io.Serializable{
 	
 	Random rand = new Random();
 	
