@@ -2,23 +2,18 @@ package model;
 
 import java.io.*;
 
+import controller.GameController;
 
-public class SaveLoad implements java.io.Serializable{
 
-	/**
-	 * has save and load game methods
-	 * p.s. if there are any instance variables or any data that we don't want to be saved, we must
-	 * go into the class where it is and declare it transient. 
-	 */
-	private static final long serialVersionUID = 1L;
-	
+public class SaveLoad {
+
 	/** save: serializes the object passed in and saves it to a file called game.ser */
 	
 	public static void save(Object o){
 		try
 		{
-	         FileOutputStream fileOut =
-	         new FileOutputStream("game.ser");
+			File f = new File("src/controller/game.ser");
+	         FileOutputStream fileOut = new FileOutputStream(f);
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	         out.writeObject(o);
 	         out.close();
@@ -26,7 +21,7 @@ public class SaveLoad implements java.io.Serializable{
 	      }
 		catch(IOException i)
 	      {
-	          i.printStackTrace();
+	         // i.printStackTrace();
 	      }
 
 	}
@@ -37,16 +32,16 @@ public class SaveLoad implements java.io.Serializable{
 		Object o = null;
 		try
 	    {
-	        FileInputStream fileIn = new FileInputStream("game.ser");
+	        FileInputStream fileIn = new FileInputStream("src/controller/game.ser");
 	        ObjectInputStream in = new ObjectInputStream(fileIn);
-	        o = in.readObject();
+	        o = (GameController) in.readObject();
 	        in.close();
 	        fileIn.close();
 	    }
 		 
 		catch(IOException i)
         {
-            i.printStackTrace();
+            //i.printStackTrace();
             return null;
         } 
 		
