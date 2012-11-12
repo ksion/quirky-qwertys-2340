@@ -4,29 +4,23 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 //import view.TradeWindow.InventoryTableModel;
 
 import model.Planet;
 import model.Player;
+import model.SaveLoad;
 
 import controller.GameController;
 
@@ -37,6 +31,7 @@ import controller.GameController;
  */
 public class PlanetVisitWindow extends BackgroundPanel{
 	
+	private static final long serialVersionUID = 1L;
 	private GameController gc;
 	private JPanel menuPanel;
 	private JPanel planetContainerPanel;
@@ -46,9 +41,6 @@ public class PlanetVisitWindow extends BackgroundPanel{
 	private ShipyardWindow shipyardWin;
 	private TradeWindow tradeWin;
 	private Image backgroundImg;
-	private Image img;
-	private Player player;
-	private Planet planet;
 	private MapWindow mapWin;
 	private JLabel planetStatsName, planetStatsName2, planetStatsTechLevel;
 	
@@ -136,7 +128,7 @@ public class PlanetVisitWindow extends BackgroundPanel{
 			
 		});
 		
-		btnSaveGame = new JButton("Save and Exit");
+		btnSaveGame = new JButton("Save");
 		btnSaveGame.addActionListener(new SaveListener());
 		
 		
@@ -221,7 +213,6 @@ public TradeWindow getTradeWindow() {
  * @param p the player
  */
 public void setPlayer(Player p){
-	player = p;
 	
 }
 
@@ -234,20 +225,7 @@ private class SaveListener implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//TODO: move this to game controller
-		PrintWriter output = null;
-		try {
-			output = new PrintWriter(new FileWriter("src/model/Player.txt"));
-			output.write(player.toString());
-			output.write(player.getShip().toString());
-		} catch (IOException e1) {
-			
-			e1.printStackTrace();
-		}
-		finally {
-			output.close();
-		}
-		System.exit(0);
+		SaveLoad.save(gc);
 	}
 }
 
@@ -256,7 +234,6 @@ private class SaveListener implements ActionListener{
  * @param planet
  */
 public void setPlanet(Planet planet) {
-	this.planet = planet;
 	backgroundImg = planet.getLargePicName();
 	planetStatsName.setForeground(new Color(0x5d,0xdf,0xfb,255));
 	planetStatsName.setFont(Style.ARIAL_NORMAL);
