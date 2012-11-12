@@ -212,6 +212,7 @@ public class TradeWindow extends JPanel {
 		player = p;
 		lblCredits.setText("Credits Available: "+Integer.toString(getCredits()));
 		tableLeft.setModel(new InventoryTableModel(player.getCargo()));
+		repaint();
 		
 	}
 	
@@ -342,6 +343,7 @@ public class TradeWindow extends JPanel {
 					
 					InventoryTableModel soldModel = (InventoryTableModel)tableRight.getModel();
 					soldModel.sold(toBuy, qtyWant);
+					repaint();
 				}
 			} else {
 				//player selling an item
@@ -366,6 +368,7 @@ public class TradeWindow extends JPanel {
 						lblCredits.setText("Credits Available: "+Integer.toString(getCredits()));				
 						InventoryTableModel buyModel = (InventoryTableModel)tableRight.getModel();
 						buyModel.purchase(toSell, qtyWant);
+						repaint();
 					}
 				}
 			}
