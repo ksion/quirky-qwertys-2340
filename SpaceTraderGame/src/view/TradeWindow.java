@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -63,16 +64,22 @@ public class TradeWindow extends JPanel {
 		this.controller = controller;
 		
 		
+		this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		setLayout(new BorderLayout(0, 0));
 		
+	
+		setOpaque(false);
+		
 		//img = ImageIO.read(new File("src/view/Space.jpg"));
-		img = ImageIO.read(getClass().getResource("/view/starsBackground.jpeg"));
+		//img = ImageIO.read(getClass().getResource("/view/starsBackground.jpeg"));
 		
 		
 		JPanel tablePanel = new JPanel();
-		tablePanel.setOpaque(false);
+		tablePanel.setBackground(new Color(0x66,0x66,0x66,125));
+		tablePanel.setBorder(new LineBorder(new Color(0x5d,0xdf,0xfb,255), 2,true));
+		//tablePanel.setOpaque(false);
 		add(tablePanel, BorderLayout.CENTER);
-		tablePanel.setLayout(new MigLayout("", "[grow][][grow]", "[][][grow][][][grow]"));
+		tablePanel.setLayout(new MigLayout("", "[grow][][grow]", "[][][grow][][][grow][]"));
 		
 		JLabel lblMessage = new JLabel("Use the arrow buttons to buy/trade items from inventory.");
 		lblMessage.setForeground(Style.SPACEAGE_COLOR);
@@ -101,7 +108,9 @@ public class TradeWindow extends JPanel {
 		tableLeft.getSelectionModel().addListSelectionListener(new TableListener(tableLeft, btnTradeSell));
 		JScrollPane scrollPaneLeft = new JScrollPane(tableLeft);
 		scrollPaneLeft.setOpaque(false);
+		scrollPaneLeft.setBorder(null);
 		scrollPaneLeft.getViewport().setOpaque(false);
+		scrollPaneLeft.getViewport().setBorder(null);
 		tablePanel.add(scrollPaneLeft, "cell 0 2 1 4,grow");
 		
 		tableRight = new JTable();
@@ -119,6 +128,8 @@ public class TradeWindow extends JPanel {
 		tableRight.getSelectionModel().addListSelectionListener(new TableListener(tableRight,btnTradeBuy));
 		JScrollPane scrollPane = new JScrollPane(tableRight);
 		scrollPane.getViewport().setOpaque(false);
+		scrollPane.getViewport().setBorder(null);
+		scrollPane.setBorder(null);
 		scrollPane.setOpaque(false);
 		tablePanel.add(scrollPane, "cell 2 2 1 4,grow");
 		
@@ -139,12 +150,14 @@ public class TradeWindow extends JPanel {
 		JLabel lblCreditsAvailable = new JLabel("Credits Available: ");
 		lblCreditsAvailable.setForeground(Style.SPACEAGE_COLOR);
 		lblCreditsAvailable.setFont(Style.SPACEAGE_NORMAL);
-		buttonPanel.add(lblCreditsAvailable);
+		//buttonPanel.add(lblCreditsAvailable);
 		
 		lblCredits = new JLabel();
 		lblCredits.setForeground(Style.SPACEAGE_COLOR);
 		lblCredits.setFont(Style.SPACEAGE_NORMAL);
-		buttonPanel.add(lblCredits);
+		//buttonPanel.add(lblCredits);
+		tablePanel.add(lblCredits, "cell 0 6");
+		//tablePanel.add(lblCredits, "cell 1 6");
 		buttonPanel.add(Box.createHorizontalGlue());
 	
 		/*
@@ -153,6 +166,7 @@ public class TradeWindow extends JPanel {
 		buttonPanel.add(btnSaveAndQuit);
 		*/
 		
+		/*
 		
 		JButton btnDone = new JButton("Done");
 		btnDone.addActionListener(new ActionListener(){
@@ -166,18 +180,10 @@ public class TradeWindow extends JPanel {
 		});
 		btnDone.setToolTipText("Done Trading");
 		buttonPanel.add(btnDone);
+		*/
 	}
 	
-	/**
-	 * draws the background image on the GUI
-	 * @param g - the graphics object
-	 */
-	public void paintComponent(Graphics g){
-		super.paintComponent(g);
-		//System.out.println("Called here");
-		boolean ret = g.drawImage(img, 0, 0, null);
-		System.out.println(ret);
-	}
+	
 	/**
 	 * styles the table to make it transparent
 	 * @param table
@@ -189,6 +195,7 @@ public class TradeWindow extends JPanel {
 		((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setOpaque(false);
 		table.setShowGrid(false);
 		table.setBorder(tableBorder);
+		table.setSelectionForeground(Color.YELLOW);
 		
 	}
 	
@@ -223,7 +230,7 @@ public class TradeWindow extends JPanel {
 	 */
 	public void setPlayer(Player p){
 		player = p;
-		lblCredits.setText(Integer.toString(getCredits()));
+		lblCredits.setText("Credits Available: "+Integer.toString(getCredits()));
 		tableLeft.setModel(new InventoryTableModel(player.getCargo()));
 		
 	}
@@ -351,7 +358,7 @@ public class TradeWindow extends JPanel {
 				InventoryTableModel model = (InventoryTableModel)tableLeft.getModel();
 				if (qty > 0 && cost < getCredits() && model.purchase(toBuy, qtyWant)) {
 					player.setMoney(-cost * qtyWant);
-					lblCredits.setText(Integer.toString(getCredits()));
+					lblCredits.setText("Credits Available: "+Integer.toString(getCredits()));
 					
 					InventoryTableModel soldModel = (InventoryTableModel)tableRight.getModel();
 					soldModel.sold(toBuy, qtyWant);
@@ -370,15 +377,16 @@ public class TradeWindow extends JPanel {
 					nums[i] = new Integer(i);
 				}
 				
-				int qtyWant = (Integer) JOptionPane.showInputDialog(t, "How many to sell ?", 
+				Integer qtyWant = (Integer)JOptionPane.showInputDialog(t, "How many to sell ?", 
 						"Quantity Sell", JOptionPane.PLAIN_MESSAGE, null, nums, new Integer(0));
-				
-				InventoryTableModel model = (InventoryTableModel)tableLeft.getModel();
-				if (model.sold(toSell, qtyWant) == true){
-					player.setMoney(cost * qtyWant);
-					lblCredits.setText(Integer.toString(getCredits()));				
-					InventoryTableModel buyModel = (InventoryTableModel)tableRight.getModel();
-					buyModel.purchase(toSell, qtyWant);
+				if( qtyWant != null ) {
+					InventoryTableModel model = (InventoryTableModel)tableLeft.getModel();
+					if (model.sold(toSell, qtyWant) == true){
+						player.setMoney(cost * qtyWant);
+						lblCredits.setText("Credits Available: "+Integer.toString(getCredits()));				
+						InventoryTableModel buyModel = (InventoryTableModel)tableRight.getModel();
+						buyModel.purchase(toSell, qtyWant);
+					}
 				}
 			}
 		}

@@ -35,23 +35,26 @@ import controller.GameController;
  * @author Quirky Qwertys
  *
  */
-public class PlanetVisitWindow extends JPanel{
+public class PlanetVisitWindow extends BackgroundPanel{
 	
 	private GameController gc;
 	private JPanel menuPanel;
 	private JPanel planetContainerPanel;
-	private BackgroundPanel planetPanel;
+	private JPanel planetPanel;
 	private JButton btnMap, btnMarket, btnShipyard, btnSaveGame, btnLocalDock;
 	private CardLayout deck;
 	private ShipyardWindow shipyardWin;
 	private TradeWindow tradeWin;
-	private Image starsImg;
+	private Image backgroundImg;
+	private Image img;
 	private Player player;
 	private Planet planet;
 	private MapWindow mapWin;
 	private JLabel planetStatsName, planetStatsName2, planetStatsTechLevel;
 	
+	/** creates the window **/
 	public PlanetVisitWindow(GameController gc) throws IOException{
+		super((Image)null);
 		this.gc = gc;
 		
 		planetStatsName = new JLabel();
@@ -73,7 +76,7 @@ public class PlanetVisitWindow extends JPanel{
 
 		Color transBlue = new Color(0x5d,0xdf,0xfb,175);
 
-		menuPanel.setBackground( new Color( 0x66,0x66,0x66,150 ) );
+		menuPanel.setBackground( new Color( 0x66,0x66,0x66,175 ) );
 		menuPanel.setBorder(BorderFactory.createCompoundBorder(new LineBorder(new Color(0x5d,0xdf,0xfb,255), 2,true), BorderFactory.createEmptyBorder(10,10,10,10)));
 		//menuPanel.setBorder(BorderFactory.createCompoundBorder(new LineBorder(new Color(0,255,0,255), 2,true), BorderFactory.createEmptyBorder(10,10,10,10)));
 		
@@ -153,12 +156,11 @@ public class PlanetVisitWindow extends JPanel{
 		planetContainerPanel = new JPanel(deck);
 		planetContainerPanel.setOpaque(false);
 		add(planetContainerPanel,BorderLayout.CENTER);
-		Image img = ImageIO.read(getClass().getResource("/view/blueGreenPlanet.png"));
-		starsImg = ImageIO.read(getClass().getResource("/view/starsBackground.jpeg"));
-		planetPanel = new BackgroundPanel(img, BackgroundPanel.ACTUAL);
+		
+		planetPanel = new JPanel();
 		planetPanel.setOpaque(false);
 		planetContainerPanel.add(planetPanel, "bluegreen");
-		//deck.show(planetContainerPanel,"bluegreen");
+		
 		
 		planetContainerPanel.add(tradeWin,"trade");
 		planetContainerPanel.add(shipyardWin, "shipyard");
@@ -195,15 +197,7 @@ public class PlanetVisitWindow extends JPanel{
 
 
 
-	/**
-	 * paint method to paint the stars
-	 */
-	public void paintComponent(Graphics g){
-		super.paintComponent(g);
-		
-		g.drawImage(starsImg, 0, 0, null);
-		
-	}
+	
 
 /**
  * returns the instance of the Shipyard Window
@@ -263,6 +257,7 @@ private class SaveListener implements ActionListener{
  */
 public void setPlanet(Planet planet) {
 	this.planet = planet;
+	backgroundImg = planet.getLargePicName();
 	planetStatsName.setForeground(new Color(0x5d,0xdf,0xfb,255));
 	planetStatsName.setFont(Style.ARIAL_NORMAL);
 	planetStatsName2.setForeground(new Color(0x5d,0xdf,0xfb,255));
@@ -272,6 +267,7 @@ public void setPlanet(Planet planet) {
 	planetStatsTechLevel.setFont(Style.ARIAL_NORMAL);
 	planetStatsTechLevel.setForeground(new Color(0x5d,0xdf,0xfb,255));
 	planetStatsTechLevel.setText("Tech Level: "+ planet.getTechLevel());
+	setImage(backgroundImg);
 	
 	
 }

@@ -23,6 +23,7 @@ public class Planet {
 	/** Name of the Planet and the name of the corresponding image file. */
 	private String name;
 	private Image picName;
+	private Image largePicName;
 	
 	/** Dimensions of the images used to represent Planets. */
 	private final int HEIGHT = 451, WIDTH = 801, SIZE = 30;
@@ -51,6 +52,11 @@ public class Planet {
 			"/view/redMineralPlanet.png"};
 	// private Vendor[] availVend;
 	
+	/** List of images to represent the large planets in the GUI **/
+	
+	public static String[] largePlanetPics = {"/view/aquaplanet.jpg", 
+			"/view/transparentplanet.jpg","/view/marbleplanet.jpg","/view/graniteplanet.jpg"};
+	
 	/** List of letters that can be used to randomly generate a planet name. */
 	private String[] vowels = {"a","e","i","o","u","y"}, consonants = 
 		{"b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","z"};
@@ -65,11 +71,12 @@ public class Planet {
 	 * @param n the name of the Planet
 	 * @throws IOException 
 	 */
-	public Planet(Point p, SolarSystem s, String n) throws IOException{
+	public Planet(Point p, SolarSystem s, String n, String largePlanetName) throws IOException{
 		position = p;
 		system = s;
 		name = n;
 		picName = ImageIO.read(getClass().getResource(planetPics[rand.nextInt(5)]));
+		largePicName = ImageIO.read(getClass().getResource(largePlanetName));
 		
 		techLevel = s.getTechLevel();
 		tax = s.getTaxRate();
@@ -85,12 +92,13 @@ public class Planet {
 	 * @param n the name of the Planet
 	 * @throws IOException 
 	 */
-	public Planet(Point p, SolarSystem s) throws IOException{
+	public Planet(Point p, SolarSystem s, String largePlanetName) throws IOException{
 		position = p;
 		system = s;
 		makeName();
 		techLevel = s.getTechLevel();
 		picName = ImageIO.read(getClass().getResource(planetPics[rand.nextInt(5)]));
+		largePicName = ImageIO.read(getClass().getResource(largePlanetName));
 	}
 	
 	
@@ -188,6 +196,12 @@ public class Planet {
 		return SIZE;
 	}
 	
+	
+	
+	public Image getLargePicName() {
+		return largePicName;
+	}
+
 	/**
 	 * Creates a String with information about the Planet's name,
 	 * position, and tech level.

@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 public class Style {
 	public static final Font SPACEAGE_NORMAL = new Font("Space Age", 1, 14);
 	public static final Color SPACEAGE_COLOR = new Color(0, 255, 0);
-	public static final Font ARIAL_NORMAL = new Font("Arial", 1, 12);
+	public static final Font ARIAL_NORMAL = new Font("Arial", 1, 14);
 
 
 	public static JLabel createNormalLabel() {

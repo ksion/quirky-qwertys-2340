@@ -31,13 +31,13 @@ public class Universe {
 		ArrayList<Planet> planets3 = new ArrayList<Planet>();
 		ArrayList<Planet> planets4 = new ArrayList<Planet>();
 		
-		planets1.add(new Planet(new Point(100, 100), system1, "Hibiscus"));
-		planets1.add(new Planet(new Point(175, 225), system1, "Acacia"));
-		planets1.add(new Planet(new Point(600,250), system1, "Pengua"));
-		planets1.add(new Planet(new Point(398, 202), system1, "Abelia"));
-		planets2.add(new Planet(new Point(), system2, "Mustang"));
-		planets3.add(new Planet(new Point(), system3, "Seckel"));
-		planets4.add(new Planet(new Point(), system4, "Toussaint"));
+		planets1.add(new Planet(new Point(100, 100), system1, "Hibiscus", Planet.largePlanetPics[0]));
+		planets1.add(new Planet(new Point(175, 225), system1, "Acacia", Planet.largePlanetPics[1]));
+		planets1.add(new Planet(new Point(600,250), system1, "Pengua", Planet.largePlanetPics[2]));
+		planets1.add(new Planet(new Point(398, 202), system1, "Abelia", Planet.largePlanetPics[3]));
+		planets2.add(new Planet(new Point(), system2, "Mustang", Planet.largePlanetPics[1]));
+		planets3.add(new Planet(new Point(), system3, "Seckel", Planet.largePlanetPics[2]));
+		planets4.add(new Planet(new Point(), system4, "Toussaint", Planet.largePlanetPics[3]));
 		
 		system1.setPlanets(planets1);
 		system2.setPlanets(planets2);
