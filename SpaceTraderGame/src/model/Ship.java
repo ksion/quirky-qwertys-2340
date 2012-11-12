@@ -284,7 +284,7 @@ public class Ship {
 	public void attack(Ship pirateShip){
 		Random random = new Random();
 		int playerStrength = getHullStrength();
-		int damage = (int) (playerStrength * (random.nextFloat() * 0.41 + 0.10)); 
+		int damage = (int) (playerStrength * (random.nextFloat() * 0.31 + 0.10)); 
 		pirateShip.setDamageSustained(pirateShip.getDamageSustained() + damage);
 	}
 

@@ -299,18 +299,17 @@ public class ShipyardWindow extends JPanel {
 		
 		spinner.setModel(spinnerModel);
 		
+		JComponent editor = spinner.getEditor();
+		
+		// Change the size of the spinner's text field 
+		ftf = ((JSpinner.DefaultEditor)editor).getTextField();
+		ftf.setColumns(4);
+		
 		Shipyard yard = new Shipyard(ship);
 		ships = yard.getShips();
 		
 		shipTableModel.clear();
 		shipTableModel.addAll(Arrays.asList(ships));
-		update();
-		
-		
-		
-		
-		
+		update();	
 	}
-	
-		
 }

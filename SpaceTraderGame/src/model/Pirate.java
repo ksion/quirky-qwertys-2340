@@ -18,7 +18,7 @@ public class Pirate{
 	 * Instantiates a pirate with a Ship.
 	 */
 	public Pirate(){
-		pirateShip = new Ship(random.nextInt(126) + 25);
+		pirateShip = new Ship(random.nextInt(75) + 25);
 	}
 	
 	/**
@@ -28,7 +28,7 @@ public class Pirate{
 	 */
 	public void attack(Ship playerShip){
 		int pirateStrength = pirateShip.getHullStrength();
-		int damage = (int) (pirateStrength * (random.nextFloat() * 0.41 + 0.10)); 
+		int damage = (int) (pirateStrength * (random.nextFloat() * 0.31 + 0.10)); 
 		playerShip.setDamageSustained(playerShip.getDamageSustained() + damage);
 	}
 	
