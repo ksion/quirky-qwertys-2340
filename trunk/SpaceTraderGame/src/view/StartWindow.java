@@ -40,9 +40,13 @@ public class StartWindow extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			try{
 				loadGame = (GameController) SaveLoad.load();
-				loadGame.showMap();
+				GameWindow gw = new GameWindow(loadGame);
+				gw.launch();
+
+				
 			}
 			catch(Exception a){
+				a.printStackTrace();
 				JOptionPane.showMessageDialog(null, "We couldn't find a previous game!", 
 	                      "Woops!", JOptionPane.ERROR_MESSAGE);
 			}
