@@ -1,7 +1,5 @@
 package controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -11,18 +9,18 @@ import model.Player;
 import model.SolarSystem;
 import model.Universe;
 import view.GameWindow;
-import view.MapWindow;
-import view.PlanetWindow;
-import view.PlayerWindow;
-import view.TradeWindow;
 
 /**
  * Controls the game flow
  * @author Quirky Qwertys
  * @version 1.0 
  */
-public class GameController {
+public class GameController implements java.io.Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Player newPlayer;
 	private Planet currentPlanet;
 	private Universe universe;
