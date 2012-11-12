@@ -157,7 +157,9 @@ public class MapWindow extends JPanel {
 				if(planet.inRange(point)){
 					int choice = JOptionPane.showConfirmDialog(null, "Would you like to travel to this planet?", "Travel", JOptionPane.YES_NO_OPTION);
 					if(choice == JOptionPane.YES_OPTION){
-						if( gc.travelToPlanet( planet ) ) {
+						if( gc.travelToPlanet( planet )) {
+							new EncounterPanel(player);
+							
 							fuelLevel.setText("Fuel level: " + player.getShip().getFuelAmount());
 							shipLocation.setText("Location: x = " + player.getShip().getLocation().x + " y = " + player.getShip().getLocation().y);
 							repaint();
