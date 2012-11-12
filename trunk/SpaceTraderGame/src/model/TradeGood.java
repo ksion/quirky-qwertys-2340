@@ -73,6 +73,15 @@ public enum TradeGood {
 		return mtlu;
 	}
 	
+	/**
+	 * Retrieves the base price of an item.
+	 * 
+	 * @return the base price
+	 */
+	public int getBasePrice(){
+		return bP;
+	}
+	
 	public String toString(){
 		String goodStr = "Trade Good: ";
 		goodStr += name + ": " + cost + " Mtlu: " + mtlu;

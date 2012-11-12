@@ -160,7 +160,7 @@ public class MapWindow extends JPanel {
 					if(choice == JOptionPane.YES_OPTION){
 						if( gc.travelToPlanet( planet )) {
 							//new EncounterPanel(player);
-							new RandomEvent(player);
+							new RandomEvent(gc);
 							fuelLevel.setText("Fuel level: " + player.getShip().getFuelAmount());
 							shipLocation.setText("Location: x = " + player.getShip().getLocation().x + " y = " + player.getShip().getLocation().y);
 							repaint();
