@@ -10,10 +10,11 @@ import javax.swing.JLabel;
  * @author Quirky Qwertys
  *
  */
-public class Style {
+public class Style implements java.io.Serializable{
 	public static final Font SPACEAGE_NORMAL = new Font("Space Age", 1, 14);
 	public static final Color SPACEAGE_COLOR = new Color(0, 255, 0);
 	public static final Font ARIAL_NORMAL = new Font("Arial", 1, 14);
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * adds spaceage styling to a label

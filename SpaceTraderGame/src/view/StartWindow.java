@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import model.SaveLoad;
 import controller.GameController;
 
-public class StartWindow extends JPanel {
+public class StartWindow extends JPanel implements java.io.Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	private final JButton btnNewGame = new JButton("New Game");

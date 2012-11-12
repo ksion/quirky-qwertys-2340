@@ -37,7 +37,7 @@ import controller.GameController;
  * @author Quirky Qwertys
  * @version 1.0 10.22.12
  */
-public class MapWindow extends JPanel {
+public class MapWindow extends JPanel implements java.io.Serializable{
 		
 	private static final long serialVersionUID = 1L;
 	private GameController gc;

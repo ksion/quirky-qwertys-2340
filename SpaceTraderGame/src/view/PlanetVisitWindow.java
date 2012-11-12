@@ -29,7 +29,7 @@ import controller.GameController;
  * @author Quirky Qwertys
  *
  */
-public class PlanetVisitWindow extends BackgroundPanel{
+public class PlanetVisitWindow extends BackgroundPanel implements java.io.Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	private GameController gc;

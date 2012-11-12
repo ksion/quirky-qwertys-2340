@@ -31,13 +31,14 @@ import controller.GameController;
  * @author Quirky Qwertys
  * @version 1.0 10.29.12
  */
-public class PlanetWindow extends JPanel {
+public class PlanetWindow extends JPanel implements java.io.Serializable{
 	private GameController controller;
 	private Planet planet;
 	private Image img;
 	private Color c = new Color(0, 255, 0);
 	private Font f = new Font("Space Age", 1, 12);
 	private JLabel planetNameLabel;
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Create the application.

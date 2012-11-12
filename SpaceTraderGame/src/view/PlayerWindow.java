@@ -31,7 +31,7 @@ import net.miginfocom.swing.MigLayout;
  * @author Quirky Qwertys
  * @version 1.0
  */
-public class PlayerWindow extends JPanel {
+public class PlayerWindow extends JPanel implements java.io.Serializable{
 	private Image img;
 	private final long serialVersionUID = 1L;
 	private JTextField textName;
