@@ -55,6 +55,7 @@ public class ShipyardWindow extends JPanel {
 	private Ship[] ships;
 	private JLabel shipLbl;
 	private JLabel lblYourShip;
+	private JLabel lblDamage;
 	private ShipTableModel shipTableModel;
 	private Border tableBorder;
 	
@@ -63,6 +64,11 @@ public class ShipyardWindow extends JPanel {
 	
 	/** Price of fuel per ton. */
 	private final int PRICE = 100;
+	private JButton btnRepair;
+	private JLabel lblNewLabel;
+	private JLabel space;
+	private JLabel label;
+	private JLabel lblRepairCost;
 
 	/**
 	 * Create the panel.
@@ -78,9 +84,6 @@ public class ShipyardWindow extends JPanel {
 		lblWelcomeToThe.setText("You may trade your ship for a new one or buy fuel here.");
 		
 		lblYourShip = Style.createNormalLabel();
-		
-		//JLabel lblOtherShips = new JLabel("Ships for Sell	              Cost");
-		//panel.add(lblOtherShips, "cell 2 1");
 		
 		shipLbl = Style.createNormalLabel();
 		
@@ -102,20 +105,12 @@ public class ShipyardWindow extends JPanel {
 		JLabel lblFuelForSell = Style.createNormalLabel(); 
 		lblFuelForSell.setText("Qty. Fuel to Buy");
 		
+		lblDamage = Style.createNormalLabel();
+		
 		currFuelLbl = Style.createNormalLabel();
 		currFuelLbl.setVerticalAlignment(SwingConstants.TOP);
 		
-		
-		spinner = new JSpinner();
-		JComponent editor = spinner.getEditor();
-		
-		// Change the size of the spinner's text field 
-		ftf = ((JSpinner.DefaultEditor)editor).getTextField();
-		ftf.setColumns(4);
-		
-		
-		btnBuy = new JButton(" Buy ");
-		btnBuy.addActionListener(new BuyListener());
+		lblRepairCost = Style.createNormalLabel();
 		
 		lblCreditsAvailable = Style.createNormalLabel();
 		JLabel lblCostCrton = Style.createNormalLabel(); 
@@ -126,7 +121,7 @@ public class ShipyardWindow extends JPanel {
 		panel.setBackground(new Color(0x66,0x66,0x66,125));
 		panel.setBorder(new LineBorder(new Color(0x5d,0xdf,0xfb,255), 2,true));
 		add(panel, BorderLayout.CENTER);
-		panel.setLayout(new MigLayout("", "[grow][][grow]", "[][][][grow][][][][][]"));
+		panel.setLayout(new MigLayout("", "[grow][][grow]", "[][][][][][grow][][][][][][grow][]"));
 		
 		panel.add(lblWelcomeToThe, "cell 0 0 3 1");
 		panel.add(lblYourShip, "cell 0 1");
@@ -136,11 +131,28 @@ public class ShipyardWindow extends JPanel {
 		
 		panel.add(lblCurrentFuelAmount, "cell 0 6 2 1");
 		panel.add(lblFuelForSell, "cell 2 6");
+		panel.add(lblDamage, "cell 0 5");
 		panel.add(currFuelLbl, "cell 0 7");
-		panel.add(spinner, "cell 2 7 2 1");
+		panel.add(lblRepairCost, "cell 2 5");
+		
+		btnRepair = new JButton("Repair");
+		panel.add(btnRepair, "cell 1 5");
+		btnRepair.addActionListener(new RepairListener());
+		
+		space = new JLabel("    ");
+		panel.add(space, "cell 0 6 2 1");
+		
+		label = new JLabel("    ");
+		panel.add(label, "cell 0 7");
+		
+		btnBuy = new JButton("  Buy  ");
+		btnBuy.addActionListener(new BuyListener());
 		panel.add(btnBuy, "cell 1 7");
 		panel.add(lblCreditsAvailable, "cell 0 8");
 		panel.add(lblCostCrton, "cell 2 8");
+		
+		spinner = new JSpinner();
+		panel.add(spinner, "cell 2 7");
 }
 	
 	/**
@@ -154,16 +166,22 @@ public class ShipyardWindow extends JPanel {
 		// If the player has no money disable all buttons
 		if (player.getMoney() == 0){
 			btnTrade.setEnabled(false);
+			btnRepair.setEnabled(false);
+			btnBuy.setEnabled(false);
 		}
 		
 		else{
 			btnBuy.setEnabled(true);
 			btnTrade.setEnabled(true);
+			btnRepair.setEnabled(true);
 		}
 		
 		// If the tank of player's ship is full disable "Buy" button
 		if (ship.getMaxFuel() == 0 || player.getMoney() == 0)
 			btnBuy.setEnabled(false);
+		
+		else if (ship.getDamageSustained() == 0)
+			btnRepair.setEnabled(false);
 		
 		else
 			btnBuy.setEnabled(true);
@@ -172,6 +190,27 @@ public class ShipyardWindow extends JPanel {
 		
 		currFuelLbl.setText(Integer.toString(player.getShip().getFuelAmount()) + " tons / " + 
                 Integer.toString(player.getShip().getFuelCapacity()) + " tons");
+	}
+	
+	/**
+	 * Repairs all of the Ship's damage.
+	 */
+	private class RepairListener implements ActionListener{
+		
+		/**
+		 * When "Repair" button is clicked, the Ship's sustained 
+		 * damage goes back down to 0.
+		 */
+		public void actionPerformed(ActionEvent event){
+			if (ship.getDamageSustained() <= player.getMoney()){
+				player.setMoney(-1 * ship.getDamageSustained());
+				ship.setDamageSustained(0);
+				lblDamage.setText("Sustained Damage: " + Integer.toString(ship.getDamageSustained()));
+				lblCreditsAvailable.setText("Credits Available: " + 
+                        Integer.toString(player.getMoney()));
+			}
+			update();
+		}
 	}
 	
 	/**
@@ -273,9 +312,10 @@ public class ShipyardWindow extends JPanel {
 		lblCreditsAvailable.setText("Credits Available: " + p.getMoney());
 		lblYourShip.setText("Your Ship: " + ship.getName());
 		shipLbl.setText("Cost of your ship: " + ship.getCost());
+		lblDamage.setText("Sustained Damage: " + Integer.toString(ship.getDamageSustained()));
 		currFuelLbl.setText(Integer.toString(ship.getFuelAmount()) + " tons / " + 
                 Integer.toString(ship.getFuelCapacity()) + " tons");
-		
+		lblRepairCost.setText("1 cr. / Damage point");
 		
 		maxFuel = player.getShip().getMaxFuel();
 		
@@ -284,6 +324,12 @@ public class ShipyardWindow extends JPanel {
 		for (int i = 0; i < maxFuel; i++){
 			fuelQuantity[i] = i + 1;
 		}
+		
+		if (ship.getDamageSustained() > 0)
+			btnRepair.setEnabled(true);
+		
+		else if (ship.getDamageSustained() == 0)
+			btnRepair.setEnabled(false);
 		
 		SpinnerListModel spinnerModel;
 		
