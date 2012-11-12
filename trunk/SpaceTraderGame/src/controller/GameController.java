@@ -21,16 +21,13 @@ public class GameController implements java.io.Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Player newPlayer;
-	private Planet currentPlanet;
+	public Player newPlayer;
+	public Planet currentPlanet;
 	private Universe universe;
 	private ArrayList<SolarSystem> systems;
 	private SolarSystem solarSystem;
+	public GameWindow gameWindow;
 	
-	
-	
-	
-	private GameWindow gameWindow;
 	
 	
 	/**
@@ -40,21 +37,19 @@ public class GameController implements java.io.Serializable{
 	
 	public static void main(String[] args){
 		//launch the player creation window;
-				
 		GameController gc = new GameController();
-		gc.start();		
 	}
 	
-	
+
+
 	/**
 	 * Starts a new Space Traders game.
 	 */
-	public void start(){
+	public GameController(){
 		try{
-			
 			gameWindow = new GameWindow(this);
 			gameWindow.launch();
-			newPlayer();
+			gameWindow.showStartWindow(this);
 		}
 		catch (IOException e){
 			e.printStackTrace();
@@ -63,12 +58,12 @@ public class GameController implements java.io.Serializable{
 	}
 	
 	
+	
 	/**
 	 * creates the player window and the map window.
 	 */
 	public void newPlayer(){
-			
-		System.out.println("Create Player");
+		//System.out.println("Create Player");
 		gameWindow.showNewPlayerWin();
 	}	
 	
@@ -79,6 +74,8 @@ public class GameController implements java.io.Serializable{
 		gameWindow.showMapWin(newPlayer, solarSystem);
 			
 	}
+	
+	
 	
 	/**
 	 * gets the player instance
