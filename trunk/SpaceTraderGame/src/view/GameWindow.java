@@ -54,7 +54,7 @@ public class GameWindow extends JPanel {
 			public void run(){
 				try{
 					JFrame frame = new JFrame();
-					frame.setPreferredSize(new Dimension(800, 600));
+					frame.setPreferredSize(new Dimension(1024, 768));
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					frame.setFocusableWindowState(true);
 					frame.setLocationByPlatform(true);

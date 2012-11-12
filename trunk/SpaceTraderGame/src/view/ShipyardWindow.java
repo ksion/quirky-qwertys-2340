@@ -1,11 +1,13 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
@@ -16,6 +18,9 @@ import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.SpinnerListModel;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import controller.GameController;
 
@@ -51,6 +56,7 @@ public class ShipyardWindow extends JPanel {
 	private JLabel shipLbl;
 	private JLabel lblYourShip;
 	private ShipTableModel shipTableModel;
+	private Border tableBorder;
 	
 	/** Maximum amount of fuel a player can buy. */
 	private int maxFuel;
@@ -63,43 +69,41 @@ public class ShipyardWindow extends JPanel {
 	 */
 	public ShipyardWindow(GameController controller) {
 		this.controller = controller;
+		this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		
 		setLayout(new BorderLayout(0, 0));
+		setOpaque(false);
 		
-		JPanel panel = new JPanel();
-		add(panel, BorderLayout.CENTER);
-		panel.setLayout(new MigLayout("", "[grow][][grow]", "[][][grow][][][grow][]"));
+		JLabel lblWelcomeToThe =Style.createNormalLabel();
+		lblWelcomeToThe.setText("You may trade your ship for a new one or buy fuel here.");
 		
-		JLabel lblWelcomeToThe = new JLabel("You may trade your ship for a new one or buy fuel here.");
-		panel.add(lblWelcomeToThe, "cell 0 0 3 1");
-		
-		lblYourShip = new JLabel();
-		panel.add(lblYourShip, "cell 0 1");
+		lblYourShip = Style.createNormalLabel();
 		
 		//JLabel lblOtherShips = new JLabel("Ships for Sell	              Cost");
 		//panel.add(lblOtherShips, "cell 2 1");
 		
-		shipLbl = new JLabel("");
-		panel.add(shipLbl, "cell 0 2");
+		shipLbl = Style.createNormalLabel();
 		
 		btnTrade = new JButton("Trade");
-		panel.add(btnTrade, "cell 1 2");
 		btnTrade.addActionListener(new TradeListener());
 		
-		
+		tableBorder = new LineBorder(new Color(0,255,0,255),1);
 		shipTableModel= new ShipTableModel();
 		table = new JTable(shipTableModel);
-		panel.add(new JScrollPane(table), "cell 2 2,grow");
+		table.setOpaque(false);
+		styleTable(table);
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.getViewport().setOpaque(false);
+		scrollPane.setOpaque(false);
 		
-		JLabel lblCurrentFuelAmount = new JLabel("Current Fuel Amount");
-		panel.add(lblCurrentFuelAmount, "cell 0 4 2 1");
+		JLabel lblCurrentFuelAmount = Style.createNormalLabel(); 
+		lblCurrentFuelAmount.setText("Current Fuel Amount");
 		
-		JLabel lblFuelForSell = new JLabel("Qty. Fuel to Buy");
-		panel.add(lblFuelForSell, "cell 2 4");
+		JLabel lblFuelForSell = Style.createNormalLabel(); 
+		lblFuelForSell.setText("Qty. Fuel to Buy");
 		
-		currFuelLbl = new JLabel();
+		currFuelLbl = Style.createNormalLabel();
 		currFuelLbl.setVerticalAlignment(SwingConstants.TOP);
-		panel.add(currFuelLbl, "cell 0 5");
 		
 		
 		spinner = new JSpinner();
@@ -109,33 +113,35 @@ public class ShipyardWindow extends JPanel {
 		ftf = ((JSpinner.DefaultEditor)editor).getTextField();
 		ftf.setColumns(4);
 		
-		panel.add(spinner, "cell 2 5 2 1");
 		
 		btnBuy = new JButton(" Buy ");
-		panel.add(btnBuy, "cell 1 5");
 		btnBuy.addActionListener(new BuyListener());
 		
-		lblCreditsAvailable = new JLabel();
-		panel.add(lblCreditsAvailable, "cell 0 6");
-		
-		JLabel lblCostCrton = new JLabel("Fuel Cost: 100 cr./ton of fuel");
-		panel.add(lblCostCrton, "cell 2 6");
-		
-		JButton btnDone = new JButton("Done");
-		btnDone.addActionListener(new ActionListener(){
+		lblCreditsAvailable = Style.createNormalLabel();
+		JLabel lblCostCrton = Style.createNormalLabel(); 
+		lblCostCrton.setText("Fuel Cost: 100 cr./ton");
+	
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ShipyardWindow.this.controller.showPlanet();
-				
-			}
-			
-		});
-		add(btnDone, BorderLayout.SOUTH);
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(0x66,0x66,0x66,125));
+		panel.setBorder(new LineBorder(new Color(0x5d,0xdf,0xfb,255), 2,true));
+		add(panel, BorderLayout.CENTER);
+		panel.setLayout(new MigLayout("", "[grow][][grow]", "[][][][grow][][][][][]"));
 		
+		panel.add(lblWelcomeToThe, "cell 0 0 3 1");
+		panel.add(lblYourShip, "cell 0 1");
+		panel.add(shipLbl, "cell 0 2");
+		panel.add(scrollPane, "cell 0 3 3 1,grow");
+		panel.add(btnTrade, "cell 2 4, align right");
 		
-		//update();
-	}
+		panel.add(lblCurrentFuelAmount, "cell 0 6 2 1");
+		panel.add(lblFuelForSell, "cell 2 6");
+		panel.add(currFuelLbl, "cell 0 7");
+		panel.add(spinner, "cell 2 7 2 1");
+		panel.add(btnBuy, "cell 1 7");
+		panel.add(lblCreditsAvailable, "cell 0 8");
+		panel.add(lblCostCrton, "cell 2 8");
+}
 	
 	/**
 	 * Updates the buttons, which can be enabled or disabled 
@@ -238,6 +244,25 @@ public class ShipyardWindow extends JPanel {
 				default: return null;
 			}
 		}
+		
+	}
+	
+	/**
+	 * styles the table to make it transparent
+	 * @param table
+	 */
+	public void styleTable(JTable table){
+		
+		table.setOpaque(false);
+		((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setForeground(new Color(0,255,0));
+		((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setOpaque(false);
+		table.setShowGrid(false);
+		table.setBorder(tableBorder);
+		table.setSelectionForeground(Color.YELLOW);
+		table.setSelectionBackground(Color.yellow);
+		table.setColumnSelectionAllowed(false);
+		table.setRowSelectionAllowed(true);
+	
 		
 	}
 	
