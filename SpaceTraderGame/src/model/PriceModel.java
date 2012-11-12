@@ -1,5 +1,5 @@
 package model;
-public class PriceModel {
+public class PriceModel implements java.io.Serializable{
 	
 	private Planet planet;
 	

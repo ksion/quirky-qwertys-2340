@@ -10,7 +10,7 @@ import java.awt.Point;
  * @author Quirky Qwertys
  * @version 1.0 11.05.12
  */
-public class Shipyard{
+public class Shipyard implements java.io.Serializable{
 	
 	/** List of all the ships in the Shipyard. */
 	private Ship[] ships = new Ship[5];

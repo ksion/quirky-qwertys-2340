@@ -1,5 +1,5 @@
 package model;
 
-public enum TradeState {
+public enum TradeState implements java.io.Serializable{
 	BUY, SELL, TRADE
 }

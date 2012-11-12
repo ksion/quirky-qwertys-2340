@@ -9,7 +9,7 @@ import java.util.Random;
  * @author Quirky Qwertys
  *
  */
-public class Pirate{
+public class Pirate implements java.io.Serializable{
 	
 	private Ship pirateShip;
 	private Random random = new Random();

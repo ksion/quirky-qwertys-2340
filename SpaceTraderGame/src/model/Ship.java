@@ -21,7 +21,7 @@ import java.util.Random;
  * @author Quirky Qwertys
  * @version 1.0 10.07.12
  */
-public class Ship {
+public class Ship implements java.io.Serializable{
     // /** Array used to store all of the Player's TradeGoods.*/
     protected TradeGood[] cargoHold = new TradeGood[20];
 	

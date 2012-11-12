@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @version 1.0 10.22.12
  *
  */
-public class SolarSystem {
+public class SolarSystem implements java.io.Serializable{
 	
 	/** Location of a SolarSystem in the Universe. */
 	private Point location;

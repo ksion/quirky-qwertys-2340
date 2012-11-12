@@ -12,7 +12,7 @@ import java.awt.Point;
  * @version 1.0 10.07.12
  *
  */
-public class Player {
+public class Player implements java.io.Serializable{
 	
 	/** Name of the Player. */
 	private String name;
