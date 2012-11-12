@@ -71,6 +71,15 @@ public class Inventory {
 	}
 	
 	/**
+	 * Gets the capacity of the inventory.
+	 * 
+	 * @return the max capacity
+	 */
+	public int getMaxItems(){
+		return maxItems;
+	}
+	
+	/**
 	 * Stores a TradeGood in the Ship, if there is space
 	 * available.
 	 * 

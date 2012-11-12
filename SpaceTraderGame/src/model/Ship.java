@@ -288,7 +288,14 @@ public class Ship {
 		pirateShip.setDamageSustained(pirateShip.getDamageSustained() + damage);
 	}
 
-
+	/**
+	 * Sets the inventory of a Player.
+	 *
+	 * @param i the inventory
+	 */
+	public void setCargo(Inventory i){
+		cargo = i;
+	}
 
 	/**
 	 * Has information about the Ship's main characteristics.
