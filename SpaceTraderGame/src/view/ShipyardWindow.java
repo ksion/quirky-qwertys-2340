@@ -194,6 +194,7 @@ public class ShipyardWindow extends JPanel {
 		
 		currFuelLbl.setText(Integer.toString(player.getShip().getFuelAmount()) + " tons / " + 
                 Integer.toString(player.getShip().getFuelCapacity()) + " tons");
+		repaint();
 	}
 	
 	/**
