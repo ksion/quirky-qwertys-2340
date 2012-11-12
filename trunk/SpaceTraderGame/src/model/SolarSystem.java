@@ -14,6 +14,11 @@ import java.util.ArrayList;
  */
 public class SolarSystem implements java.io.Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** Location of a SolarSystem in the Universe. */
 	private Point location;
 	

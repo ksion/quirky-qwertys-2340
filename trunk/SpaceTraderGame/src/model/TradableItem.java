@@ -8,6 +8,10 @@ package model;
  */
 
 public class TradableItem implements java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private TradeGood type;
 	private int qty;
 	private int price;

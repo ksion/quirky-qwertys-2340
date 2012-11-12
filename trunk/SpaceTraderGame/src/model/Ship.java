@@ -22,7 +22,12 @@ import java.util.Random;
  * @version 1.0 10.07.12
  */
 public class Ship implements java.io.Serializable{
-    // /** Array used to store all of the Player's TradeGoods.*/
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	// /** Array used to store all of the Player's TradeGoods.*/
     protected TradeGood[] cargoHold = new TradeGood[20];
 	
     protected Inventory cargo;

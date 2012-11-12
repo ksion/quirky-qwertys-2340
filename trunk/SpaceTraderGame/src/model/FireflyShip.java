@@ -12,6 +12,11 @@ import java.awt.Point;
  */
 public class FireflyShip extends Ship implements java.io.Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** Number of cargo holds available in the Ship. */
 	private static final int CARGOBAY = 20;
 	

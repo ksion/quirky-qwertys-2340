@@ -12,6 +12,7 @@ public enum TradeGood implements java.io.Serializable{
 	MEDICINE(4, 1, 6, 550, 25, 5, 600,"Medicine"),
 	NARCOTICS(5, 0, 5, 3500, 125, 150, 2000, "Narcotics"),
 	ROBOTS(6, 4, 7, 5000, 150, 100, 3500, "Robots");
+	private static final long serialVersionUID = 1L;
 	
 	private int mtlp;
 	private int mtlu;

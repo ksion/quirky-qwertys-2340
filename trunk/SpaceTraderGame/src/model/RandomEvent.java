@@ -14,6 +14,10 @@ import controller.GameController;
  */
 public class RandomEvent implements java.io.Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Random random = new Random();
 	private Player player;
 	

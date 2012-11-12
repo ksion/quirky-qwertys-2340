@@ -18,6 +18,11 @@ import javax.imageio.ImageIO;
  */
 public class Planet implements java.io.Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	Random rand = new Random();
 	
 	/** Name of the Planet and the name of the corresponding image file. */

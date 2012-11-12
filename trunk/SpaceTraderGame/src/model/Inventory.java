@@ -10,6 +10,10 @@ import java.util.Random;
  *
  */
 public class Inventory implements java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ArrayList<TradableItem> goods;
 	private int maxItems;
 	
