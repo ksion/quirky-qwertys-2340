@@ -176,12 +176,16 @@ public class ShipyardWindow extends JPanel {
 			btnRepair.setEnabled(true);
 		}
 		
+		if (ship.getDamageSustained() > 0)
+			btnRepair.setEnabled(true);
+		
+		else if (ship.getDamageSustained() == 0)
+			btnRepair.setEnabled(false);
+		
 		// If the tank of player's ship is full disable "Buy" button
 		if (ship.getMaxFuel() == 0 || player.getMoney() == 0)
 			btnBuy.setEnabled(false);
 		
-		else if (ship.getDamageSustained() == 0)
-			btnRepair.setEnabled(false);
 		
 		else
 			btnBuy.setEnabled(true);
@@ -324,12 +328,6 @@ public class ShipyardWindow extends JPanel {
 		for (int i = 0; i < maxFuel; i++){
 			fuelQuantity[i] = i + 1;
 		}
-		
-		if (ship.getDamageSustained() > 0)
-			btnRepair.setEnabled(true);
-		
-		else if (ship.getDamageSustained() == 0)
-			btnRepair.setEnabled(false);
 		
 		SpinnerListModel spinnerModel;
 		

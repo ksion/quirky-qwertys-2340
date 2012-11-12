@@ -58,7 +58,7 @@ public class EncounterPanel extends JFrame {
 		JLabel label = new JLabel("");
 		panel.add(label, "cell 0 3 3 1");
 		
-		yourDamagePoints = new JLabel("0");
+		yourDamagePoints = new JLabel(Integer.toString(player.getShip().getDamageSustained()));
 		panel.add(yourDamagePoints, "cell 1 5");
 		
 		JLabel yourDamage = new JLabel("Your ship's damage:");
