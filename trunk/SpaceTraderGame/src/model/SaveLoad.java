@@ -12,7 +12,7 @@ public class SaveLoad {
 	public static void save(Object o){
 		try
 		{
-			File f = new File("src/controller/game.ser");
+			File f = new File("game.ser");
 	         FileOutputStream fileOut = new FileOutputStream(f);
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	         out.writeObject(o);
@@ -37,6 +37,7 @@ public class SaveLoad {
 	        o = (GameController) in.readObject();
 	        in.close();
 	        fileIn.close();
+	        System.out.println("loaded game: " + fileIn.toString());
 	    }
 		 
 		catch(IOException i)
