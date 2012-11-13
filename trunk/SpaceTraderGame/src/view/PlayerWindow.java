@@ -50,8 +50,8 @@ public class PlayerWindow extends JPanel implements java.io.Serializable{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
-					Image spaceIcon = ImageIO.read(new File("src/view/shipIcon.png"));//needed for MACs and Windows
+					Image spaceIcon =ImageIO.read(getClass().getResource("/view/shipIcon.png"));
+					//Image spaceIcon = ImageIO.read(new File("src/view/shipIcon.png"));//needed for MACs and Windows
 					//PlayerWindow player = new PlayerWindow();
 					JFrame frame = new JFrame("Create a New Space Trader Character");
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -84,8 +84,8 @@ public class PlayerWindow extends JPanel implements java.io.Serializable{
 		lblHeader.setForeground(Style.SPACEAGE_COLOR);
 		lblHeader.setFont(Style.SPACEAGE_NORMAL);
 		add(lblHeader, "cell 1 0 14 1");
-		
-		img = ImageIO.read(new File("src/view/Space.jpg"));//needed for MACs and Windows
+		ImageIO.read(getClass().getResource("/view/Space.jpg"));
+		img = ImageIO.read(getClass().getResource("/view/Space.jpg"));//needed for MACs and Windows
 		
 		JLabel lblNameLabel = new JLabel("Name");
 		add(lblNameLabel, "cell 1 1,alignx trailing");

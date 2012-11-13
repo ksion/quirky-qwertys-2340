@@ -42,6 +42,7 @@ public class MapWindow extends JPanel implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	private GameController gc;
 	private Image background;
+	private Image shipIcon;
 	protected JLabel planetName;
 	protected JLabel fuelLevel, skillPilot, skillTrader, skillEngineer, skillFighter, shipLocation;
 	protected Player player;
@@ -59,6 +60,7 @@ public class MapWindow extends JPanel implements java.io.Serializable{
 	public MapWindow(GameController gc) throws IOException{
 		this.gc = gc;
 		background =ImageIO.read(getClass().getResource("/view/starsBackground.jpeg"));
+		shipIcon = ImageIO.read(getClass().getResource("/view/shipIcon.png"));
 		setLayout(new BorderLayout());
 		addMouseListener(new MouseOver());
 		addMouseMotionListener(new MouseMove());
@@ -218,12 +220,6 @@ public class MapWindow extends JPanel implements java.io.Serializable{
 		at.rotate(degree);
 		at.translate(p.x, p.y);
 		
-		try {
-			shipIcon = ImageIO.read(new File("src/view/shipIcon.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		BufferedImage bShipIcon = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
 		g2d = bShipIcon.createGraphics();
 		g2d.drawImage(shipIcon, at, null);
