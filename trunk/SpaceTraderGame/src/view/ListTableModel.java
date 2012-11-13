@@ -250,8 +250,6 @@ public abstract class ListTableModel<T> implements TableModel,List<T> {
 		return false;
 	}
 
-	
-
 	@Override
 	public void setValueAt(Object arg0, int arg1, int arg2) {
 		
