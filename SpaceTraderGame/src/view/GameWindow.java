@@ -153,8 +153,9 @@ public class GameWindow extends JPanel {
 	
 	/**
 	 * shows the new game window
+	 * @throws IOException 
 	 */
-	public void showStartWindow(GameController gc) {
+	public void showStartWindow(GameController gc) throws IOException {
 		startWin = new StartWindow(gc);
 		deck.show(this, "StartWindow");
 	}
