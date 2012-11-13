@@ -331,13 +331,14 @@ public class TradeWindow extends JPanel implements java.io.Serializable{
 				TradableItem toBuy = getOtherInventory().getGoods().get(tableRight.getSelectedRow());
 				int cost = toBuy.getPrice();
 				int qty = toBuy.getQty();
-				/**
-				 * added dialogue box ! - Keanna
-				 */
+			
 				Object[] nums = new Object[qty + 1];
 				for (int i = 0; i < qty + 1; i++) {
 					nums[i] = new Integer(i);
 				}
+				
+				//need to find a way to set the new price you bought it at in the left
+				//table...the price stays the same for some reason... --> Keanna
 				
 				int qtyWant = (Integer) JOptionPane.showInputDialog(t, "How many to buy ?", 
 						"Quantity Buy", JOptionPane.PLAIN_MESSAGE, null, nums, new Integer(0));
