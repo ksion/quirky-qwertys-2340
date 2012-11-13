@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import model.Inventory;
 import model.Planet;
 import model.Player;
+import model.SaveLoad;
 import model.SolarSystem;
 import model.Universe;
 import view.GameWindow;
@@ -15,7 +16,7 @@ import view.GameWindow;
  * @author Quirky Qwertys
  * @version 1.0 
  */
-public class GameController implements java.io.Serializable{
+public class GameController{
 	
 	/**
 	 * 
@@ -25,8 +26,9 @@ public class GameController implements java.io.Serializable{
 	public Planet currentPlanet;
 	private Universe universe;
 	private ArrayList<SolarSystem> systems;
+	private ArrayList<Object> game = new ArrayList<Object>();
 	private SolarSystem solarSystem;
-	public GameWindow gameWindow;
+	public transient GameWindow gameWindow;
 	
 	
 	
@@ -50,6 +52,9 @@ public class GameController implements java.io.Serializable{
 			gameWindow = new GameWindow(this);
 			gameWindow.launch();
 			gameWindow.showStartWindow(this);
+			game.add(newPlayer);
+			game.add(newPlayer.getShip());
+			SaveLoad.save(game, this);
 		}
 		catch (IOException e){
 			e.printStackTrace();

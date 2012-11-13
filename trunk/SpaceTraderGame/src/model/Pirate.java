@@ -9,7 +9,7 @@ import java.util.Random;
  * @author Quirky Qwertys
  *
  */
-public class Pirate implements java.io.Serializable{
+public class Pirate {
 	
 	/**
 	 * 

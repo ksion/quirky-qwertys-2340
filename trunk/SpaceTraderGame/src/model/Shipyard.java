@@ -10,7 +10,7 @@ import java.awt.Point;
  * @author Quirky Qwertys
  * @version 1.0 11.05.12
  */
-public class Shipyard implements java.io.Serializable{
+public class Shipyard {
 	
 	/**
 	 * 

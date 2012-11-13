@@ -21,7 +21,7 @@ import java.util.Random;
  * @author Quirky Qwertys
  * @version 1.0 10.07.12
  */
-public class Ship implements java.io.Serializable{
+public class Ship {
     /**
 	 * 
 	 */
@@ -304,8 +304,8 @@ public class Ship implements java.io.Serializable{
 	 *
 	 * @param i the inventory
 	 */
-	public void setCargo(Inventory i){
-		cargo = i;
+	public void setCargo(TradeGood[] tgarr){
+		cargoHold = tgarr;
 	}
 
 	/**
@@ -314,16 +314,16 @@ public class Ship implements java.io.Serializable{
 	 * @return a String containing the Ship's current state
 	 */
 	public String toString(){
-		String shipStr = "Ship: ";
-		shipStr += name + ": \n" + 
-		"Damage Sustained: " + damageSustained + "\n" + 
-		"Distance Traveled: " + distanceTraveled + "\n" + 
-		"Fuel economy: " + fuelEconomy + "\n"+ 
-		"Fuel amount: " + fuelAmount + "\n" +
-		"Escape Pod: " + escapePod + "\n" +
-		"Insurance: " + insurance + "\n" +
-		"Hull Strength: " + hullStrength + "\n" +
-		"Cargo Hold: ";
+		
+		String shipStr = 
+		name + ": \n" + 
+		damageSustained + "\n" + 
+		distanceTraveled + "\n" + 
+		fuelEconomy + "\n"+ 
+		fuelAmount + "\n" +
+		escapePod + "\n" +
+		insurance + "\n" +
+		hullStrength + "\n" ;
 		return shipStr;
 	}
 	

@@ -1,6 +1,6 @@
 package model;
 
-public class Trade implements java.io.Serializable{
+public class Trade{
 
 	/**
 	 * 
