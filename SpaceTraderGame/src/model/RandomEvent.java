@@ -12,7 +12,7 @@ import controller.GameController;
  * 
  * @author Quirky Qwertys
  */
-public class RandomEvent implements java.io.Serializable{
+public class RandomEvent {
 	
 	/**
 	 * 

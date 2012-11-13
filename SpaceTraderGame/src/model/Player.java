@@ -12,7 +12,7 @@ import java.awt.Point;
  * @version 1.0 10.07.12
  *
  */
-public class Player implements java.io.Serializable{
+public class Player {
 	
 	/**
 	 * 
@@ -165,14 +165,16 @@ public class Player implements java.io.Serializable{
 	}
 
 	public String toString(){
-		String playerString = "";
-		playerString += "You've created a player named " + name + ".\n";
-		playerString += "Pilot skill points: " + pilotSkill + "\n";
-		playerString += "Fighter skill points: " + fighterSkill + "\n";
-		playerString += "Trader skill points: " + traderSkill + "\n";
-		playerString += "Engineer skill points: " + engineerSkill + "\n";
-		playerString += "Your current ship is a " + myShip.getName() + "\n";
-		playerString += "You have " + money + " credits available. \n";
+		String playerString = 
+		name + "\n" +
+		money + "\n" +
+		pilotSkill + "\n"+
+		fighterSkill + "\n"+
+		traderSkill + "\n"+
+		engineerSkill + "\n"+
+		myShip.getName() + "\n" + 
+		myShip.toString();
+		
 		return playerString;
 	}
 	/* 

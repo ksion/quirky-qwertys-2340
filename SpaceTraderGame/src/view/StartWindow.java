@@ -2,14 +2,18 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+
+import model.Player;
 import model.SaveLoad;
+import model.Ship;
 import controller.GameController;
 
-public class StartWindow extends JPanel implements java.io.Serializable{
+public class StartWindow extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
 	private final JButton btnNewGame = new JButton("New Game");
@@ -39,9 +43,11 @@ public class StartWindow extends JPanel implements java.io.Serializable{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try{
-				loadGame = (GameController) SaveLoad.load();
-				GameWindow gw = new GameWindow(loadGame);
-				gw.launch();
+				GameController gc = new GameController();
+				ArrayList<Object> game = (ArrayList<Object>) SaveLoad.load();
+				gc.newPlayer = (Player) game.get(0);
+				gc.newPlayer.setShip((Ship) game.get(1));
+				
 
 				
 			}

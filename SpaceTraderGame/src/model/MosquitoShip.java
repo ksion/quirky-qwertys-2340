@@ -11,7 +11,7 @@ import java.awt.Point;
  * @author Qwirky Qwertys
  * @version 1.0 11.05.12
  */
-public class MosquitoShip extends Ship implements java.io.Serializable{
+public class MosquitoShip extends Ship {
     
 	/**
 	 * 

@@ -19,7 +19,7 @@ import controller.GameController;
  * @author Quirky Qwertys
  *
  */
-public class GameWindow extends JPanel implements java.io.Serializable{
+public class GameWindow extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	GameController controller;

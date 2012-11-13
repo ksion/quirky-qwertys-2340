@@ -9,15 +9,20 @@ public class SaveLoad {
 
 	/** save: serializes the object passed in and saves it to a file called game.ser */
 	
-	public static void save(Object o){
+	public static void save(Object o, GameController gc){
 		try
 		{
-			File f = new File("src/controller/game.ser");
+			File f = new File("src/controller/goods.ser");
 	         FileOutputStream fileOut = new FileOutputStream(f);
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	         out.writeObject(o);
 	         out.close();
 	         fileOut.close();
+	         
+	 		PrintWriter output = 
+ 			new PrintWriter(new FileWriter("src/controller/gametxt.txt"));
+	 		output.println(gc.getPlayer().toString());
+	 		output.close();
 	      }
 		catch(IOException i)
 	      {
@@ -32,9 +37,9 @@ public class SaveLoad {
 		Object o = null;
 		try
 	    {
-	        FileInputStream fileIn = new FileInputStream("src/controller/game.ser");
+	        FileInputStream fileIn = new FileInputStream("src/controller/goods.ser");
 	        ObjectInputStream in = new ObjectInputStream(fileIn);
-	        o = (GameController) in.readObject();
+	        o = in.readObject();
 	        in.close();
 	        fileIn.close();
 	        System.out.println("loaded game: " + fileIn.toString());

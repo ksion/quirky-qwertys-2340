@@ -9,7 +9,7 @@ import java.util.Random;
  * @author Quirky Qwertys
  *
  */
-public class Inventory implements java.io.Serializable{
+public class Inventory {
 	/**
 	 * 
 	 */
