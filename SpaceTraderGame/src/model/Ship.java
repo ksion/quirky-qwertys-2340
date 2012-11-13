@@ -25,6 +25,7 @@ public class Ship {
     /**
 	 * 
 	 */
+	
 	private static final long serialVersionUID = 1L;
 
 	// /** Array used to store all of the Player's TradeGoods.*/
@@ -304,8 +305,8 @@ public class Ship {
 	 *
 	 * @param i the inventory
 	 */
-	public void setCargo(TradeGood[] tgarr){
-		cargoHold = tgarr;
+	public void setCargo(Inventory i){
+		cargo = i;
 	}
 
 	/**
@@ -314,16 +315,16 @@ public class Ship {
 	 * @return a String containing the Ship's current state
 	 */
 	public String toString(){
-		
-		String shipStr = 
-		name + ": \n" + 
-		damageSustained + "\n" + 
-		distanceTraveled + "\n" + 
-		fuelEconomy + "\n"+ 
-		fuelAmount + "\n" +
-		escapePod + "\n" +
-		insurance + "\n" +
-		hullStrength + "\n" ;
+		String shipStr = "Ship: ";
+		shipStr += name + ": \n" + 
+		"Damage Sustained: " + damageSustained + "\n" + 
+		"Distance Traveled: " + distanceTraveled + "\n" + 
+		"Fuel economy: " + fuelEconomy + "\n"+ 
+		"Fuel amount: " + fuelAmount + "\n" +
+		"Escape Pod: " + escapePod + "\n" +
+		"Insurance: " + insurance + "\n" +
+		"Hull Strength: " + hullStrength + "\n" +
+		"Cargo Hold: ";
 		return shipStr;
 	}
 	
