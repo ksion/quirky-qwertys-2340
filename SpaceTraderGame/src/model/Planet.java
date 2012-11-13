@@ -130,7 +130,6 @@ public class Planet implements java.io.Serializable{
 	 */
 	public void createInventory(){
 		tradableInventory = new Inventory();
-		//Keanna revised stuff here...!
 		TradeGood[] possiItems = TradeGood.values();
 		ArrayList<TradeGood> passedItems = new ArrayList<TradeGood>();
 		for (int i = 0; i < possiItems.length; i++) {
@@ -139,7 +138,7 @@ public class Planet implements java.io.Serializable{
 			}
 		}
 		passedItems.trimToSize();
-		tradableInventory.generate(this.getTechLevel(), passedItems, 10, false);
+		tradableInventory.generate(this.getTechLevel(), passedItems, 15, false);
 	}
 	
 	/**
