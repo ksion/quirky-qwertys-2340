@@ -225,7 +225,7 @@ private class SaveListener implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		SaveLoad.save(gc);
+		//SaveLoad.save(gc);
 	}
 }
 
