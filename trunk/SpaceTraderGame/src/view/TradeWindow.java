@@ -261,6 +261,7 @@ public class TradeWindow extends JPanel implements java.io.Serializable{
 				added = inventory.addTradeGood(buy);
 				if( added ) {
 					notifyChange();
+					added = true;
 				}
 			}
 			return added;
@@ -276,6 +277,7 @@ public class TradeWindow extends JPanel implements java.io.Serializable{
 			if (modelItem.getQty() > 0){
 				modelItem.setQty(modelItem.getQty() - qty);
 				// todo should use a more precise method to update the table so we don't loose the selection 
+				
 				notifyChange();
 				return true;
 			}
@@ -353,11 +355,15 @@ public class TradeWindow extends JPanel implements java.io.Serializable{
 				//player selling an item
 				TradableItem toSell = player.getCargo().getGoods().get(tableLeft.getSelectedRow());
 				int cost = toSell.getPrice();
-				int qty = toSell.getQty();
+				//Sell at the price they are selling --> Keanna
+				if (otherInventory.findItem(toSell) != null) {
+					TradableItem thing = otherInventory.findItem(toSell);
+					if (cost < thing.getPrice())
+						cost = thing.getPrice();
+				}
 				
-				/**
-				 * added dialogue box ! - Keanna
-				 */
+				int qty = toSell.getQty();
+			
 				Object[] nums = new Object[qty + 1];
 				for (int i = 0; i < qty + 1; i++) {
 					nums[i] = new Integer(i);
