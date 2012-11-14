@@ -40,7 +40,7 @@ public class EncounterPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Pirate pirate = new Pirate();
+	private Pirate pirate;
 	private Player player;
 	private JLabel damageInfo;
 	private JLabel yourDamagePoints;
@@ -55,7 +55,6 @@ public class EncounterPanel extends JPanel {
 	 */
 	public EncounterPanel(GameController gc) {
 		this.gc = gc;
-		this.player = gc.getPlayer();
 		
 		try {
 			background =ImageIO.read(getClass().getResource("/view/pirateflag.jpg"));
@@ -66,8 +65,6 @@ public class EncounterPanel extends JPanel {
 		this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		setLayout(new BorderLayout(0, 0));
 		
-	
-		//setOpaque(false);
 		
 		
 		
@@ -154,9 +151,8 @@ public class EncounterPanel extends JPanel {
 				repaint();
 				if (player.getShip().getDamageSustained() >= 100){
 					JOptionPane.showMessageDialog(null, "Your ship has been destroyed and you've lost all items. GAME OVER!");
-					gc = new GameController();
-					//dispose();
-					//TODO: call gc new game
+					gc.showStart();
+					
 				}
 				else if (pirate.getShip().getDamageSustained() >= 100){
 					int money = random.nextInt((int) (player.getMoney() *.20)) ;
@@ -191,8 +187,11 @@ public class EncounterPanel extends JPanel {
 		}
 	}
 
-	public void setDamage(Player player) {
+	public void setPlayer(Player player) {
 		this.player = player;
+		pirate = new Pirate();
+		damageInfo.setText("");
+		pirateDamagePoints.setText(Integer.toString(pirate.getShip().getDamageSustained()) );
 		yourDamagePoints.setText(Integer.toString(player.getShip().getDamageSustained()));
 		
 	}

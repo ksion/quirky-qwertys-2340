@@ -85,12 +85,12 @@ public class ShipyardWindow extends JPanel implements java.io.Serializable{
 		setLayout(new BorderLayout(0, 0));
 		setOpaque(false);
 		
-		JLabel lblWelcomeToThe =Style.createRedLabel();
+		JLabel lblWelcomeToThe =Style.createNormalLabel();
 		lblWelcomeToThe.setText("You may trade your ship for a new one or buy fuel here.");
 		
-		lblYourShip = Style.createRedLabel();
+		lblYourShip = Style.createNormalLabel();
 		
-		shipLbl = Style.createRedLabel();
+		shipLbl = Style.createNormalLabel();
 		
 		btnTrade = new JButton("Trade");
 		btnTrade.addActionListener(new TradeListener());
@@ -104,21 +104,21 @@ public class ShipyardWindow extends JPanel implements java.io.Serializable{
 		scrollPane.getViewport().setOpaque(false);
 		scrollPane.setOpaque(false);
 		
-		JLabel lblCurrentFuelAmount = Style.createRedLabel(); 
+		JLabel lblCurrentFuelAmount = Style.createNormalLabel(); 
 		lblCurrentFuelAmount.setText("Current Fuel Amount");
 		
-		JLabel lblFuelForSell = Style.createRedLabel(); 
+		JLabel lblFuelForSell = Style.createNormalLabel(); 
 		lblFuelForSell.setText("Qty. Fuel to Buy");
 		
-		lblDamage = Style.createRedLabel();
+		lblDamage = Style.createNormalLabel();
 		
-		currFuelLbl = Style.createRedLabel();
+		currFuelLbl = Style.createNormalLabel();
 		currFuelLbl.setVerticalAlignment(SwingConstants.TOP);
 		
-		lblRepairCost = Style.createRedLabel();
+		lblRepairCost = Style.createNormalLabel();
 		
-		lblCreditsAvailable = Style.createRedLabel();
-		JLabel lblCostCrton = Style.createRedLabel(); 
+		lblCreditsAvailable = Style.createNormalLabel();
+		JLabel lblCostCrton = Style.createNormalLabel(); 
 		lblCostCrton.setText("Fuel Cost: 100 cr./ton");
 	
 
