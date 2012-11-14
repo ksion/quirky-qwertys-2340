@@ -116,9 +116,9 @@ public class PlanetVisitWindow extends BackgroundPanel{
 		btnShipyard = new JButton("Shipyard");
 		btnShipyard.setPreferredSize(btnSize);
 		//btnShipyard.setForeground(Color.WHITE);
-		btnShipyard.setBackground(transBlue);
+		//btnShipyard.setBackground(transBlue);
 		//btnShipyard.setBorder(thickBorder);
-		btnShipyard.setOpaque(false);
+		//btnShipyard.setOpaque(false);
 		btnShipyard.addActionListener(new ActionListener(){
 
 			@Override
