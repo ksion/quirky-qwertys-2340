@@ -81,12 +81,12 @@ public class EncounterPanel extends JPanel {
 		panel.add(message, "cell 0 0 3 1");
 		
 		JLabel message2 = Style.createRedLabel();
-		message2.setText("keep in mind that ships can only take up to 100 points of damage " +
-										  " before");
+		message2.setText("keep in mind that once damage points exceed a ship's hull strength," +
+										  " the");
 		panel.add(message2, "cell 0 1 3 1");
 		
 		JLabel message3 = Style.createRedLabel();
-		message3.setText("they are destroyed. If you flee, you may lose some credits.");
+		message3.setText("ship may be destroyed. If you flee, you may lose some credits.");
 		panel.add(message3, "cell 0 2 3 1");
 		
 		JLabel label = new JLabel("");
@@ -133,10 +133,14 @@ public class EncounterPanel extends JPanel {
 		/**
 		 * When the user attacks, damage is dealt to the 
 		 * pirate's ship. The pirate immediately attacks.
+		 * If either ship gets 100 points worth of damage
+		 * or more, the encounter ends and the player may
+		 * gain/lose.
 		 */
 		public void actionPerformed(ActionEvent event){
 			int playerDamage = player.getShip().getDamageSustained();
 			int pirateDamage = pirate.getShip().getDamageSustained();
+			System.out.println(pirateDamage);
 			if (playerDamage < 100 && pirateDamage < 100){
 				int currDamage = pirate.getShip().getDamageSustained();
 				player.getShip().attack(pirate.getShip());
@@ -172,7 +176,7 @@ public class EncounterPanel extends JPanel {
 		
 		/**
 		 * Ends the user's encounter with the pirate. The user
-		 * can lose up to 20% of his/her credits when t flee.
+		 * can lose up to 20% of his/her credits when he/she flees.
 		 */
 		public void actionPerformed(ActionEvent event){
 			if (player.getMoney() != 0){

@@ -24,7 +24,7 @@ public class Pirate {
 	 * @throws IOException 
 	 */
 	public Pirate() throws IOException{
-		pirateShip = new Ship(random.nextInt(75) + 25);
+		pirateShip = new Ship(random.nextInt(60) + 70);
 	}
 	
 	/**
