@@ -28,10 +28,8 @@ public class RandomEvent {
 		switch(event){
 			case 0:
 				break;
-			case 1:
-				
+			case 1:	
 				gc.showEncounter();
-				
 				break;
 			case 2:
 				findItem();
