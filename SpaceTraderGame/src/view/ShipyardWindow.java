@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -213,7 +214,7 @@ public class ShipyardWindow extends JPanel implements java.io.Serializable{
 		 */
 		public void actionPerformed(ActionEvent event){
 			if (ship.getDamageSustained() <= player.getMoney()){
-				player.setMoney(-1 * ship.getDamageSustained());
+				player.addMoney(-1 * ship.getDamageSustained());
 				ship.setDamageSustained(0);
 				lblDamage.setText("Sustained Damage: " + Integer.toString(ship.getDamageSustained()));
 				lblCreditsAvailable.setText("Credits Available: " + 
@@ -238,7 +239,7 @@ public class ShipyardWindow extends JPanel implements java.io.Serializable{
 			int fuelSell = Integer.parseInt(ftf.getText());
 			int totalFuelPrice = fuelSell * PRICE;
 			if (player.getShip().getMaxFuel() >= fuelSell && totalFuelPrice <= player.getMoney()){
-				player.setMoney(-1 * totalFuelPrice);
+				player.addMoney(-1 * totalFuelPrice);
 				ship.setFuelAmount(player.getShip().getFuelAmount() + fuelSell);	
 			}
 			update();
@@ -268,7 +269,7 @@ public class ShipyardWindow extends JPanel implements java.io.Serializable{
 				if (selectedShip.getCost() - currShipCost <= 0)
 					;
 				else 
-					player.setMoney((selectedShip.getCost() - currShipCost) * -1);
+					player.addMoney((selectedShip.getCost() - currShipCost) * -1);
 			}
 			shipLbl.setText("Cost of your ship: " + player.getShip().getCost());
 			lblYourShip.setText("Your Ship: " + player.getShip().getName());	
@@ -355,11 +356,18 @@ public class ShipyardWindow extends JPanel implements java.io.Serializable{
 		ftf = ((JSpinner.DefaultEditor)editor).getTextField();
 		ftf.setColumns(4);
 		
-		Shipyard yard = new Shipyard(ship);
-		ships = yard.getShips();
+		Shipyard yard;
+		try {
+			yard = new Shipyard(ship);
 		
-		shipTableModel.clear();
-		shipTableModel.addAll(Arrays.asList(ships));
+			ships = yard.getShips();
+		
+			shipTableModel.clear();
+			shipTableModel.addAll(Arrays.asList(ships));
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 		update();	
 	}
 }

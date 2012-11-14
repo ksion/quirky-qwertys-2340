@@ -345,7 +345,7 @@ public class TradeWindow extends JPanel implements java.io.Serializable{
 				
 				InventoryTableModel model = (InventoryTableModel)tableLeft.getModel();
 				if (qty > 0 && cost < getCredits() && model.purchase(toBuy, qtyWant)) {
-					player.setMoney(-cost * qtyWant);
+					player.addMoney(-cost * qtyWant);
 					lblCredits.setText("Credits Available: "+Integer.toString(getCredits()));
 					
 					InventoryTableModel soldModel = (InventoryTableModel)tableRight.getModel();
@@ -375,7 +375,7 @@ public class TradeWindow extends JPanel implements java.io.Serializable{
 				if( qtyWant != null ) {
 					InventoryTableModel model = (InventoryTableModel)tableLeft.getModel();
 					if (model.sold(toSell, qtyWant) == true){
-						player.setMoney(cost * qtyWant);
+						player.addMoney(cost * qtyWant);
 						lblCredits.setText("Credits Available: "+Integer.toString(getCredits()));				
 						InventoryTableModel buyModel = (InventoryTableModel)tableRight.getModel();
 						buyModel.purchase(toSell, qtyWant);

@@ -105,7 +105,12 @@ public class PlayerWindow extends JPanel implements java.io.Serializable{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				PlayerWindow.this.controller.newGame(getNewPlayer());
+				try {
+					PlayerWindow.this.controller.newGame(getNewPlayer());
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
 				
 			}
 			
@@ -234,8 +239,9 @@ public class PlayerWindow extends JPanel implements java.io.Serializable{
 /**
  * gets the values out of the fields to create the player
  * @return player created
+ * @throws IOException 
  */
-	public Player getNewPlayer(){
+	public Player getNewPlayer() throws IOException{
 		int[] skills = new int[4];
 		skills[0] = getValue(textFieldPilot);
 		skills[1] = getValue(textField_Fighter);

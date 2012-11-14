@@ -3,12 +3,14 @@ package model;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+
+import flexjson.JSON;
+
 
 /**
  * Represents a planet in the Space Trader game.
@@ -18,17 +20,14 @@ import javax.imageio.ImageIO;
  */
 public class Planet {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	Random rand = new Random();
 	
 	/** Name of the Planet and the name of the corresponding image file. */
 	private String name;
 	private Image picName;
 	private Image largePicName;
+	private String picNameStr;
+	private String largePicNameStr;
 	
 	/** Dimensions of the images used to represent Planets. */
 	private final int HEIGHT = 451, WIDTH = 801, SIZE = 30;
@@ -80,11 +79,16 @@ public class Planet {
 		position = p;
 		system = s;
 		name = n;
-		picName = ImageIO.read(getClass().getResource(planetPics[rand.nextInt(5)]));
-		largePicName = ImageIO.read(getClass().getResource(largePlanetName));
-		
+		setPicNameStr(planetPics[rand.nextInt(5)]);
+		setLargePicNameStr(largePlanetName);
 		techLevel = s.getTechLevel();
 		tax = s.getTaxRate();
+	}
+	
+	/**
+	 * Needed by serialization process
+	 */
+	protected Planet() {
 	}
 
 	/** 
@@ -102,8 +106,9 @@ public class Planet {
 		system = s;
 		makeName();
 		techLevel = s.getTechLevel();
-		picName = ImageIO.read(getClass().getResource(planetPics[rand.nextInt(5)]));
-		largePicName = ImageIO.read(getClass().getResource(largePlanetName));
+		setPicNameStr(planetPics[rand.nextInt(5)]);
+		setLargePicNameStr(largePlanetName);
+		
 	}
 	
 	
@@ -129,7 +134,7 @@ public class Planet {
 	 * generates the subset of planet inventory based on all allowable inventory
 	 */
 	public void createInventory(){
-		tradableInventory = new Inventory();
+		tradableInventory = new Inventory(Integer.MAX_VALUE);
 		TradeGood[] possiItems = TradeGood.values();
 		ArrayList<TradeGood> passedItems = new ArrayList<TradeGood>();
 		for (int i = 0; i < possiItems.length; i++) {
@@ -160,6 +165,26 @@ public class Planet {
 	}
 	
 	
+	
+	
+	public String getPicNameStr() {
+		return picNameStr;
+	}
+
+	public void setPicNameStr(String picNameStr) throws IOException {
+		this.picNameStr = picNameStr;
+		picName = ImageIO.read(getClass().getResource(picNameStr));
+	}
+
+	public String getLargePicNameStr() {
+		return largePicNameStr;
+	}
+
+	public void setLargePicNameStr(String largePicNameStr) throws IOException {
+		this.largePicNameStr = largePicNameStr;	
+		largePicName = ImageIO.read(getClass().getResource(largePicNameStr));
+	}
+
 	/**
 	 * Retrieves the position of a Planet.
 	 * 
@@ -178,16 +203,25 @@ public class Planet {
 		return techLevel;
 	}
 	
+	protected void setTechLevel(int level) {
+		this.techLevel = level;
+	}
+	
 	/**
 	 * Retrieves a list of all of the TradeGoods available 
 	 * in the Planet.
 	 * 
 	 * @return the list of Inventory
 	 */
-	public Inventory getInventory(){
+	public Inventory getTradableInventory(){
 		return tradableInventory;
 	}
 	
+	
+	protected void setTradableInventory(Inventory tradableInventory) {
+		this.tradableInventory = tradableInventory;
+	}
+
 	/**
 	 * Retrieves the tax rate of the given planet.
 	 * @return tax
@@ -196,12 +230,20 @@ public class Planet {
 		return tax;
 	}
 	
+	protected void setTaxRate(double rate) {
+		this.tax = rate;
+	}
+	
 	public int getSize(){
 		return SIZE;
 	}
 	
+	@JSON(include = false)
+	public Image getPicName() {
+		return picName;
+	}
 	
-	
+	@JSON(include = false)
 	public Image getLargePicName() {
 		return largePicName;
 	}
@@ -261,4 +303,5 @@ public class Planet {
 		}
 		return inRange;
 	}
+	
 }

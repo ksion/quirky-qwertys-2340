@@ -25,7 +25,7 @@ public class Universe{
 		SolarSystem system1 = new SolarSystem("Peony", new Point(1, 0), 0, 0.03, 0);
 		SolarSystem system2 = new SolarSystem("Bronco", new Point(2, 0), 3, 0.05, 0);
 		SolarSystem system3 = new SolarSystem("Anjous", new Point(3, 0), 1, 0.05, 3);
-		SolarSystem system4 = new SolarSystem();
+		SolarSystem system4 = new SolarSystem("Baton Rouge", new Point(0, 0), 5, 0.07, 7);
 		
 		ArrayList<Planet> planets1 = new ArrayList<Planet>();
 		ArrayList<Planet> planets2 = new ArrayList<Planet>();

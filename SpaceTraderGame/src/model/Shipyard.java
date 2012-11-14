@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Point;
+import java.io.IOException;
 
 /**
  * Represents the shipyard where the user may trade 
@@ -22,8 +23,9 @@ public class Shipyard {
 	/**
 	 * Instantiates a shipyard with all of the ships
 	 * that exist in the Space Trader universe.
+	 * @throws IOException 
 	 */
-	public Shipyard(Ship s){
+	public Shipyard(Ship s) throws IOException{
 		Point p = s.getLocation();
 		FleaShip flea = new FleaShip(p);
 		GnatShip gnat = new GnatShip(p);

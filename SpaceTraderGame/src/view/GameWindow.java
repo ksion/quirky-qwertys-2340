@@ -24,11 +24,7 @@ public class GameWindow extends JPanel {
 
 	GameController controller;
 	
-	MapWindow mapWin;
-	PlanetWindow planetWin;
 	PlayerWindow playerWin;
-	ShipyardWindow shipyardWin;
-	TradeWindow tradeWin;
 	PlanetVisitWindow planetVisitWin;
 	StartWindow startWin;
 	EncounterPanel encounterPanel;
@@ -44,24 +40,15 @@ public class GameWindow extends JPanel {
 		setBackground(Color.black);
 		
 		planetVisitWin = new PlanetVisitWindow(controller);
-		mapWin = new MapWindow(controller);
-		planetWin = new PlanetWindow(controller);
 		playerWin = new PlayerWindow(controller);
 		startWin = new StartWindow(controller);
 		encounterPanel = new EncounterPanel(controller);
-		//shipyardWin = new ShipyardWindow(controller);
-		//tradeWin = new TradeWindow(controller);
 		deck = new CardLayout();
 		setLayout(deck);
-		add(mapWin, "map");
-		add(planetWin, "planet");
 		add(playerWin, "player");
 		add(startWin, "StartWindow");
-		//add(shipyardWin, "shipyard");
-		//add(tradeWin, "trade");
 		add(planetVisitWin, "planetVisit");
 		add(encounterPanel,"encounter");
-		
 	}
 	
 	/**
@@ -98,7 +85,6 @@ public class GameWindow extends JPanel {
 	public void showPlanet(Planet planet, Player p) {
 		planetVisitWin.setPlanet(planet);
 		planetVisitWin.setPlayer(p);
-		//deck.show(this, "planet");
 		planetVisitWin.showCard("bluegreen");
 		deck.show(this, "planetVisit");
 	}
@@ -111,7 +97,6 @@ public class GameWindow extends JPanel {
  */
 	public void showShipyard(Player player) {
 		planetVisitWin.getShipyardWin().setPlayer(player);
-		//deck.show(this, "shipyard");
 		planetVisitWin.showCard("shipyard");
 		
 	}
@@ -125,7 +110,6 @@ public class GameWindow extends JPanel {
 	public void showMarketPlace(Player player, Inventory inventory) {
 		planetVisitWin.getTradeWindow().setPlayer(player);
 		planetVisitWin.getTradeWindow().setOtherInventory(inventory);
-		//deck.show(this, "trade");
 		planetVisitWin.showCard("trade");
 		
 	}
@@ -137,7 +121,6 @@ public class GameWindow extends JPanel {
 	public void showNewPlayerWin() {
 		playerWin.clearFields();
 		deck.show(this, "player");
-		
 	}
 
 /**
@@ -152,7 +135,6 @@ public class GameWindow extends JPanel {
 		planetVisitWin.setPlayer(player);
 		planetVisitWin.showCard("map");
 		deck.show(this,"planetVisit");
-		
 	}
 	
 	/**
@@ -172,8 +154,7 @@ public class GameWindow extends JPanel {
 	 * 
 	 * @param gc the game controller of a game
 	 */
-	public void showStartWindow(GameController gc) throws IOException {
-		startWin = new StartWindow(gc);
+	public void showStartWindow() throws IOException {
 		deck.show(this, "StartWindow");
 	}
 
@@ -182,7 +163,7 @@ public class GameWindow extends JPanel {
 	 *  
 	 * @param p the current player
 	 */
-	public void showEncounter(Player p) {
+	public void showEncounter(Player p) throws IOException {
 		encounterPanel.setPlayer(p);
 		deck.show(this,"encounter");
 	}

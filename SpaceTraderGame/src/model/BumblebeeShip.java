@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Point;
+import java.io.IOException;
 
 /**
  * Represents the most expensive ship in the Space Trader
@@ -42,8 +43,9 @@ public class BumblebeeShip extends Ship implements java.io.Serializable{
 	 * 
 	 * @param hullStrength the strength of the Ship's hull
 	 * @param point the location of the Ship
+	 * @throws IOException 
 	 */
-	public BumblebeeShip(Point point){
+	public BumblebeeShip(Point point) throws IOException{
 		super(HULL_STRENGTH, CARGOBAY, point);
 		name = "Bumblebee";
 		fuelCapacity = TRAVELRANGE * fuelEconomy;
@@ -51,4 +53,6 @@ public class BumblebeeShip extends Ship implements java.io.Serializable{
 		cost = 60000;
 	}
 	
+	protected BumblebeeShip() {		
+	}
 }

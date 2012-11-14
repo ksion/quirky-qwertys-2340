@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Point;
+import java.io.IOException;
 
 /**
  * Represents the cheapest ship type in the game. It has few
@@ -42,12 +43,16 @@ public class FleaShip extends Ship implements java.io.Serializable{
 	 * 
 	 * @param hullStrength the strength of the Ship's hull
 	 * @param point the location of the Ship
+	 * @throws IOException 
 	 */
-	public FleaShip(Point point){
+	public FleaShip(Point point) throws IOException{
 		super(HULL_STRENGTH, CARGOBAY, point);
 		name = "Flea";
 		fuelCapacity = TRAVELRANGE * fuelEconomy;
 		fuelAmount = fuelCapacity;
 		cost = 2000;
+	}
+	
+	protected FleaShip() {
 	}
 }

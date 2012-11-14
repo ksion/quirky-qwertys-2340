@@ -146,14 +146,14 @@ public class EncounterPanel extends JPanel {
 				pirate.attack(player.getShip());
 				yourDamagePoints.setText(Integer.toString(player.getShip().getDamageSustained()));
 				repaint();
-				if (player.getShip().getDamageSustained() >= 100){
+				if (player.getShip().getDamageSustained() >= player.getShip().getHullStrength()){
 					JOptionPane.showMessageDialog(null, "Your ship has been destroyed and you've lost all items. GAME OVER!");
 					gc.showStart();
 					
 				}
-				else if (pirate.getShip().getDamageSustained() >= 100){
+				else if (pirate.getShip().getDamageSustained() >= pirate.getShip().getHullStrength()){
 					int money = random.nextInt((int) (player.getMoney() *.20)) ;
-					player.setMoney(money);
+					player.addMoney(money);
 					JOptionPane.showMessageDialog(null, "You just gained " + money + " credits.");
 					
 					gc.showPlanet();
@@ -177,14 +177,14 @@ public class EncounterPanel extends JPanel {
 		public void actionPerformed(ActionEvent event){
 			if (player.getMoney() != 0){
 				int money = random.nextInt((int) (player.getMoney() *.20)) ;
-				player.setMoney(-1 * money);
+				player.addMoney(-1 * money);
 				JOptionPane.showMessageDialog(null, "You just lost " + money + " credits.");
 				gc.showPlanet();
 			}
 		}
 	}
 
-	public void setPlayer(Player player) {
+	public void setPlayer(Player player) throws IOException {
 		this.player = player;
 		pirate = new Pirate();
 		damageInfo.setText("");

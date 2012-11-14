@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Point;
+import java.io.IOException;
 
 /**
  * This is the best ship type option for those who wish to become
@@ -41,12 +42,16 @@ public class MosquitoShip extends Ship {
 	 * 
 	 * @param hullStrength the strength of the Ship's hull
 	 * @param point the location of the Ship
+	 * @throws IOException 
 	 */
-	public MosquitoShip(Point point){
+	public MosquitoShip(Point point) throws IOException{
 		super(HULL_STRENGTH, CARGOBAY, point);
 		name = "Mosquito";
 		fuelCapacity = TRAVELRANGE * fuelEconomy;
 		fuelAmount = fuelCapacity;
 		cost = 30000;
+	}
+	
+	protected MosquitoShip() {
 	}
 }

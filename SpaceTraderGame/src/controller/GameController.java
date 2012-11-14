@@ -3,11 +3,11 @@ package controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
 import model.Game;
 import model.Inventory;
 import model.Planet;
 import model.Player;
-import model.SaveLoad;
 import model.SolarSystem;
 import model.Universe;
 import view.GameWindow;
@@ -47,7 +47,7 @@ public class GameController{
 		try{
 			gameWindow = new GameWindow(this);
 			gameWindow.launch();
-			gameWindow.showStartWindow(this);
+			gameWindow.showStartWindow();
 			
 		}
 		catch (IOException e){
@@ -61,8 +61,7 @@ public class GameController{
 	/**
 	 * creates the player window and the map window.
 	 */
-	public void newPlayer(){
-		//System.out.println("Create Player");
+	public void newPlayer() {
 		gameWindow.showNewPlayerWin();
 	}	
 	
@@ -97,7 +96,7 @@ public class GameController{
 	 * tells the game window to show the marketplace
 	 */
 	public void gotoMarketPlace() {
-		gameWindow.showMarketPlace( currentGame.getPlayer(), currentGame.getCurrentPlanet().getInventory() );
+		gameWindow.showMarketPlace( currentGame.getPlayer(), currentGame.getCurrentPlanet().getTradableInventory() );
 	}
 	
 	/**
@@ -128,7 +127,11 @@ public class GameController{
 	 * tells the game window to show the pirate encounter
 	 */
 	public void showEncounter(){
-		gameWindow.showEncounter(currentGame.getPlayer());
+		try {
+			gameWindow.showEncounter(currentGame.getPlayer());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public boolean travelToPlanet(Planet planet) {
@@ -161,11 +164,29 @@ public class GameController{
 	 */
 	public void showStart(){
 		try {
-			gameWindow.showStartWindow(this);
+			gameWindow.showStartWindow();
 		} catch (IOException e) {
 			
 			e.printStackTrace();
 		}
+	}
+
+
+
+	public void loadGame() throws IOException {
+		currentGame = Game.loadGame();
+		gameWindow.showPlanet( currentGame.getCurrentPlanet(), currentGame.getPlayer() );
+		currentGame.getPlayer().getShip().loadResources();
+	}
+
+
+/**
+ * saves the current game
+ * @throws IOException
+ */
+	public void save() throws IOException {
+		currentGame.saveGame();
+		
 	}
 	
 	

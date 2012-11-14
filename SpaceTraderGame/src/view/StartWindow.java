@@ -23,7 +23,6 @@ import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
 import model.Player;
-import model.SaveLoad;
 import model.Ship;
 import controller.GameController;
 
@@ -34,7 +33,7 @@ public class StartWindow extends JPanel{
 	private final JButton btnLoadGame = new JButton("Load Game");
 	private Image background;
 	private JPanel menuPanel;
-	GameController loadGame, oldGame;
+	private GameController gc;
 
 	/**
 	 * Create the panel.
@@ -70,7 +69,7 @@ public class StartWindow extends JPanel{
 		
 		menuPanel.add(Box.createVerticalStrut(130));
 		add(menuPanel,BorderLayout.WEST);
-		oldGame = gc;
+		this.gc = gc;
 	}
 	
 	/**
@@ -88,14 +87,11 @@ public class StartWindow extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try{
-			
-				
-
-				
+				gc.loadGame();
 			}
 			catch(Exception a){
 				a.printStackTrace();
-				JOptionPane.showMessageDialog(null, "We couldn't find a previous game!", 
+				JOptionPane.showMessageDialog(getTopLevelAncestor(), "We couldn't find a previous game!", 
 	                      "Woops!", JOptionPane.ERROR_MESSAGE);
 			}
 			
@@ -106,7 +102,7 @@ public class StartWindow extends JPanel{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			oldGame.newPlayer();
+			gc.newPlayer();
 		}
 		
 	}

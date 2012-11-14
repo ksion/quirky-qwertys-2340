@@ -13,14 +13,16 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
+
 
 //import view.TradeWindow.InventoryTableModel;
 
 import model.Planet;
 import model.Player;
-import model.SaveLoad;
+
 
 import controller.GameController;
 
@@ -226,7 +228,14 @@ private class SaveListener implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//SaveLoad.save(gc);
+		try {
+			gc.save();
+			JOptionPane.showMessageDialog(getTopLevelAncestor(), "Game saved successfully!");
+			
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			JOptionPane.showMessageDialog(getTopLevelAncestor(), "Unable to save the game.");
+		} 
 	}
 }
 
