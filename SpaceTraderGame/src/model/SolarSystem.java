@@ -14,9 +14,6 @@ import java.util.ArrayList;
  */
 public class SolarSystem {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	/** Location of a SolarSystem in the Universe. */

@@ -1,9 +1,6 @@
 package model;
 public class PriceModel {
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private Planet planet;
 	

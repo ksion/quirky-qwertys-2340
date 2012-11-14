@@ -36,9 +36,6 @@ import java.io.IOException;
  */
 public class EncounterPanel extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Pirate pirate;
 	private Player player;
@@ -193,12 +190,11 @@ public class EncounterPanel extends JPanel {
 		damageInfo.setText("");
 		pirateDamagePoints.setText(Integer.toString(pirate.getShip().getDamageSustained()) );
 		yourDamagePoints.setText(Integer.toString(player.getShip().getDamageSustained()));
-		
 	}
 	
 	/**
-	 * draws the background image on the GUI
-	 * @param g - the graphics object
+	 * Draws the background image on the GUI.
+	 * @param g the graphics object
 	 */
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);

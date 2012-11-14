@@ -14,9 +14,6 @@ import java.awt.Point;
  */
 public class Player {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	/** Name of the Player. */
@@ -110,21 +107,37 @@ public class Player {
 		return money;
 	}
 	
+	/**
+	 * Retrieves the player's ship.
+	 * 
+	 * @return the ship
+	 */
 	public Ship getShip() {
 		return myShip;
 	}
 	
+	/**
+	 * Retrieves the player's inventory.
+	 * 
+	 * @return the player's inventory
+	 */
 	public Inventory getCargo() {
 		return myShip.getCargo();
 	}
 	
+	/**
+	 * Adds credits to the players current amount
+	 * 
+	 * @param update the amount of money added
+	 */
 	public void setMoney(int update){
 		money = money + update;
 	}
 	
 	
 	/**
-	 * gets the pilotskill level
+	 * Gets the pilot skill level.
+	 * 
 	 * @return pilotSkill level
 	 */
 	public int getPilotSkill() {
@@ -132,24 +145,27 @@ public class Player {
 	}
 
 	/**
-	 * gets the Fighter skill level
-	 * @return fighterSkill
+	 * Gets the Fighter skill level.
+	 * 
+	 * @return fighter skill level
 	 */
 	public int getFighterSkill() {
 		return fighterSkill;
 	}
 
 	/**
-	 * gets the trader skill level
-	 * @return traderSkill
+	 * Gets the trader skill level.
+	 * 
+	 * @return trader skill level
 	 */
 	public int getTraderSkill() {
 		return traderSkill;
 	}
 
 	/**
-	 * gets the engineer skill level
-	 * @return int engineerskill
+	 * Gets the engineer skill level.
+	 * 
+	 * @return engineer skill level
 	 */
 	public int getEngineerSkill() {
 		return engineerSkill;
@@ -158,12 +174,17 @@ public class Player {
 	/**
 	 * Sets the Player's ship to a given type.
 	 * 
-	 * @param s the Ship the player's new ship
+	 * @param s the player's new ship
 	 */
 	public void setShip(Ship s){
 		myShip = s;
 	}
 
+	/**
+	 * String that represents major player stats.
+	 * 
+	 * @return a string with the player's stats
+	 */
 	public String toString(){
 		String playerString = 
 		name + "\n" +
