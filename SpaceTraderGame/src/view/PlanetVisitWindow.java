@@ -38,7 +38,7 @@ public class PlanetVisitWindow extends BackgroundPanel{
 	private JPanel menuPanel;
 	private JPanel planetContainerPanel;
 	private JPanel planetPanel;
-	private JButton btnMap, btnMarket, btnShipyard, btnSaveGame, btnLocalDock;
+	private JButton btnMap, btnMarket, btnShipyard, btnSaveGame, btnLocalDock, btnNewGame;
 	private CardLayout deck;
 	private ShipyardWindow shipyardWin;
 	private TradeWindow tradeWin;
@@ -132,7 +132,15 @@ public class PlanetVisitWindow extends BackgroundPanel{
 		
 		btnSaveGame = new JButton("Save");
 		btnSaveGame.addActionListener(new SaveListener());
-		
+		btnNewGame = new JButton("New Game");
+		btnNewGame.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent arg0) {
+				PlanetVisitWindow.this.gc.showStart();
+				
+			}
+			
+		});
 		
 		
 		menuPanel.add(planetStatsName);
@@ -145,6 +153,7 @@ public class PlanetVisitWindow extends BackgroundPanel{
 		menuPanel.add(btnMarket);
 		menuPanel.add(btnShipyard);
 		menuPanel.add(btnSaveGame);
+		menuPanel.add(btnNewGame);
 		menuPanel.add(Box.createVerticalStrut(130));
 		add(menuPanel,BorderLayout.WEST);
 		planetContainerPanel = new JPanel(deck);
