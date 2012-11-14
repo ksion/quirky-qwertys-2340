@@ -1,5 +1,7 @@
 package model;
 
+import java.io.IOException;
+
 /**
  * class to hold the Game object to aid in loading and saving
  * @author QuirkyQwertys
@@ -12,11 +14,10 @@ public class Game {
 	private Universe universe;
 	private SolarSystem solarSystem;
 	
-	public Game(Player player, Planet currentPlanet, Universe universe, SolarSystem solarSystem){
+	public Game(Player player) throws IOException{
 		this.player = player; 
-		this.currentPlanet = currentPlanet;
-		this.universe = universe;
-		this.solarSystem = solarSystem;
+		createUniverse();
+
 		
 	}
 
@@ -51,6 +52,16 @@ public class Game {
 	public void setSolarSystem(SolarSystem solarSystem) {
 		this.solarSystem = solarSystem;
 	}
+	
+	public void createUniverse() throws IOException{
+		/** Represents the universe in Space Trader game. */
+		universe = new Universe();
+		solarSystem = universe.getSystems().get(0);
+		currentPlanet = solarSystem.getPlanets().get(0);//set the starting planet to the first in the list
+		currentPlanet.createInventory();
+	}
+	
+	
 	
 	
 	

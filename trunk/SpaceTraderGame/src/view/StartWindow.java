@@ -53,7 +53,6 @@ public class StartWindow extends JPanel{
 		menuPanel.setOpaque(false);
 		menuPanel.setBorder(BorderFactory.createCompoundBorder(new LineBorder(new Color(0x5d,0xdf,0xfb,255), 2,true), BorderFactory.createEmptyBorder(10,10,10,10)));
 		btnNewGame.setBounds(42, 33, 108, 23);
-		btnNewGame.setForeground(Style.TRON_COLOR);
 		btnNewGame.addActionListener(new NewGameListener());
 		
 		JLabel welcomeTxt1 = Style.createTronLabel();
@@ -65,8 +64,7 @@ public class StartWindow extends JPanel{
 		menuPanel.add(Box.createVerticalGlue());
 		menuPanel.add(btnNewGame);
 		btnLoadGame.setBounds(42, 67, 108, 23);
-		btnLoadGame.setForeground(Style.TRON_COLOR);
-		//btnLoadGame.addActionListener(new LoadListener());
+		btnLoadGame.addActionListener(new LoadListener());
 		
 		menuPanel.add(btnLoadGame);
 		
@@ -90,10 +88,7 @@ public class StartWindow extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try{
-				GameController gc = new GameController();
-				ArrayList<Object> game = (ArrayList<Object>) SaveLoad.load();
-				gc.newPlayer = (Player) game.get(0);
-				gc.newPlayer.setShip((Ship) game.get(1));
+			
 				
 
 				

@@ -125,6 +125,7 @@ public class GameWindow extends JPanel {
  * shows the player window
  */
 	public void showNewPlayerWin() {
+		playerWin.clearFields();
 		deck.show(this, "player");
 		
 	}
@@ -165,7 +166,7 @@ public class GameWindow extends JPanel {
 
 	
 	public void showEncounter(Player p) {
-		encounterPanel.setDamage(p);
+		encounterPanel.setPlayer(p);
 		
 		deck.show(this,"encounter");
 		

@@ -42,6 +42,8 @@ public class PlayerWindow extends JPanel implements java.io.Serializable{
 	private JButton createButton;
 
 	private GameController controller;
+	private JComboBox comboBoxDifficulty;
+	
 
 	/**
 	 * Launch the application.
@@ -170,7 +172,7 @@ public class PlayerWindow extends JPanel implements java.io.Serializable{
 		lblDifficultyLevel.setFont(Style.SPACEAGE_NORMAL);
 		
 		String[]comboBoxDefaults = {"Beginner","Easy","Normal","Hard","Impossible"};
-		JComboBox comboBoxDifficulty = new JComboBox(comboBoxDefaults);
+		comboBoxDifficulty = new JComboBox(comboBoxDefaults);
 		add(comboBoxDifficulty, "cell 6 5 4 1,growx");
 		
 			
@@ -265,6 +267,18 @@ public class PlayerWindow extends JPanel implements java.io.Serializable{
 	}
 	
 	/**
+	 * clears out the text fields
+	 */
+	public void clearFields(){
+		textName.setText( "");
+		textFieldPilot.setText("");
+		textField_Fighter.setText("");
+		textField_Engineer.setText("");
+		textField_Trader.setText("");
+		comboBoxDifficulty.setSelectedIndex(0);
+	}
+	
+	/**
 	 * inner class to make sure all the fields are populated correctly on new player creation
 	 * @author Quirky Qwertys
 	 *
@@ -316,5 +330,7 @@ public class PlayerWindow extends JPanel implements java.io.Serializable{
 			}
 			else return true;
 		}
+		
+		
 	}
 }
