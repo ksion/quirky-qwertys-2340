@@ -29,7 +29,9 @@ public class RandomEvent {
 			case 0:
 				break;
 			case 1:
-				new EncounterPanel(gc);
+				
+				gc.showEncounter();
+				
 				break;
 			case 2:
 				findItem();

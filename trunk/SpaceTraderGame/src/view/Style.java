@@ -47,4 +47,14 @@ public class Style implements java.io.Serializable{
 		label.setForeground(Style.SPACEAGE_COLOR);
 		return label;
 	}
+	/**
+	 * adds Red COLOR styling to a label
+	 * @return the label
+	 */
+	public static JLabel createRedLabel() {
+		JLabel label = new JLabel();
+		label.setFont(Style.ARIAL_LARGE);
+		label.setForeground(Color.RED);
+		return label;
+	}
 }

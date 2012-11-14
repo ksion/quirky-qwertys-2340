@@ -31,6 +31,7 @@ public class GameWindow extends JPanel {
 	TradeWindow tradeWin;
 	PlanetVisitWindow planetVisitWin;
 	StartWindow startWin;
+	EncounterPanel encounterPanel;
 	CardLayout deck;
 	
 	public GameWindow(GameController controller) throws IOException {
@@ -42,6 +43,7 @@ public class GameWindow extends JPanel {
 		planetWin = new PlanetWindow(controller);
 		playerWin = new PlayerWindow(controller);
 		startWin = new StartWindow(controller);
+		encounterPanel = new EncounterPanel(controller);
 		//shipyardWin = new ShipyardWindow(controller);
 		//tradeWin = new TradeWindow(controller);
 		deck = new CardLayout();
@@ -53,6 +55,7 @@ public class GameWindow extends JPanel {
 		//add(shipyardWin, "shipyard");
 		//add(tradeWin, "trade");
 		add(planetVisitWin, "planetVisit");
+		add(encounterPanel,"encounter");
 		
 	}
 	
@@ -159,4 +162,14 @@ public class GameWindow extends JPanel {
 		startWin = new StartWindow(gc);
 		deck.show(this, "StartWindow");
 	}
+
+	
+	public void showEncounter(Player p) {
+		encounterPanel.setDamage(p);
+		
+		deck.show(this,"encounter");
+		
+	}
+
+	
 }

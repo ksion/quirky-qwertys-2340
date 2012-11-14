@@ -25,8 +25,6 @@ public class GameController{
 	public Player newPlayer;
 	public Planet currentPlanet;
 	private Universe universe;
-	private ArrayList<SolarSystem> systems;
-	private ArrayList<Object> game = new ArrayList<Object>();
 	private SolarSystem solarSystem;
 	public transient GameWindow gameWindow;
 	
@@ -52,9 +50,7 @@ public class GameController{
 			gameWindow = new GameWindow(this);
 			gameWindow.launch();
 			gameWindow.showStartWindow(this);
-			game.add(newPlayer);
-			game.add(newPlayer.getShip());
-			SaveLoad.save(game, this);
+			
 		}
 		catch (IOException e){
 			e.printStackTrace();
@@ -129,6 +125,13 @@ public class GameController{
 	public void showPlanetVisit(){
 		gameWindow.showPlanet( currentPlanet,newPlayer );
 	}
+	
+	/**
+	 * tells the game window to show the pirate encounter
+	 */
+	public void showEncounter(){
+		gameWindow.showEncounter(newPlayer);
+	}
 
 	public boolean travelToPlanet(Planet planet) {
 		boolean b = newPlayer.getShip().travel(planet);
@@ -163,7 +166,10 @@ public class GameController{
 	public void createUniverse() throws IOException{
 		/** Represents the universe in Space Trader game. */
 		universe = new Universe();
-		systems = universe.getSystems();
-		solarSystem = systems.get(0);
+		solarSystem = universe.getSystems().get(0);
 	}
+
+
+
+	
 }

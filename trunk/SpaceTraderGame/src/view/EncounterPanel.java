@@ -1,6 +1,9 @@
 package view;
 
 import net.miginfocom.swing.MigLayout;
+
+import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -10,13 +13,19 @@ import model.Player;
 import model.Pirate;
 import controller.GameController;
 import javax.swing.JButton;
+import javax.swing.border.LineBorder;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import java.util.Random;
 import java.awt.event.*;
+import java.io.IOException;
 
 /**
  * Represents the window that pops up if a pirate encounter
@@ -25,7 +34,7 @@ import java.awt.event.*;
  * @author Quirky Qwertys
  * @version 1.0 11.11.12
  */
-public class EncounterPanel extends JFrame implements java.io.Serializable{
+public class EncounterPanel extends JPanel {
 
 	/**
 	 * 
@@ -38,8 +47,8 @@ public class EncounterPanel extends JFrame implements java.io.Serializable{
 	private JLabel pirateDamagePoints;
 	private JButton btnFlee;
 	private Random random = new Random();
-	private JPanel panel;
 	private GameController gc;
+	Image background;
 	
 	/**
 	 * Create the panel.
@@ -48,36 +57,63 @@ public class EncounterPanel extends JFrame implements java.io.Serializable{
 		this.gc = gc;
 		this.player = gc.getPlayer();
 		
-		panel = new JPanel();
+		try {
+			background =ImageIO.read(getClass().getResource("/view/pirateflag.jpg"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+		setLayout(new BorderLayout(0, 0));
+		
+	
+		//setOpaque(false);
+		
+		
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(0x66,0x66,0x66,125));
+		panel.setBorder(new LineBorder(Color.RED, 2,true));
+		//tablePanel.setOpaque(false);
+		add(panel, BorderLayout.CENTER);
+		
+		
+	
 		panel.setLayout(new MigLayout("", "[grow][][grow]", "[][][][][][grow][][][][grow][]"));
 		
-		JLabel message = new JLabel("You've encountered a pirate! You may fight or flee the pirate." +
+		JLabel message = Style.createRedLabel();
+		message.setText("You've encountered a pirate! You may fight or flee the pirate." +
 									" If you attack, ");
 		panel.add(message, "cell 0 0 3 1");
 		
-		JLabel message2 = new JLabel("keep in mind that ships can only take up to 100 points of damage " +
+		JLabel message2 = Style.createRedLabel();
+		message2.setText("keep in mind that ships can only take up to 100 points of damage " +
 										  " before");
 		panel.add(message2, "cell 0 1 3 1");
 		
-		JLabel message3 = new JLabel("they are destroyed. If you flee, you may lose some credits.");
+		JLabel message3 = Style.createRedLabel();
+		message3.setText("they are destroyed. If you flee, you may lose some credits.");
 		panel.add(message3, "cell 0 2 3 1");
 		
 		JLabel label = new JLabel("");
 		panel.add(label, "cell 0 3 3 1");
 		
-		yourDamagePoints = new JLabel(Integer.toString(player.getShip().getDamageSustained()));
+		yourDamagePoints = Style.createRedLabel();
 		panel.add(yourDamagePoints, "cell 1 5");
 		
-		JLabel yourDamage = new JLabel("Your ship's damage:");
+		JLabel yourDamage = Style.createRedLabel();
+		yourDamage.setText("Your ship's damage:");
 		panel.add(yourDamage, "flowx,cell 0 5");
 		
-		pirateDamagePoints = new JLabel("0");
+		pirateDamagePoints = Style.createRedLabel();
+		pirateDamagePoints.setText("0");
 		panel.add(pirateDamagePoints, "cell 1 6");
 		
-		JLabel pirateDamage = new JLabel("Pirate ship's damage:" );
+		JLabel pirateDamage = Style.createRedLabel();
+		pirateDamage.setText("Pirate ship's damage:" );
 		panel.add(pirateDamage, "cell 0 6");		
 		
-		damageInfo = new JLabel("");
+		damageInfo = Style.createRedLabel();
 		panel.add(damageInfo, "cell 0 8 3 1");
 		
 		JButton btnAttack = new JButton("Attack");
@@ -88,14 +124,7 @@ public class EncounterPanel extends JFrame implements java.io.Serializable{
 		btnFlee.addActionListener(new FleeListener());
 		panel.add(btnFlee, "cell 2 10,alignx center");
 		
-		getContentPane().add(panel);
-		setTitle("Pirate Encounter");
 		
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setPreferredSize(new Dimension(510, 300));
-		pack();
-		setVisible(true);
-
 	}
 	
 	/**
@@ -122,16 +151,20 @@ public class EncounterPanel extends JFrame implements java.io.Serializable{
 				pirateDamagePoints.setText(Integer.toString(pirate.getShip().getDamageSustained()));
 				pirate.attack(player.getShip());
 				yourDamagePoints.setText(Integer.toString(player.getShip().getDamageSustained()));
+				repaint();
 				if (player.getShip().getDamageSustained() >= 100){
 					JOptionPane.showMessageDialog(null, "Your ship has been destroyed and you've lost all items. GAME OVER!");
 					gc = new GameController();
-					dispose();
+					//dispose();
+					//TODO: call gc new game
 				}
 				else if (pirate.getShip().getDamageSustained() >= 100){
 					int money = random.nextInt((int) (player.getMoney() *.20)) ;
 					player.setMoney(money);
 					JOptionPane.showMessageDialog(null, "You just gained " + money + " credits.");
-					dispose();
+					
+					gc.showPlanet();
+					
 				}
 			}	
 		}
@@ -153,8 +186,23 @@ public class EncounterPanel extends JFrame implements java.io.Serializable{
 				int money = random.nextInt((int) (player.getMoney() *.20)) ;
 				player.setMoney(-1 * money);
 				JOptionPane.showMessageDialog(null, "You just lost " + money + " credits.");
-				dispose();
+				gc.showPlanet();
 			}
 		}
+	}
+
+	public void setDamage(Player player) {
+		this.player = player;
+		yourDamagePoints.setText(Integer.toString(player.getShip().getDamageSustained()));
+		
+	}
+	
+	/**
+	 * draws the background image on the GUI
+	 * @param g - the graphics object
+	 */
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);
+		g.drawImage(background, 0, 0, null);
 	}
 }
