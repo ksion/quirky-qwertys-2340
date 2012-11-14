@@ -5,20 +5,21 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * represents the attributes of inventory that traders are interested in
+ * Represents the attributes of inventory that traders
+ * are interested in.
+ * 
  * @author Quirky Qwertys
  *
  */
 public class Inventory {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private ArrayList<TradableItem> goods;
 	private int maxItems;
 	
 	/**
-	 * constructor with item max
+	 * Instantiates an inventory with a specified capacity.
+	 * 
 	 * @param maxItems size of inventory
 	 */
 	public Inventory (int maxItems){
@@ -26,18 +27,19 @@ public class Inventory {
 		goods = new ArrayList<TradableItem>();
 	}
 	/**
-	 * sets inventory to size of int if one is not passed in; e.g. for planet
+	 * Instantiates an inventory with a default capacity.
 	 */
-	public Inventory (){
+	public Inventory(){
 		this(Integer.MAX_VALUE);
 	}
 	
 
 	/**
-	 * generates the inventory out of all possible goods 
-	 * @param techLevel
-	 * @param allowableTradeGoods
-	 * @param maxQty
+	 * Generates the inventory out of all possible goods.
+	 *  
+	 * @param techLevel the current tech level
+	 * @param allowableTradeGoods trade goods permitted in the system
+	 * @param maxQty the maximum quantity allowed for a good
 	 * @param inSpace
 	 */
 
@@ -55,16 +57,18 @@ public class Inventory {
 	}
 	
 	/**
-	 * gets the trade goods out of the inventory
-	 * @return list of goods
+	 * Gets the trade goods out of the inventory.
+	 * 
+	 * @return the list of goods
 	 */
 	public List<TradableItem> getGoods(){
 		return goods;
 	}
 	
 	/**
-	 * gets quantity of good
-	 * @return quantity
+	 * Gets quantity of a good.
+	 * 
+	 * @return the quantity
 	 */
 	public int getUsedSpace(){
 		int quantity = 0;
@@ -106,9 +110,10 @@ public class Inventory {
 	}
 	
 	/**
-	 * finds a tradable item in the list
-	 * @param good
-	 * @return current item if found; null otherwise
+	 * Finds a Tradable item in the list
+	 * @param good the tradable item
+	 * 
+	 * @return current item if found, null otherwise
 	 */
 	public TradableItem findItem(TradableItem good){
 		for (TradableItem current: goods){

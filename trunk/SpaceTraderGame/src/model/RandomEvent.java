@@ -14,9 +14,6 @@ import controller.GameController;
  */
 public class RandomEvent {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Random random = new Random();
 	private Player player;

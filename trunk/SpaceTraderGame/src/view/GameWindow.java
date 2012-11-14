@@ -15,9 +15,9 @@ import model.SolarSystem;
 
 import controller.GameController;
 /**
- * Parent Container for all the game screens
+ * Parent Container for all the game screens.
+ * 
  * @author Quirky Qwertys
- *
  */
 public class GameWindow extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -34,6 +34,11 @@ public class GameWindow extends JPanel {
 	EncounterPanel encounterPanel;
 	CardLayout deck;
 	
+	/**
+	 * Instantiates the game window.
+	 * 
+	 * @param controller the game controller for a game
+	 */
 	public GameWindow(GameController controller) throws IOException {
 		this.controller = controller;
 		setBackground(Color.black);
@@ -60,7 +65,7 @@ public class GameWindow extends JPanel {
 	}
 	
 	/**
-	 * launches the main game window
+	 * Launches the main game window.
 	 */
 	public void launch(){
 		EventQueue.invokeLater(new Runnable() {
@@ -84,9 +89,11 @@ public class GameWindow extends JPanel {
 	}
 
 /**
- * sets the planet and player
- * @param planet
- * @param p
+ * Sets the planet and player and shows the planet
+ * the player is visiting.
+ * 
+ * @param planet the planet the player is in
+ * @param p the current player
  */
 	public void showPlanet(Planet planet, Player p) {
 		planetVisitWin.setPlanet(planet);
@@ -98,8 +105,9 @@ public class GameWindow extends JPanel {
 
 	
 /**
- * shows the shipyard card
- * @param player
+ * Shows the shipyard card.
+ * 
+ * @param player the current player
  */
 	public void showShipyard(Player player) {
 		planetVisitWin.getShipyardWin().setPlayer(player);
@@ -109,9 +117,10 @@ public class GameWindow extends JPanel {
 	}
 
 /**
- * shows the marketplace card
- * @param player
- * @param inventory
+ * Shows the marketplace card.
+ * 
+ * @param player the current player
+ * @param inventory the player's inventory
  */
 	public void showMarketPlace(Player player, Inventory inventory) {
 		planetVisitWin.getTradeWindow().setPlayer(player);
@@ -122,7 +131,8 @@ public class GameWindow extends JPanel {
 	}
 
 /**
- * shows the player window
+ * Shows the player window where the player selects
+ * his/her skill points.
  */
 	public void showNewPlayerWin() {
 		playerWin.clearFields();
@@ -131,9 +141,10 @@ public class GameWindow extends JPanel {
 	}
 
 /**
- * shows the map window
- * @param player
- * @param solarSystem
+ * Shows the map window.
+ * 
+ * @param player the current player
+ * @param solarSystem the current solar system the player is in
  */
 	public void showMapWin(Player player, SolarSystem solarSystem) {
 		planetVisitWin.getMapWin().setPlayer(player);
@@ -145,9 +156,10 @@ public class GameWindow extends JPanel {
 	}
 	
 	/**
-	 * shows the planet visit window
-	 * @param p
-	 * @param player
+	 * Shows the planet visit window.
+	 * 
+	 * @param p the planet
+	 * @param player the current player
 	 */
 	public void showPlanetVisitWin(Planet p, Player player) {
 		showPlanet(p, player);
@@ -156,21 +168,22 @@ public class GameWindow extends JPanel {
 	}
 	
 	/**
-	 * shows the new game window
-	 * @throws IOException 
+	 * Shows the new game/load game window.
+	 * 
+	 * @param gc the game controller of a game
 	 */
 	public void showStartWindow(GameController gc) throws IOException {
 		startWin = new StartWindow(gc);
 		deck.show(this, "StartWindow");
 	}
 
-	
+	/**
+	 * Shows the pirate encounter window.
+	 *  
+	 * @param p the current player
+	 */
 	public void showEncounter(Player p) {
 		encounterPanel.setPlayer(p);
-		
 		deck.show(this,"encounter");
-		
 	}
-
-	
 }

@@ -46,15 +46,14 @@ public class MapWindow extends JPanel implements java.io.Serializable{
 	protected JLabel planetName;
 	protected JLabel fuelLevel, skillPilot, skillTrader, skillEngineer, skillFighter, shipLocation;
 	protected Player player;
-	
-	/** Represents the solar system in Space Trader game. */
 
 	private SolarSystem solarSystem;
 	
 	/**
-	 * I also added a player parameter to the constructor so that the travel method for the ship from the game controller can be called.
-	 * Creates the panel.
-	 * @param p the player from the game controller
+	 * Creates a map window based on the information provided
+	 * by the game controller.
+	 * 
+	 * @param gc the game controller
 	 * @throws IOException 
 	 */
 	public MapWindow(GameController gc) throws IOException{
@@ -93,6 +92,8 @@ public class MapWindow extends JPanel implements java.io.Serializable{
 	
 	/**
 	 * Paints all of the SolarSystems and Planets.
+	 * 
+	 * @param g the default Graphics object
 	 */
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
@@ -102,11 +103,7 @@ public class MapWindow extends JPanel implements java.io.Serializable{
 		for(Planet p : solarSystem.getPlanets()){
 			p.draw(g);
 		}
-		
-		
-		player.getShip().drawShip(g);
-		
-		
+		player.getShip().drawShip(g);	
 	}
 	
 	/**
@@ -124,8 +121,9 @@ public class MapWindow extends JPanel implements java.io.Serializable{
 	*/
 		
 	/**
-	 * sets the player
-	 * @param player
+	 * Sets the player and displays relevant stats.
+	 * 
+	 * @param the current player
 	 */
 	public void setPlayer(Player player) {
 		this.player = player;
@@ -136,12 +134,15 @@ public class MapWindow extends JPanel implements java.io.Serializable{
 		skillFighter.setText("Fighter Skill: " + player.getFighterSkill());
 		shipLocation.setText("Location: x = " + player.getShip().getLocation().x + " y = " + player.getShip().getLocation().y);
 	}
-	
+
+	/**
+	 * Sets the solar system.
+	 * 
+	 * @param solarSystem the solar system
+	 */
 	public void setSolarSystem(SolarSystem solarSystem){
 		this.solarSystem = solarSystem;
 	}
-
-
 
 	/**
 	 * Creates an Adapter to catch where the mouse is pressed on
@@ -150,8 +151,10 @@ public class MapWindow extends JPanel implements java.io.Serializable{
 	private class MouseOver extends MouseAdapter{
 		/**
 		 * Detects when a Planet has been clicked.
-		 * if the planet clicked is in the range of the ship, it will travel there and open the trade window. 
-		 * If not it will tell the user that the planet is not in range.
+		 * if the planet clicked is in the range of the ship, 
+		 * it will travel there and open the trade window. 
+		 * If not it will tell the user that the planet is not
+		 *  in range.
 		 * @param m the event corresponding to when the mouse is pressed
 		 */
 		public void mousePressed(MouseEvent m){
@@ -174,10 +177,11 @@ public class MapWindow extends JPanel implements java.io.Serializable{
 	}
 	
 	/**
-	 * this class listens for mouse movements. As of now all it does is display the name 
-	 * of the planet when the mouse is over it
-	 * @author Hayden
-	 *
+	 * This class listens for mouse movements. As of now 
+	 * all it does is display the name of the planet when
+	 * the mouse is over it.
+	 * 
+	 * @author Quirky Qwertys
 	 */
 	private class MouseMove implements MouseMotionListener{
 
@@ -188,6 +192,11 @@ public class MapWindow extends JPanel implements java.io.Serializable{
 		}
 
 		@Override
+		/**
+		 * Checks to see whether the cursor is hovering over
+		 * a planet and displays the planet's corresponding
+		 * name if it is doing so.
+		 */
 		public void mouseMoved(MouseEvent m) {
 			Point mPoint = m.getPoint();
 			move(mPoint);
@@ -206,7 +215,10 @@ public class MapWindow extends JPanel implements java.io.Serializable{
 			}
 		}
 	}
-	/** draws the ship, rotates it and moves it to the specified point **/
+	/** 
+	 * Draws the ship, rotates it and moves it to 
+	 * the specified point. 
+	 */
 	public void move(Point p){
 		double x = player.getShip().getLocation().x,
 				y = player.getShip().getLocation().y;
@@ -223,10 +235,5 @@ public class MapWindow extends JPanel implements java.io.Serializable{
 		BufferedImage bShipIcon = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
 		g2d = bShipIcon.createGraphics();
 		g2d.drawImage(shipIcon, at, null);
-		
-		
-		
-
-		
 	}
 }

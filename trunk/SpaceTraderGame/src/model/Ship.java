@@ -22,13 +22,9 @@ import java.util.Random;
  * @version 1.0 10.07.12
  */
 public class Ship {
-    /**
-	 * 
-	 */
-	
+
 	private static final long serialVersionUID = 1L;
 
-	// /** Array used to store all of the Player's TradeGoods.*/
     protected TradeGood[] cargoHold = new TradeGood[20];
 	
     protected Inventory cargo;
@@ -331,7 +327,7 @@ public class Ship {
 	/**
 	 * Draws a visual representation of the ship
 	 *  
-	 * @param g the default graphics
+	 * @param g the graphics object
 	 */
 	public void drawShip(Graphics g){
 		Image shipIcon = null;
