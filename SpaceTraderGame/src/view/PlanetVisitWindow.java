@@ -151,8 +151,9 @@ public class PlanetVisitWindow extends BackgroundPanel{
 		
 		planetPanel = new JPanel();
 		planetPanel.setOpaque(false);
-		planetContainerPanel.add(planetPanel, "bluegreen");
 		
+		
+		planetContainerPanel.add(planetPanel, "bluegreen");
 		
 		planetContainerPanel.add(tradeWin,"trade");
 		planetContainerPanel.add(shipyardWin, "shipyard");
@@ -257,5 +258,9 @@ public MapWindow getMapWin() {
 	
 	return mapWin;
 }
+
+
+
+
 
 }
