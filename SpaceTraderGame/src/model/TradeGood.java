@@ -24,6 +24,18 @@ public enum TradeGood implements java.io.Serializable{
 	private String name;
 	private int cost;
 	
+	/**
+	 * Instantiates a trade good.
+	 * 
+	 * @param minTechLPro the minimum tech level to produce good
+	 * @param minTechLUse the minimum tech level for good to be used
+	 * @param techLProd the tech level for production
+	 * @param basePrice the good's base price
+	 * @param incrPLevel price increase per tech level
+	 * @param vari the range that price may vary in regards to base price
+	 * @param minPriceSpace the minimum price good is sold for
+	 * @param name the name of the good
+	 */
 	TradeGood(int minTechLPro, int minTechLUse, int techLProd,
 			int basePrice, int incrPLevel, int vari, 
 			int minPriceSpace, String name) {
@@ -37,6 +49,13 @@ public enum TradeGood implements java.io.Serializable{
 		this.name = name;
 	}
 	
+	/**
+	 * Determines the cost of a trade good.
+	 * 
+	 * @param currentTechLevel the tech level of the planet
+	 * @param inSpace whether or not 
+	 * @return the price of the item
+	 */
 	public int cost(int currentTechLevel, boolean inSpace) {
 		int ace = -1;
 		Random gen = new Random(); 
@@ -58,16 +77,18 @@ public enum TradeGood implements java.io.Serializable{
 		return ace;
 	}
 	/**
-	 * gets the name of the tradegood
-	 * @return name of trade good
+	 * Gets the name of the TradeGood.
+	 * 
+	 * @return the name of trade good
 	 */
 	public String getName (){
 		return name;
 	}
 
 	/**
-	 * gets the min place sold
-	 * @return int minTechLevelUsed
+	 * Gets the minimum tech level to use the good.
+	 * 
+	 * @return the tech level
 	 */
 	public int getMinTechLevelUse() {
 		// TODO Auto-generated method stub
@@ -89,4 +110,3 @@ public enum TradeGood implements java.io.Serializable{
 		return goodStr;
 	}
 }
-
