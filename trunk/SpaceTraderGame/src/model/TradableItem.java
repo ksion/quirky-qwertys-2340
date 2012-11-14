@@ -1,4 +1,7 @@
 package model;
+
+import flexjson.JSON;
+
 /**
  * Represents the items (TradeGoods) that can be traded,
  * bought or sold.
@@ -28,6 +31,9 @@ public class TradableItem {
 		this.type = type;
 		this.qty = qty;
 		this.price = price;
+	}
+	
+	protected TradableItem() {
 	}
 /**
  * Gets the quantity of the trade good
@@ -60,11 +66,16 @@ public class TradableItem {
 		return price;
 	}
 	
+	protected void setPrice(int price) {
+		this.price = price;
+	}
+	
 	/**
 	 * Gets the name of the trade good
 	 * @return the name of the good
 	 */
+	@JSON(include=false)
 	public String getName(){
 		return type.getName();
-	}
+	}	
 }

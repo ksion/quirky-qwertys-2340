@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Point;
+import java.io.IOException;
 
 /**
  * Represents the playable space trader character.
@@ -36,11 +37,8 @@ public class Player {
 	private int money = 1000;
 	
 	/** Current Ship the player owns. */ 
-	Ship myShip = new GnatShip(new Point(100,100));
-	
-	/** Player's inventory of TradeGoods. */
-	TradeGood[] inventory = new TradeGood[myShip.hullStrength];
-	
+	Ship myShip;
+		
 	/** 
 	 * Instantiates a Player with a given name and skill
 	 * points that can be allocated to the Player's different
@@ -49,13 +47,21 @@ public class Player {
 	 * @param name the name of the Player
 	 * @param skills array of skill points corresponding
 	 *        to each of the Player's skills
+	 * @throws IOException 
 	 */
-	public Player(String name, int[] skills){
+	public Player(String name, int[] skills) throws IOException{
 		this.name = name;
 		pilotSkill = skills[0];
 		fighterSkill = skills[1];
 		traderSkill = skills[2];
 		engineerSkill = skills[3];
+		myShip = new GnatShip(new Point(100,100));
+	}
+	
+	/**
+	 * Need by serialization
+	 */
+	protected Player() {
 	}
 	
 	/**
@@ -125,13 +131,20 @@ public class Player {
 		return myShip.getCargo();
 	}
 	
+
+	
+
 	/**
 	 * Adds credits to the players current amount
 	 * 
 	 * @param update the amount of money added
 	 */
-	public void setMoney(int update){
+	public void addMoney(int update){
 		money = money + update;
+	}
+	
+	protected void setMoney(int money){
+		this.money = money;
 	}
 	
 	

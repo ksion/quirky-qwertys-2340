@@ -3,6 +3,7 @@ package model;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -23,11 +24,12 @@ import java.util.Random;
  */
 public class Ship {
 
-	private static final long serialVersionUID = 1L;
 
     protected TradeGood[] cargoHold = new TradeGood[20];
 	
     protected Inventory cargo;
+    
+    private transient Image shipIcon;
 
 	/** Amount of damage Ship has sustained. */
 	protected int damageSustained = 0;
@@ -65,9 +67,6 @@ public class Ship {
 	/** Represents whether the ship is in space or a planet. */
 	protected boolean flight = false;
 	
-	/** Represents the maximum distance the Ship can travel in one trip. */
-	protected final double MAX_DISTANCE = 15; 
-	
 	/** Maximum amount of fuel or fuel capacity a Ship can have. */	
 	protected int fuelCapacity = 64;
 	
@@ -81,21 +80,35 @@ public class Ship {
 	 * @param hullStrength the ship's hull strength
 	 * @param inventorySlots the number of cargo bays
 	 * @param p the ship's location
+	 * @throws IOException 
 	 */
-	public Ship(int hullStrength, int inventorySlots, Point p){
+	public Ship(int hullStrength, int inventorySlots, Point p) throws IOException{
 		this.hullStrength = hullStrength;
 		this.currentX = p.getX();
 		this.currentY = p.getY();
 		cargo = new Inventory(inventorySlots);
+		loadResources();
+	}
+	
+	public void loadResources() throws IOException {
+		shipIcon = ImageIO.read(getClass().getResource("/view/shipIcon.png"));
 	}
 	
 	/** 
 	 * Instantiates a Ship with specified hull strength.
 	 * 
 	 * @param hullStrength the ship's hull strength
+	 * @throws IOException 
 	 */
-	public Ship(int hullStrength){
+	public Ship(int hullStrength) throws IOException{
 		this.hullStrength = hullStrength;
+		loadResources();
+	}
+	
+	/**
+	 * Needed by serialization
+	 */
+	protected Ship() {
 	}
 	
 	/**
@@ -139,9 +152,9 @@ public class Ship {
 		double 	planetX = planetPos.getX(), 
 		    	planetY = planetPos.getY();
 		double pixelDistance = 
-				Math.pow(Math.pow(currentX - planetX, 2) + 	Math.pow(currentY - planetY, 2),.5);
+				Math.sqrt( Math.pow(currentX - planetX, 2) + Math.pow(currentY - planetY, 2) );
 		double gameDistance = pixelDistance/20;
-	return gameDistance;
+		return gameDistance;
 	}
 			/*
 			 - during this time where flight is true, an encounter
@@ -160,7 +173,7 @@ public class Ship {
 		double distance = findDistance(p);
 		double fuelNeeded = Math.ceil(distance / fuelEconomy);
 		
-		if (distance <= MAX_DISTANCE && fuelAmount >= fuelNeeded){
+		if (fuelAmount >= fuelNeeded){
 			fuelAmount -= fuelNeeded;
 			return true;
 		}
@@ -330,12 +343,6 @@ public class Ship {
 	 * @param g the graphics object
 	 */
 	public void drawShip(Graphics g){
-		Image shipIcon = null;
-		try {
-			shipIcon = ImageIO.read(new File("src/view/shipIcon.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		
 		g.drawImage(shipIcon, getLocation().x, getLocation().y, 20, 20, null);
 	}

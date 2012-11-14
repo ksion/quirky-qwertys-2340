@@ -54,13 +54,9 @@ public class SolarSystem {
 	}
 	
 	/**
-	 * Instantiates a SolarSystem with a default name, coordinates, tax 
-	 * rate, and number of planets.
-	 * 
-	 * @param planets the group of Planets in the SolarSystem 
+	 * Needed by serialization
 	 */
-	public SolarSystem() {
-		this("Baton Rouge", new Point(0, 0), 5, 0.07, 7);
+	protected SolarSystem() {
 	}
 	
 	/**

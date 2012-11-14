@@ -1,5 +1,6 @@
 package model;
 
+import java.io.IOException;
 import java.util.Random;
 
 /**
@@ -20,8 +21,9 @@ public class Pirate {
 	
 	/**
 	 * Instantiates a pirate with a Ship.
+	 * @throws IOException 
 	 */
-	public Pirate(){
+	public Pirate() throws IOException{
 		pirateShip = new Ship(random.nextInt(75) + 25);
 	}
 	

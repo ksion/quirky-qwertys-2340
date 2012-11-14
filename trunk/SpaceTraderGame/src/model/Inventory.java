@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import flexjson.JSON;
+
 /**
  * Represents the attributes of inventory that traders
  * are interested in.
@@ -13,8 +15,8 @@ import java.util.Random;
  */
 public class Inventory {
 
-	private static final long serialVersionUID = 1L;
-	private ArrayList<TradableItem> goods;
+	private List<TradableItem> goods;
+
 	private int maxItems;
 	
 	/**
@@ -26,12 +28,16 @@ public class Inventory {
 		this.maxItems = maxItems;
 		goods = new ArrayList<TradableItem>();
 	}
+	
 	/**
-	 * Instantiates an inventory with a default capacity.
+
+	 * Needed for serialization
 	 */
-	public Inventory(){
-		this(Integer.MAX_VALUE);
+
+	protected Inventory (){
+
 	}
+
 	
 
 	/**
@@ -44,7 +50,6 @@ public class Inventory {
 	 */
 
 	public void generate(int techLevel, List<TradeGood> allowableTradeGoods, int maxQty, boolean inSpace){
-
 		Random rand = new Random();
 		goods = new ArrayList<TradableItem>();
 		for (TradeGood good: allowableTradeGoods){
@@ -65,11 +70,16 @@ public class Inventory {
 		return goods;
 	}
 	
+	protected void setGoods(List<TradableItem> items) {
+		this.goods = items;
+	}
+	
 	/**
 	 * Gets quantity of a good.
 	 * 
 	 * @return the quantity
 	 */
+	@JSON(include=false)
 	public int getUsedSpace(){
 		int quantity = 0;
 		for (TradableItem good: goods){
@@ -85,6 +95,10 @@ public class Inventory {
 	 */
 	public int getMaxItems(){
 		return maxItems;
+	}
+	
+	protected void setMaxItems(int max) {
+		this.maxItems = max;
 	}
 	
 	/**

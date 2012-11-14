@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Point;
+import java.io.IOException;
 
 /**
  * Represents the default Ship a Traveler starts off with.
@@ -39,13 +40,21 @@ public class GnatShip extends Ship implements java.io.Serializable{
 	 * 
 	 * @param hullStrength the strength of the Ship's hull
 	 * @param point the location of the Ship
+	 * @throws IOException 
 	 */
-	public GnatShip(Point point){
+	public GnatShip(Point point) throws IOException{
 		super(HULL_STRENGTH, CARGOBAY, point);
 		name = "Gnat";
 		fuelCapacity = TRAVELRANGE * fuelEconomy;
 		fuelAmount = fuelCapacity;
 		cost = 10000;
+	}
+
+	/**
+	 * Needed by serialization
+	 */
+	protected GnatShip() {
+		super();
 	}
 	
 	
