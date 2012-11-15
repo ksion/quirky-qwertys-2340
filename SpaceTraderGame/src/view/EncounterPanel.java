@@ -140,8 +140,9 @@ public class EncounterPanel extends JPanel {
 		public void actionPerformed(ActionEvent event){
 			int playerDamage = player.getShip().getDamageSustained();
 			int pirateDamage = pirate.getShip().getDamageSustained();
-			System.out.println(pirateDamage);
-			if (playerDamage < 100 && pirateDamage < 100){
+
+			if ((playerDamage < player.getShip().getHullStrength() && 
+				pirateDamage < pirate.getShip().getHullStrength())){
 				int currDamage = pirate.getShip().getDamageSustained();
 				player.getShip().attack(pirate.getShip());
 				damageInfo.setText("You dealt " + Integer.toString(pirate.getShip().getDamageSustained() 
@@ -160,8 +161,7 @@ public class EncounterPanel extends JPanel {
 					player.addMoney(money);
 					JOptionPane.showMessageDialog(null, "You just gained " + money + " credits.");
 					
-					gc.showPlanet();
-					
+					gc.showPlanet();					
 				}
 			}	
 		}
@@ -188,6 +188,11 @@ public class EncounterPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * Sets the player.
+	 * 
+	 * @param player the player
+	 */
 	public void setPlayer(Player player) throws IOException {
 		this.player = player;
 		pirate = new Pirate();
