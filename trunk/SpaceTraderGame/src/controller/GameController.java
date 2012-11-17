@@ -87,7 +87,6 @@ public class GameController{
 	 */
 	public void gotoShipyard(){
 		gameWindow.showShipyard(currentGame.getPlayer());
-		
 	}
 
 	/**
