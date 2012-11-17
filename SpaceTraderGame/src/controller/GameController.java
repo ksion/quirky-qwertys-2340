@@ -1,47 +1,35 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-
 import model.Game;
 import model.Inventory;
 import model.Planet;
 import model.Player;
-import model.SolarSystem;
-import model.Universe;
 import view.GameWindow;
 
 /**
- * Controls the game flow
+ * Controls the game flow.
  * @author Quirky Qwertys
  * @version 1.0 
  */
 public class GameController{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public transient GameWindow gameWindow;
 	private Game currentGame;
 	
-	
-	
 	/**
-	 * Main method to start the game
-	 * @param args
+	 * Main method to start the game.
+	 * @param args default argument for main class
 	 */
 	
 	public static void main(String[] args){
-		//launch the player creation window;
+		// launch the player creation window
 		GameController gc = new GameController();
 	}
 	
-
-
 	/**
-	 * Starts a new Space Traders game.
+	 * Starts a new Space Trader game.
 	 */
 	public GameController(){
 		try{
@@ -53,13 +41,10 @@ public class GameController{
 		catch (IOException e){
 			e.printStackTrace();
 		}
-		
 	}
 	
-	
-	
 	/**
-	 * creates the player window and the map window.
+	 * Creates the player window and the map window.
 	 */
 	public void newPlayer() {
 		gameWindow.showNewPlayerWin();
@@ -69,62 +54,58 @@ public class GameController{
 	 * Shows a map of the Planets/SolarSystems in the Universe.
 	 */
 	public void showMap() {
-		gameWindow.showMapWin(currentGame.getPlayer(), currentGame.getSolarSystem());
-			
+		gameWindow.showMapWin(currentGame.getPlayer(), currentGame.getSolarSystem());	
 	}
 	
-	
-	
 	/**
-	 * gets the player instance
-	 * @return player
+	 * Gets the player instance.
+	 * 
+	 * @return the player
 	 */
 	public Player getPlayer(){
 		return currentGame.getPlayer();
 	}
 
-
 	/**
-	 * gets the ship's cargo
-	 * @return ship's inventory
+	 * Gets the ship's cargo
+	 * 
+	 * @return the ship's inventory
 	 */
-	public Inventory getCargo() {
+	public Inventory getCargo(){
 		return currentGame.getPlayer().getCargo();
 	}
 
 	/**
-	 * tells the game window to show the marketplace
+	 * Tells the game window to show the marketplace.
 	 */
-	public void gotoMarketPlace() {
+	public void gotoMarketPlace(){
 		gameWindow.showMarketPlace( currentGame.getPlayer(), currentGame.getCurrentPlanet().getTradableInventory() );
 	}
 	
 	/**
-	 * tells the game window to show the shipyard screen
+	 * Tells the game window to show the shipyard screen.
 	 */
-	public void gotoShipyard() {
+	public void gotoShipyard(){
 		gameWindow.showShipyard(currentGame.getPlayer());
 		
 	}
 
 	/**
-	 * tells game window to show the planet screen
+	 * Tells game window to show the planet screen.
 	 */
 	public void showPlanet(){
-		gameWindow.showPlanet( currentGame.getCurrentPlanet(), currentGame.getPlayer() );
-		//gameWindow.showPlanetVisitWin();
-		
+		gameWindow.showPlanet(currentGame.getCurrentPlanet(), currentGame.getPlayer());
 	}
 	
 	/**
-	 * tells the game window to show the planet
+	 * Tells the game window to show the planet.
 	 */
 	public void showPlanetVisit(){
-		gameWindow.showPlanet( currentGame.getCurrentPlanet(),currentGame.getPlayer() );
+		gameWindow.showPlanet(currentGame.getCurrentPlanet(),currentGame.getPlayer());
 	}
 	
 	/**
-	 * tells the game window to show the pirate encounter
+	 * Tells the game window to show the pirate encounter.
 	 */
 	public void showEncounter(){
 		try {
@@ -134,21 +115,23 @@ public class GameController{
 		}
 	}
 
-	public boolean travelToPlanet(Planet planet) {
+	public boolean travelToPlanet(Planet planet){
 		boolean b = currentGame.getPlayer().getShip().travel(planet);
 		if (b){
 			currentGame.setCurrentPlanet(planet);
 			currentGame.getCurrentPlanet().createInventory();
-			//gameWindow.showPlanet( planet );
 			gameWindow.showPlanetVisitWin(currentGame.getCurrentPlanet(), currentGame.getPlayer());
 			return true;
 		}
 		return false;
 	}
 
-
-	public void newGame(Player newPlayer) {
-		
+	/**
+	 * Starts a new game.
+	 * 
+	 * @param newPlayer the new player
+	 */
+	public void newGame(Player newPlayer){	
 		try{
 			this.currentGame = new Game(newPlayer);	
 			showPlanetVisit();
@@ -156,42 +139,34 @@ public class GameController{
 		catch(IOException e){
 			System.out.println(e);
 		}
-		
 	}
+	
 	/**
-	 * shows the start window
+	 * Shows the start window.
+	 * 
 	 * @throws IOException 
 	 */
 	public void showStart(){
-		try {
+		try{
 			gameWindow.showStartWindow();
-		} catch (IOException e) {
-			
+		} 
+		catch (IOException e){
 			e.printStackTrace();
 		}
 	}
 
-
-
-	public void loadGame() throws IOException {
+	public void loadGame() throws IOException{
 		currentGame = Game.loadGame();
 		gameWindow.showPlanet( currentGame.getCurrentPlanet(), currentGame.getPlayer() );
 		currentGame.getPlayer().getShip().loadResources();
 	}
 
-
-/**
- * saves the current game
- * @throws IOException
- */
-	public void save() throws IOException {
+    /**
+     * Saves the current game.
+     * 
+     * @throws IOException
+     */
+	public void save() throws IOException{
 		currentGame.saveGame();
-		
 	}
-	
-	
-
-
-
-	
 }
