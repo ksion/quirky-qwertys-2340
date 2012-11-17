@@ -24,17 +24,8 @@ public class FireflyShip extends Ship implements java.io.Serializable{
 	/** Hull strength of the Ship. */
 	private static final int HULL_STRENGTH = 100;
 	
-	/** Number of slots available to store weapons in the Ship. */
-	private static final int WEAPONSLOTS = 1;
-	
-	/** Number of slots available to store gadgets in the Ship. */
-	private static final int GADGETSLOTS = 1;
-	
-	/** Number of slots available to store gadgets in the Ship. */
-	private static final int SHIELDSLOTS = 1;
-	
 	/** Range of parsecs Ship can travel before it runs out of fuel. */
-	private static final int TRAVELRANGE = 17;
+	private static final int TRAVEL_RANGE = 17;
 
 	/**
 	 * Instantiates a Firefly ship.
@@ -46,7 +37,7 @@ public class FireflyShip extends Ship implements java.io.Serializable{
 	public FireflyShip(Point point) throws IOException{
 		super(HULL_STRENGTH, CARGOBAY, point);
 		name = "Firefly";
-		fuelCapacity = TRAVELRANGE * fuelEconomy;
+		fuelCapacity = TRAVEL_RANGE * fuelEconomy;
 		fuelAmount = fuelCapacity;
 		cost = 25000;
 	}

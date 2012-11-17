@@ -26,17 +26,8 @@ public class FleaShip extends Ship implements java.io.Serializable{
 	/** Hull strength of a FleaShip */
 	private static final int HULL_STRENGTH = 25;
 	
-	/** Number of slots available to store weapons for a FleaShip. */
-	private static final int WEAPONSLOTS = 0;
-	
-	/** Number of slots available to store gadgets for a FleaShip. */
-	private static final int GADGETSLOTS = 0;
-	
-	/** Number of slots available to store shields for a FleaShip. */
-	private static final int SHIELDSLOTS = 0;
-	
 	/** Range of parsecs Ship can travel before it runs out of fuel for a FleaShip. */
-	private static final int TRAVELRANGE = 20;
+	private static final int TRAVEL_RANGE = 20;
 	
 	/**
 	 * Instantiates a Flea ship.
@@ -48,7 +39,7 @@ public class FleaShip extends Ship implements java.io.Serializable{
 	public FleaShip(Point point) throws IOException{
 		super(HULL_STRENGTH, CARGOBAY, point);
 		name = "Flea";
-		fuelCapacity = TRAVELRANGE * fuelEconomy;
+		fuelCapacity = TRAVEL_RANGE * fuelEconomy;
 		fuelAmount = fuelCapacity;
 		cost = 2000;
 	}

@@ -25,17 +25,8 @@ public class BumblebeeShip extends Ship implements java.io.Serializable{
 	/** Hull strength of the Ship. */
 	private static final int HULL_STRENGTH = 100;
 	
-	/** Number of slots available to store weapons in the Ship. */
-	private static final int WEAPONSLOTS = 1;
-	
-	/** Number of slots available to store gadgets in the Ship. */
-	private static final int GADGETSLOTS = 2;
-	
-	/** Number of slots available to store gadgets in the Ship. */
-	private static final int SHIELDSLOTS = 2;
-	
 	/** Range of parsecs Ship can travel before it runs out of fuel. */
-	private static final int TRAVELRANGE = 15;
+	private static final int TRAVEL_RANGE = 15;
 
 
 	/**
@@ -48,7 +39,7 @@ public class BumblebeeShip extends Ship implements java.io.Serializable{
 	public BumblebeeShip(Point point) throws IOException{
 		super(HULL_STRENGTH, CARGOBAY, point);
 		name = "Bumblebee";
-		fuelCapacity = TRAVELRANGE * fuelEconomy;
+		fuelCapacity = TRAVEL_RANGE * fuelEconomy;
 		fuelAmount = fuelCapacity;
 		cost = 60000;
 	}
