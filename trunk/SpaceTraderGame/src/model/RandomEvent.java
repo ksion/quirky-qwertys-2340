@@ -15,9 +15,18 @@ import controller.GameController;
 public class RandomEvent {
 	
 	private static final long serialVersionUID = 1L;
-	private Random random = new Random();
+	
+	/** Represents the player of the game. */
 	private Player player;
 	
+	/** Represents a Random generator. */
+	private Random random = new Random();
+	
+	/**
+	 * Instantiates a random event.
+	 * 
+	 * @param gc the game controller
+	 */
 	public RandomEvent(GameController gc){
 		this.player = gc.getPlayer();
 		int event = random.nextInt(3);
