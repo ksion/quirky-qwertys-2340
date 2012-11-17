@@ -54,7 +54,7 @@ public class RandomEvent {
 			TradeGood good = goods[random.nextInt(9)];
 			TradableItem item = new TradableItem(good, 1, good.getBasePrice());
 
-			i.addTradeGood(item);
+			i.canAddTradeGood(item);
 			player.getShip().setCargo(i);
 			JOptionPane.showMessageDialog(null, good.getName() + " has been added to your cargo.");
 		}

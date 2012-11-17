@@ -258,7 +258,7 @@ public class TradeWindow extends JPanel implements java.io.Serializable{
 		public boolean purchase( TradableItem buy, int qty ) {
 			boolean added = false;
 			for (int i = 0; i < qty; i++) {
-				added = inventory.addTradeGood(buy);
+				added = inventory.canAddTradeGood(buy);
 				if( added ) {
 					notifyChange();
 					added = true;
