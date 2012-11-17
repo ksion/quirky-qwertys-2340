@@ -44,10 +44,6 @@ public class Ship {
 	
 	/** Amount of fuel Ship currently has. */
 	protected int fuelAmount = 16;
-	
-	/** Marker used to keep track of whether or not Ship has an 
-	    escape pod. */
-	protected boolean escapePod = false;
 
 	/** Strength of the Ship's hull. */
 	protected int hullStrength;
@@ -153,11 +149,7 @@ public class Ship {
 		double gameDistance = pixelDistance/20;
 		return gameDistance;
 	}
-			/*
-			 - during this time where flight is true, an encounter
-			 - needs to be generated...
-			 - somewhere flight has to be turned back to false
-			*/
+
    /**
 	* Checks whether a Planet is within the Ship's range to
 	* travel to it.
@@ -179,9 +171,6 @@ public class Ship {
 
 	/**
 	 * Gets the name of the Ship. 
-	 * This class may be deleted later--it's purpose is
-	 * to make sure that Player instantiates the Ship
-	 * correctly.
 	 * 
 	 * @return the name/type of the Ship
 	 */
@@ -246,7 +235,7 @@ public class Ship {
 	}
 	
 	/**
-	 * Retrieves the hull strength of the ship
+	 * Retrieves the hull strength of the ship.
 	 * 
 	 * @return ship's hull strength
 	 */
@@ -255,7 +244,7 @@ public class Ship {
 	}
 	
 	/**
-	 * Sets the hull strength of the ship
+	 * Sets the hull strength of the ship.
 	 * 
 	 * @param newStrength the hull strength
 	 */
@@ -328,7 +317,6 @@ public class Ship {
 		"Distance Traveled: " + distanceTraveled + "\n" + 
 		"Fuel economy: " + fuelEconomy + "\n"+ 
 		"Fuel amount: " + fuelAmount + "\n" +
-		"Escape Pod: " + escapePod + "\n" +
 		"Hull Strength: " + hullStrength + "\n" +
 		"Cargo Hold: ";
 		return shipStr;
