@@ -1,3 +1,8 @@
+/**
+ * Inventory.java
+ * @version 1.0
+ * copyright 2012
+ */
 package edu.gatech.quirkyqwerties.spacetraders.model;
 
 import java.util.ArrayList;
@@ -11,12 +16,15 @@ import flexjson.JSON;
  * are interested in.
  * 
  * @author Quirky Qwertys
+ * @version 1.0
  *
  */
 public class Inventory {
 
+	/** list of tradable items which is the player's inventory */
 	private List<TradableItem> goods;
 
+	/** max number of items that can be stored in inventory */
 	private int maxItems;
 	
 	/**
@@ -30,15 +38,12 @@ public class Inventory {
 	}
 	
 	/**
-
-	 * Needed for serialization
+	 * Empty constructor needed for flex json serialization
 	 */
 
-	protected Inventory (){
+	protected Inventory (){ // $codepro.audit.disable emptyMethod
 
 	}
-
-	
 
 	/**
 	 * Generates the inventory out of all possible goods.
@@ -49,13 +54,15 @@ public class Inventory {
 	 * @param inSpace
 	 */
 
-	public void generate(int techLevel, List<TradeGood> allowableTradeGoods, int maxQty, boolean inSpace){
-		Random rand = new Random();
+	public void generate(int techLevel, List<TradeGood> allowableTradeGoods, int maxQty, 
+			boolean inSpace){
+		final Random rand = new Random();
 		goods = new ArrayList<TradableItem>();
 		for (TradeGood good: allowableTradeGoods){
 			int qty = rand.nextInt(maxQty);
 			if (qty > 0){
-				goods.add(new TradableItem(good, rand.nextInt(maxQty),good.cost(techLevel, inSpace)));
+				goods.add(new TradableItem(good, rand.nextInt(maxQty),
+						good.cost(techLevel, inSpace)));
 			}
 		} 
 		
@@ -70,6 +77,10 @@ public class Inventory {
 		return goods;
 	}
 	
+	/**
+	 * sets the goods instance variable
+	 * @param items list of tradable items
+	 */
 	protected void setGoods(List<TradableItem> items) {
 		this.goods = items;
 	}
@@ -97,6 +108,10 @@ public class Inventory {
 		return maxItems;
 	}
 	
+	/**
+	 * sets the max number of items in inventory
+	 * @param max number of items
+	 */
 	protected void setMaxItems(int max) {
 		this.maxItems = max;
 	}
@@ -108,14 +123,15 @@ public class Inventory {
 	 * @param good the TradeGood that will be stored
 	 * @return true if the good was stored, false otherwise
 	 */
-	public boolean addTradeGood(TradableItem good){
+	public boolean canAddTradeGood(TradableItem good){
 		if (getUsedSpace() < maxItems){
-			TradableItem found = findItem(good);
-			if (found!=null){
-				found.setQty(found.getQty()+1);
+			final TradableItem found = findItem(good);
+			if (found != null){
+				found.setQty(found.getQty() + 1);
 			}
 			else{
-				TradableItem newItem = new TradableItem(good.getType(),1,good.getPrice());
+				final TradableItem newItem = new TradableItem(good.getType(),
+						1, good.getPrice());
 				goods.add(newItem);
 			}
 			return true;
@@ -133,8 +149,22 @@ public class Inventory {
 		for (TradableItem current: goods){
 			if (current.getType().equals(good.getType())){
 				return current;
-			}	
+			}
 		}
 		return null;
+	}
+	
+	/**
+	 * prints out the inventory
+	 * @return a string representation of the inventory name
+	 */
+	public String toString(){
+		final StringBuilder invString = new StringBuilder();
+		invString.append("Inventory: ");
+		
+		for (TradableItem item:goods){
+			invString.append(item.getName() + ";");
+		}
+		return invString.toString();
 	}
 }
