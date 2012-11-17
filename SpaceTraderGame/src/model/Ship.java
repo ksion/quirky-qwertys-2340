@@ -48,9 +48,6 @@ public class Ship {
 	/** Marker used to keep track of whether or not Ship has an 
 	    escape pod. */
 	protected boolean escapePod = false;
-	
-	/** Marker used to keep track of whether or not Ship is insured. */
-	protected boolean insurance = false;
 
 	/** Strength of the Ship's hull. */
 	protected int hullStrength;
@@ -212,8 +209,9 @@ public class Ship {
 	}
 
 	/**
-	 * sets the fuel level
-	 * @param fuelAmount 
+	 * Sets the fuel level.
+	 * 
+	 * @param fuelAmount the new fuel level
 	 */
 	public void setFuelAmount(int fuelAmount) {
 		this.fuelAmount = fuelAmount;
@@ -331,7 +329,6 @@ public class Ship {
 		"Fuel economy: " + fuelEconomy + "\n"+ 
 		"Fuel amount: " + fuelAmount + "\n" +
 		"Escape Pod: " + escapePod + "\n" +
-		"Insurance: " + insurance + "\n" +
 		"Hull Strength: " + hullStrength + "\n" +
 		"Cargo Hold: ";
 		return shipStr;
