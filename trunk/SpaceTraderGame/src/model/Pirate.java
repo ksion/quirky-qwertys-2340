@@ -8,7 +8,7 @@ import java.util.Random;
  * a Ship with a random hull strength.
  * 
  * @author Quirky Qwertys
- *
+ * @version 1.0 11.14.12
  */
 public class Pirate {
 	
@@ -16,11 +16,16 @@ public class Pirate {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	/** Represents the pirate's ship. */
 	private Ship pirateShip;
+	
+	/** Random number generator. */
 	private Random random = new Random();
 	
 	/**
 	 * Instantiates a pirate with a Ship.
+	 * 
 	 * @throws IOException 
 	 */
 	public Pirate() throws IOException{
