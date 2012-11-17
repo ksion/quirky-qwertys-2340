@@ -19,7 +19,7 @@ public class RandomEvent {
 	/** Represents the player of the game. */
 	private Player player;
 	
-	/** Represents a Random generator. */
+	/** Represents a random number generator. */
 	private Random random = new Random();
 	
 	/**

@@ -5,8 +5,7 @@ import java.io.IOException;
 
 /**
  * Represents the shipyard where the user may trade 
- * his/her old ship for a new a new one. Fuel can also
- * be bought in the shipyard.
+ * his/her old ship for a new a new one.
  * 
  * @author Quirky Qwertys
  * @version 1.0 11.05.12
@@ -24,6 +23,7 @@ public class Shipyard {
 	 * Instantiates a shipyard with all of the ships
 	 * that exist in the Space Trader universe.
 	 * @throws IOException 
+	 * 
 	 */
 	public Shipyard(Ship s) throws IOException{
 		Point p = s.getLocation();

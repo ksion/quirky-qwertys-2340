@@ -149,7 +149,7 @@ public class Planet {
 	/**
 	 * Gets the name of the Planet.
 	 * 
-	 * @param n the new name of the Planet
+	 * @return the name
 	 */
 	public String getName(){
 		return name;
@@ -163,9 +163,6 @@ public class Planet {
 	public void setName(String n){
 		name = n;
 	}
-	
-	
-	
 	
 	public String getPicNameStr() {
 		return picNameStr;

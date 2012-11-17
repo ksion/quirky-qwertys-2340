@@ -211,13 +211,4 @@ public class Player {
 		
 		return playerString;
 	}
-	/* 
-	 * Methods that will be added to code later:
-	 * public int sell(Item i){return null;}
-	 * public int buy(Item i){return null;}
-	 * public int trade(Item i){return null;}
-	 * public void takeTurn(Planet p){}
-	 * public void hire(Mercenary m){}
-	 * public void fire(Mercenary m){}
-	 * public void pay(Mercenary m){}*/
 }
