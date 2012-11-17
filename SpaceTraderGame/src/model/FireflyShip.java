@@ -42,6 +42,6 @@ public class FireflyShip extends Ship implements java.io.Serializable{
 		cost = 25000;
 	}
 	
-	protected FireflyShip() {
+	protected FireflyShip(){
 	}
 }

@@ -44,6 +44,6 @@ public class FleaShip extends Ship implements java.io.Serializable{
 		cost = 2000;
 	}
 	
-	protected FleaShip() {
+	protected FleaShip(){
 	}
 }

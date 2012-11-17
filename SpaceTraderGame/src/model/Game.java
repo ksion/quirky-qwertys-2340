@@ -10,7 +10,7 @@ import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
 
 /**
- * class to hold the Game object to aid in loading and saving
+ * Holds the Game object to aid in loading and saving.
  * @author QuirkyQwertys
  *1.0
  */
@@ -71,7 +71,6 @@ public class Game {
 		currentPlanet = solarSystem.getPlanets().get(0);//set the starting planet to the first in the list
 		currentPlanet.createInventory();
 	}
-	
 	
 	/**
 	 * saves the game object using flexjson
