@@ -19,13 +19,22 @@ import flexjson.JSON;
  */
 public class Planet {
 	
+	/** The rand. */
 	Random rand = new Random();
 	
 	/** Name of the Planet and the name of the corresponding image file. */
 	private String name;
+	
+	/** The pic name. */
 	private Image picName;
+	
+	/** The large pic name. */
 	private Image largePicName;
+	
+	/** The pic name str. */
 	private String picNameStr;
+	
+	/** The large pic name str. */
 	private String largePicNameStr;
 	
 	/** Dimensions of the images used to represent Planets. */
@@ -43,38 +52,35 @@ public class Planet {
 	/** Trade goods available on the Planet. */
 	private Inventory tradableInventory;
 	
-	/** The SolarSystem the Planet belongs to. */
-	private SolarSystem system; 
-	
 	/** Tax that applies to all trade transactions in the Planet. */
 	private double tax;
 	
 	/** List of images used to represent a Planet in the GUI. */
 	private String[] planetPics = {"/edu/gatech/quirkyqwerties/spacetraders/view/blueGasPlanet.png",
-			"/edu/gatech/quirkyqwerties/spacetraders/view/desertPlanet.png",
-			"/edu/gatech/quirkyqwerties/spacetraders/view/desolatePlanet.png",
-			"/edu/gatech/quirkyqwerties/spacetraders/view/jupiterPlanet.png", 
-			"/edu/gatech/quirkyqwerties/spacetraders/view/redMineralPlanet.png"};
+		"/edu/gatech/quirkyqwerties/spacetraders/view/desertPlanet.png",
+		"/edu/gatech/quirkyqwerties/spacetraders/view/desolatePlanet.png",
+		"/edu/gatech/quirkyqwerties/spacetraders/view/jupiterPlanet.png", 
+		"/edu/gatech/quirkyqwerties/spacetraders/view/redMineralPlanet.png"};
 	
-	/** List of images to represent the large planets in the GUI **/
+	/** List of images to represent the large planets in the GUI *. */
 	
 	public static String[] largePlanetPics = {"/edu/gatech/quirkyqwerties/spacetraders/view/aquaplanet.jpg", 
 		"/edu/gatech/quirkyqwerties/spacetraders/view/transparentplanet.jpg",
 		"/edu/gatech/quirkyqwerties/spacetraders/view/marbleplanet.jpg",
 		"/edu/gatech/quirkyqwerties/spacetraders/view/graniteplanet.jpg"};
 	
-	/** 
-	 * Instantiates a Planet given a specified coordinate, 
+	/**
+	 * Instantiates a Planet given a specified coordinate,
 	 * SolarSystem, and name.
-	 * 
-	 * @param p the (x, y) coordinate of the Planet 
+	 *
+	 * @param p the (x, y) coordinate of the Planet
 	 * @param s the SolarSystem the Planet belongs to
 	 * @param n the name of the Planet
-	 * @throws IOException 
+	 * @param largePlanetName the large planet name
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public Planet(Point p, SolarSystem s, String n, String largePlanetName) throws IOException{
 		position = p;
-		system = s;
 		name = n;
 		setPicNameStr(planetPics[rand.nextInt(5)]);
 		setLargePicNameStr(largePlanetName);
@@ -83,13 +89,13 @@ public class Planet {
 	}
 	
 	/**
-	 * Needed by serialization process
+	 * Needed by serialization process.
 	 */
 	protected Planet() {
 	}
 	
 	/**
-	 * generates the subset of planet inventory based on all allowable inventory
+	 * generates the subset of planet inventory based on all allowable inventory.
 	 */
 	public void createInventory(){
 		tradableInventory = new Inventory(Integer.MAX_VALUE);
@@ -122,19 +128,41 @@ public class Planet {
 		name = n;
 	}
 	
+	/**
+	 * Gets the pic name str.
+	 *
+	 * @return the pic name str
+	 */
 	public String getPicNameStr() {
 		return picNameStr;
 	}
 
+	/**
+	 * Sets the pic name str.
+	 *
+	 * @param picNameStr the new pic name str
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void setPicNameStr(String picNameStr) throws IOException {
 		this.picNameStr = picNameStr;
 		picName = ImageIO.read(getClass().getResource(picNameStr));
 	}
 
+	/**
+	 * Gets the large pic name str.
+	 *
+	 * @return the large pic name str
+	 */
 	public String getLargePicNameStr() {
 		return largePicNameStr;
 	}
 
+	/**
+	 * Sets the large pic name str.
+	 *
+	 * @param largePicNameStr the new large pic name str
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void setLargePicNameStr(String largePicNameStr) throws IOException {
 		this.largePicNameStr = largePicNameStr;	
 		largePicName = ImageIO.read(getClass().getResource(largePicNameStr));
@@ -158,6 +186,11 @@ public class Planet {
 		return techLevel;
 	}
 	
+	/**
+	 * Sets the tech level.
+	 *
+	 * @param level the new tech level
+	 */
 	protected void setTechLevel(int level) {
 		this.techLevel = level;
 	}
@@ -172,6 +205,11 @@ public class Planet {
 		return tradableInventory;
 	}
 	
+	/**
+	 * Sets the tradable inventory.
+	 *
+	 * @param tradableInventory the new tradable inventory
+	 */
 	protected void setTradableInventory(Inventory tradableInventory) {
 		this.tradableInventory = tradableInventory;
 	}
@@ -184,19 +222,39 @@ public class Planet {
 		return tax;
 	}
 	
+	/**
+	 * Sets the tax rate.
+	 *
+	 * @param rate the new tax rate
+	 */
 	protected void setTaxRate(double rate) {
 		this.tax = rate;
 	}
 	
+	/**
+	 * Gets the size.
+	 *
+	 * @return the size
+	 */
 	public int getSize(){
 		return SIZE;
 	}
 	
+	/**
+	 * Gets the pic name.
+	 *
+	 * @return the pic name
+	 */
 	@JSON(include = false)
 	public Image getPicName() {
 		return picName;
 	}
 	
+	/**
+	 * Gets the large pic name.
+	 *
+	 * @return the large pic name
+	 */
 	@JSON(include = false)
 	public Image getLargePicName() {
 		return largePicName;
