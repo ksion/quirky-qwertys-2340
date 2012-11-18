@@ -124,14 +124,14 @@ public class Inventory {
 	 * @return true if the good was stored, false otherwise
 	 */
 	public boolean canAddTradeGood(TradableItem good){
-		if (getUsedSpace() < maxItems){
+		if (maxItems - getUsedSpace() >= good.getQty()){
 			final TradableItem found = findItem(good);
 			if (found != null){
-				found.setQty(found.getQty() + 1);
+				found.setQty(found.getQty() + good.getQty());
 			}
 			else{
 				final TradableItem newItem = new TradableItem(good.getType(),
-						1, good.getPrice());
+						good.getQty(), good.getPrice());
 				goods.add(newItem);
 			}
 			return true;
