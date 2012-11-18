@@ -40,7 +40,7 @@ public class GnatShip extends Ship{
 	}
 
 	/**
-	 * Needed by serialization
+	 * Empty method needed for flexjson serializer.
 	 */
 	protected GnatShip() { // $codepro.audit.disable emptyMethod
 	}

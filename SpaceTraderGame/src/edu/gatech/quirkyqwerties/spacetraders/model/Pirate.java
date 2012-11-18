@@ -46,7 +46,7 @@ public class Pirate {
 	
 	/**
 	 * Attack the player's Ship. Deals damage based on 
-	 * 10-35% of the hull strength value  
+	 * 10-100% of the hull strength value  
 	 * 
 	 * @param playerShip the ship that corresponds to the player
 	 */

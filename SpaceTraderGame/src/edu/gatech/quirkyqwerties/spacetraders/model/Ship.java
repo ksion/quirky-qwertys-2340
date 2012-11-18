@@ -80,7 +80,7 @@ public class Ship{
 	private static final int DEFAULT_COST = 10000;
 	
 	/** Number used to determine damage. */
-	private static final float PERCENT = 0.25f;
+	private static final float PERCENT = 0.20f;
 	
 	/** Possible min percentage of hull strength used to determine damage. */
 	private static final float MIN_PERCENT = 0.10f;
@@ -116,7 +116,7 @@ public class Ship{
 	}
 	
 	/**
-	 * Empty constructor needed for serialization.
+	 * Empty method needed for flexjson serializer.
 	 */
 	protected Ship(){ // $codepro.audit.disable emptyMethod -->
 	}
@@ -333,7 +333,8 @@ public class Ship{
 	}
 	
 	/**
-	 * Attack a pirate's Ship.
+	 * Attack a pirate's Ship based on 10-100% of the 
+	 * hull strength.
 	 * 
 	 * @param pirateShip the ship that corresponds to a pirate
 	 */

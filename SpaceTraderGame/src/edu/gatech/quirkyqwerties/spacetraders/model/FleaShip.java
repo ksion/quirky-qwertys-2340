@@ -21,7 +21,6 @@ import java.io.IOException;
 
 public class FleaShip extends Ship{
 	
-
 	/** Number of cargo holds available for the FleaShip. */
 	private static final int CARGOBAY = 10;
 	
@@ -46,7 +45,7 @@ public class FleaShip extends Ship{
 	}
 	
 	/**
-	 * empty constructor required for json serialization
+	 * Empty method needed for flexjson serializer.
 	 */
 	protected FleaShip(){ // $codepro.audit.disable emptyMethod
 	}

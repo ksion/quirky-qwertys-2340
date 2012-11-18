@@ -20,7 +20,6 @@ import java.io.IOException;
  */
 public class MosquitoShip extends Ship {
     
-
 	/** Number of cargo holds available in the Ship. */
 	private static final int CARGOBAY = 15;
 	
@@ -45,7 +44,7 @@ public class MosquitoShip extends Ship {
 	}
 	
 	/**
-	 * empty constructor needed for json serialization
+	 * Empty method needed for flexjson serializer.
 	 */
 	protected MosquitoShip() { // $codepro.audit.disable emptyMethod
 	}

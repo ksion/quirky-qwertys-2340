@@ -1,3 +1,8 @@
+/**
+ * Shipyard.java
+ * @version 1.0
+ * copyright 2012
+ */
 package edu.gatech.quirkyqwerties.spacetraders.model;
 
 import java.awt.Point;
@@ -12,32 +17,32 @@ import java.io.IOException;
  */
 public class Shipyard {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	/** Number of all the types of ships available in the game.*/
+	private static final int SHIP_TYPES = 5;
+	
 	/** List of all the ships in the Shipyard. */
-	private Ship[] ships = new Ship[5];
+	private static final Ship[] SHIPS = new Ship[SHIP_TYPES];
 	
 	/**
 	 * Instantiates a shipyard with all of the ships
 	 * that exist in the Space Trader universe.
-	 * @throws IOException 
 	 * 
+	 * @param s the player's current ship
+	 * @throws IOException 
 	 */
 	public Shipyard(Ship s) throws IOException{
-		Point p = s.getLocation();
-		FleaShip flea = new FleaShip(p);
-		GnatShip gnat = new GnatShip(p);
-		FireflyShip firefly = new FireflyShip(p);
-		MosquitoShip mosquito = new MosquitoShip(p);
-		BumblebeeShip bee = new BumblebeeShip(p);
+		final Point point = s.getLocation();
+		final FleaShip flea = new FleaShip(point);
+		final GnatShip gnat = new GnatShip(point);
+		final FireflyShip firefly = new FireflyShip(point);
+		final MosquitoShip mosquito = new MosquitoShip(point);
+		final BumblebeeShip bee = new BumblebeeShip(point);
 		
-		ships[0] = flea;
-		ships[1] = gnat;
-		ships[2] = firefly;
-		ships[3] = mosquito;
-		ships[4] = bee;
+		SHIPS[0] = flea;
+		SHIPS[1] = gnat;
+		SHIPS[2] = firefly; // $codepro.audit.disable numericLiterals
+		SHIPS[3] = mosquito; // $codepro.audit.disable numericLiterals
+		SHIPS[4] = bee; // $codepro.audit.disable numericLiterals
 	}
 	
 	/**
@@ -46,6 +51,19 @@ public class Shipyard {
 	 * @return the list of ships
 	 */
 	public Ship[] getShips(){
-		return ships;
+		return SHIPS;
+	}
+	
+	/**
+	 * Returns a String containing all of the ships available
+	 * in the shipyard.
+	 * 
+	 * @return a String with all available ships in shipyard
+	 */
+	public String toString(){
+		final StringBuilder sb = new StringBuilder();
+		for (Ship ship : SHIPS)
+			sb.append(ship.getName() + "\n");
+		return sb.toString();		
 	}
 }

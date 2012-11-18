@@ -18,7 +18,6 @@ import java.io.IOException;
  */
 public class FireflyShip extends Ship{
 	
-
 	/** Number of cargo holds available in the Ship. */
 	private static final int CARGOBAY = 20;
 	
@@ -42,7 +41,7 @@ public class FireflyShip extends Ship{
 	}
 	
 	/**
-	 * empty constructor required for json serialization
+	 * Empty method needed for flexjson serializer.
 	 */
 	protected FireflyShip(){ // $codepro.audit.disable emptyMethod
 	}
