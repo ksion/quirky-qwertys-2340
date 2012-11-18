@@ -45,8 +45,11 @@ import net.miginfocom.swing.MigLayout;
  * @version 1.0 11.05.12
  */
 public class ShipyardWindow extends JPanel implements java.io.Serializable{
-	
+
+	private static final long serialVersionUID = 1L;
+
 	/** Represents the current game's game controller. */
+	@SuppressWarnings("unused")
 	private GameController controller;
 	
 	/** The player's ship. */
