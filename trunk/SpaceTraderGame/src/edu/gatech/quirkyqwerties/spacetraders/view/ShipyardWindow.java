@@ -1,3 +1,4 @@
+// $codepro.audit.disable overloadedMethods, com.instantiations.assist.eclipse.analysis.unusedReturnValue, importStyle, com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.constructorsOnlyInvokeFinalMethods
 /**
  * ShipyardWindow.java
  * @version 1.0
@@ -45,9 +46,7 @@ import net.miginfocom.swing.MigLayout;
  * @version 1.0 11.05.12
  */
 public class ShipyardWindow extends JPanel implements java.io.Serializable{
-
-	private static final long serialVersionUID = 1L;
-
+	
 	/** Represents the current game's game controller. */
 	private final GameController controller;
 	
@@ -120,37 +119,15 @@ public class ShipyardWindow extends JPanel implements java.io.Serializable{
 	/** Label containing the cost for a ship's repair. */
 	private final JLabel lblRepairCost;
 	
-	/** Border dimension. */
-	private static final int DIMENSION = 20;
-	
-	/** Color used in table's border. */
-	private static final int BORDER_COLOR = 255;
-	
-	/** Transparency value used in the border. */
-	private static final int ALPHA = 255;
-	
-	/** Thickness value of the border. */
-	private static final int TABLE_THICKNESS = 1;
-	
-	/** Represents the background color. */
-	private static final int BKG_COLOR = 0x66;
-	
-	/** Represents the transparency of the background. */
-	private static final int BKG_ALPHA = 255;
-
-	/** General color value used for GUI. */
-	private static final int COLOR = 255;
-	
 	/**
 	 * Create the panel.
 	 * 
 	 * @param controller the current game controller in the game
 	 */
-	public ShipyardWindow(GameController controller) {
+	public ShipyardWindow(GameController controller){
 		this.controller = controller;
 		
-		this.setBorder(BorderFactory.createEmptyBorder(DIMENSION, DIMENSION,
-				DIMENSION, DIMENSION));
+		this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // $codepro.audit.disable numericLiterals
 		
 		setLayout(new BorderLayout(0, 0));
 		setOpaque(false);
@@ -166,8 +143,7 @@ public class ShipyardWindow extends JPanel implements java.io.Serializable{
 		btnTrade = new JButton("Trade");
 		btnTrade.addActionListener(new TradeListener());
 		
-		tableBorder = new LineBorder(new Color(0, BORDER_COLOR, 0, ALPHA), 
-				TABLE_THICKNESS);
+		tableBorder = new LineBorder(new Color(0, 255, 0, 255), 1); // $codepro.audit.disable numericLiterals
 		shipTableModel= new ShipTableModel();
 		table = new JTable(shipTableModel);
 		table.setOpaque(false);
@@ -194,8 +170,8 @@ public class ShipyardWindow extends JPanel implements java.io.Serializable{
 		lblCostCrton.setText("Fuel Cost: 100 cr./ton");
 
 		final JPanel panel = new JPanel();
-		panel.setBackground(new Color(BKG_COLOR, BKG_COLOR, BKG_COLOR, BKG_ALPHA));
-		panel.setBorder(new LineBorder(new Color(0x5d, 0xdf, 0xfb, BKG_ALPHA), 2, true));
+		panel.setBackground(new Color(0x66, 0x66, 0x66, 255)); // $codepro.audit.disable numericLiterals
+		panel.setBorder(new LineBorder(new Color(0x5d, 0xdf, 0xfb, 255), 2, true)); // $codepro.audit.disable numericLiterals
 		add(panel, BorderLayout.CENTER);
 		panel.setLayout(new MigLayout("", "[grow][][grow]", 
 				"[][][][][][grow][][][][][][grow][]"));
@@ -230,7 +206,7 @@ public class ShipyardWindow extends JPanel implements java.io.Serializable{
 		
 		spinner = new JSpinner();
 		panel.add(spinner, "cell 2 7");
-}
+	}
 	
 	/**
 	 * Updates the buttons, which can be enabled or disabled 
@@ -281,7 +257,7 @@ public class ShipyardWindow extends JPanel implements java.io.Serializable{
 	 * 
 	 * @author Quirky Qwertys
 	 */
-	private class RepairListener implements ActionListener{
+	private class RepairListener implements ActionListener{ // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString -->
 		
 		/**
 		 * When "Repair" button is clicked, the Ship's sustained 
@@ -308,7 +284,7 @@ public class ShipyardWindow extends JPanel implements java.io.Serializable{
 	 * 
 	 * @author Quirky Qwertys
 	 */
-	private class BuyListener implements ActionListener{
+	private class BuyListener implements ActionListener{ // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString -->
 		
 		/**
 		 * When the "Buy" button is clicked the ship's current
@@ -340,7 +316,7 @@ public class ShipyardWindow extends JPanel implements java.io.Serializable{
 	 * 
 	 * @author Quirky Qwertys
 	 */
-	private class TradeListener implements ActionListener{
+	private class TradeListener implements ActionListener{ // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString
 		
 		/**
 		 * If user has enough credits, then the user may 
@@ -351,7 +327,7 @@ public class ShipyardWindow extends JPanel implements java.io.Serializable{
 		 */
 		public void actionPerformed(ActionEvent event){
 			final int currShipCost = player.getShip().getCost();
-			final Ship selectedShip = shipTableModel.get(table.getSelectedRow());
+			final Ship selectedShip = shipTableModel.get(table.getSelectedRow()); // $codepro.audit.disable com.instantiations.eclipse.analysis.audit.security.incompatibleTypesStoredInACollection
 			
 			if (selectedShip.getCost() <= currShipCost){
 				player.setShip(selectedShip);
@@ -370,8 +346,16 @@ public class ShipyardWindow extends JPanel implements java.io.Serializable{
 		}
 	}
 	
-	private class ShipTableModel extends ListTableModel<Ship>{
+	/**
+	 * Model used to stylize the table in the window.
+	 * 
+	 * @author Qwirky Qwertys
+	 */
+	private static class ShipTableModel extends ListTableModel<Ship>{ // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString
 		
+		/**
+		 * Instantiates the model for the table.
+		 */
 		public ShipTableModel(){ // $codepro.audit.disable publicConstructorInNonPublicType
 			super(new String[]{"Ship Type", "Cost"}, new ArrayList<Ship>());
 		}
@@ -379,6 +363,8 @@ public class ShipyardWindow extends JPanel implements java.io.Serializable{
 		/**
 		 * Gets the value of a specified cell in the table.
 		 * 
+		 * @param row the table's corresponding row
+		 * @param col the table's corresponding column
 		 * @return the ship the user clicked on the table
 		 */
 		@Override
@@ -403,7 +389,7 @@ public class ShipyardWindow extends JPanel implements java.io.Serializable{
 	public void styleTable(JTable table){
 		table.setOpaque(false);
 		((DefaultTableCellRenderer) 
-			table.getDefaultRenderer(Object.class)).setForeground(new Color(0, COLOR, 0));
+			table.getDefaultRenderer(Object.class)).setForeground(new Color(0, 255, 0)); // $codepro.audit.disable numericLiterals
 		((DefaultTableCellRenderer) 
 			table.getDefaultRenderer(Object.class)).setOpaque(false);
 		table.setShowGrid(false);
