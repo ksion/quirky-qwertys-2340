@@ -129,11 +129,6 @@ public class PlanetVisitWindow extends BackgroundPanel{
 		btnMarket = new JButton("Marketplace");
 		final Dimension btnSize = btnMarket.getPreferredSize();
 		btnMap.setPreferredSize(btnSize);
-		//btnMarket.setForeground(Color.WHITE);
-		//btnMarket.setBackground(transBlue);
-		//btnMarket.setContentAreaFilled( false );
-		//btnMarket.setBorder(thickBorder);
-		//btnMarket.setOpaque(false);
 		btnMarket.addActionListener(new ActionListener(){
 
 			@Override
@@ -145,10 +140,7 @@ public class PlanetVisitWindow extends BackgroundPanel{
 		});
 		btnShipyard = new JButton("Shipyard");
 		btnShipyard.setPreferredSize(btnSize);
-		//btnShipyard.setForeground(Color.WHITE);
-		//btnShipyard.setBackground(transBlue);
-		//btnShipyard.setBorder(thickBorder);
-		//btnShipyard.setOpaque(false);
+
 		btnShipyard.addActionListener(new ActionListener(){
 
 			@Override
