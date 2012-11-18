@@ -337,13 +337,15 @@ public class Ship{
 	 * hull strength.
 	 * 
 	 * @param pirateShip the ship that corresponds to a pirate
+	 * @return amount of damage resulting from the attack
 	 */
-	public void attack(Ship pirateShip){
+	public int attack(Ship pirateShip){
 		final Random random = new Random();
 		final int playerStrength = getHullStrength();
 		final int damage = (int) (playerStrength * (random.nextFloat() *  // $codepro.audit.disable lossOfPrecisionInCast
 				                  PERCENT + MIN_PERCENT)); 
 		pirateShip.setDamageSustained(pirateShip.getDamageSustained() + damage);
+		return damage;
 	}
 
 	/**

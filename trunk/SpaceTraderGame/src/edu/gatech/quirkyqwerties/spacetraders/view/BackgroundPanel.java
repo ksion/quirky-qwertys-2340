@@ -5,12 +5,6 @@
  * copyright unknown
  * file downloaded from web - ignoring many of issues
  */
-/**
- * 
- */
-/**
- * 
- */
 package edu.gatech.quirkyqwerties.spacetraders.view;
 
 import java.awt.*;
@@ -29,8 +23,7 @@ import javax.swing.*;
  */
 public class BackgroundPanel extends JPanel {
 
-	
-	/** default serial verion */
+	/** default serial version */
 	private static final long serialVersionUID = 1L;
 
 	/** constant to rep scaled image */
@@ -54,7 +47,7 @@ public class BackgroundPanel extends JPanel {
 	/** alignment of x coordinate */
 	private float alignmentX = 0.5f; // $codepro.audit.disable numericLiterals
 	
-	/** alignement of y coordinate */
+	/** alignment of y coordinate */
 	private float alignmentY = 0.5f; // $codepro.audit.disable numericLiterals
 	
 	/** if image should be transparent */
