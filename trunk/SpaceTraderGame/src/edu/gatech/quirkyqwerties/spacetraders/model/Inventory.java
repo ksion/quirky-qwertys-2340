@@ -123,7 +123,7 @@ public class Inventory {
 	 * @param good the TradeGood that will be stored
 	 * @return true if the good was stored, false otherwise
 	 */
-	public boolean canAddTradeGood(TradableItem good){
+	public boolean addTradeGo(TradableItem good){ // $codepro.audit.disable booleanMethodNamingConvention
 		if (maxItems - getUsedSpace() >= good.getQty()){
 			final TradableItem found = findItem(good);
 			if (found != null){
