@@ -311,6 +311,6 @@ public class EncounterPanel extends JPanel {
 	 */
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		g.drawImage(background, 0, 0, null); // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.unusedReturnValue
+		g.drawImage(imageBackground, 0, 0, null); // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.unusedReturnValue
 	}
 }
