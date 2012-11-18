@@ -1,3 +1,9 @@
+/**
+ * FleaShip.java
+ * @version 1.0
+ * copyright 2012
+ */
+
 package edu.gatech.quirkyqwerties.spacetraders.model;
 
 import java.awt.Point;
@@ -13,12 +19,8 @@ import java.io.IOException;
  * @version 1.0 11.05.12
  */
 
-public class FleaShip extends Ship implements java.io.Serializable{
+public class FleaShip extends Ship{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	/** Number of cargo holds available for the FleaShip. */
 	private static final int CARGOBAY = 10;
@@ -32,7 +34,6 @@ public class FleaShip extends Ship implements java.io.Serializable{
 	/**
 	 * Instantiates a Flea ship.
 	 * 
-	 * @param hullStrength the strength of the Ship's hull
 	 * @param point the location of the Ship
 	 * @throws IOException 
 	 */
@@ -41,9 +42,12 @@ public class FleaShip extends Ship implements java.io.Serializable{
 		name = "Flea";
 		fuelCapacity = TRAVEL_RANGE * fuelEconomy;
 		fuelAmount = fuelCapacity;
-		cost = 2000;
+		cost = 2000; // $codepro.audit.disable numericLiterals
 	}
 	
-	protected FleaShip(){
+	/**
+	 * empty constructor required for json serialization
+	 */
+	protected FleaShip(){ // $codepro.audit.disable emptyMethod
 	}
 }

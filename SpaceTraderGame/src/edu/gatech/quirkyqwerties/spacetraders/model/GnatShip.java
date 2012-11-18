@@ -1,3 +1,8 @@
+/**
+ * GnatShip.java
+ * @version 1.0
+ * copyright 2012
+ */
 package edu.gatech.quirkyqwerties.spacetraders.model;
 
 import java.awt.Point;
@@ -9,12 +14,8 @@ import java.io.IOException;
  * @author Qwirky Qwertys
  * @version 1.0 10.07.12
  */
-public class GnatShip extends Ship implements java.io.Serializable{
+public class GnatShip extends Ship{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	/** Number of cargo holds available in the Ship. */
 	private static final int CARGOBAY = 15;
@@ -24,12 +25,9 @@ public class GnatShip extends Ship implements java.io.Serializable{
 	
 	/** Range of parsecs Ship can travel before it runs out of fuel. */
 	private static final int TRAVEL_RANGE = 14;
-	
-	
+		
 	/**
 	 * Instantiates a Gnat ship.
-	 * 
-	 * @param hullStrength the strength of the Ship's hull
 	 * @param point the location of the Ship
 	 * @throws IOException 
 	 */
@@ -38,13 +36,12 @@ public class GnatShip extends Ship implements java.io.Serializable{
 		name = "Gnat";
 		fuelCapacity = TRAVEL_RANGE * fuelEconomy;
 		fuelAmount = fuelCapacity;
-		cost = 10000;
+		cost = 10000; // $codepro.audit.disable numericLiterals
 	}
 
 	/**
 	 * Needed by serialization
 	 */
-	protected GnatShip() {
-		super();
+	protected GnatShip() { // $codepro.audit.disable emptyMethod
 	}
 }
