@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -17,14 +18,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-
+import edu.gatech.quirkyqwerties.spacetraders.model.Planet;
+import edu.gatech.quirkyqwerties.spacetraders.model.Player;
 //import view.TradeWindow.InventoryTableModel;
-
-import model.Planet;
-import model.Player;
-
-
-import controller.GameController;
 
 /**
  * Class to display various game screens once a new game is created
@@ -34,7 +30,7 @@ import controller.GameController;
 public class PlanetVisitWindow extends BackgroundPanel{
 	
 	private static final long serialVersionUID = 1L;
-	private GameController gc;
+	private edu.gatech.quirkyqwerties.spacetraders.controller.GameController gc;
 	private JPanel menuPanel;
 	private JPanel planetContainerPanel;
 	private JPanel planetPanel;
@@ -47,7 +43,7 @@ public class PlanetVisitWindow extends BackgroundPanel{
 	private JLabel planetStatsName, planetStatsName2, planetStatsTechLevel;
 	
 	/** creates the window **/
-	public PlanetVisitWindow(GameController gc) throws IOException{
+	public PlanetVisitWindow(edu.gatech.quirkyqwerties.spacetraders.controller.GameController gc) throws IOException{
 		super((Image)null);
 		this.gc = gc;
 		

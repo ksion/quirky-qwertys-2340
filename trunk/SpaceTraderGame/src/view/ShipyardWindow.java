@@ -23,13 +23,11 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import controller.GameController;
-
-import model.Player;
-import model.Ship;
-import model.Shipyard;
-import model.TradableItem;
 import net.miginfocom.swing.MigLayout;
+import edu.gatech.quirkyqwerties.spacetraders.controller.GameController;
+import edu.gatech.quirkyqwerties.spacetraders.model.Player;
+import edu.gatech.quirkyqwerties.spacetraders.model.Ship;
+import edu.gatech.quirkyqwerties.spacetraders.model.Shipyard;
 
 /**
  * Represents the shipyard where the user may trade his/her
