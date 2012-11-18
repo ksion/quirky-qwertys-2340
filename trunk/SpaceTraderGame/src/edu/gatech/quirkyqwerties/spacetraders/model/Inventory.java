@@ -120,20 +120,22 @@ public class Inventory {
 	 * Stores a TradeGood in the Ship, if there is space
 	 * available.
 	 * 
-	 * @param good the TradeGood that will be stored
+	 * @param srcGood the TradeGood that will be stored
+	 * @param qty to buy
 	 * @return true if the good was stored, false otherwise
 	 */
-	public boolean addTradeGo(TradableItem good){ // $codepro.audit.disable booleanMethodNamingConvention
-		if (maxItems - getUsedSpace() >= good.getQty()){
-			final TradableItem found = findItem(good);
+	public boolean purchase(TradableItem srcGood, int qty){ // $codepro.audit.disable booleanMethodNamingConvention
+		if (maxItems - getUsedSpace() >= qty){
+			final TradableItem found = findItem(srcGood);
 			if (found != null){
-				found.setQty(found.getQty() + good.getQty());
+				found.setQty(found.getQty() + qty);
 			}
 			else{
-				final TradableItem newItem = new TradableItem(good.getType(),
-						good.getQty(), good.getPrice());
+				final TradableItem newItem = new TradableItem(srcGood.getType(),
+						qty, srcGood.getPrice());
 				goods.add(newItem);
 			}
+			srcGood.setQty(srcGood.getQty() - qty);
 			return true;
 		}
 		return false;

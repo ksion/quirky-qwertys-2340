@@ -256,13 +256,9 @@ public class TradeWindow extends JPanel implements java.io.Serializable{
 		 * @return true if successful
 		 */
 		public boolean purchase( TradableItem buy, int qty ) {
-			boolean added = false;
-			for (int i = 0; i < qty; i++) {
-				added = inventory.addTradeGo(buy);
-				if( added ) {
-					notifyChange();
-					added = true;
-				}
+			boolean added = inventory.purchase(buy, qty);
+			if( added ) {
+				notifyChange();
 			}
 			return added;
 		}
@@ -273,15 +269,8 @@ public class TradeWindow extends JPanel implements java.io.Serializable{
 		 * @return true if successful
 		 */
 		public boolean sold(TradableItem item, int qty) {
-			TradableItem modelItem = inventory.findItem(item);
-			if (modelItem.getQty() > 0){
-				modelItem.setQty(modelItem.getQty() - qty);
-				// todo should use a more precise method to update the table so we don't loose the selection 
-				
-				notifyChange();
-				return true;
-			}
-			return false;
+			notifyChange();
+			return true;
 		}
 	}
 	
