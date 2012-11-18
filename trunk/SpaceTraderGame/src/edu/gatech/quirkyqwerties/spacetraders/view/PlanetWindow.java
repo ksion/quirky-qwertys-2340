@@ -1,20 +1,11 @@
 package edu.gatech.quirkyqwerties.spacetraders.view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
-import javax.swing.AbstractButton;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -31,12 +22,9 @@ import edu.gatech.quirkyqwerties.spacetraders.model.Planet;
  * @author Quirky Qwertys
  * @version 1.0 10.29.12
  */
-public class PlanetWindow extends JPanel implements java.io.Serializable{
+public class PlanetWindow extends JPanel {
 	private GameController controller;
 	private Planet planet;
-	private Image img;
-	private Color c = new Color(0, 255, 0);
-	private Font f = new Font("Space Age", 1, 12);
 	private JLabel planetNameLabel;
 	private static final long serialVersionUID = 1L;
 

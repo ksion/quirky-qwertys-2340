@@ -2,8 +2,6 @@ package edu.gatech.quirkyqwerties.spacetraders.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -14,12 +12,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -29,7 +24,6 @@ import edu.gatech.quirkyqwerties.spacetraders.model.Planet;
 import edu.gatech.quirkyqwerties.spacetraders.model.Player;
 import edu.gatech.quirkyqwerties.spacetraders.model.RandomEvent;
 import edu.gatech.quirkyqwerties.spacetraders.model.SolarSystem;
-import edu.gatech.quirkyqwerties.spacetraders.model.Universe;
 
 /**
  * Represents the navigation window for the Space Trader game.
@@ -42,6 +36,7 @@ public class MapWindow extends JPanel implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	private GameController gc;
 	private Image background;
+	@SuppressWarnings("unused")
 	private Image shipIcon;
 	protected JLabel planetName;
 	protected JLabel fuelLevel, skillPilot, skillTrader, skillEngineer, skillFighter, shipLocation;
