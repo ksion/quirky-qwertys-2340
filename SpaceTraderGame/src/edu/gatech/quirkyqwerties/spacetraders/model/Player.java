@@ -15,8 +15,6 @@ import java.io.IOException;
  */
 public class Player {
 	
-	private static final long serialVersionUID = 1L;
-
 	/** Name of the Player. */
 	private String name;
 	

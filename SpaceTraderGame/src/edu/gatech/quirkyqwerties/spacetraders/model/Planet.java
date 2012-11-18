@@ -11,7 +11,6 @@ import javax.imageio.ImageIO;
 
 import flexjson.JSON;
 
-
 /**
  * Represents a planet in the Space Trader game.
  * 
@@ -56,7 +55,6 @@ public class Planet {
 			"/edu/gatech/quirkyqwerties/spacetraders/view/desolatePlanet.png",
 			"/edu/gatech/quirkyqwerties/spacetraders/view/jupiterPlanet.png", 
 			"/edu/gatech/quirkyqwerties/spacetraders/view/redMineralPlanet.png"};
-	// private Vendor[] availVend;
 	
 	/** List of images to represent the large planets in the GUI **/
 	
@@ -64,11 +62,6 @@ public class Planet {
 		"/edu/gatech/quirkyqwerties/spacetraders/view/transparentplanet.jpg",
 		"/edu/gatech/quirkyqwerties/spacetraders/view/marbleplanet.jpg",
 		"/edu/gatech/quirkyqwerties/spacetraders/view/graniteplanet.jpg"};
-	
-	/** List of letters that can be used to randomly generate a planet name. */
-	private String[] vowels = {"a","e","i","o","u","y"}, consonants = 
-		{"b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","z"};
-	
 	
 	/** 
 	 * Instantiates a Planet given a specified coordinate, 
@@ -94,46 +87,7 @@ public class Planet {
 	 */
 	protected Planet() {
 	}
-
-	/** 
-	 * Instantiates a Planet given a specified coordinate, 
-	 * and SolarSystem. The Planet's name is randomly 
-	 * generated.
-	 * 
-	 * @param p the (x, y) coordinate of the Planet 
-	 * @param s the SolarSystem the Planet belongs to
-	 * @param n the name of the Planet
-	 * @throws IOException 
-	 */
-	public Planet(Point p, SolarSystem s, String largePlanetName) throws IOException{
-		position = p;
-		system = s;
-		makeName();
-		techLevel = s.getTechLevel();
-		setPicNameStr(planetPics[rand.nextInt(5)]);
-		setLargePicNameStr(largePlanetName);
-		
-	}
 	
-	
-    /**
-     * Generates a random name for the Planet.
-     */
-	public void makeName(){
-		int nameLength = rand.nextInt(8) + 3;
-		String n = "";
-		for(int i = 0; i <= (int)(nameLength/2); i++){
-			if(nameLength % 2 == 0){
-				n += vowels[rand.nextInt(6)];
-				n += consonants[rand.nextInt(20)];
-			}
-			else{
-				n += consonants[rand.nextInt(20)];
-				n += vowels[rand.nextInt(6)];
-			}
-		}
-		name = n;
-	}
 	/**
 	 * generates the subset of planet inventory based on all allowable inventory
 	 */
@@ -218,7 +172,6 @@ public class Planet {
 		return tradableInventory;
 	}
 	
-	
 	protected void setTradableInventory(Inventory tradableInventory) {
 		this.tradableInventory = tradableInventory;
 	}
@@ -257,7 +210,8 @@ public class Planet {
 	 * and tech level
 	 */
 	public String toString(){
-		String info = "Name: " + name + "\nPosition: " + position + "\nTech Level: " + techLevel;
+		String info = "Name: " + name + "\nPosition: " + position + 
+				"\nTech Level: " + techLevel;
 		return info;
 	}
 	
