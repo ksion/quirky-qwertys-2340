@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -20,10 +19,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import controller.GameController;
-
-import model.Player;
 import net.miginfocom.swing.MigLayout;
+import edu.gatech.quirkyqwerties.spacetraders.controller.GameController;
+import edu.gatech.quirkyqwerties.spacetraders.model.Player;
 
 
 /**
@@ -31,9 +29,9 @@ import net.miginfocom.swing.MigLayout;
  * @author Quirky Qwertys
  * @version 1.0
  */
-public class PlayerWindow extends JPanel implements java.io.Serializable{
+public class PlayerWindow extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private Image img;
-	private final long serialVersionUID = 1L;
 	private JTextField textName;
 	private JTextField textFieldPilot;
 	private JTextField textField_Fighter;

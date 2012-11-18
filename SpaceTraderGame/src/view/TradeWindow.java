@@ -2,16 +2,10 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -28,12 +22,11 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import controller.GameController;
-
-import model.Inventory;
-import model.Player;
-import model.TradableItem;
 import net.miginfocom.swing.MigLayout;
+import edu.gatech.quirkyqwerties.spacetraders.controller.GameController;
+import edu.gatech.quirkyqwerties.spacetraders.model.Inventory;
+import edu.gatech.quirkyqwerties.spacetraders.model.Player;
+import edu.gatech.quirkyqwerties.spacetraders.model.TradableItem;
 
 /**
  * view of the trade window; can be trader/planet or trader/trader(future todo)
@@ -50,12 +43,13 @@ public class TradeWindow extends JPanel implements java.io.Serializable{
 	private JLabel lblCredits;
 	private static final int BUY = 0;
 	private static final int SELL = 1;
-	private Image img;
+	/*private Image img;
 	private Color c = new Color(0, 255, 0);
-	private Font f = new Font("Space Age", 1, 12);
+	private Font f = new Font("Space Age", 1, 12);*/
 	private TradeWindow t = this;
 	private Border tableBorder;
 	
+	@SuppressWarnings("unused")
 	private GameController controller;
 	
 	private Player player;
@@ -67,11 +61,9 @@ public class TradeWindow extends JPanel implements java.io.Serializable{
 	public TradeWindow(GameController controller) throws IOException {
 		this.controller = controller;
 		
-		
 		this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 		setLayout(new BorderLayout(0, 0));
 		
-	
 		setOpaque(false);
 		
 		//img = ImageIO.read(new File("src/view/Space.jpg"));
@@ -163,10 +155,7 @@ public class TradeWindow extends JPanel implements java.io.Serializable{
 		tablePanel.add(lblCredits, "cell 0 6");
 		//tablePanel.add(lblCredits, "cell 1 6");
 		buttonPanel.add(Box.createHorizontalGlue());
-	
-		
 	}
-	
 	
 	/**
 	 * styles the table to make it transparent
@@ -180,13 +169,12 @@ public class TradeWindow extends JPanel implements java.io.Serializable{
 		table.setShowGrid(false);
 		table.setBorder(tableBorder);
 		table.setSelectionForeground(Color.YELLOW);
-		
 	}
 	
-/**
- * gets the right side inventory
- * @return the right side inventory
- */
+	/**
+	 * gets the right side inventory
+	 * @return the right side inventory
+	 */
 	public Inventory getOtherInventory() {
 		return otherInventory;
 	}
@@ -250,19 +238,16 @@ public class TradeWindow extends JPanel implements java.io.Serializable{
 			}
 		
 		}
+		
 		/**
 		 * purchase action
 		 * @param buy a tradable item
 		 * @return true if successful
 		 */
 		public boolean purchase( TradableItem buy, int qty ) {
-			boolean added = false;
-			for (int i = 0; i < qty; i++) {
-				added = inventory.addTradeGood(buy);
-				if( added ) {
-					notifyChange();
-					added = true;
-				}
+			boolean added = inventory.purchase(buy, qty);
+			if( added ) {
+				notifyChange();
 			}
 			return added;
 		}
@@ -304,9 +289,8 @@ public class TradeWindow extends JPanel implements java.io.Serializable{
 				button.setEnabled(! (table.getSelectionModel().isSelectionEmpty()) );
 			
 		}
-					
-		
 	}
+	
 	/**
 	 * listener for the buy/sell buttons
 	 * @author Quirky Qwertys
@@ -385,19 +369,4 @@ public class TradeWindow extends JPanel implements java.io.Serializable{
 			}
 		}
     }
-	
-	
-	
-	
-	/*public static void main(String[] args){
-		JFrame frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setContentPane(new TradeWindow());
-		frame.setBounds(100, 100, 450, 300);
-		frame.setPreferredSize(new Dimension(650, 250));
-		//frame.setIconImage(spaceIcon);
-		frame.setVisible(true);
-		frame.pack();
-		
-	}*/
 }
