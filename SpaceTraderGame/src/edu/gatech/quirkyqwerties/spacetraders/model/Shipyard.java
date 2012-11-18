@@ -15,7 +15,7 @@ import java.io.IOException;
  * @author Quirky Qwertys
  * @version 1.0 11.05.12
  */
-public class Shipyard {
+public class Shipyard{
 	
 	/** Number of all the types of ships available in the game.*/
 	private static final int SHIP_TYPES = 5;
@@ -64,6 +64,6 @@ public class Shipyard {
 		final StringBuilder sb = new StringBuilder();
 		for (Ship ship : SHIPS)
 			sb.append(ship.getName() + "\n");
-		return sb.toString();		
+		return sb.toString();
 	}
 }
