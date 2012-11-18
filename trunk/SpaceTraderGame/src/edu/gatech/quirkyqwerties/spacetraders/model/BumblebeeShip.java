@@ -20,7 +20,6 @@ import java.io.IOException;
  */
 public class BumblebeeShip extends Ship{
 
-
 	/** Number of cargo holds available in the Ship. */
 	private static final int CARGOBAY = 25;
 	
@@ -45,9 +44,8 @@ public class BumblebeeShip extends Ship{
 	}
 	
 	/**
-	 * empty method needed for flexjson serializer
+	 * Empty method needed for flexjson serializer.
 	 */
 	protected BumblebeeShip(){ // $codepro.audit.disable emptyMethod
-		
 	}
 }
