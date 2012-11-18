@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Universe{
 	
-	private static final long serialVersionUID = 1L;
+	
 	/** Represents a list of all of the SolarSystems instantiated in the Universe. */
 	private ArrayList<SolarSystem> solarSystems = new ArrayList<SolarSystem>();
 	 

@@ -15,6 +15,7 @@ import java.io.IOException;
  */
 public class Player {
 	
+
 	/** Name of the Player. */
 	private String name;
 	
