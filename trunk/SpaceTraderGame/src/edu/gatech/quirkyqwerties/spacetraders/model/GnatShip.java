@@ -16,7 +16,6 @@ import java.io.IOException;
  */
 public class GnatShip extends Ship{
 	
-
 	/** Number of cargo holds available in the Ship. */
 	private static final int CARGOBAY = 15;
 	

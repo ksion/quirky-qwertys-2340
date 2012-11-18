@@ -18,10 +18,10 @@ import java.util.Random;
 public class Pirate {
 	
 	/** Represents the pirate's ship. */
-	private final Ship pirateShip;
+	private Ship pirateShip; // $codepro.audit.disable variableShouldBeFinal
 	
 	/** Random number generator. */
-	private final Random random = new Random();
+	private Random random = new Random(); // $codepro.audit.disable variableShouldBeFinal
 	
 	/** Possible middle value for the pirate ship's hull strength. */
 	private static final int MIDDLE_STRENGTH = 60;
