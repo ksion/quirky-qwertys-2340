@@ -1,8 +1,15 @@
+// $codepro.audit.disable overloadedMethods, com.instantiations.assist.eclipse.analysis.unusedReturnValue, importStyle, com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.constructorsOnlyInvokeFinalMethods
 /**
  * BackgroundPanel.java
  * @version 1.0
  * copyright unknown
  * file downloaded from web - ignoring many of issues
+ */
+/**
+ * 
+ */
+/**
+ * 
  */
 package edu.gatech.quirkyqwerties.spacetraders.view;
 
@@ -20,28 +27,37 @@ import javax.swing.*;
  *  @author Internet
  *  @version Unknown
  */
-public class BackgroundPanel extends JPanel implements java.io.Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class BackgroundPanel extends JPanel {
+
 	
+	/** default serial verion */
+	private static final long serialVersionUID = 1L;
+
+	/** constant to rep scaled image */
 	public static final int SCALED = 0;
 	
+	/** constant to represent tiled image*/
 	public static final int TILED = 1;
 	
+	/** constant to represent actual image */
 	public static final int ACTUAL = 2;
 
+	/** paint */
 	private Paint painter;
 	
+	/** image for the background */
 	private Image image;
 	
+	/** default style */
 	private int style = SCALED;
 	
-	private float alignmentX = 0.5f;
+	/** alignment of x coordinate */
+	private float alignmentX = 0.5f; // $codepro.audit.disable numericLiterals
 	
-	private float alignmentY = 0.5f;
+	/** alignement of y coordinate */
+	private float alignmentY = 0.5f; // $codepro.audit.disable numericLiterals
 	
+	/** if image should be transparent */
 	private boolean isTransparentAdd = true;
 
 	/**
@@ -278,6 +294,6 @@ public class BackgroundPanel extends JPanel implements java.io.Serializable{
 		final int height = d.height - insets.top - insets.left;
 		final float x = (width - image.getWidth(null)) * alignmentX;
 		final float y = (height - image.getHeight(null)) * alignmentY;
-		g.drawImage(image, (int) x + insets.left, (int) y + insets.top, this);
+		g.drawImage(image, (int) x + insets.left, (int) y + insets.top, this); // $codepro.audit.disable lossOfPrecisionInCast
 	}
 }

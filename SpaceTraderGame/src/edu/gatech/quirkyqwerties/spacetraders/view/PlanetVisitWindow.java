@@ -1,3 +1,9 @@
+// $codepro.audit.disable numericLiterals
+/**
+ * PlanetVisitWindow.java
+ * @version 1.0
+ * copyright 2012
+ */
 package edu.gatech.quirkyqwerties.spacetraders.view;
 
 import java.awt.BorderLayout;
@@ -29,26 +35,54 @@ import edu.gatech.quirkyqwerties.spacetraders.model.Player;
 /**
  * Class to display various game screens once a new game is created
  * @author Quirky Qwertys
+ * @version 1.0
  *
  */
 public class PlanetVisitWindow extends BackgroundPanel{
 	
+	/** serialize version */
 	private static final long serialVersionUID = 1L;
-	private GameController gc;
-	private JPanel menuPanel;
-	private JPanel planetContainerPanel;
-	private JPanel planetPanel;
-	private JButton btnMap, btnMarket, btnShipyard, btnSaveGame, btnLocalDock, btnNewGame;
-	private CardLayout deck;
-	private ShipyardWindow shipyardWin;
-	private TradeWindow tradeWin;
-	private Image backgroundImg;
-	private MapWindow mapWin;
-	private JLabel planetStatsName, planetStatsName2, planetStatsTechLevel;
 	
-	/** creates the window **/
-	public PlanetVisitWindow(GameController gc) throws IOException{
-		super((Image)null);
+	/** game controller instance */
+	private final GameController gc;
+	
+	/** the menu panel */
+	private final JPanel menuPanel;
+	
+	/** the container for styling */
+	private final JPanel planetContainerPanel;
+	
+	/** planet panel */
+	private final JPanel planetPanel;
+	
+	/** buttons on the window */
+	private final JButton btnMap, btnMarket, btnShipyard, 
+	btnSaveGame, btnLocalDock, btnNewGame;
+	
+	/** the card layout instance */
+	private final CardLayout deck;
+	
+	/** instance of the shipyard window */
+	private final ShipyardWindow shipyardWin;
+	
+	/** instance of the trade window */
+	private final TradeWindow tradeWin;
+	
+	/** background image for the window */
+	private Image backgroundImg;
+	
+	/** map window instance */
+	private final MapWindow mapWin;
+	
+	/** labels */
+	private final JLabel planetStatsName, planetStatsName2, planetStatsTechLevel;
+	
+	/** creates the window 
+	 * @param gc 
+	 * @throws IOException
+	 */
+	public PlanetVisitWindow(GameController gc) throws IOException{ // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.constructorsOnlyInvokeFinalMethods
+		super((Image) null);
 		this.gc = gc;
 		
 		planetStatsName = new JLabel();
@@ -64,15 +98,11 @@ public class PlanetVisitWindow extends BackgroundPanel{
 		setLayout(new BorderLayout());
 		menuPanel = new JPanel();
 		menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.Y_AXIS));
-		
-		//Color transBlue = new Color(0,0,255,125);
-		//Color transBlue = new Color(0x11,0x33,0x3b,200);
 
-		Color transBlue = new Color(0x5d,0xdf,0xfb,175);
-
-		menuPanel.setBackground( new Color( 0x66,0x66,0x66,175 ) );
-		menuPanel.setBorder(BorderFactory.createCompoundBorder(new LineBorder(new Color(0x5d,0xdf,0xfb,255), 2,true), BorderFactory.createEmptyBorder(10,10,10,10)));
-		//menuPanel.setBorder(BorderFactory.createCompoundBorder(new LineBorder(new Color(0,255,0,255), 2,true), BorderFactory.createEmptyBorder(10,10,10,10)));
+		menuPanel.setBackground( new Color( 0x66, 0x66, 0x66, 175 ) );
+		menuPanel.setBorder(BorderFactory.createCompoundBorder(new LineBorder(
+				new Color(0x5d, 0xdf, 0xfb, 255), 2, true), 
+				BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 		
 		btnMap = new JButton("Map");
 		btnMap.setOpaque(false);
@@ -97,7 +127,7 @@ public class PlanetVisitWindow extends BackgroundPanel{
 			
 		});
 		btnMarket = new JButton("Marketplace");
-		Dimension btnSize = btnMarket.getPreferredSize();
+		final Dimension btnSize = btnMarket.getPreferredSize();
 		btnMap.setPreferredSize(btnSize);
 		//btnMarket.setForeground(Color.WHITE);
 		//btnMarket.setBackground(transBlue);
@@ -126,8 +156,7 @@ public class PlanetVisitWindow extends BackgroundPanel{
 				PlanetVisitWindow.this.gc.gotoShipyard();
 				
 			}
-			
-			
+						
 		});
 		
 		btnSaveGame = new JButton("Save");
@@ -141,8 +170,7 @@ public class PlanetVisitWindow extends BackgroundPanel{
 			}
 			
 		});
-		
-		
+				
 		menuPanel.add(planetStatsName);
 		menuPanel.add(planetStatsName2);
 		menuPanel.add(planetStatsTechLevel);
@@ -155,23 +183,21 @@ public class PlanetVisitWindow extends BackgroundPanel{
 		menuPanel.add(btnSaveGame);
 		menuPanel.add(btnNewGame);
 		menuPanel.add(Box.createVerticalStrut(130));
-		add(menuPanel,BorderLayout.WEST);
+		add(menuPanel, BorderLayout.WEST);
 		planetContainerPanel = new JPanel(deck);
 		planetContainerPanel.setOpaque(false);
-		add(planetContainerPanel,BorderLayout.CENTER);
+		add(planetContainerPanel, BorderLayout.CENTER);
 		
 		planetPanel = new JPanel();
 		planetPanel.setOpaque(false);
-		
-		
+				
 		planetContainerPanel.add(planetPanel, "bluegreen");
 		
-		planetContainerPanel.add(tradeWin,"trade");
+		planetContainerPanel.add(tradeWin, "trade");
 		planetContainerPanel.add(shipyardWin, "shipyard");
 		planetContainerPanel.add(mapWin, "map");
 	}
-	
-	
+		
 	/**
 	 * gets the deck
 	 * @return deck of the container panel
@@ -180,13 +206,12 @@ public class PlanetVisitWindow extends BackgroundPanel{
 		return deck;
 	}
 
-
 /**
  * displays the appropriate panel from the deck
  * @param name of panel
  */
 	public void showCard(String name) {
-		deck.show(planetContainerPanel,name);
+		deck.show(planetContainerPanel, name);
 	}
 	
 	/**
@@ -195,14 +220,9 @@ public class PlanetVisitWindow extends BackgroundPanel{
 	 * @param name to reference the JPanel
 	 */
 	public void addToContainer(JPanel panel, String name){
-		planetContainerPanel.add(panel,name);
+		planetContainerPanel.add(panel, name);
 	}
 	
-
-
-
-	
-
 /**
  * returns the instance of the Shipyard Window
  * @return ShipyardWindow
@@ -222,10 +242,19 @@ public TradeWindow getTradeWindow() {
 
 /**
  * sets the Player instance
+ * empty needed for the flex json serializer
  * @param p the player
  */
-public void setPlayer(Player p){
+public void setPlayer(Player p){ // $codepro.audit.disable emptyMethod
 	
+}
+
+/**
+ * overrides the toString
+ * @return a string for the planetvisitwindow
+ */
+public String toString(){
+	return "PlanetVisitWindow";
 }
 
 /**
@@ -233,17 +262,23 @@ public void setPlayer(Player p){
  * @author Quirky Qwertys
  *
  */
-private class SaveListener implements ActionListener{
+private class SaveListener implements ActionListener{ // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString
 	
+	/**
+	 * action performed upon event
+	 * @param e
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try {
 			gc.save();
-			JOptionPane.showMessageDialog(getTopLevelAncestor(), "Game saved successfully!");
+			JOptionPane.showMessageDialog(getTopLevelAncestor(), 
+					"Game saved successfully!");
 			
 		} catch (Exception e1) {
 			e1.printStackTrace();
-			JOptionPane.showMessageDialog(getTopLevelAncestor(), "Unable to save the game.");
+			JOptionPane.showMessageDialog(getTopLevelAncestor(), 
+					"Unable to save the game.");
 		} 
 	}
 }
@@ -254,15 +289,15 @@ private class SaveListener implements ActionListener{
  */
 public void setPlanet(Planet planet) {
 	backgroundImg = planet.getLargePicName();
-	planetStatsName.setForeground(new Color(0x5d,0xdf,0xfb,255));
+	planetStatsName.setForeground(new Color(0x5d, 0xdf, 0xfb, 255));
 	planetStatsName.setFont(Style.ARIAL_NORMAL);
-	planetStatsName2.setForeground(new Color(0x5d,0xdf,0xfb,255));
+	planetStatsName2.setForeground(new Color(0x5d, 0xdf, 0xfb, 255));
 	planetStatsName2.setFont(Style.ARIAL_NORMAL);
 	planetStatsName.setText("Welcome to ");
-	planetStatsName2.setText("Planet "+ planet.getName()+".");
+	planetStatsName2.setText("Planet " + planet.getName() + ".");
 	planetStatsTechLevel.setFont(Style.ARIAL_NORMAL);
-	planetStatsTechLevel.setForeground(new Color(0x5d,0xdf,0xfb,255));
-	planetStatsTechLevel.setText("Tech Level: "+ planet.getTechLevel());
+	planetStatsTechLevel.setForeground(new Color(0x5d, 0xdf, 0xfb, 255));
+	planetStatsTechLevel.setText("Tech Level: " + planet.getTechLevel());
 	setImage(backgroundImg);
 	
 	
@@ -276,7 +311,6 @@ public MapWindow getMapWin() {
 	
 	return mapWin;
 }
-
 
 
 
