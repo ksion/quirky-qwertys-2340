@@ -22,6 +22,7 @@ public class InventoryTest { // $codepro.audit.disable com.instantiations.assist
 	
 	/**
 	 * setup the preconditions for the tests
+	 * @author Sara Harvey
 	 */
 	@Before
 	public void setUp(){ // $codepro.audit.disable accessorMethodNamingConvention
@@ -31,6 +32,7 @@ public class InventoryTest { // $codepro.audit.disable com.instantiations.assist
 	
 	/**
 	 * test adding a new trade good via purchase method from inventory.java
+	 * @author Sara Harvey
 	 */
 	@Test
 	public void testPurchase(){
@@ -44,6 +46,7 @@ public class InventoryTest { // $codepro.audit.disable com.instantiations.assist
 	
 	/**
 	 * test adding a second existing tradegood via purchase method
+	 * @author Sara Harvey
 	 */
 	@Test
 	public void testPurchaseExistingTradeGood(){
@@ -57,6 +60,7 @@ public class InventoryTest { // $codepro.audit.disable com.instantiations.assist
 	
 	/**
 	 * test to make sure that can't add a trade good if inventory is full
+	 * @author Sara Harvey
 	 */
 	@Test
 	public void testPurchaseTradeGoodLimits(){
