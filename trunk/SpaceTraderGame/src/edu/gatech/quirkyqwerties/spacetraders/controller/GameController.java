@@ -128,7 +128,7 @@ public class GameController{
 	 * @return true if travel was successful
 	 */
 	public boolean canTravelToPlanet(Planet planet){
-		final boolean b = currentGame.getPlayer().getShip().travel(planet);
+		final boolean b = currentGame.getPlayer().getShip().canTravel(planet);
 		if (b){
 			currentGame.setCurrentPlanet(planet);
 			currentGame.getCurrentPlanet().createInventory();
