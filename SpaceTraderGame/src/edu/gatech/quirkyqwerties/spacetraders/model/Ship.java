@@ -3,20 +3,16 @@
  * @version 1.0
  * copyright 2012
  */
-
 package edu.gatech.quirkyqwerties.spacetraders.model;
 
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import java.util.Random;
-
 
 /**
  * Represents the vehicle used by the Player to travel
@@ -28,14 +24,16 @@ import java.util.Random;
  * @author Quirky Qwertys
  * @version 1.0 10.07.12
  */
-public class Ship {
+public class Ship{
 
-
-    protected TradeGood[] cargoHold = new TradeGood[20];
-	
+	/** Represents the ship's cargo. */
     protected Inventory cargo;
     
-    private transient Image shipIcon;
+    /** Image representing icon of the ship. */
+    protected Image shipIcon;
+    
+    /** Dimensions of ship image icon. */
+    private static final int WIDTH = 20, HEIGHT = 20;
 
 	/** Amount of damage Ship has sustained. */
 	protected int damageSustained = 0;
@@ -46,10 +44,16 @@ public class Ship {
 	/** Rate at which Ship uses up fuel as it travels. For every
 	    four parsecs the Ship travels, the Ship's fuel amount 
 	    goes down by one ton of fuel. */
-	protected int fuelEconomy = 4;
+	protected int fuelEconomy = DEFAULT_ECONOMY;
+	
+	/** Default fuel economy that the ship has. */
+	private static final int DEFAULT_ECONOMY = 4;
 	
 	/** Amount of fuel Ship currently has. */
-	protected int fuelAmount = 16;
+	protected int fuelAmount = DEFAULT_FUEL;
+	
+	/** Default fuel amount ship starts of with. */
+	private static final int DEFAULT_FUEL = 56; 
 
 	/** Strength of the Ship's hull. */
 	protected int hullStrength;
@@ -67,10 +71,32 @@ public class Ship {
 	protected boolean flight = false;
 	
 	/** Maximum amount of fuel or fuel capacity a Ship can have. */	
-	protected int fuelCapacity = 64;
+	protected int fuelCapacity = DEFAULT_FUEL;
 	
 	/** Cost of the Ship. */
-	protected Integer cost = 10000;
+	protected Integer cost = DEFAULT_COST;
+	
+	/** Default cost of a ship. */
+	private static final int DEFAULT_COST = 10000;
+	
+	/** Number used to determine damage. */
+	private static final float PERCENT = 0.25f;
+	
+	/** Possible min percentage of hull strength used to determine damage. */
+	private static final float MIN_PERCENT = 0.10f;
+	
+	/** Error message for when planet is out-of-range for ship. */
+	private static final String OUT_OF_RANGE_MESSAGE = "This planet is out " +
+	                                               "of range. Click on a " +
+	                                               "closer planet or check " +
+	                                               "to see if you have enough" +
+	                                               " fuel to travel.";
+
+	/** Error message when ship is out of fuel. */
+	private static final String OUT_OF_FUEL_MESSAGE = "Your ship is out of fuel."; 
+	
+	/** Maximum number of parsecs ship can travel. */
+	private static final int MAX_PARSECS = 20;
 	
 	/**
 	 * Instantiates a Ship with specified hull strength, inventory 
@@ -89,25 +115,32 @@ public class Ship {
 		loadResources();
 	}
 	
-	public void loadResources() throws IOException {
-		shipIcon = ImageIO.read(getClass().getResource("/edu/gatech/quirkyqwerties/spacetraders/view/shipIcon.png"));
+	/**
+	 * Empty constructor needed for serialization.
+	 */
+	protected Ship(){ // $codepro.audit.disable emptyMethod -->
+	}
+	
+	/**
+	 * Loads the ship icon.
+	 * 
+	 * @throws IOException
+	 */
+	public final void loadResources() throws IOException{
+		shipIcon = ImageIO.read(getClass().getResource("/edu/gatech/" +
+	                            "quirkyqwerties/spacetraders/view/" +
+				                "shipIcon.png"));
 	}
 	
 	/** 
 	 * Instantiates a Ship with specified hull strength.
 	 * 
-	 * @param hullStrength the ship's hull strength
+	 * @param strength the ship's hull strength
 	 * @throws IOException 
 	 */
-	public Ship(int hullStrength) throws IOException{
-		this.hullStrength = hullStrength;
+	public Ship(int strength) throws IOException{
+		hullStrength = strength;
 		loadResources();
-	}
-	
-	/**
-	 * Needed by serialization
-	 */
-	protected Ship() {
 	}
 	
 	/**
@@ -115,25 +148,27 @@ public class Ship {
 	 * be at the planet passed in if it is within range of the ship.
 	 * 
 	 * @param p the planet to travel to.
+	 * @return true if ship can travel, false otherwise
 	 */
-	public boolean travel(Planet p) {
+	public boolean canTravel(Planet p) {
 		boolean canTravel = false;
-		if(inRange(p)){
+		if(isInRange(p)){
 			canTravel = true;
 			flight = true;
-			double gameDistance = findDistance(p);
-			fuelAmount -= gameDistance/fuelEconomy;
+			final double gameDistance = findDistance(p);
+			fuelAmount -= gameDistance / fuelEconomy;
 			
-			setLocation(p.getPosition());	
+			setLocation(p.getPosition());
 		}
 		else{
-			if (!inRange(p) && fuelAmount != 0){
-				JOptionPane.showMessageDialog(null, "This planet is too far away to travel to.", 
-						                      "Woops!", JOptionPane.ERROR_MESSAGE);
+			if (!isInRange(p) && fuelAmount != 0){
+				JOptionPane.showMessageDialog(null, OUT_OF_RANGE_MESSAGE, "Woops!", 
+						                      JOptionPane.ERROR_MESSAGE);
 			}
-			else
-				JOptionPane.showMessageDialog(null, "Your ship is out of fuel. You can't travel anywhere.", 
-	                                          "Woops!", JOptionPane.ERROR_MESSAGE);				
+			else{
+				JOptionPane.showMessageDialog(null, OUT_OF_FUEL_MESSAGE, "Woops!", 
+	                                          JOptionPane.ERROR_MESSAGE);
+			}
 		}
 		System.out.println("You are in planet " + p.getName() + " at " + getLocation());
 		return canTravel;
@@ -147,13 +182,15 @@ public class Ship {
 	 * @return the distance between the Ship and the Planet
 	 */
 	public double findDistance(Planet p){
-		Point planetPos = p.getPosition();
-		double 	planetX = planetPos.getX(), 
+		final Point planetPos = p.getPosition();
+		final double planetX = planetPos.getX(), 
 		    	planetY = planetPos.getY();
-		double pixelDistance = 
-				Math.sqrt( Math.pow(currentX - planetX, 2) + Math.pow(currentY - planetY, 2) );
-		double gameDistance = pixelDistance/20;
-		return gameDistance;
+		
+		// Use basic distance formula
+		final double pixelDistance = 
+				Math.sqrt(Math.pow(currentX - planetX, 2) + Math.pow(currentY -  // $codepro.audit.disable numericLiterals
+						  planetY, 2)); // $codepro.audit.disable numericLiterals
+		return pixelDistance / MAX_PARSECS;
 	}
 
    /**
@@ -164,9 +201,9 @@ public class Ship {
     * @return true if the Planet is within the Ship's range, 
     * otherwise false
 	*/	
-	private boolean inRange(Planet p) {
-		double distance = findDistance(p);
-		double fuelNeeded = Math.ceil(distance / fuelEconomy);
+	private boolean isInRange(Planet p) {
+		final double distance = findDistance(p);
+		final double fuelNeeded = Math.ceil(distance / fuelEconomy);
 		
 		if (fuelAmount >= fuelNeeded){
 			fuelAmount -= fuelNeeded;
@@ -192,7 +229,6 @@ public class Ship {
 	public Inventory getCargo() {
 		return cargo;
 	}
-	
 	
 	/**
 	 * Gets the remaining fuel level. 
@@ -264,9 +300,15 @@ public class Ship {
 	 * @return the ship's location
 	 */
 	public Point getLocation(){
-		return new Point((int)currentX, (int)currentY);
+		return new Point((int) currentX, (int) currentY); // $codepro.audit.disable lossOfPrecisionInCast
 	}
 	
+	/**
+	 * Sets the location of a ship to a new 
+	 * point. 
+	 * 
+	 * @param p the Ship's new coordinates
+	 */
 	public void setLocation(Point p){
 		currentX = p.x;
 		currentY = p.y;
@@ -296,9 +338,10 @@ public class Ship {
 	 * @param pirateShip the ship that corresponds to a pirate
 	 */
 	public void attack(Ship pirateShip){
-		Random random = new Random();
-		int playerStrength = getHullStrength();
-		int damage = (int) (playerStrength * (random.nextFloat() * 0.31 + 0.10)); 
+		final Random random = new Random();
+		final int playerStrength = getHullStrength();
+		final int damage = (int) (playerStrength * (random.nextFloat() *  // $codepro.audit.disable lossOfPrecisionInCast
+				                  PERCENT + MIN_PERCENT)); 
 		pirateShip.setDamageSustained(pirateShip.getDamageSustained() + damage);
 	}
 
@@ -321,7 +364,7 @@ public class Ship {
 		shipStr += name + ": \n" + 
 		"Damage Sustained: " + damageSustained + "\n" + 
 		"Distance Traveled: " + distanceTraveled + "\n" + 
-		"Fuel economy: " + fuelEconomy + "\n"+ 
+		"Fuel economy: " + fuelEconomy + "\n" + 
 		"Fuel amount: " + fuelAmount + "\n" +
 		"Hull Strength: " + hullStrength + "\n" +
 		"Cargo Hold: ";
@@ -334,7 +377,6 @@ public class Ship {
 	 * @param g the graphics object
 	 */
 	public void drawShip(Graphics g){
-		
-		g.drawImage(shipIcon, getLocation().x, getLocation().y, 20, 20, null);
+		g.drawImage(shipIcon, getLocation().x, getLocation().y, WIDTH, HEIGHT, null); // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.unusedReturnValue
 	}
 }
