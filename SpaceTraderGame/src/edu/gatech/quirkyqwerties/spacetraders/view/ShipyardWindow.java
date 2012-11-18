@@ -1,4 +1,4 @@
-// $codepro.audit.disable overloadedMethods, com.instantiations.assist.eclipse.analysis.unusedReturnValue, importStyle, com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.constructorsOnlyInvokeFinalMethods
+// $codepro.audit.disable overloadedMethods, importStyle, com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.constructorsOnlyInvokeFinalMethods
 /**
  * ShipyardWindow.java
  * @version 1.0
@@ -458,5 +458,20 @@ public class ShipyardWindow extends JPanel implements java.io.Serializable{
 			e.printStackTrace();
 		}
 		update();
+	}
+	
+	/**
+	 * Creates a String with the types of ships sold in
+	 * the shipyard.
+	 * 
+	 * @return a String with all the ships.
+	 */
+	public String toString(){
+		final StringBuilder sb = new StringBuilder();
+		for (Ship ship : shipList){
+			sb.append("Name: " + ship.getName() + "Cost: " + ship.getCost()
+					+ "\n");
+		}
+		return sb.toString();
 	}
 }
