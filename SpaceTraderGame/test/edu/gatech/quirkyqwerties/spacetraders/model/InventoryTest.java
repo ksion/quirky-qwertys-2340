@@ -30,27 +30,28 @@ public class InventoryTest { // $codepro.audit.disable com.instantiations.assist
 	}
 	
 	/**
-	 * test adding a new trade good via addTradeGood method from inventory.java
+	 * test adding a new trade good via purchase method from inventory.java
 	 */
 	@Test
-	public void testAddNewTradeGood(){
+	public void testPurchase(){
 		assertEquals("assertion getUsedSpace() failed", 0, testInventory.getUsedSpace());
-		final boolean isAdded = testInventory.addTradeGo(
-				new TradableItem(TradeGood.FIREARMS, 2, 5));
-		assertTrue("assertion canAddTradeGood failed", isAdded);
+		final TradableItem item = new TradableItem(TradeGood.FIREARMS, 2, 5); 
+		final boolean isAdded = testInventory.purchase(item, 2);
+		assertTrue("assertion purchase failed", isAdded);
 		assertEquals("assertion getusedspace failed", 2, testInventory.getUsedSpace());
+		assertEquals("assertion", 0, item.getQty());
 	}
 	
 	/**
-	 * test adding a second existing tradegood via canAddTradeGood method
+	 * test adding a second existing tradegood via purchase method
 	 */
 	@Test
-	public void testAddExistingTradeGood(){
-		assertTrue("assertion true failed", testInventory.addTradeGo(
-				new TradableItem(TradeGood.FIREARMS, 2, 5)) );
-		assertEquals("assertion canAddTradeGood failed", 2, testInventory.getUsedSpace());
-		assertTrue("assertion true failed", testInventory.addTradeGo(
-				new TradableItem(TradeGood.FIREARMS, 3, 5)) );
+	public void testPurchaseExistingTradeGood(){
+		assertTrue("assertion true failed", testInventory.purchase(
+				new TradableItem(TradeGood.FIREARMS, 2, 5), 2) );
+		assertEquals("assertion purchase failed", 2, testInventory.getUsedSpace());
+		assertTrue("assertion true failed", testInventory.purchase(
+				new TradableItem(TradeGood.FIREARMS, 3, 5), 3) );
 		assertEquals("assertion getusedspace failed", 5, testInventory.getUsedSpace());
 	}
 	
@@ -58,13 +59,13 @@ public class InventoryTest { // $codepro.audit.disable com.instantiations.assist
 	 * test to make sure that can't add a trade good if inventory is full
 	 */
 	@Test
-	public void testAddTradeGoodLimits(){
-		boolean isAdded = testInventory.addTradeGo(
-				new TradableItem(TradeGood.FIREARMS, 3, 5));
-		assertEquals("assertion canAddTradeGood failed", 3, testInventory.getUsedSpace());
-		isAdded = testInventory.addTradeGo(
-				new TradableItem(TradeGood.FIREARMS, 3, 5));
-		assertFalse("assertion canAddTradeGood failed", isAdded);
+	public void testPurchaseTradeGoodLimits(){
+		boolean isAdded = testInventory.purchase(
+				new TradableItem(TradeGood.FIREARMS, 3, 5), 3);
+		assertEquals("assertion purchase failed", 3, testInventory.getUsedSpace());
+		isAdded = testInventory.purchase(
+				new TradableItem(TradeGood.FIREARMS, 3, 5), 3);
+		assertFalse("assertion purchase failed", isAdded);
 		assertEquals("assertion getusedspace failed", 3, testInventory.getUsedSpace());
 		
 	}
