@@ -1,3 +1,9 @@
+/**
+ * Ship.java
+ * @version 1.0
+ * copyright 2012
+ */
+
 package edu.gatech.quirkyqwerties.spacetraders.model;
 
 import java.awt.Graphics;
