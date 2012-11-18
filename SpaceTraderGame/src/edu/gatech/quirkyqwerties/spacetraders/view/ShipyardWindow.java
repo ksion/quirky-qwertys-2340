@@ -49,8 +49,7 @@ public class ShipyardWindow extends JPanel implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 
 	/** Represents the current game's game controller. */
-	@SuppressWarnings("unused")
-	private GameController controller;
+	private final GameController controller;
 	
 	/** The player's ship. */
 	private Ship ship;
@@ -139,6 +138,9 @@ public class ShipyardWindow extends JPanel implements java.io.Serializable{
 	/** Represents the transparency of the background. */
 	private static final int BKG_ALPHA = 255;
 
+	/** General color value used for GUI. */
+	private static final int COLOR = 255;
+	
 	/**
 	 * Create the panel.
 	 * 
@@ -316,12 +318,17 @@ public class ShipyardWindow extends JPanel implements java.io.Serializable{
 		 * @param event the action of pressing the "Buy" button
 		 */
 		public void actionPerformed(ActionEvent event){
-			final int fuelSell = Integer.parseInt(ftf.getText());
-			final int totalFuelPrice = fuelSell * fuelPrice;
-			if (player.getShip().getMaxFuel() >= fuelSell && totalFuelPrice 
-					<= player.getMoney()){
-				player.addMoney(-1 * totalFuelPrice);
-				ship.setFuelAmount(player.getShip().getFuelAmount() + fuelSell);
+			try{
+			    final int fuelSell = Integer.parseInt(ftf.getText());
+				final int totalFuelPrice = fuelSell * fuelPrice;
+				if (player.getShip().getMaxFuel() >= fuelSell && totalFuelPrice 
+						<= player.getMoney()){
+					player.addMoney(-1 * totalFuelPrice);
+					ship.setFuelAmount(player.getShip().getFuelAmount() + fuelSell);
+				}
+			}
+			catch (Exception e){
+				e.printStackTrace();
 			}
 			update();
 		}
@@ -395,8 +402,10 @@ public class ShipyardWindow extends JPanel implements java.io.Serializable{
 	 */
 	public void styleTable(JTable table){
 		table.setOpaque(false);
-		((DefaultTableCellRenderer) table.getDefaultRenderer(Object.class)).setForeground(new Color(0, 255, 0));
-		((DefaultTableCellRenderer) table.getDefaultRenderer(Object.class)).setOpaque(false);
+		((DefaultTableCellRenderer) 
+			table.getDefaultRenderer(Object.class)).setForeground(new Color(0, COLOR, 0));
+		((DefaultTableCellRenderer) 
+			table.getDefaultRenderer(Object.class)).setOpaque(false);
 		table.setShowGrid(false);
 		table.setBorder(tableBorder);
 		table.setSelectionForeground(Color.YELLOW);
