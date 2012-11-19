@@ -35,11 +35,8 @@ import edu.gatech.quirkyqwerties.spacetraders.model.SolarSystem;
  * @author Quirky Qwertys
  * @version 1.0 10.22.12
  */
-public class MapWindow extends JPanel implements java.io.Serializable{
-	
-	/***/
-	private static final long serialVersionUID = 1L;
-	
+public class MapWindow extends JPanel {
+		
 	/** the game controller the window will be added to */
 	private final  GameController gc;
 	
