@@ -1,3 +1,4 @@
+// $codepro.audit.disable numericLiterals, disallowTestAnnotation
 /**
  * AttackTest.java
  * @version 1.0
@@ -7,7 +8,7 @@ package edu.gatech.quirkyqwerties.spacetraders.model;
 
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Tests the Pirate class attack method.
@@ -15,7 +16,7 @@ import static org.junit.Assert.*;
  * @author Annette Almonte Malagon
  * @version 1.0 11.18.12
  */
-public class AttackTest{
+public class AttackTest{ 
 	
 	/** Instance of a pirate from the game. */
 	private Pirate pirate1;
@@ -31,9 +32,10 @@ public class AttackTest{
 	
 	/**
 	 * Sets up a Pirate instance used for testing.
+	 * @throws Exception
 	 */
 	@Before
-	public void setUp() throws Exception{
+	public void setUp() throws Exception{ // $codepro.audit.disable
 		pirate1 = new Pirate();
 		ship1 = pirate1.getShip();
 		
@@ -47,7 +49,7 @@ public class AttackTest{
 	 * strength.
 	 */
 	@Test
-	public void testPirateHullStrength(){	
+	public void testPirateHullStrength(){
 		assertTrue("Invalid hull strength", ship1.getHullStrength() >= 70);
 		assertTrue("Invalid hull strength", ship1.getHullStrength() < 130);
 		assertTrue("Invalid hull strength", ship2.getHullStrength() >= 70);
@@ -60,8 +62,8 @@ public class AttackTest{
 	 */
 	@Test
 	public void testAttack(){
-		int damage1 = pirate1.attack(ship2);
-		int damage2 = pirate2.attack(ship1);
+		final int damage1 = pirate1.attack(ship2);
+		final int damage2 = pirate2.attack(ship1);
 		assertTrue("Attack did no damage", damage1 > 0);
 		assertTrue("Attack did no damage", damage2 > 0);
 	}
@@ -83,8 +85,6 @@ public class AttackTest{
 	 */
 	@Test
 	public void testDestructiveAttacks(){
-		ship1.getHullStrength();
-		ship2.getHullStrength();
 		boolean turn = true;
 		while (!pirate1.isDestroyed() && !pirate2.isDestroyed()){
 			if (turn == true){
