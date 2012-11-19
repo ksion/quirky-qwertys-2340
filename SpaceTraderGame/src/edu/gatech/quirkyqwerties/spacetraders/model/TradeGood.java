@@ -2,7 +2,7 @@ package edu.gatech.quirkyqwerties.spacetraders.model;
 
 import java.util.Random;
 
-public enum TradeGood implements java.io.Serializable{
+public enum TradeGood {
 	WATER(0, 0, 1, 45, 5, 5, 50, "Water"),
 	FURS(0, 0, 0, 250, 10, 20, 300, "Furs"),
 	FOOD(1, 0, 1, 100, 3, 5, 120, "Food"),
@@ -12,16 +12,16 @@ public enum TradeGood implements java.io.Serializable{
 	MEDICINE(4, 1, 6, 550, 25, 5, 600,"Medicine"),
 	NARCOTICS(5, 0, 5, 3500, 125, 150, 2000, "Narcotics"),
 	ROBOTS(6, 4, 7, 5000, 150, 100, 3500, "Robots");
-	private static final long serialVersionUID = 1L;
 	
-	private int mtlp;
-	private int mtlu;
-	private int ttp;
-	private int bP;
-	private int var;
-	private int ipl;
-	private int minSpace;
+	private int minTechLevelProd;
+	private int minTechLevelUse;
+	private int techLevelProd;
+	private int basePrice;
+	private int variance;
+	private int incrPriLevel;
+	private int minSpacePrice;
 	private String name;
+	private Random gen;
 	private int cost;
 	
 	/**
@@ -32,20 +32,21 @@ public enum TradeGood implements java.io.Serializable{
 	 * @param techLProd the tech level for production
 	 * @param basePrice the good's base price
 	 * @param incrPLevel price increase per tech level
-	 * @param vari the range that price may vary in regards to base price
+	 * @param variancei the range that price may variancey in regards to base price
 	 * @param minPriceSpace the minimum price good is sold for
 	 * @param name the name of the good
 	 */
 	TradeGood(int minTechLPro, int minTechLUse, int techLProd,
-			int basePrice, int incrPLevel, int vari, 
+			int basePrice, int incrPLevel, int variance, 
 			int minPriceSpace, String name) {
-		mtlp = minTechLPro;
-		mtlu = minTechLUse;
-		ttp = techLProd;
-		bP = basePrice;
-		var = vari;
-		ipl = incrPLevel;
-		minSpace = minPriceSpace;
+		minTechLevelProd = minTechLPro;
+		minTechLevelUse = minTechLUse;
+		techLevelProd = techLProd;
+		this.basePrice = basePrice;
+		this.variance = variance;
+		incrPriLevel = incrPLevel;
+		minSpacePrice = minPriceSpace;
+		gen = new Random();
 		this.name = name;
 	}
 	
@@ -57,24 +58,45 @@ public enum TradeGood implements java.io.Serializable{
 	 * @return the price of the item
 	 */
 	public int cost(int currentTechLevel, boolean inSpace) {
-		int ace = -1;
-		Random gen = new Random(); 
-		int headTail = gen.nextInt(3);
-		int varia = gen.nextInt(var);
-		double variance = (double) varia / 100;
-		if (inSpace && this.mtlu <= currentTechLevel) {
-			if (headTail < 1)
-				ace = (int) (minSpace + ipl * (ttp - mtlp) + (bP * variance));
-			else
-				ace = (int) (minSpace + ipl * (ttp - mtlp) - (bP * variance));
-		} else if (!inSpace && this.mtlu <= currentTechLevel) {
-			if (headTail < 2)
-				ace = (int) ((bP + ipl * Math.abs((ttp - mtlp))) + (bP * variance));
-			else
-				ace = (int) ((bP + ipl * Math.abs((ttp - mtlp))) - (bP * variance));
+		int res = -1;
+		boolean ace = (gen.nextInt(variance) > (variance / 2)) ? true : false;
+		int num = gen.nextInt(variance);
+		
+		if (this.minTechLevelUse <= currentTechLevel) {
+			if (ace) {
+				res = basePrice + (incrPriLevel * 
+						Math.abs(techLevelProd - minTechLevelProd)) 
+						- (basePrice * (num / 100));
+			} else {
+				res = minSpacePrice + (incrPriLevel * 
+						Math.abs(techLevelProd - minTechLevelProd)) 
+						+ (basePrice * (num / 100));
+			}
 		}
-		cost = ace;
-		return ace;
+		
+		if (res < 0) {
+			res = basePrice + gen.nextInt(variance);
+		}
+		
+		return res;
+	}
+		
+		/*int ace = -1;
+		Random gen = new Random(); 
+		int var = gen.nextInt(variance);
+		double vari = (double) var / 100;
+		if (inSpace && this.minTechLevelUse <= currentTechLevel) {
+			if (headTail < 1)
+				ace = (int) (minSpacePrice + incrPriLevel * (techLevelProd - minTechLevelProd) + (basePrice * vari));
+			else
+				ace = (int) (minSpacePrice + incrPriLevel * (techLevelProd - minTechLevelProd) - (basePrice * vari));
+		} else if (!inSpace && this.minTechLevelUse <= currentTechLevel) {
+			if (headTail < 2)
+				ace = (int) ((basePrice + incrPriLevel * Math.abs((techLevelProd - minTechLevelProd))) + (basePrice * vari));
+			else
+				ace = (int) ((basePrice + incrPriLevel * Math.abs((techLevelProd - minTechLevelProd))) - (basePrice * vari));
+		}
+		
 	}
 	/**
 	 * Gets the name of the TradeGood.
@@ -91,8 +113,7 @@ public enum TradeGood implements java.io.Serializable{
 	 * @return the tech level
 	 */
 	public int getMinTechLevelUse() {
-		// TODO Auto-generated method stub
-		return mtlu;
+		return minTechLevelUse;
 	}
 	
 	/**
@@ -101,12 +122,12 @@ public enum TradeGood implements java.io.Serializable{
 	 * @return the base price
 	 */
 	public int getBasePrice(){
-		return bP;
+		return basePrice;
 	}
 	
 	public String toString(){
 		String goodStr = "Trade Good: ";
-		goodStr += name + ": " + cost + " Mtlu: " + mtlu;
+		goodStr += name + ": " + cost + " Mtlu: " + minTechLevelUse;
 		return goodStr;
 	}
 }
