@@ -1,9 +1,15 @@
+// $codepro.audit.disable com.instantiations.assist.eclipse.analysis.unusedReturnValue
+
+// $codepro.audit.disable numericLiterals, \com.instantiations.assist.eclipse.analysis.unusedReturnValue, whiteSpaceUsage, com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.constructorsOnlyInvokeFinalMethods, com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString, methodJavadoc, handleNumericParsingErrors, com.instantiations.assist.eclipse.analysis.audit.rule.codingStyle.returnBooleanExpressionValue
+/** the window that holds all the palyer stat labels */
+
 // $codepro.audit.disable overloadedMethods, importStyle, com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.constructorsOnlyInvokeFinalMethods
 /**
  * PlayerWindow.java
  * @version 1.0
  * copyright 2012
  */
+
 package edu.gatech.quirkyqwerties.spacetraders.view;
 
 import java.awt.Color;
@@ -39,6 +45,11 @@ import edu.gatech.quirkyqwerties.spacetraders.model.Player;
  */
 public class PlayerWindow extends JPanel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** Image used in the background of the window. */
 	private final Image img;
 	
@@ -65,11 +76,7 @@ public class PlayerWindow extends JPanel{
 	
 	/** Box from which the game difficulty is selected. */
 	private final JComboBox comboBoxDifficulty;
-	
-	/** Directory of the ship image used in the window. */
-	private static final String SHIP_IMAGE_DIR = "/edu/gatech/quirkyqwerties/" +
-			"spacetraders/view/shipIcon.png";
-	
+
 	/** Column width for the text fields. */
 	private static final int WIDTH = 10;
 	
@@ -86,9 +93,11 @@ public class PlayerWindow extends JPanel{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					final Image spaceIcon =
-							ImageIO.read(getClass().getResource(SHIP_IMAGE_DIR));
 
+					final Image spaceIcon =ImageIO.read(getClass().getResource(
+							"/edu/gatech/quirkyqwerties/spacetraders/view/shipIcon.png"));
+					//Image spaceIcon = ImageIO.read(new File("src/view/shipIcon.png"));//needed for MACs and Windows
+					//PlayerWindow player = new PlayerWindow();
 					final JFrame frame = new JFrame("Create a New Space Trader " +
 							"Character");
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -110,23 +119,26 @@ public class PlayerWindow extends JPanel{
 	 * 
 	 * @param controller the game's current game controller
 	 * @throws IOException 
+	 * @param GameController gc
 	 */
 	public PlayerWindow(GameController controller) throws IOException {
 		this.controller = controller;
 		setBackground(Color.black);
 		final NewPlayerListener playerListener = new NewPlayerListener();
-		
 		setBorder(new EmptyBorder(150, 5, 5, 5)); // $codepro.audit.disable numericLiterals
 		setLayout(new MigLayout("", "[][][grow][][][grow][grow][grow][][][grow][][][][]",
 				"[][shrink 50][][][][][][grow,bottom]"));
 		final JLabel lblHeader = new JLabel("Pick your options below to start a new" +
 				" game.");
+
 		lblHeader.setForeground(Style.SPACEAGE_COLOR);
 		lblHeader.setFont(Style.SPACEAGE_NORMAL);
 		add(lblHeader, "cell 1 0 14 1");
 
-		img = ImageIO.read(getClass().getResource("/edu/gatech/quirkyqwerties/" +
-				"spacetraders/view/Space.jpg"));//needed for MACs and Windows
+		ImageIO.read(getClass().getResource(
+				"/edu/gatech/quirkyqwerties/spacetraders/view/Space.jpg"));
+		img = ImageIO.read(getClass().getResource(
+				"/edu/gatech/quirkyqwerties/spacetraders/view/Space.jpg"));//needed for MACs and Windows
 		
 		final JLabel lblNameLabel = new JLabel("Name");
 		add(lblNameLabel, "cell 1 1,alignx trailing");
@@ -158,6 +170,7 @@ public class PlayerWindow extends JPanel{
 		
 		final JLabel lblSkillPointsDesc1 = new JLabel("Start the game with 15 skill " +
 				"points. Allocate those points");
+
 		add(lblSkillPointsDesc1, "cell 1 2 12 1");
 		lblSkillPointsDesc1.setForeground(Style.SPACEAGE_COLOR);
 		lblSkillPointsDesc1.setFont(Style.SPACEAGE_NORMAL);
@@ -212,8 +225,9 @@ public class PlayerWindow extends JPanel{
 		lblDifficultyLevel.setForeground(Style.SPACEAGE_COLOR);
 		lblDifficultyLevel.setFont(Style.SPACEAGE_NORMAL);
 		
-		final String[] comboBoxDefaults = {"Beginner", "Easy", "Normal",
-				"Hard", "Impossible"};
+		final String[]comboBoxDefaults = {
+				"Beginner", "Easy", "Normal", "Hard", "Impossible"};
+
 		comboBoxDifficulty = new JComboBox(comboBoxDefaults);
 		add(comboBoxDifficulty, "cell 6 5 4 1,growx");
 	}
@@ -243,7 +257,7 @@ public class PlayerWindow extends JPanel{
 	public String getTextFieldFighter() {
 		return textField_Fighter.getText();
 	}
-	
+
 	/**
 	 * Gets the engineer skill points.
 	 * @return engineer skill points
@@ -251,11 +265,10 @@ public class PlayerWindow extends JPanel{
 	public String getTextFieldEngineer() {
 		return textField_Engineer.getText();
 	}
-	
+
 	/**
-	 * Gets the trader skill points.
-	 * 
-	 * @return trader skill points
+	 * gets the trader skill points
+	 * @return skill points
 	 */
 	public String getTextFieldTrader() {
 		return textField_Trader.getText();
@@ -269,7 +282,7 @@ public class PlayerWindow extends JPanel{
 	public String getTextFieldName(){
 		return textName.getText();
 	}
-	
+
 	/**
 	 * Zeros out the different skill fields.
 	 */
@@ -282,17 +295,18 @@ public class PlayerWindow extends JPanel{
 	
 	/**
 	 * Gets the values out of the fields to create the player.
-	 * 
 	 * @return the newly created player 
 	 * @throws IOException 
 	 */
+
 	public Player getNewPlayer() throws IOException{
+
 		final int[] skills = new int[SKILLS];
+
 		skills[0] = getValue(textFieldPilot);
 		skills[1] = getValue(textField_Fighter);
 		skills[2] = getValue(textField_Engineer); // $codepro.audit.disable numericLiterals
 		skills[3] = getValue(textField_Trader); // $codepro.audit.disable numericLiterals
-		
 		final String playerName = textName.getText();
 		final Player newPlayer = new Player(playerName, skills);
 		return newPlayer;
@@ -339,11 +353,11 @@ public class PlayerWindow extends JPanel{
 	}
 	
 	/**
-	 * Makes sure all the fields are populated correctly on 
-	 * new player creation.
-	 * 
+	 * inner class to make sure all the fields 
+	 * are populated correctly on new player creation
 	 * @author Quirky Qwertys
 	 */
+
 	private class NewPlayerListener implements DocumentListener { // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString
 		
 		/**
@@ -355,7 +369,11 @@ public class PlayerWindow extends JPanel{
 		public void changedUpdate(DocumentEvent arg0) {
 			createButton.setEnabled(areAllSkillPointsUsed() && isNameSet());
 		}
-
+		
+		/**
+		 * stuff
+		 * @param DocumentEvent arg0
+		 */
 		/**
 		 * Checks newly entered information in the
 		 * text fields.
@@ -366,7 +384,11 @@ public class PlayerWindow extends JPanel{
 		public void insertUpdate(DocumentEvent arg0) {
 			createButton.setEnabled(areAllSkillPointsUsed() && isNameSet());
 		}
-
+		
+		/**
+		 * stuff
+		 * @param DocumentEvent arg0
+		 */
 		/**
 		 * Checks for information that has been deleted
 		 * in the text fields.
@@ -407,7 +429,9 @@ public class PlayerWindow extends JPanel{
 			if (textName.getText().equals("")){
 				return false;
 			}
-			return true;
+			else {
+				return true;
+			}
 		}
 	}
 	

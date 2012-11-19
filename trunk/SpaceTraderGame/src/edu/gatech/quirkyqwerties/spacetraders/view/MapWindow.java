@@ -1,3 +1,7 @@
+// $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.constructorsOnlyInvokeFinalMethods, numericLiterals, lossOfPrecisionInCast, emptyMethod
+// emptyMethod, variableShouldBeFinal, numericLiterals
+
+/** the containing package and all its necessary imports */
 package edu.gatech.quirkyqwerties.spacetraders.view;
 
 import java.awt.BorderLayout;
@@ -32,16 +36,33 @@ import edu.gatech.quirkyqwerties.spacetraders.model.SolarSystem;
  * @version 1.0 10.22.12
  */
 public class MapWindow extends JPanel implements java.io.Serializable{
-		
+	
+	/***/
 	private static final long serialVersionUID = 1L;
-	private GameController gc;
-	private Image background;
+	
+	/** the game controller the window will be added to */
+	private final  GameController gc;
+	
+	/** the background image for the window */
+	private final Image background; // $codepro.audit.disable hidingInheritedFields
+	
+	/***/
 	@SuppressWarnings("unused")
-	private Image shipIcon;
+	
+	/** the picture of the ship */
+	final private Image shipIcon;
+	
+	/** the displayed name of the planet when the mouse is moved over it */
 	protected JLabel planetName;
-	protected JLabel fuelLevel, skillPilot, skillTrader, skillEngineer, skillFighter, shipLocation;
+	
+	/** all the labels that show the players skills location and fuel level */
+	protected JLabel fuelLevel, skillPilot, 
+	skillTrader, skillEngineer, skillFighter, shipLocation;
+	
+	/** the player of the game. used for the stats displayed on the window */
 	protected Player player;
-
+	
+	/** the solar system the player is in */
 	private SolarSystem solarSystem;
 	
 	/**
@@ -49,20 +70,22 @@ public class MapWindow extends JPanel implements java.io.Serializable{
 	 * by the game controller.
 	 * 
 	 * @param gc the game controller
-	 * @throws IOException 
-	 */
+	
+	 * @throws IOException  */
 	public MapWindow(GameController gc) throws IOException{
 		this.gc = gc;
-		background =ImageIO.read(getClass().getResource("/edu/gatech/quirkyqwerties/spacetraders/view/starsBackground.jpeg"));
-		shipIcon = ImageIO.read(getClass().getResource("/edu/gatech/quirkyqwerties/spacetraders/view/shipIcon.png"));
+		background =ImageIO.read(getClass().getResource(
+				"/edu/gatech/quirkyqwerties/spacetraders/view/starsBackground.jpeg"));
+		shipIcon = ImageIO.read(getClass().getResource(
+				"/edu/gatech/quirkyqwerties/spacetraders/view/shipIcon.png"));
 		setLayout(new BorderLayout());
 		addMouseListener(new MouseOver());
 		addMouseMotionListener(new MouseMove());
 		planetName = new JLabel();
 		planetName.setForeground(Color.white);
 		add(planetName);
-		JPanel labelPanel = new JPanel();
-		labelPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
+		final JPanel labelPanel = new JPanel();
+		labelPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5)); 
 		labelPanel.setOpaque(false);
 		labelPanel.setBackground(null);
 
@@ -86,48 +109,45 @@ public class MapWindow extends JPanel implements java.io.Serializable{
 	}
 	
 	/**
+	 * to string method
+	
+	 * @return nothing */
+	@Override
+	public String toString(){
+		return null;
+	}
+	
+	/**
 	 * Paints all of the SolarSystems and Planets.
 	 * 
 	 * @param g the default Graphics object
 	 */
+	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		
-		g.drawImage(background, 0, 0, null);
+		g.drawImage(background, 0, 0, null); // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.unusedReturnValue
 		
 		for(Planet p : solarSystem.getPlanets()){
 			p.draw(g);
 		}
-		player.getShip().drawShip(g);	
+	player.getShip().drawShip(g);
 	}
 	
 	/**
-	 * Main method creates the navigation window.
-	 
-	public static void main(String[] args){
-		JFrame frame = new JFrame();
-		frame.setPreferredSize(new Dimension(800, 450));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		frame.add(new MapWindow());
-		frame.pack();
-		frame.setVisible(true);
-	}
-	*/
-		
-	/**
 	 * Sets the player and displays relevant stats.
-	 * 
-	 * @param the current player
+	
+	 * @param player Player
 	 */
 	public void setPlayer(Player player) {
 		this.player = player;
 		fuelLevel.setText("Fuel level: " + player.getShip().getFuelAmount());
-		skillPilot.setText("Pilot Skill: "+ player.getPilotSkill());
-		skillTrader.setText("Trader Skill: "+ player.getTraderSkill());
+		skillPilot.setText("Pilot Skill: " + player.getPilotSkill());
+		skillTrader.setText("Trader Skill: " + player.getTraderSkill());
 		skillEngineer.setText("Engineer Skill: " + player.getEngineerSkill());
 		skillFighter.setText("Fighter Skill: " + player.getFighterSkill());
-		shipLocation.setText("Location: x = " + player.getShip().getLocation().x + " y = " + player.getShip().getLocation().y);
+		shipLocation.setText("Location: x = " + 
+		player.getShip().getLocation().x + " y = " + player.getShip().getLocation().y);
 	}
 
 	/**
@@ -142,8 +162,9 @@ public class MapWindow extends JPanel implements java.io.Serializable{
 	/**
 	 * Creates an Adapter to catch where the mouse is pressed on
 	 * the map.
+	 * @author Hayden
 	 */
-	private class MouseOver extends MouseAdapter{
+	private class MouseOver extends MouseAdapter{ // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString
 		/**
 		 * Detects when a Planet has been clicked.
 		 * if the planet clicked is in the range of the ship, 
@@ -151,17 +172,23 @@ public class MapWindow extends JPanel implements java.io.Serializable{
 		 * If not it will tell the user that the planet is not
 		 *  in range.
 		 * @param m the event corresponding to when the mouse is pressed
+		 * @see java.awt.event.MouseListener#mousePressed(MouseEvent)
 		 */
 		public void mousePressed(MouseEvent m){
-			Point point = m.getPoint();
+			final Point point = m.getPoint();
 			for(Planet planet: solarSystem.getPlanets()){
 				if(planet.inRange(point)){
-					int choice = JOptionPane.showConfirmDialog(null, "Would you like to travel to this planet?", "Travel", JOptionPane.YES_NO_OPTION);
+					int choice = JOptionPane.showConfirmDialog(null, 
+							"Would you like to travel to this planet?", 
+							"Travel", JOptionPane.YES_NO_OPTION);
 					if(choice == JOptionPane.YES_OPTION){
 						if( gc.canTravelToPlanet( planet )) {
 							new RandomEvent(gc);
-							fuelLevel.setText("Fuel level: " + player.getShip().getFuelAmount());
-							shipLocation.setText("Location: x = " + player.getShip().getLocation().x + " y = " + player.getShip().getLocation().y);
+							fuelLevel.setText("Fuel level: " + 
+							player.getShip().getFuelAmount());
+							shipLocation.setText("Location: x = " + 
+							player.getShip().getLocation().x + " y = " 
+									+ player.getShip().getLocation().y);
 							repaint();
 						}
 					}
@@ -177,30 +204,39 @@ public class MapWindow extends JPanel implements java.io.Serializable{
 	 * 
 	 * @author Quirky Qwertys
 	 */
-	private class MouseMove implements MouseMotionListener{
-
+	private class MouseMove implements MouseMotionListener{ // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString
+		
+		/**
+		 * @see java.awt.event.MouseMotionListener#mouseDragged(MouseEvent)
+		 * @param MouseEvent e
+		 */
 		@Override
 		public void mouseDragged(MouseEvent e) {
 			// TODO Auto-generated method stub
-			
 		}
 
-		@Override
 		/**
 		 * Checks to see whether the cursor is hovering over
 		 * a planet and displays the planet's corresponding
 		 * name if it is doing so.
+		 * @see java.awt.event.MouseMotionListener#mouseMoved(MouseEvent)
+		 * @param MouseEvent m
 		 */
+		@Override
 		public void mouseMoved(MouseEvent m) {
-			Point mPoint = m.getPoint();
+			final Point mPoint = m.getPoint();
+			
+			/** 
+			 * @param the point that the mouse currently holds
+			 */
 			move(mPoint);
 			for (Planet planet: solarSystem.getPlanets()){
 				if(planet.inRange(mPoint)){
 					int size = planet.getSize();
 					Point pPos = planet.getPosition();
 					planetName.setBounds(
-							(int)pPos.getX() - size,
-							(int)pPos.getY() - size,
+							(int) pPos.getX() - size,
+							(int) pPos.getY() - size,
 							100, 
 							15
 							);
@@ -209,25 +245,27 @@ public class MapWindow extends JPanel implements java.io.Serializable{
 			}
 		}
 	}
+	
 	/** 
 	 * Draws the ship, rotates it and moves it to 
 	 * the specified point. 
+	 * @param p Point
 	 */
 	public void move(Point p){
-		double x = player.getShip().getLocation().x,
+		final double x = player.getShip().getLocation().x,
 				y = player.getShip().getLocation().y;
 		
-		Graphics2D g2d;
-		Image shipIcon = null;
-		double 	dx = p.x - x, 
-				dy = p.y - y;
-		double degree = Math.atan(dy/dx);
-		AffineTransform at = new AffineTransform();
+		final Graphics2D g2d;
+		final Image shipIcon = null;
+		final double dx = p.x - x, dy = p.y - y;
+		final double degree = Math.atan(dy / dx);
+		final AffineTransform at = new AffineTransform();
 		at.rotate(degree);
 		at.translate(p.x, p.y);
 		
-		BufferedImage bShipIcon = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
+		final BufferedImage bShipIcon = new BufferedImage(
+				100, 100, BufferedImage.TYPE_INT_ARGB);
 		g2d = bShipIcon.createGraphics();
-		g2d.drawImage(shipIcon, at, null);
+		g2d.drawImage(shipIcon, at, null); // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.unusedReturnValue
 	}
 }
