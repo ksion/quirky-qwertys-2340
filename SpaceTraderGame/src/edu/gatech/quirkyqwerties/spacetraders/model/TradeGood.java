@@ -48,9 +48,6 @@ public enum TradeGood {
 	/** The min tech level use. */
 	private final int minTechLevelUse;
 
-	/** The tech level prod. */
-	private final int techLevelProd;
-
 	/** The base price. */
 	private final int basePrice;
 
@@ -59,9 +56,6 @@ public enum TradeGood {
 
 	/** The increase price level. */
 	private final int incrPriLevel;
-
-	/** The min space price. */
-	private final int minSpacePrice;
 
 	/** The name of the good. */
 	private final String name;
@@ -89,11 +83,9 @@ public enum TradeGood {
 			int minPriceSpace, String name) {
 		minTechLevelProd = minTechLPro;
 		minTechLevelUse = minTechLUse;
-		techLevelProd = techLProd;
 		this.basePrice = basePrice;
 		this.variance = variance;
 		incrPriLevel = incrPLevel;
-		minSpacePrice = minPriceSpace;
 		gen = new Random();
 		this.name = name;
 	}
@@ -108,7 +100,7 @@ public enum TradeGood {
 	public int cost(int currentTechLevel, boolean inSpace) {
 		double res = -1;
 		final boolean ace = (gen.nextInt(variance) > (variance >> 1)) ? true : false;
-		final int num = gen.nextInt(variance*2);
+		final int num = gen.nextInt(variance << 1);
 		
 		if (this.minTechLevelUse <= currentTechLevel) {
 			if (ace) {
@@ -126,8 +118,8 @@ public enum TradeGood {
 			res = basePrice + num;
 		}
 		
-		cost = (int)res;
-		return (int)res;
+		cost = (int) res;
+		return (int) res;
 	}
 
 	/**
