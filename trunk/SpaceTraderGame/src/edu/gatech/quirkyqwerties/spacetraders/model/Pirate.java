@@ -15,7 +15,7 @@ import java.util.Random;
  * @author Quirky Qwertys
  * @version 1.0 11.14.12
  */
-public class Pirate {
+public class Pirate{
 	
 	/** Represents the pirate's ship. */
 	private Ship pirateShip; // $codepro.audit.disable variableShouldBeFinal
