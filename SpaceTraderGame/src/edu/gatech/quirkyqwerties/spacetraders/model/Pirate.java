@@ -53,7 +53,7 @@ public class Pirate {
 	 */
 	public int attack(Ship playerShip){
 		final int pirateStrength = pirateShip.getHullStrength();
-		final int damage = (int) (pirateStrength * (random.nextFloat() * PERCENT  +  // $codepro.audit.disable lossOfPrecisionInCast
+		final int damage = (int) (pirateStrength * (random.nextFloat() * PERCENT +  // $codepro.audit.disable lossOfPrecisionInCast
 				MIN_PERCENT)); 
 		playerShip.setDamageSustained(playerShip.getDamageSustained() + damage);
 		return damage;
@@ -77,5 +77,18 @@ public class Pirate {
 	 */
 	public String toString(){
 		return "Pirate ship's hull strength: " + pirateShip.getHullStrength();
+	}
+	
+	/**
+	 * Checks to see whether the Pirate's ship damage
+	 * has exceeded its hull strength.
+	 * 
+	 * @return whether or not the ship is "destroyed"
+	 */
+	public boolean isDestroyed(){
+		if (pirateShip.getDamageSustained() >= pirateShip.getHullStrength()){
+			return true;
+		}
+		return false;
 	}
 }
