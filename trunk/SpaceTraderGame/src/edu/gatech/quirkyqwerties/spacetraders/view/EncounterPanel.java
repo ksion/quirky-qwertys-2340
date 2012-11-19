@@ -213,7 +213,7 @@ public class EncounterPanel extends JPanel {
 				pirateDamagePoints.setText(Integer.toString(totalPirateDamage));
 				
 				// Pirate attacks user
-				pirate.attack(playerShip); // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.unusedReturnValue
+				pirate.attack(playerShip); 
 				final int totalPlayerDamage = player.getShip().getDamageSustained();
 				yourDamagePoints.setText(Integer.toString(totalPlayerDamage));
 				repaint();
