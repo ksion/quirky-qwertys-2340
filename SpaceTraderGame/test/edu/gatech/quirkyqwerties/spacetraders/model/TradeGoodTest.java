@@ -1,3 +1,4 @@
+
 package edu.gatech.quirkyqwerties.spacetraders.model;
 
 import static org.junit.Assert.*;
