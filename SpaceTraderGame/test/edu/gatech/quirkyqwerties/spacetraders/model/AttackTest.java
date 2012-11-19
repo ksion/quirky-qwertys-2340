@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
  * @author Annette Almonte Malagon
  * @version 1.0 11.18.12
  */
-public class AttackTest{ 
+public class AttackTest{  // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString
 	
 	/** Instance of a pirate from the game. */
 	private Pirate pirate1;
@@ -73,8 +73,8 @@ public class AttackTest{
 	 */
 	@Test
 	public void testShipDamage(){
-		pirate1.attack(ship2);
-		pirate2.attack(ship1);
+		pirate1.attack(ship2); // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.unusedReturnValue
+		pirate2.attack(ship1); // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.unusedReturnValue
 		assertTrue("No damage was sustained", ship1.getDamageSustained() > 0);
 		assertTrue("No damage was sustained", ship2.getDamageSustained() > 0);
 	}
@@ -87,12 +87,12 @@ public class AttackTest{
 	public void testDestructiveAttacks(){
 		boolean turn = true;
 		while (!pirate1.isDestroyed() && !pirate2.isDestroyed()){
-			if (turn == true){
-				pirate1.attack(ship2);
+			if (turn == true){ // $codepro.audit.disable equalityTestWithBooleanLiteral
+				pirate1.attack(ship2); // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.unusedReturnValue
 				turn = false;
 			}
 			else{
-				pirate2.attack(ship1);
+				pirate2.attack(ship1); // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.unusedReturnValue
 				turn = true;
 			}
 		}
