@@ -1,3 +1,5 @@
+// $codepro.audit.disable declareAsInterface, emptyMethod
+/** the solar system class that holds all the planets */
 package edu.gatech.quirkyqwerties.spacetraders.model;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -14,7 +16,12 @@ import java.util.ArrayList;
  */
 public class SolarSystem {
 	
-	
+	/**
+	 * @return the string of solar system
+	 */
+	public String toString(){
+		return "new solar system";
+	}
 
 	/** Location of a SolarSystem in the Universe. */
 	private Point location;
@@ -66,7 +73,7 @@ public class SolarSystem {
 	 * @return true if the Planet isn't a copy or repeat of another 
 	 * Planet, false otherwise
 	 */
-	public boolean add(Planet planet) {
+	public boolean canAdd(Planet planet) {
 		if (!planets.contains(planet)) {
 			planets.add(planet);
 			return true;
@@ -81,9 +88,9 @@ public class SolarSystem {
 	 * @return true if the Planet exists and can be removed, false
 	 * otherwise
 	 */
-	public boolean remove(Planet planet) {
+	public boolean canRemove(Planet planet) {
 		boolean ace = false;
-		int idx = planets.indexOf(planet);
+		final int idx = planets.indexOf(planet);
 		if (idx >= 0 && planets.contains(planet)){
 			planets.remove(idx);
 			ace = true;
@@ -102,6 +109,7 @@ public class SolarSystem {
 	
 	/**
 	 * Retrieves the name of a SolarSystem.
+	 * @return the name of the player
 	 */
 	public String getName(){
 		return name;
@@ -110,6 +118,7 @@ public class SolarSystem {
 	/**
 	 * Sets the SolarSystem to have a specified group of 
 	 * Planets.
+	 * @param newPlanets (a list of planets)
 	 */
 	public void setPlanets(ArrayList<Planet> newPlanets) {
 		planets = newPlanets;
@@ -160,8 +169,7 @@ public class SolarSystem {
 	
 	/**
 	 * Sets the tax rate of the SolarSystem.
-	 * 
-	 * @param taxRate the new tax rate of the SolarSystem
+	 * @param newTaxRate
 	 */
 	public void setTaxRate(double newTaxRate) {
 	    taxRate = newTaxRate;
