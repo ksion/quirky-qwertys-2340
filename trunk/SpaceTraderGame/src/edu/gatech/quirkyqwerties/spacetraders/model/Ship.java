@@ -201,7 +201,7 @@ public class Ship{
     * @return true if the Planet is within the Ship's range, 
     * otherwise false
 	*/	
-	private boolean isInRange(Planet p) {
+	public boolean isInRange(Planet p) {
 		final double distance = findDistance(p);
 		final double fuelNeeded = Math.ceil(distance / fuelEconomy);
 		
