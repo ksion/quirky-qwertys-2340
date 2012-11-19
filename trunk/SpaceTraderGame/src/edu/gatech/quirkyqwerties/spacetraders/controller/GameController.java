@@ -158,12 +158,7 @@ public class GameController{
 	 * @throws IOException 
 	 */
 	public void showStart(){
-		try{
-			gameWindow.showStartWindow();
-		} 
-		catch (IOException e){
-			e.printStackTrace();
-		}
+		gameWindow.showStartWindow();
 	}
 
 	/**
