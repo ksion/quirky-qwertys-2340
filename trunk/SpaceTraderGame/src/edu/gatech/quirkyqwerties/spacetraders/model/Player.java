@@ -1,3 +1,5 @@
+// $codepro.audit.disable numericLiterals, emptyMethod, whiteSpaceUsage
+/** the code that represents the player in the game */
 package edu.gatech.quirkyqwerties.spacetraders.model;
 
 import java.awt.Point;
@@ -36,7 +38,7 @@ public class Player {
 	private int money = 1000;
 	
 	/** Current Ship the player owns. */ 
-	Ship myShip;
+	private Ship myShip = null;
 		
 	/** 
 	 * Instantiates a Player with a given name and skill
@@ -54,7 +56,7 @@ public class Player {
 		fighterSkill = skills[1];
 		traderSkill = skills[2];
 		engineerSkill = skills[3];
-		myShip = new GnatShip(new Point(100,100));
+		myShip = new GnatShip(new Point(100, 100));
 	}
 	
 	/**
@@ -129,9 +131,6 @@ public class Player {
 	public Inventory getCargo() {
 		return myShip.getCargo();
 	}
-	
-
-	
 
 	/**
 	 * Adds credits to the players current amount
@@ -142,10 +141,13 @@ public class Player {
 		money = money + update;
 	}
 	
+	/**
+	 * set the amount of money for the player
+	 * @param money
+	 */
 	protected void setMoney(int money){
 		this.money = money;
 	}
-	
 	
 	/**
 	 * Gets the pilot skill level.
@@ -198,13 +200,13 @@ public class Player {
 	 * @return a string with the player's stats
 	 */
 	public String toString(){
-		String playerString = 
+		final String playerString = 
 		name + "\n" +
 		money + "\n" +
-		pilotSkill + "\n"+
-		fighterSkill + "\n"+
-		traderSkill + "\n"+
-		engineerSkill + "\n"+
+		pilotSkill + "\n" +
+		fighterSkill + "\n" +
+		traderSkill + "\n" +
+		engineerSkill + "\n" +
 		myShip.getName() + "\n" + 
 		myShip.toString();
 		
