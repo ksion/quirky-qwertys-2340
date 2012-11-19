@@ -23,9 +23,6 @@ import javax.swing.*;
  */
 public class BackgroundPanel extends JPanel {
 
-	/** default serial version */
-	private static final long serialVersionUID = 1L;
-
 	/** constant to rep scaled image */
 	public static final int SCALED = 0;
 	
