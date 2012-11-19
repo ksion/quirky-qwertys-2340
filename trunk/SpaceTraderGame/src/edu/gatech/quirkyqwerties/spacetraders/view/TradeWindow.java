@@ -78,7 +78,7 @@ public class TradeWindow extends JPanel {
 	 * @param controller the controller
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public TradeWindow(GameController controller) { 
+	public TradeWindow(GameController controller) {  // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.constructorsOnlyInvokeFinalMethods
 		// $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.constructorsOnlyInvokeFinalMethods
 		this.controller = controller;
 
@@ -133,16 +133,11 @@ public class TradeWindow extends JPanel {
 		tableRight = new JTable();
 		
 		tableBorder = new LineBorder(new Color(0, 255, 0, 255), 1);
-		/*
-		tableRight.setOpaque(false);
-		((DefaultTableCellRenderer)tableRight.getDefaultRenderer(Object.class)).setForeground(new Color(0,255,0));
-		((DefaultTableCellRenderer)tableRight.getDefaultRenderer(Object.class)).setOpaque(false);
-		tableRight.setShowGrid(false);
-		tableRight.setBorder(tableBorder);
-		*/
+		
 		styleTable(tableRight);
 		styleTable(tableLeft);
-		tableRight.getSelectionModel().addListSelectionListener(new TableListener(tableRight, btnTradeBuy));
+		tableRight.getSelectionModel().addListSelectionListener(new TableListener
+					(tableRight, btnTradeBuy));
 		final JScrollPane scrollPane = new JScrollPane(tableRight);
 		scrollPane.getViewport().setOpaque(false);
 		scrollPane.getViewport().setBorder(null);
@@ -186,8 +181,10 @@ public class TradeWindow extends JPanel {
 	public void styleTable(JTable table){
 		
 		table.setOpaque(false);
-		((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setForeground(new Color(0, 255, 0));
-		((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setOpaque(false);
+		((DefaultTableCellRenderer)table.getDefaultRenderer(
+				Object.class)).setForeground(new Color(0, 255, 0));
+		((DefaultTableCellRenderer)table.getDefaultRenderer(
+				Object.class)).setOpaque(false);
 		table.setShowGrid(false);
 		table.setBorder(tableBorder);
 		table.setSelectionForeground(Color.YELLOW);
@@ -401,24 +398,31 @@ public class TradeWindow extends JPanel {
 					nums[i] = new Integer(i);
 				}
 				
-				//need to find a way to set the new price you bought it at in the left
-				//table...the price stays the same for some reason... --> Keanna
+				//need to find a way to set the new price you bought it
+				//at in the left table...the price stays the same for 
+				//some reason... --> Keanna
 				
-				final int qtyWant = (Integer) JOptionPane.showInputDialog(tradeWin, "How many to buy ?", 
-						"Quantity Buy", JOptionPane.PLAIN_MESSAGE, null, nums, initialSelect);
+				final int qtyWant = (Integer) JOptionPane.showInputDialog(
+						tradeWin, "How many to buy ?", 
+						"Quantity Buy", JOptionPane.PLAIN_MESSAGE, 
+						null, nums, initialSelect);
 				
-				final InventoryTableModel model = (InventoryTableModel)tableLeft.getModel();
+				final InventoryTableModel model = 
+						(InventoryTableModel)tableLeft.getModel();
 				if (qty > 0 && cost < getCredits() && model.canPurchase(toBuy, qtyWant)) {
 					player.addMoney(-cost * qtyWant);
-					lblCredits.setText("Credits Available: " + Integer.toString(getCredits()));
+					lblCredits.setText("Credits Available: " + 
+							Integer.toString(getCredits()));
 					
-					final InventoryTableModel soldModel = (InventoryTableModel)tableRight.getModel();
+					final InventoryTableModel soldModel = 
+							(InventoryTableModel)tableRight.getModel();
 					soldModel.canSell(toBuy, qtyWant);
 					repaint();
 				}
 			} else {
 				//player selling an item
-				final TradableItem toSell = player.getCargo().getGoods().get(tableLeft.getSelectedRow());
+				final TradableItem toSell = 
+						player.getCargo().getGoods().get(tableLeft.getSelectedRow());
 				int cost = toSell.getPrice();
 				//Sell at the price they are selling --> Keanna
 				if (otherInventory.findItem(toSell) != null) {
