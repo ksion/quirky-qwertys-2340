@@ -1,3 +1,4 @@
+// $codepro.audit.disable
 package edu.gatech.quirkyqwerties.spacetraders.model;
 
 import java.awt.Graphics;
@@ -20,7 +21,7 @@ import flexjson.JSON;
 public class Planet {
 	
 	/** The rand. */
-	Random rand = new Random();
+	private Random rand = new Random();
 	
 	/** Name of the Planet and the name of the corresponding image file. */
 	private String name;
@@ -62,6 +63,8 @@ public class Planet {
 		"/edu/gatech/quirkyqwerties/spacetraders/view/jupiterPlanet.png", 
 		"/edu/gatech/quirkyqwerties/spacetraders/view/redMineralPlanet.png"};
 	
+	private final int PICNUM = 5;
+	
 	/** List of images to represent the large planets in the GUI *. */
 	
 	public static String[] largePlanetPics = {"/edu/gatech/quirkyqwerties/spacetraders/view/aquaplanet.jpg", 
@@ -82,7 +85,7 @@ public class Planet {
 	public Planet(Point p, SolarSystem s, String n, String largePlanetName) throws IOException{
 		position = p;
 		name = n;
-		setPicNameStr(planetPics[rand.nextInt(5)]);
+		setPicNameStr(planetPics[rand.nextInt(PICNUM)]);
 		setLargePicNameStr(largePlanetName);
 		techLevel = s.getTechLevel();
 		tax = s.getTaxRate();
@@ -305,7 +308,7 @@ public class Planet {
 	 * @param p the current x- and y-coordinates of the mouse
 	 * @return true if the mouse is over a Planet, false otherwise
 	 */
-	public boolean inRange(Point p){
+	public boolean inRange(Point p){ // $codepro.audit.disable booleanMethodNamingConvention
 		boolean inRange = false;
 		
 		int distance = (int) (Math.pow(Math.pow((position.getX() - p.getX()), 2) + 
