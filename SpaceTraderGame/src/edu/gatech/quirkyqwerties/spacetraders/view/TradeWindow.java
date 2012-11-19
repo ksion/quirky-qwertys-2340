@@ -1,4 +1,4 @@
-// $codepro.audit.disable spaceAfterCasts, numericLiterals, appendString
+// $codepro.audit.disable spaceAfterCasts, numericLiterals, appendString, com.instantiations.assist.eclipse.analysis.unusedReturnValue
 /**
  * TradeWindow.java
  * @version 1.0

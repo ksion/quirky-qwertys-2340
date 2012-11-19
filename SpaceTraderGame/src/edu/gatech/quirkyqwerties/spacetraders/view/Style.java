@@ -35,7 +35,7 @@ public class Style {
 	 * adds spaceage styling to a label
 	 * @return the label */
 	public static JLabel createNormalLabel() {
-		JLabel label = new JLabel();
+		final JLabel label = new JLabel();
 		label.setFont(Style.SPACEAGE_NORMAL);
 		label.setForeground(Style.SPACEAGE_COLOR);
 		return label;
@@ -45,7 +45,7 @@ public class Style {
 	 * adds TRON COLOR styling to a label
 	 * @return the label */
 	public static JLabel createTronLabel() {
-		JLabel label = new JLabel();
+		final JLabel label = new JLabel();
 		label.setFont(Style.ARIAL_LARGE);
 		label.setForeground(Style.TRON_COLOR);
 		return label;
@@ -56,7 +56,7 @@ public class Style {
 	 *
 	 * @return the label */
 	public static JLabel createSkillLabel() {
-		JLabel label = new JLabel();
+		final JLabel label = new JLabel();
 		label.setForeground(Style.SPACEAGE_COLOR);
 		return label;
 	}
@@ -66,7 +66,7 @@ public class Style {
 	 *
 	 * @return the label */
 	public static JLabel createRedLabel() {
-		JLabel label = new JLabel();
+		final JLabel label = new JLabel();
 		label.setFont(Style.ARIAL_LARGE);
 		label.setForeground(Color.RED);
 		return label;
