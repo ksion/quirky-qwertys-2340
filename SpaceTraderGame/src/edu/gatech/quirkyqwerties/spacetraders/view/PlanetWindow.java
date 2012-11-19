@@ -1,4 +1,8 @@
-// $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString, whiteSpaceUsage
+/** 
+ * PlanetWindow.java
+ * @author QuirkyQwertys
+ */
+// $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString, whiteSpaceUsage, fieldJavadoc
 package edu.gatech.quirkyqwerties.spacetraders.view;
 
 import java.awt.BorderLayout;
@@ -35,7 +39,8 @@ public class PlanetWindow extends JPanel {
 	/**
 	 * Create the application.
 	 * 
-	 * @param planet the current Planet in which the Ship is located  
+	
+	 * @param controller GameController
 	 */
 	public PlanetWindow(GameController controller) {
 		this.controller = controller;
@@ -58,7 +63,7 @@ public class PlanetWindow extends JPanel {
 	/**
 	 * Initialize the contents of the frame.
 	 * 
-	 * @param p the current Planet in which the Ship is located  
+	 *
 	 */
 	private void initialize() {
 		setLayout( new BorderLayout() );
@@ -114,6 +119,7 @@ public class PlanetWindow extends JPanel {
 	/**
 	 * Opens the marketplace window, so that the user may trade, buy,
 	 * or sell TradeGoods.
+	 * @author Keanna
 	 */
 	private class MarketPlaceListener implements ActionListener{
 		
@@ -122,6 +128,7 @@ public class PlanetWindow extends JPanel {
 		 * marketplace window pops up.
 		 * 
 		 * @param ae the event that corresponds to when the button is clicked
+		 * @see java.awt.event.ActionListener#actionPerformed(ActionEvent)
 		 */
 		public void actionPerformed(ActionEvent ae){
 			controller.gotoMarketPlace();
@@ -131,23 +138,34 @@ public class PlanetWindow extends JPanel {
 	/**
 	 * Opens the ship yard window, so that the user may trade 
 	 * his/her ship.
-	 * @param event the event that corresponds to when the button is clicked
+	 * @param event the event that corresponds to when the button is clicked <!-- // $codepro.audit.disable typeJavadoc -->
+	 * @author QuirkyQwerties
 	 */
 	private class ShipyardListener implements ActionListener{
 		
 		/**
 		 * When the "Go to the Shipyard" button is clicked the shipyard
 		 * window pops up.
+		 * @param event ActionEvent
+		 * @see java.awt.event.ActionListener#actionPerformed(ActionEvent)
 		 */
 		public void actionPerformed(ActionEvent event){
 			controller.gotoShipyard();
 		}
 	}
 
+	/**
+	 * Method getPlanet.
+	 * @return Planet
+	 */
 	public Planet getPlanet() {
 		return planet;
 	}
 
+	/**
+	 * Method setPlanet.
+	 * @param planet Planet
+	 */
 	public void setPlanet(Planet planet) {
 		this.planet = planet;
 		
