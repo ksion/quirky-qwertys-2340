@@ -106,28 +106,28 @@ public enum TradeGood {
 	
 	 * @return the price of the item */
 	public int cost(int currentTechLevel, boolean inSpace) {
-		int res = -1;
+		double res = -1;
 		final boolean ace = (gen.nextInt(variance) > (variance >> 1)) ? true : false;
-		final int num = gen.nextInt(variance);
+		final int num = gen.nextInt(variance*2);
 		
 		if (this.minTechLevelUse <= currentTechLevel) {
 			if (ace) {
-				res = basePrice + (incrPriLevel * 
-						Math.abs(techLevelProd - minTechLevelProd)) 
-						- (basePrice * (num / 100));
+				res = basePrice * (incrPriLevel * 
+						Math.abs(currentTechLevel - minTechLevelProd))
+						- num;
 			} else {
-				res = minSpacePrice + (incrPriLevel * 
-						Math.abs(techLevelProd - minTechLevelProd)) 
-						+ (basePrice * (num / 100));
+				res = basePrice * (incrPriLevel * 
+						Math.abs(currentTechLevel - minTechLevelProd))
+						+ num;
 			}
 		}
 		
 		if (res < 0) {
-			res = basePrice + gen.nextInt(variance);
+			res = basePrice + num;
 		}
 		
-		cost = res;
-		return res;
+		cost = (int)res;
+		return (int)res;
 	}
 
 	/**
@@ -157,9 +157,6 @@ public enum TradeGood {
 		return basePrice;
 	}
 	
-	/* (non-Javadoc)
-	 * @see java.lang.Enum#toString()
-	 */
 	/**
 	 * Method toString.
 	 * @return String
@@ -168,5 +165,14 @@ public enum TradeGood {
 		String goodStr = "Trade Good: ";
 		goodStr += name + ": " + cost + " Mtlu: " + minTechLevelUse;
 		return goodStr;
+	}
+
+	/**
+	 * Gets the min tech level prod.
+	 *
+	 * @return the min tech level prod
+	 */
+	public int getMinTechLevelProd() {
+		return minTechLevelProd;
 	}
 }
