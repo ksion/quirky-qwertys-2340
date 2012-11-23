@@ -1,7 +1,3 @@
-/** 
- * PlanetWindow.java
- * @author QuirkyQwertys
- */
 // $codepro.audit.disable com.instantiations.assist.eclipse.analysis.audit.rule.effectivejava.alwaysOverridetoString.alwaysOverrideToString, whiteSpaceUsage, fieldJavadoc
 package edu.gatech.quirkyqwerties.spacetraders.view;
 
@@ -63,7 +59,7 @@ public class PlanetWindow extends JPanel {
 	/**
 	 * Initialize the contents of the frame.
 	 * 
-	 *
+	
 	 */
 	private void initialize() {
 		setLayout( new BorderLayout() );
@@ -138,8 +134,8 @@ public class PlanetWindow extends JPanel {
 	/**
 	 * Opens the ship yard window, so that the user may trade 
 	 * his/her ship.
-	 * @param event the event that corresponds to when the button is clicked <!-- // $codepro.audit.disable typeJavadoc -->
-	 * @author QuirkyQwerties
+	 * @param event the event that corresponds to when the button is clicked
+	 * @author Keanna
 	 */
 	private class ShipyardListener implements ActionListener{
 		
