@@ -1,0 +1,1 @@
+SVN code repository for SpaceTradersGame
